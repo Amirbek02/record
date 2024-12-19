@@ -44,7 +44,6 @@ const Training = () => {
         </div>
 
         <div className="flex flex-col  lg:flex-row items-center justify-between gap-0 lg:gap-3">
-          {/* Мобильная версия */}
           <div className="lg:hidden">
             {training.map((item) => (
               <div
