@@ -12,14 +12,14 @@ const training = [
   {
     id: 2,
     imgSrc: "/images/Vector1.svg",
-    title: "Тест",
+    title: "02. Тест",
     description:
       "Сабактарды көргөн соң, тест тапшыруу менен канчалык теманы түшүнгөнүңүздү текшерсеңиз болот.",
   },
   {
     id: 3,
     imgSrc: "/images/Vector2.svg",
-    title: "Университет",
+    title: "03. Университет",
     description: "Кесип, университет тандоо боюнча да сабактар болот",
   },
 ];
@@ -30,7 +30,7 @@ const Training = () => {
       style={{
         background: "linear-gradient(180deg, #2E3095 19.25%, #0F0F2F 100%)",
       }}
-      className="pt-10 pb-5 sm:pb-16 sm:pt-20"
+      className="pt-10 pb-5 text-white sm:pb-16 sm:pt-20"
     >
       <div className="max-w-7xl mx-auto p-4">
         <div className="text-center mb-8">
