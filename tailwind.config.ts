@@ -9,8 +9,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        white: "var(--background)",
+        darkGrey: "var(--foreground)",
+        green: "var(--green)",
+        blue: { 600: "var(--blue-600)", 700: "var(--blue-700)" },
+        red: "var(--red)",
+      },
+      backgroundImage: {
+        "custom-gradient-cards": "linear-gradient(to bottom, #1A1A25, #2E3095)",
+        "landing-gradient": "linear-gradient(to top, #0F0F2F, #2E3095)",
+      },
+      container: {
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+          "2xl": "6rem",
+        },
       },
     },
   },
