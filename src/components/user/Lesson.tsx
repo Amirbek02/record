@@ -40,7 +40,7 @@ const VideoLessons = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <div className="text-center mb-8">
-        <h2 className="text-xl md:text-2xl lg:text-[32px] font-medium mb-2">
+        <h2 className="text-xl md:text-2xl text-[#002038] lg:text-[32px] font-medium mb-2">
           Видео сабактар
         </h2>
         <p className="text-[#002038] font-medium text-lg md:text-xl">
@@ -48,7 +48,7 @@ const VideoLessons = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <div className="space-y-2     items-center  ">
           <div className="relative">
             <video
@@ -61,19 +61,19 @@ const VideoLessons = () => {
               <source src="/video/2.webm" type="video/webm" />
               Ваш браузер не поддерживает видео.
             </video>
-            <span className="absolute m-2 bottom-0 left-0  bg-green-600 text-white px-4 py-1 rounded-full z-10">
+            <span className="absolute m-2 bottom-0 left-0 w-[154px] text-center cursor-pointer bg-[#4C4C4C] hover:bg-[#2E3095] text-white px-4 py-1 rounded-full z-10">
               Кыргыз тил
             </span>
           </div>
 
-          <h3 className="text-lg md:text-xl font-semibold">
+          <h3 className="text-lg text-[#252641] md:text-xl font-semibold">
             Кыргыз тил боюнча даярдалган видео сабакка кош келиңиз
           </h3>
           <p className="text-gray-500 text-sm md:text-base">
             30 Видео сабак 4 тестик суроо камтылган. Сабакты көрүп бүткөндөн
             кийин 4 тестик суроону аткарууга 10 мүнөт убакыт берилет.
           </p>
-          <Link href="#" className=" font-semibold">
+          <Link href="#" className=" text-black   underline  font-semibold">
             Толук оку
           </Link>
         </div>
@@ -86,7 +86,7 @@ const VideoLessons = () => {
             >
               <div className="relative">
                 <video
-                  className="w-full h-auto sm:max-w-[600px] md:max-w-[600px] lg:max-w-[300px] max-h-[200px] rounded-xl border"
+                  className="w-full h-auto sm:max-w-[600px] md:max-w-[600px] lg:max-w-[300px] max-h-[300px] rounded-xl border"
                   autoPlay
                   muted
                   loop
@@ -96,12 +96,12 @@ const VideoLessons = () => {
                   Ваш браузер не поддерживает видео.
                 </video>
 
-                <span className=" absolute text-[14px] cursor-pointer z-10 right-2 bottom-0 bg-green-600 text-white px-2 py-1 rounded-full mb-2">
+                <span className=" absolute text-[12px] w-[104px] text-center cursor-pointer pr-3 pl-3 z-10 right-2 bottom-0 bg-[#4C4C4C] hover:bg-[#2E3095] text-white px-2 py-1 rounded-full mb-2">
                   {lesson.title}
                 </span>
               </div>
               <div>
-                <h3 className="text-lg md:text-xl font-semibold  ">
+                <h3 className="text-lg text-[#252641] md:text-xl font-semibold  ">
                   {lesson.tag}
                 </h3>
                 <p className="text-gray-500 text-sm md:text-base">
@@ -109,7 +109,7 @@ const VideoLessons = () => {
                 </p>
                 <Link
                   href="/"
-                  className=" sm:hidden mt-1 text-lg font-semibold flex justify-center"
+                  className=" sm:hidden text-black mt-1 underline text-lg font-semibold flex justify-center"
                 >
                   Толук окуу
                 </Link>
