@@ -16,8 +16,8 @@ export default {
         red: "var(--red)",
       },
       backgroundImage: {
-        "custom-gradient-cards": "linear-gradient(to bottom, #1A1A2E, #2E3095)",
-        "landing-gradient": "linear-gradient(to bottom, #1E1E3F, #2E3095)",
+        "custom-gradient-cards": "linear-gradient(to bottom, #1A1A25, #2E3095)",
+        "landing-gradient": "linear-gradient(to top, #0F0F2F, #2E3095)",
       },
       container: {
         padding: {
