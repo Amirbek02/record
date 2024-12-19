@@ -12,7 +12,7 @@ export default {
         white: "var(--background)",
         darkGrey: "var(--foreground)",
         green: "var(--green)",
-        blue: "var(--blue-600)",
+        blue: { 600: "var(--blue-600)", 700: "var(--blue-700)" },
         red: "var(--red)",
       },
       backgroundImage: {
