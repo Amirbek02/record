@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+import Link from "next/link";
 
 const BlogPage = () => {
   const test = [
@@ -45,7 +40,7 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className={`${montserrat.className} max-w-6xl mx-auto p-4`}>
+    <div className=" max-w-6xl mx-auto p-4">
       <div className="hidden sm:block">
         <p className="text-xl sm:text-center lg:text-start font-bold text-[#4C4C4C] lg:text-[32px] mb-4">
           Предметтик тест
@@ -71,33 +66,46 @@ const BlogPage = () => {
 
               <div className="flex flex-col text-center lg:text-start  mt-auto">
                 <p className="text-2xl font-medium">{testi.tag}</p>
-                <p className="text-sm opacity-50">{testi.description}</p>
-                <b className="underline  cursor-pointer">Толук оку</b>
+                <h3 className="text-[16px] opacity-50">{testi.description}</h3>
+                <Link
+                  href="/"
+                  className="underline font-bold text-[20px]  cursor-pointer"
+                >
+                  Толук оку
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="block sm:hidden">
-        <p className="text-xl font-bold text-[#4C4C4C] mb-4">Мобильный тест</p>
+      <div className="block sm:w-[400px] sm:hidden">
+        <p className="text-xl justify-center font-bold text-[#4C4C4C] mb-4">
+          Мобильный тест
+        </p>
         {test.map((testi) => (
-          <div key={testi.id} className="space-y-4 text-start">
-            <div className="relative w-[356px]">
+          <div
+            key={testi.id}
+            className="space-y-4 xs:justify-center text-start"
+          >
+            <div className="relative sm:w-[400px]  w-[356px]">
               <Image
                 src={testi.imgSrc}
-                width={305}
+                width={350}
                 height={195}
                 alt="img"
                 className="mx-auto"
               />
-              <h3 className="absolute text-center w-32 border-black rounded-xl cursor-pointer p-2 bg-[#4C4C4C] hover:bg-[#2E3095] bottom-2 right-9 transform text-sm font-medium text-white">
+              <Link
+                href="/"
+                className="absolute text-center w-32 border-black rounded-xl cursor-pointer p-2 bg-[#4C4C4C] hover:bg-[#2E3095] bottom-2 right-3 transform text-sm font-medium text-white"
+              >
                 {testi.title}
-              </h3>
+              </Link>
             </div>
             <div className="flex flex-col">
               <p className="text-lg font-medium">{testi.tag}</p>
-              <p className="text-sm opacity-30">{testi.description}</p>
+              <p className="text-sm   opacity-30">{testi.description}</p>
               <b className="underline pb-5 cursor-pointer ">Толук оку</b>
             </div>
           </div>
