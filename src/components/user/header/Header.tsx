@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../../../public/images/logo.svg";
 import home from "../../../../public/icons/home.svg";
 import test from "../../../../public/icons/test.svg";
@@ -15,8 +15,24 @@ const Header = () => {
 	const toggleSidebar = () => {
 		setSidebarOpen(!isSidebarOpen);
 	};
+	const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				sidebarRef.current &&
+				!sidebarRef.current.contains(event.target as Node)
+			) {
+				setSidebarOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () =>
+			document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+
 	return (
-		<div className="max-w-[1440px] w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto]">
+		<div className="max-w-[1440px] w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 			<div className="flex justify-between w-full md:w-[160px]">
 				<div className="flex flex-col items-center order-2">
 					<Image
@@ -50,9 +66,10 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
-			<div className="md:hidden">
+			<div className="md:hidden ">
 				{/* Sidebar */}
 				<aside
+					ref={sidebarRef}
 					className={` flex flex-col items-center fixed top-[80px] left-0 w-[296px] h-full bg-[#FFFF]  transform ${
 						isSidebarOpen ? "translate-x-0" : "-translate-x-full"
 					} transition-transform duration-300 z-100`}
@@ -69,7 +86,18 @@ const Header = () => {
 								alt=""
 								className=""
 							/>
-							<h1 className="text-[16px] text-[#2E3095]">Башкы бет</h1>
+							<h1
+								className={`text-[16px] ${
+									activeIndex === 3
+										? "text-[#2E3095] font-bold"
+										: "text-[#252641] font-normal"
+								}`}
+								onClick={() => {
+									setActiveIndex(3);
+									console.log("Active index:", activeIndex);
+								}}>
+								Башкы бет
+							</h1>
 						</div>
 						<div className="flex gap-[16px] items-center">
 							<Image
@@ -79,7 +107,15 @@ const Header = () => {
 								alt=""
 								className=""
 							/>
-							<h1 className="text-[16px] text-[#2E3095]">Тест</h1>
+							<h1
+								onClick={() => setActiveIndex(4)}
+								className={`text-[16px] ${
+									activeIndex === 4
+										? "text-[#2E3095] font-bold"
+										: "text-[#252641] font-normal"
+								}`}>
+								Тест
+							</h1>
 						</div>
 						<div className="flex gap-[16px] items-center">
 							<Image
@@ -89,7 +125,15 @@ const Header = () => {
 								alt=""
 								className=""
 							/>
-							<h1 className="text-[16px] text-[#2E3095]">Видео сабак</h1>
+							<h1
+								onClick={() => setActiveIndex(5)}
+								className={`text-[16px] ${
+									activeIndex === 5
+										? "text-[#2E3095] font-bold"
+										: "text-[#252641] font-normal"
+								}`}>
+								Видео сабак
+							</h1>
 						</div>
 						<div className="flex gap-[16px] items-center">
 							<Image
@@ -99,7 +143,15 @@ const Header = () => {
 								alt=""
 								className=""
 							/>
-							<h1 className="text-[16px] text-[#2E3095]">Төлөм</h1>
+							<h1
+								onClick={() => setActiveIndex(6)}
+								className={`text-[16px] ${
+									activeIndex === 6
+										? "text-[#2E3095] font-bold"
+										: "text-[#252641] font-normal"
+								}`}>
+								Төлөм
+							</h1>
 						</div>
 						<div className="flex gap-[16px] items-center">
 							<Image
@@ -109,7 +161,15 @@ const Header = () => {
 								alt=""
 								className=""
 							/>
-							<h1 className="text-[16px] text-[#2E3095]">Башкы бет</h1>
+							<h1
+								className={`text-[16px] ${
+									activeIndex === 7
+										? "text-[#2E3095] font-bold"
+										: "text-[#252641] font-normal"
+								}`}
+								onClick={() => setActiveIndex(7)}>
+								Башкы бет
+							</h1>
 						</div>
 					</div>
 				</aside>
