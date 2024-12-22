@@ -8,9 +8,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         white: "var(--background)",
-        darkGrey: "var(--foreground)",
+        darkGrey: "var(--dark-gray)",
         green: "var(--green)",
         blue: { 600: "var(--blue-600)", 700: "var(--blue-700)" },
         red: "var(--red)",
