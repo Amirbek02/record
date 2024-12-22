@@ -9,12 +9,14 @@ import {
 } from "@/components/UI/carousel";
 import TestCarouselCard from "./TestCarouselCard";
 import { mockTestsData } from "./mockData";
+import FurtherTestMobile from "./FurtherTestMobile";
 
 const FurtherTestCarousel = () => {
-  
+  const slideCount = mockTestsData.length;
   return (
     <div>
-      <Carousel opts={{ loop: false, align: "start", containScroll:'keepSnaps' }} className=" m-auto max-w-[58%] relative">
+      <FurtherTestMobile testData={mockTestsData}/>
+      <Carousel opts={{ loop: false, align: "start", containScroll:'keepSnaps' }} className=" m-auto max-w-[58%] relative hidden md:block">
         <CarouselContent>
           {mockTestsData.map((item) => (
             <CarouselItem
@@ -30,11 +32,15 @@ const FurtherTestCarousel = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselDots className='mt-[50px]' />
-        <div className='justify-end flex gap-3 mt-[50px]'>
-        <CarouselPrevious />
-        <CarouselNext className="mr-[150px]"/>
-        </div>
+        {slideCount > 2 && (
+          <>
+            <CarouselDots className="mt-[50px]" />
+            <div className="justify-end flex gap-3 mt-[50px]">
+              <CarouselPrevious />
+              <CarouselNext className="mr-[85px]" />
+            </div>
+          </>
+        )}
       </Carousel>
     </div>
   );

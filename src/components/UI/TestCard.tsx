@@ -12,15 +12,19 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
     <div
       ref={ref}
       className={cn(
-        "flex flex-col gap-1  bg-white max-w-[420px] cursor-pointer",
+        "flex flex-col gap-1  bg-white max-w-[356px] md:max-w-[420px] align-middle cursor-pointer",
         className
       )}
       {...props}
     >
       {children}
       {/* Embedded Button */}
-      <div className="flex justify-start">
-        <Button variant="link" className="underline -ml-4 font-bold" onClick={onButtonClick}>
+      <div className="flex justify-start -mt-2 md:mt-0">
+        <Button
+          variant="link"
+          className="underline -ml-4 font-bold"
+          onClick={onButtonClick}
+        >
           Толук оку
         </Button>
       </div>
@@ -37,9 +41,11 @@ const TestCardImage = React.forwardRef<HTMLDivElement, TestCardImageProps>(
   ({ className, imgSrc, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(` bg-cover bg-center h-[275px] max-w-[400px] relative rounded-[6px] transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey`, className)}
+      className={cn(
+        ` bg-cover bg-center max-w-[356px] h-[225px] lg:h-[275px] lg:max-w-[400px] relative rounded-[6px] transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey`,
+        className
+      )}
       style={{ backgroundImage: `url(${imgSrc})` }}
-
       {...props}
     />
   )
@@ -53,7 +59,10 @@ const TestCardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(" hover:bg-blue-600 text-xl right-[22px] bottom-[13px] flex justify-center px-3 py-1 text-white font-bold bg-darkGrey rounded-[80px] absolute transition-all duration-300 ease-in-out", className)}
+    className={cn(
+      " hover:bg-blue-600  lg:text-xl right-0 lg:right-[22px] bottom-[13px] flex justify-center px-3 py-1 text-white font-bold bg-darkGrey rounded-[80px] absolute transition-all duration-300 ease-in-out",
+      className
+    )}
     {...props}
   />
 ));
@@ -64,11 +73,7 @@ const TestCardSubtitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <h2
-    ref={ref}
-    className={cn("text-xl font-medium", className)}
-    {...props}
-  />
+  <h2 ref={ref} className={cn("lg:text-xl font-medium", className)} {...props} />
 ));
 TestCardSubtitle.displayName = "TestCardSubtitle";
 
@@ -77,7 +82,11 @@ const TestCardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-base  text-[#25264170] font-medium", className)} {...props}></p>
+  <p
+    ref={ref}
+    className={cn("text-xs lg:text-base  text-[#25264170] font-medium", className)}
+    {...props}
+  ></p>
 ));
 TestCardDescription.displayName = "TestCardDescription";
 
