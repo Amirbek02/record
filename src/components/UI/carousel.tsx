@@ -243,7 +243,7 @@ const CarouselDots: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", ...props }, ref) => {
+>(({ className, variant = "outline", children, ...props }, ref) => {
   const { scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -259,7 +259,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      Артка
+      {children}
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -269,14 +269,13 @@ CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "outline", children, ...props }, ref) => {
   const { scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
       ref={ref}
       variant={variant}
-      size={size}
       className={cn(
         "  w-[140px] border h-[56px] translate-x-0 bg-blue-600 text-white font-poppins font-bold text-xl",
         !canScrollNext && "bg-[#D0D0D0] text-darkGrey font-medium",
@@ -286,7 +285,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      Алдыга
+      {children}
       <span className="sr-only">Next slide</span>
     </Button>
   );
