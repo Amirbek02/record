@@ -1,7 +1,7 @@
 import React from "react";
 import {
   TestCard,
-  TestCardImage,
+  TestCardMedia,
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
@@ -21,13 +21,13 @@ const TestCarouselCard = ({
   imgSrc,
 }: TestProps) => {
   return (
-    <TestCard>
-      <TestCardImage imgSrc={imgSrc}>
+    <TestCard withLink>
+      <TestCardMedia imgSrc={imgSrc}>
         {" "}
         <TestCardTitle>{testTitle}</TestCardTitle>
-      </TestCardImage>
+      </TestCardMedia>
       <TestCardSubtitle>{testDescriptionTitle}</TestCardSubtitle>
-      <TestCardDescription>{description}</TestCardDescription>
+      <TestCardDescription className="max-w-[356px]">{description}</TestCardDescription>
     </TestCard>
   );
 };

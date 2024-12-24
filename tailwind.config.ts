@@ -11,6 +11,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        montserrat:["montserrat"]
       },
       colors: {
         white: "var(--background)",

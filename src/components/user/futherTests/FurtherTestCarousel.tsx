@@ -1,27 +1,26 @@
 import React from "react";
+import NextPrevButtons from "../../UI/nextPrevButtons";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselDots,
-  CarouselPrevious,
-  CarouselNext,
 } from "@/components/UI/carousel";
-import TestCarouselCard from "./TestCarouselCard";
+import TestCarouselCard from "../TestCarouselCard";
 import { mockTestsData } from "./mockData";
 import FurtherTestMobile from "./FurtherTestMobile";
 const FurtherTestCarousel = () => {
   const slideCount = mockTestsData.length;
   return (
-    <div>
+    <div className="flex flex-col justify-between gap-11">
       <FurtherTestMobile testData={mockTestsData} />
       <Carousel
         opts={{ loop: false, align: "start", containScroll: "keepSnaps" }}
-        className=" m-auto max-w-[58%] relative hidden md:block"
+        className="  relative hidden md:block  max-w-[900px]  "
       >
-        <CarouselContent>
+        <CarouselContent className="ml-0">
           {mockTestsData.map((item) => (
-            <CarouselItem key={item.id} className="basis-1/2  max-w-[420px]">
+            <CarouselItem key={item.id} className="max-w-[400px] flex justify-center pl-0 -mr-2">
               <TestCarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}
@@ -31,16 +30,9 @@ const FurtherTestCarousel = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 2 && (
-          <>
-            <CarouselDots className="mt-[50px]" />
-            <div className="justify-end flex gap-3 mt-[50px]">
-              <CarouselPrevious>Артка</CarouselPrevious>
-              <CarouselNext className="mr-[85px]">Алдыга</CarouselNext>
-            </div>
-          </>
-        )}
+        {slideCount > 2 && <CarouselDots className="mt-[50px]" />}
       </Carousel>
+      <NextPrevButtons />
     </div>
   );
 };

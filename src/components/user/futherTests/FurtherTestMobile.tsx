@@ -1,5 +1,5 @@
 import React from "react";
-import TestCarouselCard from "./TestCarouselCard";
+import TestCarouselCard from "../TestCarouselCard";
 
 type TestData = {
   id: number;

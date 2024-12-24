@@ -6,6 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import Image from "next/image";
 // import { Button } from "@/components/ui/button"
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -243,23 +244,31 @@ const CarouselDots: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", children, ...props }, ref) => {
-  const { scrollPrev, canScrollPrev } = useCarousel();
+>(({ className, variant = "ghost", size = "icon", ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
     <Button
       ref={ref}
       variant={variant}
+      size={size}
       className={cn(
-        "  w-[140px] h-[56px] translate-x-0 bg-blue-600 text-white font-poppins text-xl font-bold",
-        !canScrollPrev && "bg-[#D0D0D0] text-darkGrey font-medium",
+        "absolute  h-8 w-8 rounded-full",
+        orientation === "horizontal"
+          ? "-left-12 top-1/2 -translate-y-1/2"
+          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      {children}
+      <Image
+        src="/icons/arrowLeft.svg"
+        alt="arrowLeft"
+        width={24}
+        height={16}
+      />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -269,23 +278,31 @@ CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", children, ...props }, ref) => {
-  const { scrollNext, canScrollNext } = useCarousel();
+>(({ className, variant = "ghost", size = "icon", ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
       ref={ref}
       variant={variant}
+      size={size}
       className={cn(
-        "  w-[140px] border h-[56px] translate-x-0 bg-blue-600 text-white font-poppins font-bold text-xl",
-        !canScrollNext && "bg-[#D0D0D0] text-darkGrey font-medium",
+        "absolute h-8 w-8 rounded-full",
+        orientation === "horizontal"
+          ? "-right-12 top-1/2 -translate-y-1/2"
+          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      {children}
+       <Image
+        src="/icons/arrowRight.svg"
+        alt="arrowRight"
+        width={24}
+        height={16}
+      />
       <span className="sr-only">Next slide</span>
     </Button>
   );
