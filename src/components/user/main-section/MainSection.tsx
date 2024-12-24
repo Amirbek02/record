@@ -1,14 +1,30 @@
-import React from "react";
+"use client";
+//section after header
+import React, { useEffect, useRef, useState } from "react";
 import girl from "../../../../public/images/education.png";
 import Image from "next/image";
 import { MdEmail } from "react-icons/md";
 import { IoMdPlay } from "react-icons/io";
-import play from "../../../../public/icons/play.svg";
 
 const MainSection = () => {
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const openModal = () => setIsModalVisible(true);
+	const closeModal = () => setIsModalVisible(false);
+
+	const modalRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const handleEscapeKey = (event: KeyboardEvent) => {
+			if (event.key === "Escape") closeModal();
+		};
+		if (isModalVisible) {
+			document.addEventListener("keydown", handleEscapeKey);
+		}
+		return () => document.removeEventListener("keydown", handleEscapeKey);
+	}, [isModalVisible]);
 	return (
 		<div className="w-[90%] max-w-[1440px] mx-auto  py-[35px] ">
-			<div className="flex items-center  flex-col-reverse mx-auto md:flex-row md:justify-between ">
+			<div className="flex items-center pl-[20px] md:pl-[0]  flex-col-reverse mx-auto md:flex-row md:justify-between ">
 				<div className="flex w-[420px] lg:w-[680px] flex-col items-center mt-[420px] xl:mt-[100px]  md:mt-[30px] md:items-start ">
 					<h1 className="text-[#002038] text-[16px] font-medium md:text-[25px] lg:text-[37px]">
 						Жалпы республикалык тестке
@@ -23,7 +39,9 @@ const MainSection = () => {
 						керек
 					</p>
 					<div className="md:flex md:gap-[20px] md:items-center">
-						<button className="py-[12px] md:px-[47px] px-[67px] rounded-[80px] bg-blue-600 text-[#FFF] text-[16px] font-semibold mt-[8px]">
+						<button
+							onClick={openModal}
+							className="py-[12px] md:px-[47px] px-[67px] rounded-[80px] bg-blue-600 text-[#FFF] text-[16px] font-semibold mt-[8px]">
 							Тест тапшыруу
 						</button>
 						<div className="mt-[29px] md:mt-[5px] flex gap-[10px] items-center justify-center">
@@ -37,7 +55,7 @@ const MainSection = () => {
 					</div>
 				</div>
 
-				<div className=" mr-[320px] md:mr-[280px]">
+				<div className=" mr-[320px] md:mr-[300px]">
 					<div className="relative w-[full] md:mt-[-150px]">
 						<div className="absolute left-[55px] w-[202px] h-[400px] rounded-[60px] bg-[#008335] xl:w-[340px] xl:h-[610px] xl:left-[-130px]"></div>
 						<div className="w-[240px] xl:w-[400px]  absolute top-[6px] left-[50px] md:left-[20px] xl:left-[-170px] ">
@@ -60,7 +78,7 @@ const MainSection = () => {
 								</h3>
 							</div>
 						</div>
-						<div className="absolute left-[-20px] xl:left-[-230px] top-[60px] xl:top-[90px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] xl:w-[172px] xl:h-[61px] border-[0.35px] border-green rounded-[10px]">
+						<div className="absolute left-[-20px] xl:left-[-230px] top-[80px] xl:top-[90px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] xl:w-[172px] xl:h-[61px] border-[0.35px] border-green rounded-[10px]">
 							<h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">
 								200 Бал
 							</h3>
@@ -72,6 +90,64 @@ const MainSection = () => {
 						</div>
 					</div>
 				</div>
+
+				{isModalVisible && (
+					<div
+						onClick={closeModal}
+						className="fixed top-0 left-0 right-0 z-50 w-full h-full  flex items-center justify-center bg-[#212121AD]"
+						role="dialog"
+						aria-hidden="false">
+						<div
+							onClick={(e) => e.stopPropagation()}
+							className="bg-[#ffff] rounded-[20px] shadow max-w-2xl w-full md:w-[509px] h-[507px] ">
+							<div className="">
+								<h1 className="text-center text-[22px] font-bold text-[#4C4C4C] mt-[24px]">
+									Сынамык тест
+								</h1>
+								<div className="mx-[24px] mt-[30px] w-full ">
+									<h3 className="font-semibold text-left text-[16px] text-[#7B7B7B]">
+										Аты
+									</h3>
+									<input
+										className="text-[15px] text-[#7B7B7B] w-[90%] h-[56px] pl-[20px] border-[0.69px] border-[rgba(0, 0, 0, 0.69)] rounded-[4px] mt-[8px]"
+										type="text"
+										placeholder="Asel"
+									/>
+								</div>
+								<div className="mx-[24px] mt-[15px] w-full ">
+									<h3 className="font-semibold text-left text-[16px] text-[#7B7B7B]">
+										Фамилия
+									</h3>
+									<input
+										className="text-[15px] text-[#7B7B7B] w-[90%] h-[56px] pl-[20px] border-[0.69px] border-[rgba(0, 0, 0, 0.69)] rounded-[4px] mt-[8px]"
+										type="text"
+										placeholder="Asylbekova"
+									/>
+								</div>
+								<div className="mx-[24px] mt-[15px] w-full ">
+									<h3 className="font-semibold text-left text-[16px] text-[#7B7B7B]">
+										Whatsapp номери
+									</h3>
+									<input
+										className="text-[15px] text-[#7B7B7B] w-[90%] h-[56px] pl-[20px] border-[0.69px] border-[rgba(0, 0, 0, 0.69)] rounded-[4px] mt-[8px]"
+										type="text"
+										placeholder="09009000900"
+									/>
+								</div>
+								<div className="flex flex-col items-center">
+									<button className="w-[90%] h-[56px] rounded-[10px] bg-blue-600 text-[#FFF] text-[24px] font-extrabold	 mt-[8px]">
+										Тест тапшыруу
+									</button>
+									<a
+										href=""
+										className="underline text-center text-[16px] text-[#2E3095] mt-[15px]">
+										Катталуу
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);
