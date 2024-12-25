@@ -12,15 +12,18 @@ import FurtherTestMobile from "./FurtherTestMobile";
 const FurtherTestCarousel = () => {
   const slideCount = mockTestsData.length;
   return (
-    <div className="flex flex-col justify-between gap-11">
+    <div className="flex flex-col  gap-8 items-end">
       <FurtherTestMobile testData={mockTestsData} />
       <Carousel
-        opts={{ loop: false, align: "start", containScroll: "keepSnaps" }}
-        className="  relative hidden md:block  max-w-[900px]  "
+        opts={{ loop: true, align: "center", containScroll: "trimSnaps" }}
+        className="  relative hidden md:block w-[95%] max-w-[1440px]"
       >
         <CarouselContent className="ml-0">
           {mockTestsData.map((item) => (
-            <CarouselItem key={item.id} className="max-w-[400px] flex justify-center pl-0 -mr-2">
+            <CarouselItem
+              key={item.id}
+              className="max-w-[400px] flex justify-center pl-0 -mr-2"
+            >
               <TestCarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}
