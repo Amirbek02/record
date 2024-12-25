@@ -23,28 +23,28 @@ const Footer = () => {
 					ЖРТ абитуриенттин билим деңгээлин жана логикалык ой жүгүртүүсүн
 					баалоо максатында өткөрүлөт
 				</p>
-				<nav className="mt-[20px] flex gap-[10px] md:flex-col">
-					<div className="flex gap-[10px] items-center ">
+				<nav className="mt-[20px] flex gap-[17px] md:flex-col">
+					<div className="flex gap-[9px] items-center md:gap-[15px]">
 						<Phone className="w-[16px] h-[16px] text-[#4C4C4C] md:w-[24px] md:h-[24px]" />
 						<a
 							href="tel:+9969999999"
-							className=" text-[10px] text-[#4C4C4C] font-semibold md:text-[16px]">
+							className=" text-[9px]  text-[#4C4C4C] font-semibold md:text-[16px]">
 							(996) 9999999
 						</a>
 					</div>
-					<div className="flex gap-[10px] items-center">
+					<div className="flex gap-[9px] items-center md:gap-[15px]">
 						<Mail className="w-[16px] h-[16px] text-[#4C4C4C] md:w-[24px] md:h-[24px]" />
 						<a
 							href="mailto:Zhrt@gmail.com"
-							className="text-[10px] text-[#4C4C4C] font-semibold md:text-[16px]">
+							className="text-[9px] text-[#4C4C4C] font-semibold md:text-[16px]">
 							Zhrt@gmail.com
 						</a>
 					</div>
-					<div className="flex gap-[10px] items-center">
+					<div className="flex gap-[9px] items-center md:gap-[15px]">
 						<MapPin className="w-[16px] h-[16px] text-[#4C4C4C] md:w-[24px] md:h-[24px]" />
 						<a
 							href="Location: Osh, Bishkek, Kyrgyzstan"
-							className=" text-[10px] text-[#4C4C4C] font-semibold md:text-[16px]">
+							className=" text-[9px] text-[#4C4C4C] font-semibold md:text-[16px]">
 							720000 Osh
 						</a>
 					</div>
