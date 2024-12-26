@@ -8,9 +8,6 @@ const VideoPlayer = () => {
 
 	return (
 		<div className="w-[90%] max-w-[1440px] mx-auto py-[30px]">
-			<h1 className="text-[18px] md:text-[24px] font-semibold md:font-bold tracking-[2%] text-[#4C4C4C] mb-[15px] md:mb-[24px]">
-				1- бөлүм. Математика
-			</h1>
 			<div>
 				<div className="w-full h-auto md:w-[734px] lg:w-[834px] lg:h-[502px] rounded-[15px] overflow-hidden">
 					<div

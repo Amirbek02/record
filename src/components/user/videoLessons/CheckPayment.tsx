@@ -9,7 +9,7 @@ const CheckPayment = () => {
 				1- бөлүм. Математика
 			</h1>
 			<div className="flex flex-col">
-				<h2 className="text-center font-bold text-[24px] md:text-[32px] md:font-medium leading-[130%] text-[#4C4C4C] order-2">
+				<h2 className="text-center font-bold text-[24px] md:text-[32px] md:font-medium leading-[130%] text-[#4C4C4C] order-2 md:order-1">
 					2-видео сабак көрүү үчүн төлөм аткарыңыз!
 				</h2>
 				<Image
@@ -17,7 +17,7 @@ const CheckPayment = () => {
 					alt=""
 					width={150}
 					height={150}
-					className="mx-auto mt-[70px] order-1"
+					className="mx-auto mt-[70px] order-1 md:order-2"
 				/>
 			</div>
 			<div className="flex flex-col gap-[8px] items-center mt-[80px]">
