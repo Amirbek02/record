@@ -19,9 +19,13 @@ export default {
         "2xl": "1536px",
         xxl: "1600px",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        montserrat: ["montserrat"],
+      },
       colors: {
         white: "var(--background)",
-        darkGrey: "var(--foreground)",
+        darkGrey: "var(--dark-gray)",
         green: "var(--green)",
         blue: { 600: "var(--blue-600)", 700: "var(--blue-700)" },
         red: "var(--red)",

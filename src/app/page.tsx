@@ -1,3 +1,9 @@
+import TakeTest from "@/components/user/TakeTest";
+
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <TakeTest />
+    </div>
+  );
 }
