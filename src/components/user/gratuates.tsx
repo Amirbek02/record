@@ -76,8 +76,8 @@ const Graduates: React.FC = () => {
                 height={150}
               />
               <div className='flex flex-col gap-1 items-center mt-2'>
-              <p className="text-red font-bold text-[30px]  md:text-[30px]">{graduate.score} бал</p>
-              <h3 className="text-xl font-bold text-gray-400">{graduate.name}</h3>
+              <p className="text-red font-bold text-[24px]  md:text-[30px]">{graduate.score} бал</p>
+              <h3 className="text-[12px] md:text-[20px] font-bold text-gray-400">{graduate.name}</h3>
               </div>
              </div>
               <p className="text-gray-400 relative top-[-20px] text-center">{graduate.feedback}</p>
