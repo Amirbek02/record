@@ -9,9 +9,19 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        small: "415px",
+        xs: "480px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+        xxl: "1600px",
+      },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        montserrat:["montserrat"]
+        montserrat: ["montserrat"],
       },
       colors: {
         white: "var(--background)",
