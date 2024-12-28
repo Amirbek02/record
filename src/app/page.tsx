@@ -1,3 +1,5 @@
+import ResultTest from "@/components/user/ResultTest"
+
 export default function Home() {
-	return <div></div>
+	return <div><ResultTest/></div>
 }
