@@ -27,7 +27,7 @@ const ResultTest = () => {
         <WelcomeText subjectTitle="Математика" />
         <Clock
           time={result.time_spent}
-          className="absolute  right-[7%] top-7"
+          className="absolute  right-[7%] md:top-7 bottom-0"
         />
       </div>
       <ProgressInfo
@@ -38,12 +38,12 @@ const ResultTest = () => {
       <Image
         src={result.emoji}
         alt="emoji"
-        width={150}
-        height={150}
-        className="mx-auto mb-5 mt-3"
+        width={137}
+        height={137}
+        className="mx-auto mb-5 mt-3 md:w-[150px] md:h-[150px]"
       />
-      <div className="max-w-[978px] mx-auto flex justify-end">
-      <Button className="text-xl font-bold"> Аяктоо</Button>
+      <div className="lg:max-w-[978px] mx-auto flex justify-end">
+      <Button className="text-xl font-bold lg:ml-0 mx-6"> Аяктоо</Button>
       </div>
     </div>
   );

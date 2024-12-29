@@ -19,14 +19,15 @@ const ProgressInfo = ({
     return () => clearTimeout(timer);
   }, [progressPercentage]);
   return (
-    <div className="flex flex-col gap-2 max-w-[978px] mx-auto my-8">
-      <p className="text-[23px] font-extrabold">{total_questions} Суроо</p>
+    <div className="flex flex-col gap-2  lg:max-w-[978px] px-6 lg:px-0 mx-auto md:my-8 my-1">
+      <p className="md:hidden block text-base font-normal text-blue-600 py-2 pl-1">Жыйынтыгы</p>
+      <p className="lg:text-[23px] md:text-lg  md:font-bold lg:font-extrabold">{total_questions} Суроо</p>
       <Progress value={progress} />
-      <div className="text-[23px] font-medium flex gap-3 justify-between">
+      <div className="lg:text-[23px] md:text-lg text-sm font-medium flex gap-3 justify-between">
         <p className="max-w-[69px] text-blue-600">
           {total_questions}/{correct_answers} Туура
         </p>
-        <p className="w-[135px] text-red">
+        <p className="md:w-[135px] w-[82px] text-red">
           {total_questions}/{incorrect_answers} Туура эмес
         </p>
       </div>
