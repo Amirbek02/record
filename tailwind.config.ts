@@ -10,6 +10,7 @@ export default {
   theme: {
     extend: {
       screens: {
+        mm: "375px",
         small: "415px",
         xs: "480px",
         sm: "640px",
@@ -22,6 +23,7 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         montserrat: ["montserrat"],
+        roboto: ["Roboto", "sans-serif"],
       },
       colors: {
         white: "var(--background)",
