@@ -32,6 +32,9 @@ const SignUp = () => {
       </h1>
 
       <form className="flex justify-center items-center flex-col relative">
+        {/* <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px]  pb-[40px]  ">
+          Катталуу
+        </h1> */}
         <div className="flex justify-center items-start flex-col">
           <span className="font-montserrat font-[400] text-[16px] leading-[20px] pb-[6px] text-[rgb(76,76,76)]">
             Телефон номери
@@ -67,7 +70,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className="pb-[32px] flex items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
+        <div className="pb-[32px] flex items-center justify-start self-start pl-[50px] mm:pl-[0px] ">
           <label className="flex items-center justify-center">
             <input
               type="checkbox"
@@ -88,7 +91,7 @@ const SignUp = () => {
           </label>
           <Link
             href=""
-            className="font-roboto font-[400] text-[14px] leading-[16px] text-[rgb(46,48,149)] underline "
+            className="font-roboto font-[400] text-[14px] leading-[16px] text-[rgb(46,48,149)] pl-[15px] mm:pl-[60px] xl:pl-[185px] underline pr-[15px]"
           >
             Сыр сөзүңүздү унуттуңузбу?
           </Link>
