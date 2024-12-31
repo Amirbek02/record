@@ -1,3 +1,8 @@
+import AboutUs from "@/components/UI/AboutUs";
+
 export default function Home() {
-  return <div></div>;
+  return <div>
+
+    <AboutUs/>
+  </div>;
 }
