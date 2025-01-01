@@ -15,7 +15,7 @@ const MainTestCarousel = () => {
   
   return (
     <div className="flex flex-col gap-2 md:flex md:gap-20 md:my-0 my-[30px]">
-      <div className="flex md:flex">
+      {/* <div className="flex md:flex">
       <div className="bg-[#2E3095] md:mt-20 mt-40 flex flex-col justify-center relative md:left-[150px]  text-center  w-full md:w-[60%] max-w-[838px] h-auto md:h-[200px] rounded-10 rounded-tl-[300px] rounded-bl-[10px] rounded-br-[200px] p-4 md:p-6 text-white">
           <Image
             className="absolute md:left-[-150px] left-[-100px]  sm:left-[-140px] lg:left-[-150px] bottom-0 "
@@ -37,7 +37,7 @@ const MainTestCarousel = () => {
           </p>
         </div>
         <Image className="relative left-[-40px] top-[140px] h-[155px] hidden lg:block" src="/images/test foto.png" alt="" width={215} height={155} />
-      </div>
+      </div> */}
       <div className="flex flex-col gap-8 items-end mt-[50px]">
       <h1 className="text-[20px] relative md:left-[-86%] md:left-0 left-[-56%] mt-[50px] md:mt-[10px]">Негизги тест</h1>
       <Carousel
