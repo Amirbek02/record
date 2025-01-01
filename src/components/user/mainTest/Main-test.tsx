@@ -14,13 +14,19 @@ const MainTestCarousel = () => {
   const slideCount = mainTestsData.length;
   
   return (
-    <div className="flex flex-col gap-20 md:flex  md:gap-10 md:my-0 my-[30px]">
-      <div className="flex md:flex ">
-        <Image className="absolute md:left-0 left-[-100px] md:top-[0px] top-[-10px]  w-[415px]  z-[1] " src="/images/education.png" alt="" width={415} height={311} />
-        <div className="bg-[#2E3095] flex flex-col justify-center pl-[100px] md:top-[78px] md:mr-0 mr-[40px] top-[100px] left-[40px] relative md:left-[150px]  text-center  w-full md:w-[60%] max-w-[838px] h-auto md:h-[200px] rounded-10 rounded-tl-[300px] rounded-bl-[10px] rounded-br-[200px] p-4 md:p-6 text-white">
-          <h2 className="text-[14px] md:text-xl font-semibold text-center">Жалпы республикалык тестке</h2>
-          <h1 className="text-[16px] md:text-3xl text-[#FFE500] font-bold mt-2">Oнлайн даярдан</h1>
-          <p className="text-[12px] m-auto md:text-[16px] hidden md:block  mt-2 w-[392px]">
+    <div className="flex flex-col gap-2 md:flex md:gap-20 md:my-0 my-[30px]">
+      <div className="flex md:flex">
+      <div className="bg-[#2E3095] md:mt-20 mt-40 flex flex-col justify-center relative md:left-[150px]  text-center  w-full md:w-[60%] max-w-[838px] h-auto md:h-[200px] rounded-10 rounded-tl-[300px] rounded-bl-[10px] rounded-br-[200px] p-4 md:p-6 text-white">
+          <Image
+            className="absolute md:left-[-150px] left-[-100px]  sm:left-[-140px] lg:left-[-150px] bottom-0 "
+            src="/images/education.png"
+            alt=""
+            width={415}
+            height={311}
+          />
+          <h2 className="text-[12px] md:text-xl font-semibold md:text-center text-end">Жалпы республикалык тестке</h2>
+          <h1 className="text-[16px] md:text-3xl text-[#FFE500] text-end mr-6 font-bold mt-2">Oнлайн даярдан</h1>
+          <p className="text-[12px] m-auto md:text-[16px] hidden lg:block  mt-2 w-[392px]">
             Кыргыз тил   
             Математика
             Англис тил
@@ -30,10 +36,10 @@ const MainTestCarousel = () => {
             Биология
           </p>
         </div>
-        <Image className="relative left-[-40px] top-[140px] h-[155px] hidden md:block" src="/images/test foto.png" alt="" width={215} height={155} />
+        <Image className="relative left-[-40px] top-[140px] h-[155px] hidden lg:block" src="/images/test foto.png" alt="" width={215} height={155} />
       </div>
       <div className="flex flex-col gap-8 items-end mt-[50px]">
-      <h1 className="text-[20px] relative md:left-[-86%] md:left-0 left-[-60%] mt-[50px] md:mt-[10px]">Негизги тест</h1>
+      <h1 className="text-[20px] relative md:left-[-86%] md:left-0 left-[-56%] mt-[50px] md:mt-[10px]">Негизги тест</h1>
       <Carousel
         opts={{
           loop: true,
@@ -62,7 +68,7 @@ const MainTestCarousel = () => {
       </Carousel>
     </div>
     <div className="flex flex-col gap-8 items-end">
-      <h1 className="text-[20px] relative md:left-[-86%] left-[-60%]">Негизги тест</h1>
+      <h1 className="text-[20px] relative md:left-[-86%] left-[-56%]">Негизги тест</h1>
       <Carousel
         opts={{
           loop: true,
