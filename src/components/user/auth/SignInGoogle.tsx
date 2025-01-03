@@ -39,7 +39,7 @@ const SignInGoogle = () => {
         <CustomButton
           title="Кирүү"
           containerStyles="mm:rounded-[5px] xl:rounded-[12px] mm:w-[356px] xl:w-[500px] mb-[32px] xl:mb-[300px]"
-          textStyles="font-[500] xl:font-[700]  text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(255,255,255)]"
+          textStyles="font-[500] xl:font-[700] text-[21px] mm:text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(255,255,255)]"
         />
 
         <Image

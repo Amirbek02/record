@@ -64,7 +64,7 @@ const SignUp = () => {
         </div>
 
         <div className="pb-[32px] flex items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
-          <label className="flex items-center justify-center">
+          <label className="flex items-center justify-center  ">
             <input
               type="checkbox"
               checked={isChecked}
@@ -78,13 +78,13 @@ const SignUp = () => {
                 </span>
               )}
             </div>
-            <span className="font-roboto text-[14px] font-[400] leading-[16px] text-[rgba(0,0,0,0.6)] pl-[17px]">
+            <span className="font-roboto text-[14px] font-[400] leading-[16px] text-[rgba(0,0,0,0.6)] pl-[17px] ">
               Эстеп кал
             </span>
           </label>
           <Link
             href=""
-            className="font-roboto font-[400] text-[14px] leading-[16px] text-[rgb(46,48,149)] underline "
+            className="font-roboto font-[400] text-[14px] leading-[16px] text-[rgb(46,48,149)] underline text-end"
           >
             Сыр сөзүңүздү унуттуңузбу?
           </Link>
@@ -92,8 +92,8 @@ const SignUp = () => {
 
         <CustomButton
           title="Кирүү"
-          containerStyles="mm:rounded-[5px] mm:w-[356px] xl:w-[500px] mb-[32px]"
-          textStyles=" font-[700] text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(255,255,255)]"
+          containerStyles="rounded-[5px] mm:rounded-[5px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[32px]"
+          textStyles="font-[500] mm:font-[700] text-[21px] mm:text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(255,255,255)]"
         />
 
         <div className="flex justify-center items-center flex-col pb-[175px] ">
@@ -102,9 +102,8 @@ const SignUp = () => {
             <p className="px-[16px] ">Же</p>
             <span className="flex-1 border-t border-[rgb(163,163,174)]  w-[100px] mm:w-[150px] xl:w-[160px] pl-[16px] "></span>
           </div>
-
           <div className="flex pb-[32px] items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
-            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] ">
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] mr-[12px] mm:mr-[0px]">
               <div className="flex justify-center items-center px-[10px] xl:px-[15px] py-[15px] xl:py-[19px] ">
                 <div className="pr-[10px] ">
                   <Image

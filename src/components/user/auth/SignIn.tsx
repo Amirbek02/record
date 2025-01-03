@@ -111,8 +111,8 @@ const SignIn = () => {
         />
         <CustomButton
           title="Кирүү"
-          containerStyles="mm:rounded-[5px] xl:rounded-[12px] mm:w-[356px] xl:w-[500px] mb-[14px] xl:mb-[114px] bg-[rgb(228,228,228)] xl:bg-[rgb(46,48,149)]"
-          textStyles=" font-[700] text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(75,75,75)] xl:text-[rgb(255,255,255)]"
+          containerStyles="mm:rounded-[5px] xl:rounded-[12px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[14px] xl:mb-[114px] bg-customGray xl:bg-customBlue"
+          textStyles="font-[500] mm:font-[700] text-[21px] mm:text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(75,75,75)] xl:text-[rgb(255,255,255)]"
         />
 
         <div className="flex justify-center items-center flex-col pb-[53px] xl:hidden ">
@@ -122,7 +122,7 @@ const SignIn = () => {
             <span className="flex-1 border-t border-[rgb(163,163,174)]  w-[100px] mm:w-[150px] xl:w-[160px] pl-[16px] "></span>
           </div>
           <div className="flex pb-[32px] items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
-            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] ">
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] mr-[12px] ">
               <div className="flex justify-center items-center px-[10px] xl:px-[15px] py-[15px] xl:py-[19px] ">
                 <div className="pr-[10px] ">
                   <Image
