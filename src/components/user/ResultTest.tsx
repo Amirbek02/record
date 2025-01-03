@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import WelcomeText from "@/components/UI/welcomeText";
 import Clock from "@/components/UI/clock";
 import ProgressInfo from "@/components/UI/ProgressInfo";
 import { Button } from "../UI/button";
+import SendResult from "./SendResult";
 //local dependencies
 import Image from "next/image";
 export interface ResultProps {
@@ -13,6 +15,8 @@ export interface ResultProps {
   emoji: string;
 }
 const ResultTest = () => {
+  const [sendResult, setSendResult] = React.useState(false);
+  const [isSmallScreen, setIsSmallScreen] = React.useState(false);
   const result: ResultProps = {
     correct_answers: 20,
     incorrect_answers: 10,
@@ -20,6 +24,19 @@ const ResultTest = () => {
     time_spent: 3400,
     emoji: "/images/line.png",
   };
+
+  const handleEnd = () => setSendResult(true);
+
+  React.useEffect(() => {
+    const checkWindowSize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    checkWindowSize();
+    window.addEventListener("resize", checkWindowSize);
+    return () => {
+      window.removeEventListener("resize", checkWindowSize);
+    };
+  }, []);
 
   return (
     <div>
@@ -35,16 +52,28 @@ const ResultTest = () => {
         incorrect_answers={result.incorrect_answers}
         total_questions={result.total_questions}
       />
-      <Image
-        src={result.emoji}
-        alt="emoji"
-        width={137}
-        height={137}
-        className="mx-auto mb-5 mt-3 md:w-[150px] md:h-[150px]"
-      />
-      <div className="lg:max-w-[978px] mx-auto flex justify-end">
-      <Button className="text-xl font-bold lg:ml-0 mx-6"> Аяктоо</Button>
-      </div>
+      {!(sendResult && isSmallScreen) && (
+        <Image
+          src={result.emoji}
+          alt="emoji"
+          width={137}
+          height={137}
+          className="mx-auto mb-5 mt-3 md:w-[150px] md:h-[150px]"
+        />
+      )}
+      {sendResult ? (
+        <SendResult />
+      ) : (
+        <div className="lg:max-w-[978px] mx-auto flex justify-end">
+          <Button
+            className="text-xl font-bold lg:ml-0 mx-6"
+            onClick={handleEnd}
+          >
+            {" "}
+            Аяктоо
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
