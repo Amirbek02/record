@@ -7,7 +7,7 @@ import {
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
-} from '@/components/UI/TestCard';
+} from '@/components/UI/VideoCoursesCard';
 import { Play, Pause } from 'lucide-react';
 
 interface TestProps {

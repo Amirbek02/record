@@ -21,7 +21,7 @@ const VideoCourses = () => {
         }}
         className="relative lg:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
-        <h1 className="text-[20px] text-[#2E3095] font-bold md:mt-20 md:mb-6 mb-4 mt-10 ml-4 md:ml-4" >1-бөлүм. Математика </h1>
+        <h1 className="md:text-[20px] text-[14px] text-[#2E3095] font-bold md:mt-20 md:mb-6 mb-4 mt-10 " >1-бөлүм. Математика </h1>
         <CarouselContent className="ml-0 flex">
           {videoCourses.map((item) => (
             <CarouselItem
@@ -47,7 +47,7 @@ const VideoCourses = () => {
         }}
         className="relative md:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
-        <h1 className="text-[20px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-2 ml-4 md:ml-4" >2-бөлүм. Математика </h1>
+        <h1 className="md:text-[20px] text-[14px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-4 " >2-бөлүм. Математика </h1>
         <CarouselContent className="ml-0 flex">
           {videoCourses.map((item) => (
             <CarouselItem
@@ -73,7 +73,7 @@ const VideoCourses = () => {
         }}
         className="relative md:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
-        <h1 className="text-[20px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-2 ml-4 md:ml-4" >1-бөлүм. Кыргыз тил  </h1>
+        <h1 className="md:text-[20px] text-[14px] text-[#2E3095] font-bold md:mt-10 mt-4 md:mb-6 mb-4 mt-4 " >1-бөлүм. Кыргыз тил  </h1>
         <CarouselContent className="ml-0 flex">
           {videoCourses.map((item) => (
             <CarouselItem
@@ -99,7 +99,7 @@ const VideoCourses = () => {
         }}
         className="relative md:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
-        <h1 className="text-[20px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-2 ml-4 md:ml-4" >2-бөлүм. Кыргыз тил  </h1>
+        <h1 className="md:text-[20px] text-[14px]  text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-4 " >2-бөлүм. Кыргыз тил  </h1>
         <CarouselContent className="ml-0 flex">
           {videoCourses.map((item) => (
             <CarouselItem
@@ -125,7 +125,7 @@ const VideoCourses = () => {
         }}
         className="relative md:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
-        <h1 className="text-[20px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-2 ml-4 md:ml-4" >Предметтик тест.  Биология </h1>
+        <h1 className="md:text-[20px] text-[14px] text-[#2E3095] font-bold md:mt-10 md:mb-6 mb-4 mt-4 " >Предметтик тест.  Биология </h1>
         <CarouselContent className="ml-0 flex">
           {videoCourses.map((item) => (
             <CarouselItem
