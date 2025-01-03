@@ -10,16 +10,12 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  //   const toggleCheckbox = () => {
-  //     setIsChecked(!isChecked);
-  //   };
-
   const inputClass =
     "font-montserrat font-[400] box-border border-[0.6px] border-gray-300 placeholder-gray-300 text-[rgba(0,0,0,0.44)] w-[270px] mm:w-[360px] xl:w-[500px] rounded-[4px] py-[19px] pl-[15px] mb-[32px] text-[16px] leading-[20px]";
 
   return (
     <div className="flex justify-center items-center flex-col w-[360px] mm:w-auto">
-      <div className="pt-[24px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
+      <div className="pt-[26px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
         <Image
           src="/icons/record-logo.svg"
           width={290}
@@ -101,24 +97,45 @@ const SignUp = () => {
         />
 
         <div className="flex justify-center items-center flex-col pb-[175px] ">
-          <p className="pb-[32px] text-[rgb(76,76,76)] font-montserrat text-[16px] font-[500] leading-[20px] tracking-[2%] ">
-            же
-          </p>
-          <div className="flex pb-[32px]">
-            <Image
-              src="/icons/google.svg"
-              width={24}
-              height={24}
-              alt="google"
-              className="mr-[40px]"
-            ></Image>
-            <Image
-              src="/icons/iphone.svg"
-              width={24}
-              height={24}
-              alt="sighIn"
-            ></Image>
+          <div className="pb-[32px] text-[rgb(163,163,174)] font-montserrat text-[16px] font-[500] leading-[20px] tracking-[2%] flex items-center">
+            <span className="flex-1 border-t border-[rgb(163,163,174)] w-[100px]  mm:w-[150px] xl:w-[160px] pr-[16px] "></span>
+            <p className="px-[16px] ">Же</p>
+            <span className="flex-1 border-t border-[rgb(163,163,174)]  w-[100px] mm:w-[150px] xl:w-[160px] pl-[16px] "></span>
           </div>
+
+          <div className="flex pb-[32px] items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] ">
+              <div className="flex justify-center items-center px-[10px] xl:px-[15px] py-[15px] xl:py-[19px] ">
+                <div className="pr-[10px] ">
+                  <Image
+                    src="/icons/iphone.svg"
+                    width={24}
+                    height={24}
+                    alt="sighIn"
+                  ></Image>
+                </div>
+                <p className="text-[rgb(163,163,174)] font-montserrat text-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
+                  icloud аркылуу
+                </p>
+              </div>
+            </div>
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px]">
+              <div className="flex justify-center items-center px-[10px] py-[15px]">
+                <div className="pr-[10px] ">
+                  <Image
+                    src="/icons/google.svg"
+                    width={24}
+                    height={24}
+                    alt="google"
+                  ></Image>
+                </div>
+                <p className="text-[rgb(163,163,174)] font-montserrat ext-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
+                  Google аркылуу{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <Link
             href=""
             className="text-[rgb(46,48,149)] font-roboto text-[20px] font-normal leading-[23px] underline"
