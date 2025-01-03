@@ -10,7 +10,8 @@ const SignIn = () => {
 
   const inputClass =
     "font-montserrat font-[400] box-border border-[0.6px] border-gray-300 placeholder-gray-300 text-[rgb(163,163,174)] w-[270px] mm:w-[356px] xl:w-[500px] rounded-[4px] xl:rounded-[12px] py-[19px] pl-[15px] mb-[20px] text-[16px] leading-[20px]";
-  const additionalClass = "xl:w-[238px]";
+  const additionalClass =
+    "xl:w-[238px] font-montserrat font-[400] box-border border-[0.6px] border-gray-300 placeholder-gray-300 text-[rgb(163,163,174)] w-[270px] mm:w-[356px]  rounded-[4px] xl:rounded-[12px] py-[19px] pl-[15px] mb-[20px] text-[16px] leading-[20px]";
 
   return (
     <div className="flex justify-center items-center flex-col w-full h-auto ">
@@ -72,12 +73,12 @@ const SignIn = () => {
           <input
             type="text"
             placeholder="Аты"
-            className={`${inputClass} ${additionalClass} xl:mr-[25px] `}
+            className={` ${additionalClass} xl:mr-[25px] `}
           />
           <input
             type="text"
             placeholder="Фамилия"
-            className={`${inputClass} ${additionalClass}`}
+            className={` ${additionalClass}`}
           />
         </div>
         <input
