@@ -46,8 +46,12 @@ const formSchema = z.object({
 
 const MakePayment = ({
   bankLabelName = "MBANK",
+  qrCode = "/images/Ram.png",
+  bankCard = "/images/image 4.png",
 }: {
   bankLabelName?: string;
+  qrCode?: string;
+  bankCard?: string;
 }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,7 +66,7 @@ const MakePayment = ({
     console.log(values);
   }
   return (
-    <div className="ml-10 mt-5">
+    <div className=" m-5">
       <H1Text />
       <Form {...form}>
         <form
@@ -135,14 +139,14 @@ const MakePayment = ({
               />
             </div>
             <BankCard
-              imgSrc="/images/image 4.png"
+              imgSrc={bankCard}
               className="w-[372px] h-[184px] shadow-transparent"
             />
           </div>
           <div className="w-[358px] h-[365px]  flex flex-col items-center justify-between gap-3">
             <div className="shadow-[0px_5px_16px_#3284E529] w-[228px] h-[222px] flex justify-center items-center bg-[#FDFCFD] rounded-[9px]">
               <Image
-                src="/images/Ram.png"
+                src={qrCode}
                 width={172.33}
                 height={151.55}
                 alt="qr-code"
