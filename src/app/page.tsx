@@ -1,5 +1,5 @@
-import MakePayment from "@/components/user/payments/MakePayment";
+import AcceptPayment from "@/components/user/payments/AcceptPayment";
 
 export default function Home() {
-  return <div><MakePayment/></div>;
+  return <div><AcceptPayment/></div>;
 }
