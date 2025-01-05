@@ -9,7 +9,11 @@ interface ExamplePageProps {
   instructionsTitle: string;
   comparisonDetails: {
     text: string;
-    points: string[];
+    points: {
+      columnA: string;
+      columnB: string;
+      result: string;
+    }[];
   };
   additionalDetails: {
     title: string;
@@ -31,9 +35,10 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
 }) => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="text-center mb-3 sm:mb-8">
+      {comparisonDetails.points.map((point, index) => (
+      <div key={index} className="text-center mb-3 sm:mb-8">
         <h2 className="text-xl md:text-2xl lg:text-3xl text-[#4C4C4C] font-medium mb-2">
-          {title}
+          {title}. {point.columnA}
         </h2>
         <p className="font-bold text-xl sm:text-2xl lg:text-3xl text-red">
           {subtitle}
@@ -52,16 +57,25 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
         </p>
         <div className="flex justify-center">
           <h3 className="text-[10px] sm:text-base lg:text-2xl w-full md:w-3/4">
-            {comparisonDetails.points.map((point, index) => (
-              <span key={index}>
-                {point} <br />
+            
+              <span >
+                Эгерде{" "}
+                <b className="uppercase underline tet-[13px] lg:text-[24px] sm:text-xl">
+                  {point.columnA}
+                </b>{" "}
+                чондук чон болсо, анда ({point.result}); <br />
+                Эгерде{" "}
+                <b className="uppercase underline tet-[13px] lg:text-[24px] sm:text-xl">
+                  {point.columnB}
+                </b>{" "}
+                чондук чон болсо, анда ({point.result}). <br />
               </span>
-            ))}
+            
           </h3>
         </div>
 
         {additionalDetails.map((detail, index) => (
-          <div key={index} className="mt-6">
+          <div  className="mt-6">
             <h3 className="font-bold lg:text-[24px] text-[13px]">
               {detail.title}
             </h3>
@@ -81,7 +95,9 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
         <button className="border text-xs sm:text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[245px] py-2 rounded-lg">
           {startButtonText}
         </button>
+     
       </div>
+      ))}
     </div>
   );
 };
