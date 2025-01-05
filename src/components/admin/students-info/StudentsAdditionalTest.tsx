@@ -19,7 +19,7 @@ const StudentsAdditionalTest = () => {
   ];
 
   return (
-    <div className="w-full max-w-[554px] mx-auto p-4 ">
+    <div className=" w-[554px] mx-auto p-4 ">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="main-test">
           <div className="flex items-center  justify-between bg-[#F6EEFF] p-3 rounded-lg">
