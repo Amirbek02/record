@@ -35,7 +35,7 @@ const formSchema = z.object({
 });
 
 const MobileMakePayment = ({
-  bankCard = "/images/image 2.png",
+  bankCard = "/images/image 1.png",
   qrCode = "/images/Ram.png",
   bankLabelName = "Mbank",
 }: {
@@ -55,61 +55,68 @@ const MobileMakePayment = ({
   }
 
   return (
-    <div>
-      <h1 className="font-semibold text-[28px] text-darkGrey">Төлөм</h1>
-      <Image src={bankCard} width={351} height={70} alt="bankcard" />
-      <div className="shadow-[0px_5px_16px_#3284E529] w-[257px] h-[243px] flex justify-center items-center bg-[#FDFCFD] rounded-[9px]">
-        <Image src={qrCode} width={194} height={165} alt="qr-code" />
-      </div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className=" mt-[36px]  p-5 flex  flex-col justify-between border gap-3 items-center "
-        >
-          <FormField
-            control={form.control}
-            name="telNumber"
-            render={({ field }) => (
-              <>
-                <FormItem className="flex items-center h-[45px] border-b">
-                  <FormLabel className="-ml-3 pr-8 h-full flex items-center justify-center mt-2 text-base font-medium text-[#7B7B7B]">
-                    {bankLabelName}
-                  </FormLabel>
+    <div className="flex justify-center py-1 md:hidden">
+      <div className="max-w-[400px] p-2 flex flex-col items-center gap-4">
+        <h1 className="font-semibold text-[28px] text-darkGrey pb-5">Төлөм</h1>
+        <Image src={bankCard} width={351} height={70} alt="bankcard" />
+        <div className="mt-[30px] shadow-[0px_5px_16px_#3284E529] w-[257px] h-[243px] flex justify-center items-center bg-[#FDFCFD] rounded-[9px]">
+          <Image src={qrCode} width={194} height={165} alt="qr-code" />
+        </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className=" mt-[36px] w-full  flex  flex-col justify-between  gap-3 items-center "
+          >
+            <FormField
+              control={form.control}
+              name="telNumber"
+              render={({ field }) => (
+                <>
+                  <FormItem className="flex items-center h-[45px] border-b w-[310px]">
+                    <FormLabel className="-ml-3 pr-4 h-full flex items-center justify-center mt-2 text-base font-medium text-[#7B7B7B]">
+                      {bankLabelName}
+                    </FormLabel>
 
-                  <FormControl>
-                    <Input
-                      {...field}
-                      className=" py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium"
-                    />
-                  </FormControl>
-                </FormItem>
-                <FormMessage className="text-xs" />
-              </>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="amount"
-            render={({ field }) => (
-              <>
-                <FormItem className="flex items-center h-[45px] border-b">
-                  <FormLabel className="-ml-3 pr-8 text-base font-medium text-[#7B7B7B] h-full flex items-center justify-center mt-2">
-                    Баасы
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      className="py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium "
-                    />
-                  </FormControl>
-                </FormItem>
-                <FormMessage className="text-xs" />
-              </>
-            )}
-          />
-          <Button>Төлөм</Button>
-        </form>
-      </Form>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className=" py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium"
+                      />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="amount"
+              render={({ field }) => (
+                <>
+                  <FormItem className="flex items-center h-[45px] border-b w-[310px]">
+                    <FormLabel className="-ml-3 pr-4 text-base font-medium text-[#7B7B7B] h-full flex items-center justify-center mt-2">
+                      Баасы
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium "
+                      />
+                    </FormControl>
+                  </FormItem>
+                  <FormMessage className="text-xs" />
+                </>
+              )}
+            />
+            <Button
+              type="submit"
+              className="w-full mt-10 font-semibold text-xl font-montserrat"
+            >
+              Төлөм
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

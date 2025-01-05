@@ -1,5 +1,9 @@
-// import MakePayment from "@/components/user/payments/MakePayment";
-import MobileMakePayment from "@/components/user/payments/MobileMakePayment";
+import MakePayment from "@/components/user/payments/MakePayment";
+
 export default function Home() {
-  return <div><MobileMakePayment/></div>;
+  return (
+    <div>
+      <MakePayment />
+    </div>
+  );
 }
