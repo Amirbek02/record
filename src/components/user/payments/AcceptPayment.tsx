@@ -3,7 +3,13 @@ import BankCard from "@/components/UI/bankCard";
 import { Button } from "@/components/UI/button";
 import H1Text from "./H1Text";
 
-const DataContainer = ({ label, text }: { label: string; text?: string|number }) => {
+const DataContainer = ({
+  label,
+  text,
+}: {
+  label: string;
+  text?: string | number;
+}) => {
   return (
     <div className="w-[311px] h-[45px] bg-[#FFFFFF] flex gap-9 justify-start items-center text-base font-medium">
       <p className="ml-1">{label}</p>
@@ -13,26 +19,28 @@ const DataContainer = ({ label, text }: { label: string; text?: string|number })
 };
 const MobileAcceptPayment = () => {
   return (
-    <div className=" md:hidden  flex flex-col gap-4 h-screen justify-center items-center">
-      <div className="font-semibold text-darkGrey text-xl w-[358px] h-[56px] flex justify-center items-center border-[0.5px] border-darkGrey">
+    <div className="h-screen w-full md:hidden flex justify-center items-center">
+    <div className="flex flex-col gap-6  w-full max-w-[358px] mx-1">
+      <div className=" rounded-[5px] font-semibold text-darkGrey text-xl w-full  h-[56px] flex justify-center items-center border-[0.5px] border-darkGrey">
         Төлөм кабыл алынды
       </div>
-      <Button className="font-bold text-[28px] max-w-[358px]">
+      <Button className="font-semibold h-[56px] text-xl font-montserrat max-w-[358px]">
         Видео сабак
       </Button>
+    </div>
     </div>
   );
 };
 const AcceptPayment = ({
   bankCard = "/images/image 4.png",
   fullName = "Асель Асанова",
-  amount=2500,
-  accepted='Төлөм кабыл алынды'
+  amount = 2500,
+  accepted = "Төлөм кабыл алынды",
 }: {
   bankCard?: string;
   fullName?: string;
-  amount?:number;
-  accepted?:string
+  amount?: number;
+  accepted?: string;
 }) => {
   return (
     <>

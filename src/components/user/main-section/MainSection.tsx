@@ -14,15 +14,6 @@ const MainSection = () => {
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   const handleEscapeKey = (event: KeyboardEvent) => {
-  //     if (event.key === "Escape") closeModal();
-  //   };
-  //   if (isModalVisible) {
-  //     document.addEventListener("keydown", handleEscapeKey);
-  //   }
-  //   return () => document.removeEventListener("keydown", handleEscapeKey);
-  // }, [isModalVisible]);
   return (
     <div className="w-[90%] max-w-[1440px] mx-auto  py-[35px] ">
       <div className="flex items-center pl-[20px] md:pl-[0]  flex-col-reverse mx-auto md:flex-row md:justify-between ">
