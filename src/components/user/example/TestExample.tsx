@@ -9,12 +9,14 @@ const TestExample = () => {
       sectionTitle="1-бөлүм. Математика"
       instructionsTitle="Көрсөтмө"
       comparisonDetails={{
-        text: "1-ден 30 чейинки суроолор эки чоңдукту камтыйт...",
         points: [
           {
             columnA: "А калонкасындагы",
             columnB: "Б калонкасындагы",
             result: "А",
+            result1: "B",
+            result2: "Г",
+            result3: "В",
           },
         ],
       }}
