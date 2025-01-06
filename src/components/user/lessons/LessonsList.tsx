@@ -22,27 +22,29 @@ const LessonsList = () => {
 			<h1 className="font-semibold text-[24px] text-[#4C4C4C] mb-[16px]">
 				1-бөлүм Математика{" "}
 			</h1>
-			<div className="flex gap-[15px] flex-wrap">
+			<div className="flex gap-[10px] flex-wrap">
 				{Array(6)
 					.fill(null)
 					.map((item, index) => (
 						<div key={index}>
-							<div className="mx-auto w-full h-auto  md:w-[330px] lg:w-[300px] rounded-[20px] overflow-hidden object-cover">
+							<div className="mx-auto w-full h-[206px]  md:w-[290px] lg:w-[290px] rounded-[20px] overflow-hidden object-cover ">
 								<div
-									className={`relative rounded-[20px] overflow-hidden transition-all duration-500 ease-in-out ${
+									className={`relative rounded-[20px] overflow-hidden transition-all duration-500 ease-in-out   ${
 										playStates[index]
-											? "border-[#2E3095]"
-											: "border-0"
+											? "border-[#2E3095] bg-[black]"
+											: "border-0 bg-[black]"
 									}`}>
-									<ReactPlayer
-										url="/video/nature.mp4"
-										controls
-										width="100%"
-										height="100%"
-										className="rounded-[20px]"
+									<video
+										className="w-[120%] h-[206px]"
 										onPlay={() => handlePlay(index)}
 										onPause={() => handlePause(index)}
-									/>
+										autoPlay
+										muted
+										controls>
+										{" "}
+										<source src="/video/2.mp4" type="video/mp4" />
+									</video>
+
 									<div
 										className={`transition-all duration-500 ease-in-out ${
 											playStates[index]
