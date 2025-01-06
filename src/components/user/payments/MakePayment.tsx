@@ -49,10 +49,12 @@ const MakePayment = ({
   bankLabelName = "MBANK",
   qrCode = "/images/Ram.png",
   bankCard = "/images/image 4.png",
+  isAdmin=false
 }: {
   bankLabelName?: string;
   qrCode?: string;
   bankCard?: string;
+  isAdmin?:boolean
 }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,7 +72,7 @@ const MakePayment = ({
     <>
       <MobileMakePayment />
       <div className=" m-5 hidden md:block">
-        <H1Text />
+       {!isAdmin && <H1Text />}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
