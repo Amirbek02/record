@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@/components/UI/button";
+import { TestCard } from "@/components/UI/TestCard";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -57,6 +59,7 @@ const LessonsList = () => {
 									</div>
 								</div>
 							</div>
+
 							<h2 className="w-[330px] text-[16px] font-semibold texxt-[#252641] mt-[15px]">
 								Математика боюнча 1 - видео сабакка кош келиңиз!
 							</h2>
@@ -64,12 +67,12 @@ const LessonsList = () => {
 					))}
 			</div>
 			<div className="flex gap-[10px] mt-[100px] md:mt-[70px] justify-end">
-				<button className="hidden md:block w-[149px]  px-[15px] py-[10px] text-[#4C4C4C] bg-[#D0D0D0] rounded-[5px] font-medium text-[20px]">
+				<Button className="text-[#fff] font-medium text-[20px]">
 					Артка
-				</button>
-				<button className="w-[320px] md:w-[149px] px-[15px] py-[10px] text-[#fff] bg-blue-600 rounded-[5px] font-medium text-[20px]">
+				</Button>
+				<Button className="text-[#fff] font-medium text-[20px]">
 					Алдыга
-				</button>
+				</Button>
 			</div>
 		</div>
 	);
