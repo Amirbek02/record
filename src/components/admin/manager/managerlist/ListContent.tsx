@@ -45,13 +45,9 @@ const ListBox = ({ subject }: { subject: string }) => {
 
 const ListContent = ({
   imageUrl = "/images/test.png",
-  email = "Email",
-  phone = "Ватсап номери",
   subjects = mocksubjects,
 }: {
   imageUrl?: string;
-  email?: string;
-  phone?: string;
   subjects?: SubjectProps[];
 }) => {
   return (
