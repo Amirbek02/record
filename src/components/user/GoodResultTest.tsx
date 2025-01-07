@@ -63,13 +63,15 @@ const GoodResultTest = () => {
       )}
 
       {!sendResult && (
-        <div className="items-center  flex justify-center font-bold text-2xl">
+        <div className="items-center lg:pb-0 md:pb-0 pb-3  flex justify-center font-bold text-2xl">
           {result.title}
         </div>
       )}
       {!sendResult && (
-        <div className="flex items-center justify-center font-bold text-2xl">
-          {result.titleComment}
+        <div className="flex justify-center text-center items-center">
+          <div className="flex w-[450px]  pb-3 lg:block md:block hidden  font-bold text-lg">
+            {result.titleComment}
+          </div>
         </div>
       )}
 
