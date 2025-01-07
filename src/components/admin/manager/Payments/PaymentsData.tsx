@@ -5,9 +5,11 @@ import EditDeleteRefresh from "@/components/UI/editDeleteRefresh";
 
 const PaymentsData = () => {
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div className='flex justify-center items-center p-5'>
       <div className="flex flex-col ">
+        <div className="flex justify-end items-end -mb-5 pr-5">
       <EditDeleteRefresh /> 
+      </div>
       <MakePayment isAdmin />
       <div className='mt-10 flex justify-end'>
       <CancelSaveButtons />

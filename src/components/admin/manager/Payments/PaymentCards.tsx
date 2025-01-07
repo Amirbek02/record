@@ -20,10 +20,10 @@ const PaymentCards = () => {
     },
   ];
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="flex flex-col gap-1 px-2">
+    <div className="max-h-full min-h-screen flex justify-center items-center ">
+      <div className="flex flex-col gap-1 p-3">
         <EditDeleteRefresh />
-        <div className="p-4 flex flex-col gap-10 pb-[100px]">
+        <div className="p-4 flex flex-col gap-5 pb-[100px]">
           <H1Text />
           <div className=" flex flex-wrap justify-center gap-5">
             {banks.map((bank) => (
