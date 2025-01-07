@@ -1,3 +1,5 @@
+import ManagerList from "@/components/admin/manager/managerlist/ManagerList";
+
 export default function Home() {
-  return <div></div>;
+  return <div><ManagerList/></div>;
 }
