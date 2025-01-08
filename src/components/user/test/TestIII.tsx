@@ -64,8 +64,10 @@ const TestIII = ({ initialTime = 30 * 60 }) => {
       {/* Carousel with Navigation */}
       <div className="relative lg:mt-0 md:mt-0  mt-[-80px] flex items-center justify-center">
         <Image
-          onClick={handlePrev}
-          className="md:block lg:block hidden cursor-pointer"
+          onClick={currentQuestionIndex === 0 ? undefined : handlePrev}
+          className={`md:block lg:block hidden cursor-pointer ${
+            currentQuestionIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+          } `}
           src="/icons/prev.svg"
           alt="Previous"
           width={24}
@@ -111,10 +113,15 @@ const TestIII = ({ initialTime = 30 * 60 }) => {
             </div>
           </div>
         </Carousel>
-
         <Image
-          onClick={handleNext}
-          className="md:block lg:block hidden cursor-pointer"
+          onClick={
+            currentQuestionIndex === tests.length - 1 ? undefined : handleNext
+          }
+          className={`md:block lg:block hidden cursor-pointer ${
+            currentQuestionIndex === tests.length - 1
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
           src="/icons/next.svg"
           alt="Next"
           width={24}
@@ -125,13 +132,21 @@ const TestIII = ({ initialTime = 30 * 60 }) => {
       <div className="lg:flex gap-4 md:flex md:justify-end lg:space-y-0 md:space-y-0 space-y-3 flex-none justify-center lg:justify-end mt-8">
         <button
           onClick={handlePrev}
-          className="border text-xl sm:text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl"
+          disabled={currentQuestionIndex === 0}
+          className={`border text-xl sm:text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl ${
+            currentQuestionIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Артка
         </button>
         <button
           onClick={handleNext}
-          className="border text-xl sm:text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl"
+          disabled={currentQuestionIndex === tests.length - 1}
+          className={`border text-xl sm:text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl ${
+            currentQuestionIndex === tests.length - 1
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
         >
           Алдыга
         </button>
