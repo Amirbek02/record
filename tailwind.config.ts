@@ -52,6 +52,7 @@ export default {
           "2xl": "6rem",
         },
       },
+      
     },
   },
   plugins: [require("tailwindcss-animate")],

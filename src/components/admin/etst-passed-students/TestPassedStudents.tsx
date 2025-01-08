@@ -45,7 +45,7 @@ const TestPassedStudents = () => {
               >
                 {student.name}
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4">  
               <button className="p-1 hover:text-blue-600">
                 <Pencil className="h-4 w-4" />
               </button>
