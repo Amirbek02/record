@@ -1,85 +1,154 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
-import blockData from "@/components/admin/leading/LeadingPage";
+import EditDeleteRefresh from "@/components/UI/editDeleteRefresh";
+const AdminPanel = () => {
+  type Student = {
+    id: number;
+    imgSrc: string;
+    ball: number;
+    firstName: string;
+    opinion: string;
+  };
 
-const TestPage = ({ blockData }) => {
-  const { blockOne, blockTwo, blockThree, blockFour } = blockData;
+  const [students, setStudents] = useState<Student[]>([
+    {
+      id: 1,
+      imgSrc: "/icons//Download.svg",
+      ball: 95,
+      firstName: "Иван",
+      opinion: "Прекрасный учитель и курс!",
+    },
+    {
+      id: 2,
+      imgSrc: "/icons//Download.svg",
+      ball: 88,
+      firstName: "Алина",
+      opinion: "Очень полезные занятия!",
+    },
+    {
+      id: 3,
+      imgSrc: "/icons//Download.svg",
+      ball: 92,
+      firstName: "Марат",
+      opinion: "Учитель всегда помогал нам.",
+    },
+    {
+      id: 4,
+      imgSrc: "/icons//Download.svg",
+      ball: 89,
+      firstName: "Динара",
+      opinion: "Курс превзошел мои ожидания!",
+    },
+    {
+      id: 5,
+      imgSrc: "/icons//Download.svg",
+      ball: 94,
+      firstName: "Канат",
+      opinion: "Очень доволен результатами.",
+    },
+    {
+      id: 6,
+      imgSrc: "/icons//Download.svg",
+      ball: 90,
+      firstName: "Жанара",
+      opinion: "Замечательная программа обучения.",
+    },
+  ]);
+
+  const handleInputChange = (
+    id: number,
+    field: keyof Student,
+    value: string | number
+  ) => {
+    setStudents((prev) =>
+      prev.map((student) =>
+        student.id === id ? { ...student, [field]: value } : student
+      )
+    );
+  };
+
+  const handleImageChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const newImageSrc = URL.createObjectURL(file);
+      handleInputChange(id, "imgSrc", newImageSrc);
+    }
+  };
 
   return (
-    <div className="p-6 space-y-12">
-      {/* 1-Блок */}
-      <div className="p-6 border rounded-lg shadow-lg bg-white max-w-md mx-auto">
-        <div className="mb-4">
-          {blockOne.text.map((line, index) => (
-            <p key={index} className="text-lg font-medium">
-              {line}
-            </p>
-          ))}
+    <div className="p-4">
+      <h2 className="text-xl  font-bold mb-6 text-center">
+        Биздин бүтүрүүчүлөр
+      </h2>
+      <div className="grid border relative rounded-xl border-black p-8 grid-cols-3 gap-6">
+        <p className="absolute pl-3 bg-slate-500 rounded-tl-[10px] opacity-50 pr-3 text-[18px] ">
+          2 - болум
+        </p>
+        <div className="flex  absolute right-0 top-0 ">
+          <EditDeleteRefresh />
         </div>
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-          {blockOne.buttonText}
-        </button>
-        <div className="mt-4 flex flex-col items-center">
-          <div className="border border-dashed border-gray-400 rounded-lg p-4 w-full h-32 flex items-center justify-center">
-            <p className="text-gray-500">{blockOne.uploadText}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* 2-Блок */}
-      <div className="p-6 border rounded-lg shadow-lg bg-white max-w-2xl mx-auto">
-        <h2 className="text-lg font-medium mb-4">{blockTwo.title}</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {blockTwo.items.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center"
+        {students.map((student) => (
+          <div
+            key={student.id}
+            className="border pt-10 p-4 rounded-lg bg-white shadow-lg flex flex-col items-center"
+          >
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              id={`fileInput-${student.id}`}
+              onChange={(e) => handleImageChange(e, student.id)}
+            />
+            <label
+              htmlFor={`fileInput-${student.id}`}
+              className="cursor-pointer"
             >
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-                <span className="text-gray-500">⬇️</span>
-              </div>
-              <p className="text-sm text-gray-700">{item}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+              <Image
+                src={student.imgSrc}
+                alt={student.firstName}
+                width={70}
+                height={70}
+                className="rounded-full mb-4 bg-slate-500 object-cover"
+              />
+            </label>
 
-      {/* 3-Блок */}
-      <div className="p-6 border rounded-lg shadow-lg bg-white max-w-md mx-auto">
-        <h2 className="text-lg font-medium mb-4">{blockThree.title}</h2>
-        <div className="border border-gray-300 rounded-lg p-4 flex flex-col items-center">
-          <div className="w-full h-40 bg-gray-100 flex items-center justify-center mb-4">
-            <p className="text-gray-500">{blockThree.imageText}</p>
-          </div>
-          <div className="flex gap-2">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              -
-            </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              +
-            </button>
-          </div>
-        </div>
-      </div>
+            <input
+              type="text"
+              value={student.firstName}
+              onChange={(e) =>
+                handleInputChange(student.id, "firstName", e.target.value)
+              }
+              className="border rounded-md p-2 mb-2 w-full text-center"
+              placeholder="Имя студента"
+            />
 
-      {/* 4-Блок */}
-      <div className="p-6 border rounded-lg shadow-lg bg-white max-w-lg mx-auto">
-        <h2 className="text-lg font-medium mb-4">{blockFour.title}</h2>
-        <div className="space-y-4">
-          {blockFour.tasks.map((task, index) => (
-            <div
-              key={index}
-              className="border border-gray-300 rounded-lg p-4 bg-gray-50"
-            >
-              <h3 className="text-sm font-bold">{task.label}</h3>
-              <p className="text-sm text-gray-600">{task.description}</p>
-            </div>
-          ))}
-        </div>
+            <input
+              type="number"
+              value={student.ball}
+              onChange={(e) =>
+                handleInputChange(student.id, "ball", +e.target.value)
+              }
+              className="border rounded-md p-2 mb-2 w-full text-center"
+              placeholder="Баллы"
+            />
+
+            <textarea
+              value={student.opinion}
+              onChange={(e) =>
+                handleInputChange(student.id, "opinion", e.target.value)
+              }
+              className="border rounded-md p-2 mb-2 w-full text-center"
+              placeholder="Отзыв студента"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default TestPage;
+export default AdminPanel;
