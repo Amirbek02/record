@@ -18,8 +18,6 @@ export interface ResultProps {
 }
 
 const GoodResultTest = () => {
-  const [sendResult, setSendResult] = React.useState(false);
-
   const result: ResultProps = {
     correct_answers: 25,
     incorrect_answers: 5,
@@ -30,11 +28,10 @@ const GoodResultTest = () => {
     titleComment: "Тестти аткаруунун жыйынтыгы боюнча сиз 2-бөлүмгө өттүңүз! ",
   };
 
-  // Логика в зависимости от результата
-  const isGoodResult = result.correct_answers >= 3; // Условие для хорошего результата
-  const emoji = isGoodResult ? "/images/goodemogi.png" : "/images/smile.svg"; // Изображение
-  const buttonText = isGoodResult ? "2-бөлүм" : "Видео сабак"; // Текст кнопки
-  const buttonLink = isGoodResult ? "/" : "/"; // Ссылка кнопки
+  const isGoodResult = result.correct_answers >= 27;
+  const emoji = isGoodResult ? "/images/goodemogi.png" : "/images/smile.svg";
+  const buttonText = isGoodResult ? "2-бөлүм" : "Видео сабак";
+  const buttonLink = isGoodResult ? "/" : "/";
   const title = isGoodResult
     ? "Сизди куттуктайбыз!"
     : "Тестти аткаруунун жыйынтыгы боюнча сиз  видео сабактты кайталап көрүп чыгыңыз!";
@@ -51,41 +48,32 @@ const GoodResultTest = () => {
         <Clock time={result.time_spent} className="absolute right-[7%] top-0" />
       </div>
 
-      {/* Прогресс маалыматтары */}
       <ProgressInfo
         correct_answers={result.correct_answers}
         incorrect_answers={result.incorrect_answers}
         total_questions={result.total_questions}
       />
 
-      {/* Эмоциялык сүрөт */}
-      {!sendResult && (
-        <Image
-          src={emoji}
-          alt="emoji"
-          width={150}
-          height={150}
-          className="mx-auto mb-5 mt-3"
-        />
-      )}
+      <Image
+        src={emoji}
+        alt="emoji"
+        width={150}
+        height={150}
+        className="mx-auto mb-5 mt-3"
+      />
 
-      {/* Текст результата */}
-      {!sendResult && (
-        <div className="flex justify-center items-center">
-          <div className="items-center w-auto md:w-[430px] lg:w-[450px] lg:pb-0 md:pb-0 pb-3 text-center flex justify-center font-bold text-2xl">
-            {title}
-          </div>
+      <div className="flex justify-center items-center">
+        <div className="items-center w-auto md:w-[430px] lg:w-[450px] lg:pb-0 md:pb-0 pb-3 text-center flex justify-center font-bold text-xl">
+          {title}
         </div>
-      )}
-      {!sendResult && (
-        <div className="flex justify-center text-center items-center">
-          <div className="flex w-[450px] pb-3 lg:block md:block hidden font-bold text-lg">
-            {titleComment}
-          </div>
-        </div>
-      )}
+      </div>
 
-      {/* Кнопка */}
+      <div className="flex justify-center text-center items-center">
+        <div className=" w-[450px] pb-3 lg:block md:block hidden font-bold text-[14px]">
+          {titleComment}
+        </div>
+      </div>
+
       <div className="lg:max-w-[978px] items-center mx-auto flex justify-center">
         <Link
           href={buttonLink}
