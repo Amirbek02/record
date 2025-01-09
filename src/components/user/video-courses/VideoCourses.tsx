@@ -16,8 +16,9 @@ const VideoCourses = () => {
         opts={{
           loop: true,
           align: "start",
-          containScroll: false,
+          containScroll: "trimSnaps",
           slidesToScroll: 1,
+          draggable: true, 
         }}
         className="relative lg:w-[60%] w-[100%] max-w-[1440px] overflow-hidden md:mx-10 mx-1"
       >
@@ -36,7 +37,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
       </Carousel>
       <Carousel
         opts={{
@@ -62,7 +63,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
       </Carousel>
       <Carousel
         opts={{
@@ -88,7 +89,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
       </Carousel>
       <Carousel
         opts={{
@@ -114,7 +115,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
       </Carousel>
       <Carousel
         opts={{
@@ -140,7 +141,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
       </Carousel>
         </div>
     );
