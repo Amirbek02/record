@@ -65,9 +65,9 @@ const Graduates: React.FC = () => {
           {graduates.map((graduate) => (
             <div
               key={graduate.id}
-              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] rounded-lg shadow-lg p-2 flex flex-col"
+              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items-center rounded-xl shadow-lg p-2 flex flex-col"
             >
-             <div className='flex gap-5'>
+             <div className='flex gap-5 '>
              <Image
                 src={graduate.image}
                 alt={graduate.name}
@@ -80,7 +80,7 @@ const Graduates: React.FC = () => {
               <h3 className="text-[12px] xl:text-[20px] font-bold text-gray-400">{graduate.name}</h3>
               </div>
              </div>
-              <p className="text-gray-400 relative top-[-20px] text-center">{graduate.feedback}</p>
+              <p className="text-gray-300 w-[300px]  relative top-[-20px] text-center">{graduate.feedback}</p>
             </div>
           ))}
         </div>

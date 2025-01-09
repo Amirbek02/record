@@ -1,3 +1,5 @@
+import Graduates from "@/components/user/gratuates";
+
 export default function Home() {
-  return <div></div>;
+  return <div><Graduates /></div>;
 }
