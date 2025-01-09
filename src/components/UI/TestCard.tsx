@@ -64,6 +64,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
           autoPlay
           loop
           muted
+          controls
         />
       )}
       {children}
