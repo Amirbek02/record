@@ -10,6 +10,7 @@ export default {
   theme: {
     extend: {
       screens: {
+        mm: "375px",
         small: "415px",
         xs: "480px",
         sm: "640px",
@@ -22,6 +23,7 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         montserrat: ["montserrat"],
+        roboto: ["Roboto", "sans-serif"],
       },
       colors: {
         white: "var(--background)",
@@ -29,6 +31,8 @@ export default {
         green: "var(--green)",
         blue: { 600: "var(--blue-600)", 700: "var(--blue-700)" },
         red: "var(--red)",
+        customGray: "rgb(228, 228, 228)",
+        customBlue: "rgb(46, 48, 149)",
       },
       backgroundImage: {
         "custom-gradient-cards": "linear-gradient(to bottom, #1A1A25, #2E3095)",
@@ -48,6 +52,7 @@ export default {
           "2xl": "6rem",
         },
       },
+      
     },
   },
   plugins: [require("tailwindcss-animate")],
