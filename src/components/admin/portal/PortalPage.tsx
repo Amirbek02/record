@@ -1,15 +1,31 @@
 "use client";
 import EditDeleteRefresh from "@/components/UI/editDeleteRefresh";
+import { useState, useRef } from "react";
+import Image from "next/image";
 
 const PortalPage = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+    }
+  };
   const portals = [
     { id: 1, title: "ЖРТ га даярдоо" },
     { id: 2, title: "ЖРТ га даярдоо" },
-    { id: 3, title: "ЖРТ га даярдоо" }, // Этот будет снизу
+    { id: 3, title: "ЖРТ га даярдоо" },
   ];
 
-  const topPortals = portals.slice(0, 2); // Первые 2 элемента
-  const bottomPortal = portals[2]; // Третий элемент отдельно
+  const topPortals = portals.slice(0, 2);
+  const bottomPortal = portals[2];
 
   const fileItems = new Array(2).fill(null);
   const textItems = [
@@ -19,8 +35,7 @@ const PortalPage = () => {
 
   return (
     <div className="flex">
-      <div className="max-w-3xl mx-auto p-4 space-y-8">
-        {/* Верхние элементы порталов */}
+      <div className="max-w-7xl mx-auto p-4 space-y-8">
         <ul className="space-y-3">
           {topPortals.map((portal) => (
             <PortalItem key={portal.id} title={portal.title} />
@@ -31,7 +46,13 @@ const PortalPage = () => {
         <div>
           <ul className="flex gap-4">
             {fileItems.map((_, index) => (
-              <FileItem key={index} />
+              <FileItem
+                key={index}
+                selectedImage={selectedImage}
+                setSelectedImage={setSelectedImage}
+                handleClick={handleClick}
+                fileInputRef={fileInputRef}
+              />
             ))}
           </ul>
         </div>
@@ -65,10 +86,61 @@ const PortalItem = ({ title }: { title: string }) => (
 );
 
 // Компонент для элементов с input type="file"
-const FileItem = () => (
-  <li className="w-[473px] flex justify-between items-center h-[227px] border rounded-xl">
-    <input type="file" />
-    <EditDeleteRefresh />
+const FileItem = ({
+  selectedImage,
+  setSelectedImage,
+  handleClick,
+  fileInputRef,
+}: {
+  selectedImage: File | null;
+  setSelectedImage: React.Dispatch<React.SetStateAction<File | null>>;
+  handleClick: () => void;
+  fileInputRef: React.RefObject<HTMLInputElement>;
+}) => (
+  <li className="w-[473px] relative flex justify-between items-center h-[227px] border rounded-xl">
+    <div className="flex flex-col items-center">
+      {/* Верхний элемент */}
+      <div className="flex flex-col  mr-20 justify-center items-center mb-4 md:mb-0 border rounded-xl border-black h-[227px] w-[206px]">
+        {selectedImage ? (
+          <Image
+            width={180}
+            height={180}
+            alt="Selected"
+            src={URL.createObjectURL(selectedImage)}
+            className="w-full h-full object-contain rounded-xl"
+          />
+        ) : (
+          <div
+            className="cursor-pointer rounded-lg p-3 flex flex-col justify-center items-center"
+            onClick={handleClick}
+          >
+            <Image
+              width={180}
+              height={180}
+              alt="Download Icon"
+              src="/icons/Download.svg"
+              className="w-10  rounded-lg h-10"
+            />
+            <span className="text-sm mt-2">Загрузить фото</span>
+          </div>
+        )}
+
+        <input
+          id="fileInput"
+          ref={fileInputRef}
+          type="file"
+          className="hidden"
+        />
+      </div>
+    </div>
+    <div className="absolute top-0 right-0">
+      <EditDeleteRefresh />
+    </div>
+    <input
+      className="border absolute right-2 bottom- rounded-xl p-3 w"
+      type="text"
+      placeholder="text"
+    />
   </li>
 );
 
