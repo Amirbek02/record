@@ -1,25 +1,22 @@
 /** @format */
 "use client"
 import React, { useState, useEffect } from "react"
-import { Button } from "@/components/UI/button"
 import { Card, CardContent } from "@/components/UI/card"
 import { RadioGroup, RadioGroupItem } from "@/components/UI/radio-group"
 import Image, { StaticImageData } from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import QuestionImage from "@/../public/images/question.png"
 
 interface Question {
 	id: number
-	question: string
 	trueVariant: string
-	image?: StaticImageData
+	image: StaticImageData
 }
 
 interface TestSession {
 	id: number
 	department: number
 	subject: string
-	totalTime: number // Added total time for the entire test
+	totalTime: number
 	questions: Question[]
 }
 
@@ -46,28 +43,16 @@ const PaidVideoLessonTest = () => {
 		questions: [
 			{
 				id: 3434,
-				question: `Эгерде A КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (A);
-Эгерде Б КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (Б);
-Эгерде эки чондук барабар болсо, анда (В);
-Эгерде бар болгон маалымат аркылуу буд чондуктардын кайсынысы чон экендигин, же алардын барабар экендигин аныктоо мумкун болбосо, анда (Г).`,
 				trueVariant: "A",
 				image: QuestionImage,
 			},
 			{
 				id: 344,
-				question: `Эгерде A КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (A);
-Эгерде Б КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (Б);
-Эгерде эки чондук барабар болсо, анда (В);
-Эгерде бар болгон маалымат аркылуу буд чондуктардын кайсынысы чон экендигин, же алардын барабар экендигин аныктоо мумкун болбосо, анда (Г).`,
 				trueVariant: "A",
 				image: QuestionImage,
 			},
 			{
 				id: 334,
-				question: `Эгерде A КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (A);
-Эгерде Б КОЛОНКАСЫНДАГЫ чондук чон болсо, анда (Б);
-Эгерде эки чондук барабар болсо, анда (В);
-Эгерде бар болгон маалымат аркылуу буд чондуктардын кайсынысы чон экендигин, же алардын барабар экендигин аныктоо мумкун болбосо, анда (Г).`,
 				trueVariant: "A",
 				image: QuestionImage,
 			},
@@ -191,15 +176,11 @@ const PaidVideoLessonTest = () => {
 		const answersKey = `test-answers-${testData.id}`
 		const finalAnswers = JSON.parse(localStorage.getItem(answersKey) || "{}")
 
-		// Here you can add the logic to submit to backend
 		console.log("Test completed:", finalAnswers)
 
 		// Clear local storage
 		localStorage.removeItem(answersKey)
 		localStorage.removeItem(`test-session-${testData.id}`)
-
-		// Add your navigation logic here
-		// For example: router.push('/test-results')
 	}
 
 	return (
@@ -234,41 +215,57 @@ const PaidVideoLessonTest = () => {
 			</div>
 
 			<div className="flex items-center gap-2 md:gap-4">
-				<button
-					onClick={() => handleNavigation("prev")}
-					disabled={currentQuestion === 0}
-					className="p-1 md:p-2 rounded-full hover:bg-gray-100 transition-colors"
-				>
-					<ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-				</button>
-
 				<Card className="flex-1 border-none shadow-none">
 					<CardContent className="p-3 md:p-6">
-						<div className="mb-4 text-lg md:text-xl font-medium">
-							Суроо {currentQuestion + 1}/{testData.questions.length}
+						<div className="flex justify-between">
+							<h1 className="text-xl text-gray-700 md:text-2xl font-semibold">
+								Тапшырма
+							</h1>
+							<div className="mb-4 text-lg md:text-2xl font-medium">
+								Суроо {currentQuestion + 1}/{testData.questions.length}
+							</div>
 						</div>
 						<div className="flex flex-col lg:flex-row gap-2 md:gap-4">
-							<div className="text-lg md:text-xl font-bold lg:w-12">
-								{currentQuestion + 1}.
-							</div>
-
 							<div className="flex-1">
-								<div className="whitespace-pre-line mb-4 md:mb-6 text-sm md:text-base">
-									{testData.questions[currentQuestion].question}
+								<div className="whitespace-pre-line mb-4 md:mb-6 text-sm md:text-xl">
+									<p>
+										Эгерде{" "}
+										<span className="font-bold underline text-black">
+											А КОЛОНКАСЫНДАГЫ
+										</span>{" "}
+										чоңдук чоң болсо, анда (А);
+									</p>
+									<p>
+										Эгерде{" "}
+										<span className="font-bold underline text-black">
+											Б КОЛОНКАСЫНДАГЫ
+										</span>{" "}
+										чоңдук чоң болсо, анда (Б);
+									</p>
+									<p>Эгерде эки чоңдук барабар болсо, анда (В);</p>
+									<p>
+										Эгерде бар болгон маалымат аркылуу бул чоңдуктардын
+										кайсынысы чоң экендигин, же алардын барабар экендигин
+										аныктоо мүмкүн болбосо, анда (Г)
+									</p>
 								</div>
-
-								{testData.questions[currentQuestion].image && (
-									<div className="relative w-full aspect-[4/3] max-h-[180px] md:max-h-[220px]">
-										<Image
-											src={testData.questions[currentQuestion].image}
-											alt="Question visualization"
-											fill
-											className="object-contain"
-											sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-											priority
-										/>
+								<div className="flex items-center justify-center ">
+									<div className="text-lg md:text-2xl font-bold lg:w-12 ">
+										{currentQuestion + 1}.
 									</div>
-								)}
+									{testData.questions[currentQuestion].image && (
+										<div className="relative w-full aspect-[4/3] max-h-[180px] md:max-h-[220px]">
+											<Image
+												src={testData.questions[currentQuestion].image}
+												alt="Question visualization"
+												fill
+												className="object-contain"
+												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+												priority
+											/>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 
@@ -282,7 +279,7 @@ const PaidVideoLessonTest = () => {
 									<RadioGroupItem
 										value={variant}
 										id={`option-${variant}-${currentQuestion}`}
-										className="w-4 h-4 md:w-5 md:h-5"
+										className="w-4 h-4 md:w-5 md:h-5 rounded-full border-2 border-gray-400 data-[state=checked]:bg-black data-[state=checked]:border-black"
 									/>
 									<label
 										htmlFor={`option-${variant}-${currentQuestion}`}
@@ -295,14 +292,6 @@ const PaidVideoLessonTest = () => {
 						</RadioGroup>
 					</CardContent>
 				</Card>
-
-				<button
-					onClick={() => handleNavigation("next")}
-					disabled={currentQuestion === testData.questions.length - 1}
-					className="p-1 md:p-2 rounded-full hover:bg-gray-100 transition-colors"
-				>
-					<ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-				</button>
 			</div>
 
 			<div className="flex flex-col-reverse justify-center items-center gap-2 sm:flex-row sm:justify-end mt-4 md:mt-6">
@@ -316,9 +305,10 @@ const PaidVideoLessonTest = () => {
 				</button>
 				{currentQuestion === testData.questions.length - 1 ? (
 					<button
+						style={{ background: "green" }}
 						onClick={handleFinishTest}
 						disabled={!isAllAnswered}
-						className="w-full sm:w-[185px] text-sm md:text-2xl	font-bold text-white h-[56px] rounded-md"
+						className="w-full sm:w-[185px] text-sm md:text-xl	font-bold text-white h-[56px] rounded-md"
 					>
 						Тестти бүтүрүү
 					</button>
