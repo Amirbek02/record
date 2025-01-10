@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/UI/card"
 import { RadioGroup, RadioGroupItem } from "@/components/UI/radio-group"
 import Image, { StaticImageData } from "next/image"
 import QuestionImage from "@/../public/images/question.png"
+import { Clock } from "lucide-react"
 
 interface Question {
 	id: number
@@ -56,7 +57,6 @@ const PaidVideoLessonTest = () => {
 				trueVariant: "A",
 				image: QuestionImage,
 			},
-			// ... other questions
 		],
 	})
 
@@ -185,33 +185,20 @@ const PaidVideoLessonTest = () => {
 
 	return (
 		<div className="w-full max-w-[1440px] mx-auto p-4">
-			<h1 className="text-center mb-4 text-xl md:text-2xl">
-				Сынамык тестке кош келдиңиз!
-			</h1>
-			<h1 className="text-center text-red-500 font-semibold mb-4 text-xl md:text-2xl">
+			<h1 className="md:hidden text-center text-red font-semibold mb-4 text-xl md:text-2xl">
 				ЖРТ га даярдоо
 			</h1>
 
-			<div className="flex justify-between items-center mb-6">
-				<h1 className="text-xl md:text-2xl font-semibold">
+			<div className="flex flex-col gap-4 md:gap-0 md:flex-row justify-center items-center md:justify-between">
+				<h1 className="text-xl md:text-2xl font-semibold ">
 					{testData.subject}
 				</h1>
-			</div>
-
-			<div className="flex flex-col items-center mb-6">
-				<svg
-					className="w-8 h-8 md:w-12 md:h-12 mb-2 animate-spin-slow"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-				>
-					<circle cx="12" cy="12" r="10" />
-					<path d="M12 6v6l4 2" />
-				</svg>
-				<span className="text-xl md:text-2xl font-mono">
-					{formatTime(timeLeft)}
-				</span>
+				<div className="flex flex-col items-center mb-6 max-w-[200px] ">
+					<Clock size={82} strokeWidth={1.25} />
+					<span className="text-xl md:text-2xl font-mono">
+						{formatTime(timeLeft)}
+					</span>
+				</div>
 			</div>
 
 			<div className="flex items-center gap-2 md:gap-4">
@@ -272,21 +259,21 @@ const PaidVideoLessonTest = () => {
 						<RadioGroup
 							value={selectedAnswers[currentQuestion] || ""}
 							onValueChange={handleAnswer}
-							className="flex flex-wrap justify-center gap-6 md:gap-12 mt-6 md:mt-8"
+							className="flex flex-wrap justify-center gap-8 md:gap-24 mt-6 md:mt-8"
 						>
 							{["А", "Б", "В", "Г"].map(variant => (
-								<div key={variant} className="flex items-center space-x-2">
+								<div key={variant} className="flex flex-col ">
+									<label
+										htmlFor={`option-${variant}-${currentQuestion}`}
+										className="text-lg md:text-2xl font-semibold"
+									>
+										{variant}
+									</label>
 									<RadioGroupItem
 										value={variant}
 										id={`option-${variant}-${currentQuestion}`}
 										className="w-4 h-4 md:w-5 md:h-5 rounded-full border-2 border-gray-400 data-[state=checked]:bg-black data-[state=checked]:border-black"
 									/>
-									<label
-										htmlFor={`option-${variant}-${currentQuestion}`}
-										className="text-lg md:text-xl font-semibold"
-									>
-										{variant}
-									</label>
 								</div>
 							))}
 						</RadioGroup>
@@ -296,7 +283,7 @@ const PaidVideoLessonTest = () => {
 
 			<div className="flex flex-col-reverse justify-center items-center gap-2 sm:flex-row sm:justify-end mt-4 md:mt-6">
 				<button
-					style={{ background: "#E0E0E0" }}
+					style={{ background: "#E0E0E0", borderRadius: "5px" }}
 					onClick={() => handleNavigation("prev")}
 					disabled={currentQuestion === 0}
 					className=" w-full sm:w-[185px] h-[56px] font-bold  text-black text-sm md:text-2xl rounded-md"
@@ -305,18 +292,18 @@ const PaidVideoLessonTest = () => {
 				</button>
 				{currentQuestion === testData.questions.length - 1 ? (
 					<button
-						style={{ background: "green" }}
+						style={{ background: "green", borderRadius: "5px" }}
 						onClick={handleFinishTest}
 						disabled={!isAllAnswered}
-						className="w-full sm:w-[185px] text-sm md:text-xl	font-bold text-white h-[56px] rounded-md"
+						className="w-full sm:w-[185px] text-sm md:text-xl	font-bold text-white h-[56px] rounded-lg"
 					>
 						Тестти бүтүрүү
 					</button>
 				) : (
 					<button
-						style={{ background: "#2E3095" }}
+						style={{ background: "#2E3095", borderRadius: "5px" }}
 						onClick={() => handleNavigation("next")}
-						className="w-full sm:w-[185px] h-[56px] font-bold  text-white text-sm md:text-2xl bg-blue  rounded-md"
+						className="w-full sm:w-[185px] h-[56px] font-bold  text-white text-sm md:text-2xl bg-blue  rounded-lg"
 					>
 						Алдыга
 					</button>
