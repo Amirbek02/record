@@ -6,6 +6,25 @@ interface TestData {
     imgSrc: string;
 }
 
+  export const TestPage : TestData[] = [
+    {
+      id: 1,
+      testTitle: "Кыргыз тил",
+      testDescriptionTitle: "Кыргыз тил боюнча предметтик тестке кош келиңиз",
+      description:
+        "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. ",
+      imgSrc: "/images/test.png",
+    },
+    {
+      id: 2,
+      testTitle: "Математика",
+      testDescriptionTitle: "Математика боюнча предметтик тестке кош келиңиз",
+      description:
+        "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. ",
+      imgSrc: "/images/test.png",
+    },
+  ]
+
   
   export const mainTestsData: TestData[] = [
     {
@@ -91,6 +110,13 @@ interface TestData {
         id: 5,
         testTitle: "Кыргыз тили",
         testDescriptionTitle: "Кыргыз тили боюнча тестке кош келиңиз",
+        description:'',
+        imgSrc: "/images/test.png",
+      },
+      {
+        id: 6,
+        testTitle: "Англис тил",
+        testDescriptionTitle: "Англис тил боюнча тестке кош келиңиз",
         description:'',
         imgSrc: "/images/test.png",
       },
