@@ -185,6 +185,9 @@ const PaidVideoLessonTest = () => {
 
 	return (
 		<div className="w-full max-w-[1440px] mx-auto p-4">
+			<h1 className="md:hidden text-center text-gray-500 font-semibold mb-4 text-lg md:text-2xl">
+				Сынамык тестке кош келдиңиз!
+			</h1>
 			<h1 className="md:hidden text-center text-red font-semibold mb-4 text-xl md:text-2xl">
 				ЖРТ га даярдоо
 			</h1>

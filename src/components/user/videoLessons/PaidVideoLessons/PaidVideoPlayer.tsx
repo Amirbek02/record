@@ -113,17 +113,19 @@ const PaidVideoPlayer = () => {
 								</p>
 
 								{/* Navigation Buttons */}
-								<div className="flex justify-end gap-3">
+								<div className="flex justify-end gap-3 pr-2">
 									<Button
 										variant="outline"
 										size="lg"
+										style={{ borderRadius: "4px" }}
 										className="w-[149px] h-[56px] text-sm font-medium rounded-md bg-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
 									>
 										Артка
 									</Button>
 									<Button
 										size="lg"
-										className="w-[149px] h-[56px] text-sm font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+										style={{ borderRadius: "4px" }}
+										className="w-[149px] h-[56px] text-sm font-medium rounded-md bg-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700"
 									>
 										Алдыга
 									</Button>
