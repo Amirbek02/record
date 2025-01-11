@@ -3,6 +3,8 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/UI/button";
+import CustomButton from "@/components/UI/CustomButton";
 
 const links = [
 	{ label: "Сынамык тест", href: "/test" },
@@ -82,7 +84,7 @@ const Header = () => {
 						boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
 					}}>
 					<div className="flex flex-col gap-[24px] mt-[61px]">
-						<div className="flex gap-[16px] items-center">
+						<Link href="/" className="flex gap-[16px] items-center">
 							<Image
 								src="/icons/home.svg"
 								width={23}
@@ -98,8 +100,8 @@ const Header = () => {
 								}`}>
 								Башкы бет
 							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
+						</Link>
+						<Link href="/test" className="flex gap-[16px] items-center">
 							<Image
 								src="/icons/test.svg"
 								width={23}
@@ -115,8 +117,8 @@ const Header = () => {
 								}`}>
 								Тест
 							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
+						</Link>
+						<Link href="/video" className="flex gap-[16px] items-center">
 							<Image
 								src="/icons/pc.svg"
 								width={23}
@@ -132,8 +134,10 @@ const Header = () => {
 								}`}>
 								Видео сабак
 							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
+						</Link>
+						<Link
+							href="/payment"
+							className="flex gap-[16px] items-center">
 							<Image
 								src="/icons/pay.svg"
 								width={23}
@@ -149,8 +153,8 @@ const Header = () => {
 								}`}>
 								Төлөм
 							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
+						</Link>
+						<Link href="/ac" className="flex gap-[16px] items-center">
 							<Image
 								src="/icons/chel.svg"
 								width={23}
@@ -166,7 +170,7 @@ const Header = () => {
 								}`}>
 								Жеке кабинет
 							</h1>
-						</div>
+						</Link>
 					</div>
 				</aside>
 			</div>
@@ -185,13 +189,21 @@ const Header = () => {
 					</Link>
 				))}
 			</nav>
-			<div className="hidden gap-[12px] md:flex">
-				<button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
-					Кирүү
-				</button>
-				<button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
-					Катталуу
-				</button>
+			<div className="hidden gap-[32px] md:flex">
+				<Button
+					asChild
+					className="font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#FFFF]">
+					<Link href="/sign-in" className=" -ml-6 font-bold">
+						Кируу
+					</Link>
+				</Button>
+				<Button
+					asChild
+					className="font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#FFFF] ">
+					<Link href="/sign-in" className=" -ml-6 font-bold">
+						Катталуу
+					</Link>
+				</Button>
 			</div>
 		</div>
 	);
