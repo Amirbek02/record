@@ -14,7 +14,7 @@ const HeaderSign = () => {
 					borderRadius: "0px 40px 40px 0px",
 					boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
 				}}>
-				<div className="flex flex-col items-center mb-[100px]">
+				<div className="flex flex-col items-center mb-[70px]">
 					<Link href="#">
 						<Image
 							src="/images/logo.svg"
@@ -94,7 +94,7 @@ const HeaderSign = () => {
 							Төлөм
 						</h1>
 					</div>
-					<div className="flex gap-[16px] items-center">
+					<Link href="ac" className="flex gap-[16px] items-center">
 						<Image
 							src="/icons/chel.svg"
 							width={23}
@@ -110,10 +110,10 @@ const HeaderSign = () => {
 							}`}>
 							Жеке кабинет
 						</h1>
-					</div>
+					</Link>
 				</div>
 
-				<div className="mt-auto mb-[30px] ml-[-60px]">
+				<div className="mt-auto mb-[30px] ml-[-65px]">
 					<Link
 						href="/"
 						className={`flex gap-[20px] items-center h-[20px] border-l-[1px] `}>
@@ -147,7 +147,6 @@ const HeaderSign = () => {
 					</Link>
 				</div>
 			</div>
-			<div></div>
 		</div>
 	);
 };
