@@ -49,19 +49,25 @@ const MakePayment = ({
   bankLabelName = "MBANK",
   qrCode = "/images/Ram.png",
   bankCard = "/images/image 4.png",
-  isAdmin=false
+  telNumber = "+996707700700",
+  fullName = "Асель Асанова",
+  amount = 2500,
+  isAdmin = false,
 }: {
   bankLabelName?: string;
   qrCode?: string;
   bankCard?: string;
-  isAdmin?:boolean
+  isAdmin?: boolean;
+  telNumber: string;
+  fullName: string;
+  amount: number;
 }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      telNumber: "+996707700700",
-      fullName: " Асель Асанова",
-      amount: 2500,
+      telNumber: isAdmin ? " " : telNumber,
+      fullName: isAdmin ? " " : fullName,
+      amount: isAdmin ? 0 : amount,
     },
   });
 
@@ -70,9 +76,9 @@ const MakePayment = ({
   }
   return (
     <>
-      <MobileMakePayment />
+      <MobileMakePayment isAdmin={isAdmin} />
       <div className=" m-5 hidden md:block">
-       {!isAdmin && <H1Text />}
+        {!isAdmin && <H1Text />}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -94,6 +100,7 @@ const MakePayment = ({
                         <FormControl>
                           <Input
                             {...field}
+                            readOnly={!isAdmin}
                             className=" py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium"
                           />
                         </FormControl>
@@ -114,6 +121,7 @@ const MakePayment = ({
                         <FormControl>
                           <Input
                             {...field}
+                            readOnly={!isAdmin}
                             className="py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium"
                           />
                         </FormControl>
@@ -134,6 +142,7 @@ const MakePayment = ({
                         <FormControl>
                           <Input
                             {...field}
+                            readOnly={!isAdmin}
                             className="py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium "
                           />
                         </FormControl>
@@ -158,7 +167,7 @@ const MakePayment = ({
                 />
               </div>
               <Button
-                type="submit"
+                type={!isAdmin ? "button" : "submit"}
                 className=" md:w-full font-montserrat text-2xl font-semibold"
               >
                 Төлөм аткаруу
