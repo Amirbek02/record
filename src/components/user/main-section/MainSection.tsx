@@ -1,6 +1,6 @@
 "use client";
 //section after header
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import girl from "../../../../public/images/education.png";
 import Image from "next/image";
 import { MdEmail } from "react-icons/md";
@@ -12,10 +12,8 @@ const MainSection = () => {
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
   return (
-    <div className="w-[90%] max-w-[1440px] mx-auto  py-[35px] ">
+    <div className="w-[90%]  max-w-[1440px] mx-auto  py-[35px] ">
       <div className="flex items-center pl-[20px] md:pl-[0]  flex-col-reverse mx-auto md:flex-row md:justify-between ">
         <div className="flex w-[420px] lg:w-[680px] flex-col items-center mt-[420px] xl:mt-[100px]  md:mt-[30px] md:items-start ">
           <h1 className="text-[#002038] text-[16px] font-medium md:text-[25px] lg:text-[37px]">
@@ -45,7 +43,7 @@ const MainSection = () => {
           </div>
         </div>
 
-        <div className=" mr-[320px] md:mr-[300px]">
+        <div className=" mr-[320px]  md:mr-[300px]">
           <div className="relative w-[full] md:mt-[-150px]">
             <div className="absolute left-[55px] w-[202px] h-[400px] rounded-[60px] bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px]"></div>
             <div className="w-[240px] xl:w-[400px]  absolute top-[6px] left-[50px] md:left-[20px] xl:left-[-170px] ">
