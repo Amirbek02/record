@@ -105,7 +105,7 @@ const MainTestCarousel = () => {
           {slideCount > 3 && <CarouselDots className="mt-[50px]" />}
         </Carousel>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };

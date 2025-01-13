@@ -1,5 +1,6 @@
 import React from "react";
 import WelcomeText from "@/components/UI/welcomeText";
+import Footer from "@/components/user/footer/Footer";
 
 const layout = async ({
   children,
@@ -18,6 +19,7 @@ const layout = async ({
       )}
       {slugDepth < 6 && <WelcomeText subjectTitle="Математика" />}
       {children}
+      {slugDepth===1 && <Footer/>}
     </>
   );
 };

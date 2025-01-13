@@ -1,5 +1,6 @@
 import React from "react";
 import BlogPage from "@/components/user/BlogPage";
+import Footer from "@/components/user/footer/Footer";
 
 const ExamTest = () => {
   return (
@@ -8,6 +9,7 @@ const ExamTest = () => {
         Сынамык тестке кош келиңиз!
       </h2>
       <BlogPage />
+      <Footer/>
     </section>
   );
 };
