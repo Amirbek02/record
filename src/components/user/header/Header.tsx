@@ -15,6 +15,24 @@ const links = [
 	{ label: "Биз жөнүндө", href: "/about" },
 ];
 
+const link = [
+	{
+		path: "",
+		icon: "/icons/home.svg",
+		post: "Башкы бет",
+	},
+	{
+		path: "",
+		icon: "/icons/test.svg",
+		post: "Тест",
+	},
+	{
+		path: "",
+		icon: "/icons/pc.svg",
+		post: "Видео сабак",
+	},
+];
+
 const Header = () => {
 	const pathname = usePathname();
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -76,7 +94,6 @@ const Header = () => {
 				</div>
 			</div>
 			<div className="md:hidden ">
-				{/* Sidebar */}
 				<aside
 					ref={sidebarRef}
 					className={` flex flex-col items-center fixed top-[80px] left-0 w-[296px] h-full bg-[#FFFF]  transform ${
@@ -87,91 +104,28 @@ const Header = () => {
 						boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
 					}}>
 					<div className="flex flex-col gap-[24px] mt-[61px]">
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src="/icons/home.svg"
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-									pathname === "/"
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Башкы бет
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src="/icons/test.svg"
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-									pathname === "/test"
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Тест
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src="/icons/pc.svg"
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-									pathname === "/video"
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Видео сабак
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src="/icons/pay.svg"
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-									pathname === "/payment"
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Төлөм
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src="/icons/chel.svg"
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-									pathname === "/ac"
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Жеке кабинет
-							</h1>
-						</div>
+						{link.map((item, index) => (
+							<Link
+								href="ac"
+								key={index}
+								className="flex gap-[16px] items-center">
+								<Image
+									src={item.icon}
+									width={23}
+									height={23}
+									alt=""
+									className=""
+								/>
+								<h1
+									className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
+										pathname === item.path
+											? "text-[#2E3095] font-bold"
+											: "text-[#2E3095] font-normal"
+									}`}>
+									{item.post}
+								</h1>
+							</Link>
+						))}
 					</div>
 				</aside>
 			</div>

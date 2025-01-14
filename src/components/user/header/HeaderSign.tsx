@@ -4,6 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
+export const link = [
+	{
+		path: "",
+		icon: "/icons/home.svg",
+		post: "Башкы бет",
+	},
+	{
+		path: "",
+		icon: "/icons/test.svg",
+		post: "Тест",
+	},
+	{
+		path: "",
+		icon: "/icons/pc.svg",
+		post: "Видео сабак",
+	},
+	{
+		path: "",
+		icon: "/icons/pay.svg",
+		post: "Төлөм",
+	},
+	{
+		path: "",
+		icon: "/icons/chel.svg",
+		post: "Жеке кабинет",
+	},
+];
+
 const HeaderSign = () => {
 	const pathname = usePathname();
 	return (
@@ -29,90 +57,29 @@ const HeaderSign = () => {
 					</h1>
 				</div>
 				<div className="flex flex-col gap-[24px] mt-[61px]">
-					<Link
-						href="/"
-						className={`flex gap-[16px] items-center h-[20px] border-l-[1px] `}>
-						<Image src="/icons/home.svg" width={23} height={23} alt="" />
-						<h1
-							className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-								pathname === "/"
-									? "text-[#2E3095] font-bold"
-									: "text-[#2E3095] font-normal"
-							}`}>
-							Башкы бет
-						</h1>
-					</Link>
-
-					<div className="flex gap-[16px] items-center">
-						<Image
-							src="/icons/test.svg"
-							width={23}
-							height={23}
-							alt=""
-							className=""
-						/>
-						<h1
-							className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-								pathname === "/test"
-									? "text-[#2E3095] font-bold"
-									: "text-[#2E3095] font-normal"
-							}`}>
-							Тест
-						</h1>
-					</div>
-					<div className="flex gap-[16px] items-center">
-						<Image
-							src="/icons/pc.svg"
-							width={23}
-							height={23}
-							alt=""
-							className=""
-						/>
-						<h1
-							className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-								pathname === "/video"
-									? "text-[#2E3095] font-bold"
-									: "text-[#2E3095] font-normal"
-							}`}>
-							Видео сабак
-						</h1>
-					</div>
-					<div className="flex gap-[16px] items-center">
-						<Image
-							src="/icons/pay.svg"
-							width={23}
-							height={23}
-							alt=""
-							className=""
-						/>
-						<h1
-							className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-								pathname === "/payment"
-									? "text-[#2E3095] font-bold"
-									: "text-[#2E3095] font-normal"
-							}`}>
-							Төлөм
-						</h1>
-					</div>
-					<Link href="ac" className="flex gap-[16px] items-center">
-						<Image
-							src="/icons/chel.svg"
-							width={23}
-							height={23}
-							alt=""
-							className=""
-						/>
-						<h1
-							className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-								pathname === "/ac"
-									? "text-[#2E3095] font-bold"
-									: "text-[#2E3095] font-normal"
-							}`}>
-							Жеке кабинет
-						</h1>
-					</Link>
+					{link.map((item, index) => (
+						<Link
+							href="ac"
+							key={index}
+							className="flex gap-[16px] items-center">
+							<Image
+								src={item.icon}
+								width={23}
+								height={23}
+								alt=""
+								className=""
+							/>
+							<h1
+								className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
+									pathname === item.path
+										? "text-[#2E3095] font-bold"
+										: "text-[#2E3095] font-normal"
+								}`}>
+								{item.post}
+							</h1>
+						</Link>
+					))}
 				</div>
-
 				<div className="mt-auto mb-[30px] ml-[-65px]">
 					<Link
 						href="/"
