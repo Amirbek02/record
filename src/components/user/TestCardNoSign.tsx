@@ -12,6 +12,7 @@ interface TestProps {
   testDescriptionTitle: string;
   description: string;
   imgSrc: string;
+  href:string
 }
 
 const TestCardNoSign = ({
@@ -19,9 +20,10 @@ const TestCardNoSign = ({
   testDescriptionTitle,
   description,
   imgSrc,
+  href
 }: TestProps) => {
   return (
-    <TestCard withLink>
+    <TestCard withLink href={href}>
       <TestCardMedia imgSrc={imgSrc} className="lg:max-w-[600px] lg:h-[350px]">
         {" "}
         <TestCardTitle className=" lg:w-[300px] lg:h-[64px]  lg:text-[24px] lg:bottom-[50%] lg:right-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%]">

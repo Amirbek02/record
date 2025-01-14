@@ -13,6 +13,7 @@ const BlogPage = () => {
         "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
       tag: "Кыргыз тил боюнча негизги тестке кош келиңиз",
       imgSrc: "/images/text.jpg",
+      pathName: "exam-test/kyrgyz",
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ const BlogPage = () => {
       description:
         "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
       imgSrc: "/images/text.jpg",
+      pathName: "exam-test/mathematics",
     },
     {
       id: 3,
@@ -29,6 +31,7 @@ const BlogPage = () => {
         "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
       tag: "Кыргыз тил боюнча негизги тестке кош келиңиз",
       imgSrc: "/images/text.jpg",
+      pathName: "exam-test/history",
     },
     {
       id: 4,
@@ -37,6 +40,7 @@ const BlogPage = () => {
       description:
         "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
       imgSrc: "/images/text.jpg",
+      pathName: "exam-test/biologies",
     },
   ];
 
@@ -48,13 +52,15 @@ const BlogPage = () => {
         </p>
         <div className="grid lg:grid-cols-2 gap-6">
           {test.map((testi) => (
-            <TestCardNoSign
-              key={testi.id}
-              testTitle={testi.title}
-              testDescriptionTitle={testi.tag}
-              description={testi.description}
-              imgSrc={testi.imgSrc}
-            />
+            <Link href={testi.pathName} key={testi.id}>
+              <TestCardNoSign
+                testTitle={testi.title}
+                testDescriptionTitle={testi.tag}
+                description={testi.description}
+                imgSrc={testi.imgSrc}
+                href='#'
+              />
+            </Link>
           ))}
         </div>
       </div>
