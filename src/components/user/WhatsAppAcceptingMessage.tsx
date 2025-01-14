@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../UI/button";
+import Link from "next/link";
 
 const WhatsAppAcceptingMessage = () => {
   return (
@@ -12,8 +13,10 @@ const WhatsAppAcceptingMessage = () => {
           <p className="md:w-[320px] w-full text-base md:text-xl">
             Видео сабактарды көрүү үчүн кийинки баскычты басыңыз!{" "}
           </p>
-          <Button className="md:w-[229px] h-[56px] text-2xl font-bold">
+          <Button asChild className="md:w-[229px] h-[56px] text-2xl font-bold">
+            <Link href='/sign-up'>
             Катталуу
+            </Link>
           </Button>
         </div>
       </div>

@@ -38,16 +38,22 @@ const MobileMakePayment = ({
   bankCard = "/images/image 1.png",
   qrCode = "/images/Ram.png",
   bankLabelName = "Mbank",
+  isAdmin = false,
+  telNumber = "+996707700700",
+  amount = 2500,
 }: {
   bankCard?: string;
   qrCode?: string;
   bankLabelName?: string;
+  isAdmin: boolean;
+  telNumber?: string;
+  amount?: number;
 }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      telNumber: "+996707700700",
-      amount: 2500,
+      telNumber: isAdmin ? " " : telNumber,
+      amount: isAdmin ? 0 : amount,
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -80,6 +86,7 @@ const MobileMakePayment = ({
                     <FormControl>
                       <Input
                         {...field}
+                        readOnly={!isAdmin}
                         className=" py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium"
                       />
                     </FormControl>
@@ -99,6 +106,7 @@ const MobileMakePayment = ({
                     </FormLabel>
                     <FormControl>
                       <Input
+                        readOnly={!isAdmin}
                         {...field}
                         className="py-0 border-none rounded-none bg-transparent h-full text-blue-600 font-medium "
                       />
@@ -109,7 +117,7 @@ const MobileMakePayment = ({
               )}
             />
             <Button
-              type="submit"
+               type={!isAdmin ? "button" : "submit"}
               className="w-full mt-10 font-semibold text-xl font-montserrat"
             >
               Төлөм
