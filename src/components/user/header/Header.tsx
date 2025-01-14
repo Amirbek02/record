@@ -1,11 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import home from "../../../../public/icons/home.svg";
-import test from "../../../../public/icons/test.svg";
-import pc from "../../../../public/icons/pc.svg";
-import chel from "../../../../public/icons/chel.svg";
-import pay from "../../../../public/icons/pay.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
