@@ -1,15 +1,16 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/UI/button";
+import Link from "next/link";
 
 // Main container for the card
 interface TestCardProps extends React.HTMLAttributes<HTMLDivElement> {
-	onButtonClick?: () => void;
+	href?: string;
 	withLink?: boolean;
 }
 
 const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
-	({ className, children, onButtonClick, withLink, ...props }, ref) => (
+	({ className, children, href, withLink, ...props }, ref) => (
 		<div
 			ref={ref}
 			className={cn(
@@ -19,13 +20,15 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
 			{...props}>
 			{children}
 			{/* Embedded Button */}
-			{withLink && (
+			{withLink && href && (
 				<div className="flex justify-start -mt-2 md:mt-0">
 					<Button
+						asChild
 						variant="link"
-						className="underline -ml-4 font-bold"
-						onClick={onButtonClick}>
-						Толук оку
+						className="underline -ml-4 font-bold">
+						<Link href={href} className="underline -ml-6 font-bold">
+							Толук оку
+						</Link>
 					</Button>
 				</div>
 			)}
@@ -63,6 +66,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
 					autoPlay
 					loop
 					muted
+					controls
 				/>
 			)}
 			{children}
