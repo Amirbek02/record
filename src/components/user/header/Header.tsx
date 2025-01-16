@@ -1,15 +1,35 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import logo from "../../../../public/images/logo.svg";
-import home from "../../../../public/icons/home.svg";
-import test from "../../../../public/icons/test.svg";
-import pc from "../../../../public/icons/pc.svg";
-import chel from "../../../../public/icons/chel.svg";
-import pay from "../../../../public/icons/pay.svg";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+	{ label: "Сынамык тест", href: "/test" },
+	{ label: "Видео сабак", href: "/video" },
+	{ label: "Биз жөнүндө", href: "/about" },
+];
+
+const link = [
+	{
+		path: "",
+		icon: "/icons/home.svg",
+		post: "Башкы бет",
+	},
+	{
+		path: "",
+		icon: "/icons/test.svg",
+		post: "Тест",
+	},
+	{
+		path: "",
+		icon: "/icons/pc.svg",
+		post: "Видео сабак",
+	},
+];
 
 const Header = () => {
-	const [activeIndex, setActiveIndex] = useState(0);
+	const pathname = usePathname();
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
 
 	const toggleSidebar = () => {
@@ -35,13 +55,15 @@ const Header = () => {
 		<div className="max-w-[1440px] w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 			<div className="flex justify-between w-full md:w-[160px]">
 				<div className="flex flex-col items-center order-2">
-					<Image
-						src={logo}
-						alt=""
-						width={166}
-						height={61}
-						className="w-[105px] h-[31px] md:w-[130px] md:h-[40px] lg:w-[166px] lg:h-[61px]"
-					/>
+					<Link href="#">
+						<Image
+							src="/images/logo.svg"
+							alt=""
+							width={166}
+							height={61}
+							className="w-[105px] h-[31px] md:w-[130px] md:h-[40px] lg:w-[166px] lg:h-[61px]"
+						/>
+					</Link>
 					<h1 className="text-[3px] font-montserrat font-black text-[#2F2F99] lg:text-[6px]">
 						Аналитикалык жана билим берүү уюму
 					</h1>
@@ -67,7 +89,6 @@ const Header = () => {
 				</div>
 			</div>
 			<div className="md:hidden ">
-				{/* Sidebar */}
 				<aside
 					ref={sidebarRef}
 					className={` flex flex-col items-center fixed top-[80px] left-0 w-[296px] h-full bg-[#FFFF]  transform ${
@@ -78,134 +99,45 @@ const Header = () => {
 						boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
 					}}>
 					<div className="flex flex-col gap-[24px] mt-[61px]">
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src={home}
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`text-[16px] ${
-									activeIndex === 3
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}
-								onClick={() => {
-									setActiveIndex(3);
-									console.log("Active index:", activeIndex);
-								}}>
-								Башкы бет
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src={test}
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								onClick={() => setActiveIndex(4)}
-								className={`text-[16px] ${
-									activeIndex === 4
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Тест
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src={pc}
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								onClick={() => setActiveIndex(5)}
-								className={`text-[16px] ${
-									activeIndex === 5
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Видео сабак
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src={pay}
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								onClick={() => setActiveIndex(6)}
-								className={`text-[16px] ${
-									activeIndex === 6
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}>
-								Төлөм
-							</h1>
-						</div>
-						<div className="flex gap-[16px] items-center">
-							<Image
-								src={chel}
-								width={23}
-								height={23}
-								alt=""
-								className=""
-							/>
-							<h1
-								className={`text-[16px] ${
-									activeIndex === 7
-										? "text-[#2E3095] font-bold"
-										: "text-[#252641] font-normal"
-								}`}
-								onClick={() => setActiveIndex(7)}>
-								Башкы бет
-							</h1>
-						</div>
+						{link.map((item, index) => (
+							<Link
+								href="ac"
+								key={index}
+								className="flex gap-[16px] items-center">
+								<Image
+									src={item.icon}
+									width={23}
+									height={23}
+									alt=""
+									className=""
+								/>
+								<h1
+									className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
+										pathname === item.path
+											? "text-[#2E3095] font-bold"
+											: "text-[#2E3095] font-normal"
+									}`}>
+									{item.post}
+								</h1>
+							</Link>
+						))}
 					</div>
 				</aside>
 			</div>
 
 			<nav className="font-montserrat hidden items-center lg:gap-[40px] xl:gap-[55px] md:gap-[30px] md:flex">
-				<a
-					href="#"
-					className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-						activeIndex === 0
-							? "text-[#2E3095] font-bold"
-							: "text-[#252641] font-normal"
-					}`}
-					onClick={() => setActiveIndex(0)}>
-					Сынамык тест
-				</a>
-				<a
-					href="#"
-					className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-						activeIndex === 1
-							? "text-[#2E3095] font-bold"
-							: "text-[#252641] font-normal"
-					}`}
-					onClick={() => setActiveIndex(1)}>
-					Видео
-				</a>
-				<a
-					href="#"
-					className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-						activeIndex === 2
-							? "text-[#2E3095] font-bold"
-							: "text-[#252641] font-normal"
-					}`}
-					onClick={() => setActiveIndex(2)}>
-					Биз жөнүндө
-				</a>
+				{links.map((link, index) => (
+					<Link
+						key={index}
+						href={link.href}
+						className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
+							pathname === link.href
+								? "text-[#2E3095] font-bold"
+								: "text-[#252641] font-normal"
+						}`}>
+						{link.label}
+					</Link>
+				))}
 			</nav>
 			<div className="hidden gap-[12px] md:flex">
 				<button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">

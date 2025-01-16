@@ -13,6 +13,7 @@ const FurtherTestCarousel = () => {
   const slideCount = mockTestsData.length;
   return (
     <div className="flex flex-col  gap-8 items-end">
+      <h1 className="font-semibold text-[22px] self-start ml-11">Математика</h1>
       <FurtherTestMobile testData={mockTestsData} />
       <Carousel
         opts={{ loop: true, align: "center", containScroll: "trimSnaps" }}

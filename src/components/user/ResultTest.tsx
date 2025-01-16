@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import WelcomeText from "@/components/UI/welcomeText";
 import Clock from "@/components/UI/clock";
 import ProgressInfo from "@/components/UI/ProgressInfo";
 import { Button } from "../UI/button";
@@ -40,13 +39,11 @@ const ResultTest = () => {
 
   return (
     <div>
-      <div className="relative">
-        <WelcomeText subjectTitle="Математика" />
-        <Clock
-          time={result.time_spent}
-          className="absolute  right-[7%] md:top-7 bottom-0"
-        />
-      </div>
+      <Clock
+        time={result.time_spent}
+        className="absolute  right-[7%] md:top-[200px] top-[20%]"
+      />
+
       <ProgressInfo
         correct_answers={result.correct_answers}
         incorrect_answers={result.incorrect_answers}
@@ -64,7 +61,7 @@ const ResultTest = () => {
       {sendResult ? (
         <SendResult />
       ) : (
-        <div className="lg:max-w-[978px] mx-auto flex justify-end">
+        <div className="lg:max-w-[978px] mx-auto flex justify-end pb-10">
           <Button
             className="text-xl font-bold lg:ml-0 mx-6"
             onClick={handleEnd}

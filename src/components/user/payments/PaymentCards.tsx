@@ -42,7 +42,7 @@ const PaymentCards = () => {
       <h1 className="font-semibold text-[28px] text-darkGrey pb-5 md:hidden text-center">
         Төлөм
       </h1>
-      <div className=" flex flex-wrap justify-center max-w-[836px] md:gap-5 gap-1">
+      <div className=" flex flex-wrap justify-center  md:gap-5 gap-1">
         {banks.map((bank) => (
           <React.Fragment key={bank.id}>
             <BankCard imgSrc={bank.bank} className="md:flex hidden" />
