@@ -49,7 +49,7 @@ const CarouselCardVideo = ({
 
 const VideoLessonCarousel = () => {
   return (
-    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center">
+    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8">
       <h1 className="text-xl font-semibold">Видео сабак</h1>
       <Carousel
         opts={{

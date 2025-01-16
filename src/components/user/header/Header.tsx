@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const links = [
 	{ label: "Сынамык тест", href: "/exam-test" },
-	{ label: "Видео сабак", href: "#videoLessons" },
+	{ label: "Видео сабак", href: "/#videoLessons" },
 	{ label: "Биз жөнүндө", href: "/" },
 ];
 
@@ -17,12 +17,12 @@ const link = [
 		post: "Башкы бет",
 	},
 	{
-		path: "exam-test",
+		path: "/exam-test",
 		icon: "/icons/test.svg",
 		post: "Тест",
 	},
 	{
-		path: "#videoLessons",
+		path: "/#videoLessons",
 		icon: "/icons/pc.svg",
 		post: "Видео сабак",
 	},
@@ -55,7 +55,7 @@ const Header = () => {
 		<div className="max-w-[1440px] w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 			<div className="flex justify-between w-full md:w-[160px]">
 				<div className="flex flex-col items-center order-2">
-					<Link href="#">
+					<Link href="/">
 						<Image
 							src="/images/logo.svg"
 							alt=""
@@ -101,7 +101,7 @@ const Header = () => {
 					<div className="flex flex-col gap-[24px] mt-[61px]">
 						{link.map((item, index) => (
 							<Link
-								href="ac"
+								href={item.path}
 								key={index}
 								className="flex gap-[16px] items-center">
 								<Image

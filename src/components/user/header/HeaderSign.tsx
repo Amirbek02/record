@@ -11,22 +11,22 @@ export const link = [
 		post: "Башкы бет",
 	},
 	{
-		path: "in/all-tests",
+		path: "/in/all-tests",
 		icon: "/icons/test.svg",
 		post: "Тест",
 	},
 	{
-		path: "in/video-lessons",
+		path: "/in/video-lessons",
 		icon: "/icons/pc.svg",
 		post: "Видео сабак",
 	},
 	{
-		path: "in/payments",
+		path: "/in/payment",
 		icon: "/icons/pay.svg",
 		post: "Төлөм",
 	},
 	{
-		path: "in/profile",
+		path: "/in/profile",
 		icon: "/icons/chel.svg",
 		post: "Жеке кабинет",
 	},
@@ -37,7 +37,7 @@ const HeaderSign = () => {
 	return (
 		<div>
 			<div
-				className={` flex flex-col items-center fixed top-0 pt-[30px] left-0 w-[296px] h-full bg-[#FFFF]  `}
+				className={` flex flex-col items-center top-0 pt-[30px] left-0 w-[296px] h-full bg-[#FFFF]  `}
 				style={{
 					borderRadius: "0px 40px 40px 0px",
 					boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
