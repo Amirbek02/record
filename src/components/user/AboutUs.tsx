@@ -1,5 +1,5 @@
 import React from "react";
-import ContactButtons from "../UI/ContactButton";
+import Link from "next/link";
 import Image from "next/image";
 
 const TeamMember: React.FC<{
@@ -8,7 +8,7 @@ const TeamMember: React.FC<{
   customClass: string;
   extraContent?: React.ReactNode;
 }> = ({ name, image, customClass, extraContent }) => (
-  <div className={`rounded-lg overflow-hidden shadow-md ${customClass}`}>
+  <div className={`rounded-xl overflow-hidden shadow-md ${customClass}`}>
     <Image
       src={image}
       alt={name || "Team Member"}
@@ -31,11 +31,16 @@ const TeamMember: React.FC<{
         </p>
       </div>
     )}
-    {extraContent && <div className="absolute bottom-2 left-2">{extraContent}</div>}
+    {extraContent && (
+      <div className="absolute bottom-2 left-2">{extraContent}</div>
+    )}
   </div>
 );
 
-const FeatureItem: React.FC<{ icon: string; text: string }> = ({ icon, text }) => (
+const FeatureItem: React.FC<{ icon: string; text: string }> = ({
+  icon,
+  text,
+}) => (
   <div className="flex items-center gap-6 lg:gap-8 text-sm lg:text-base">
     <div className="w-[60px] h-[60px] bg-gray-100 flex items-center justify-center rounded-full ">
       <Image src={icon} alt="feature icon" width={28} height={28} />
@@ -97,23 +102,23 @@ const AboutUs: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <section className="relative py-8 sm:py-16 ">
-        <h2 className="mb-[24px] text-[24px] sm:text-center sm:mb-[60px] px-4 lg:text-[40px] font-medium  text-blue-700 text-left lg:mb-[130px]">
+      <section className="relative max-w-7xl py-8 sm:py-16 ">
+        <h2 className=" text-[24px] sm:text-center sm:mb-[60px] px-4 lg:text-[40px] font-semibold lg:font-medium   text-blue-700 text-left lg:mb-[60px]">
           Биз жөнүндө
         </h2>
 
-        <div className="container  lg:mx-auto  lg:px-4 lg:px-0 flex flex-col gap-4 sm:gap-[30px] lg:gap-8 lg:flex-row ">
-          <div className="  w-full lg:text-[24px] font-semibold lg:w-[518px] lg:mt-[70px] space-y-10 order-1 lg:order-2">
+        <div className="container    lg:mx-auto  lg:px-4 flex flex-col gap-4 sm:gap-[30px] lg:gap-8 lg:flex-row ">
+          <div className="  w-full  lg:text-[24px] font-semibold lg:w-[518px] lg:mt-[70px] space-y-10 order-1 lg:order-2">
             {features.map((feature, index) => (
-              <FeatureItem key={index} icon={feature.icon} text={feature.text} />
+              <FeatureItem
+                key={index}
+                icon={feature.icon}
+                text={feature.text}
+              />
             ))}
           </div>
- 
 
-
-
-          
-          <div className="relative w-[360px] h-[447px] mt-[60px] sm:w-full lg:w-[705px] lg:h-[447px] bg-gray-100 rounded-lg shadow-lg py-6 px-4 order-2 lg:order-1">
+          <div className="relative w-[360px] h-[447px] rounded-xl mt-[60px] sm:w-full lg:w-[705px] lg:h-[447px] bg-gray-100  py-6 px-4 order-2 lg:order-1">
             <div className="absolute top-4 left-4">
               <ul className=" gap-[2px] mr-[12px] flex space-x-2 lg:gap-[9px]">
                 <li className="w-[6px] h-[6px] lg:w-[13px] lg:h-[13px] rounded-full bg-[#5BEB7B]"></li>
@@ -127,8 +132,24 @@ const AboutUs: React.FC = () => {
             ))}
 
             {/* Кнопки */}
-            <div className="absolute sm:mt-6 lg:bottom-[15px] ">
-              <ContactButtons />
+            <div className="relative left-0 flex gap-5 sm:mt-6 bottom-0 ">
+              <div className="">
+                <Link
+                  className="border absolute w-auto bottom-0 left-0 rounded-[20px] p-3  bg-white hover:bg-blue-800 text-black hover:text-white font-bold text-[22px]  "
+                  href="/"
+                >
+                  Кат куржуну
+                </Link>
+              </div>
+
+              <div className="">
+                <Link
+                  className="border rounded-[20px] absolute bottom-0 left-5 p-2 pl-7  bg-blue-800 hover:bg-white  text-white hover:text-black font-bold text-[22px] pr-7"
+                  href="/"
+                >
+                  Чалуу
+                </Link>
+              </div>
             </div>
           </div>
         </div>
