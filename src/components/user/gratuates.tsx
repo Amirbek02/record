@@ -79,7 +79,7 @@ const Graduates: React.FC = () => {
                 <Image
                   src={graduate.image}
                   alt={graduate.name}
-                  className="relative top-[-50px] rounded-full object-cover w-[150px] h-[150px] sm:w-[120px] sm:h-[120px] xs:w-[100px] xs:h-[100px]"
+                  className="relative top-[-40px] md:top-[-50px] lg:top-[-50px]  left-[-20px] md:left-0 lg:left-0 rounded-full object-cover w-[110px] h-[110px] lg:w-[120px] lg:h-[120px] xs:w-[100px] xs:h-[100px]"
                   width={150}
                   height={150}
                 />
