@@ -19,7 +19,7 @@ const TestListIn = ({tests,isMainTest}:{tests:Props[],isMainTest?:boolean}) => {
         <p className="text-xl lg:text-start md:text-center font-bold text-[#4C4C4C] lg:text-[32px] mb-4">
          {isMainTest ? "Негизги тест":"Предметтик тест"}
         </p>
-        <div className="grid md:grid-cols-2 grid-col-1 gap-4  mx-auto ">
+        <div className="grid xl:grid-cols-2 grid-col-1 gap-4  mx-auto ">
           {tests.map((testi) => (
             <Link key={testi.id} href={testi.pathName}>
               <TestCarouselCard

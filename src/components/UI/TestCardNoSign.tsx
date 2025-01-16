@@ -30,8 +30,8 @@ const TestCardNoSign = ({
           {testTitle}
         </TestCardTitle>
       </TestCardMedia>
-      <TestCardSubtitle className="lg:max-w-[471px] max-w-[311px] lg:mx-auto ml-8 ">{testDescriptionTitle}</TestCardSubtitle>
-      <TestCardDescription className="max-w-[542px] mx-auto  px-8  lg:text-xl">{description}</TestCardDescription>
+      <TestCardSubtitle className="lg:max-w-[471px] max-w-[311px] ml-7 ">{testDescriptionTitle}</TestCardSubtitle>
+      <TestCardDescription className="max-w-[542px] mx-auto  px-7  lg:text-xl">{description}</TestCardDescription>
     </TestCard>
   );
 };

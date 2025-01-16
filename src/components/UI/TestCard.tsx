@@ -25,7 +25,7 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
         <div className="flex justify-start -mt-2 md:mt-2">
           <Link
             href={href}
-            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-8 ${isCarouselCard ? 'lg:text-base':"lg:text-base"}`}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-base':"lg:text-base"}`}
           >
             Толук оку
           </Link>
@@ -48,7 +48,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
     <div
       ref={ref}
       className={cn(
-        "max-w-[356px] h-[225px] lg:h-[275px] lg:max-w-[400px] relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
+        "w-full h-[225px] lg:h-[275px]  relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
         className
       )}
       {...props}
@@ -98,7 +98,7 @@ const TestCardSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
-    className={cn("lg:text-xl text-xs font-medium max-w-[358px] min-h-[32px]", className)}
+    className={cn("lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]", className)}
     {...props}
   />
 ));
@@ -112,7 +112,7 @@ const TestCardDescription = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "text-xs lg:text-base  text-[#25264170] font-medium",
+      "text-xs lg:text-base px-1 text-[#25264170] font-medium",
       className
     )}
     {...props}
