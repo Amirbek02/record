@@ -1,12 +1,12 @@
 import React from "react";
-import NextPrevButtons from "../../UI/nextPrevButtons";
+import NextPrevButtons from "../../../UI/nextPrevButtons";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselDots,
 } from "@/components/UI/carousel";
-import TestCarouselCard from "../TestCarouselCard";
+import TestCarouselCard from "../../../UI/TestCarouselCard";
 import { mockTestsData } from "./mockData";
 import FurtherTestMobile from "./FurtherTestMobile";
 const FurtherTestCarousel = () => {
@@ -30,6 +30,7 @@ const FurtherTestCarousel = () => {
                 testTitle={item.testTitle}
                 testDescriptionTitle={item.testDescriptionTitle}
                 description={item.description}
+                href='#'
               />
             </CarouselItem>
           ))}

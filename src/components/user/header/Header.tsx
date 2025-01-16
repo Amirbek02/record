@@ -112,6 +112,7 @@ const Header = () => {
             </div>
             <div className="flex gap-[16px] items-center">
               <Image src={pc} width={23} height={23} alt="" className="" />
+              <Link href="#videoLessons" scroll={false}>
               <h1
                 onClick={() => setActiveIndex(5)}
                 className={`text-[16px] ${
@@ -122,6 +123,7 @@ const Header = () => {
               >
                 Видео сабак
               </h1>
+              </Link>
             </div>
             <div className="flex gap-[16px] items-center">
               <Image src={pay} width={23} height={23} alt="" className="" />
@@ -166,7 +168,7 @@ const Header = () => {
           Сынамык тест
         </Link>
         <Link
-          href="#"
+          href="/#videoLessons"
           className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
             activeIndex === 1
               ? "text-[#2E3095] font-bold"

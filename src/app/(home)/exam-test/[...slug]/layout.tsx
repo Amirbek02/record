@@ -1,5 +1,4 @@
 import React from "react";
-import WelcomeText from "@/components/UI/welcomeText";
 import Footer from "@/components/user/footer/Footer";
 
 const layout = async ({
@@ -17,9 +16,13 @@ const layout = async ({
           Сынамык тестке кош келиңиз!
         </h2>
       )}
-      {slugDepth < 6 && <WelcomeText subjectTitle="Математика" />}
+      {slugDepth < 6 && slugDepth > 1 && (
+        <h3 className="lg:text-4xl md:text-2xl text-[22px] text-[#C00510] font-bold text-center">
+        ЖРТ га даярдоо{" "}
+      </h3>
+      )}
       {children}
-      {slugDepth===1 && <Footer/>}
+      {slugDepth === 1 && <Footer />}
     </>
   );
 };

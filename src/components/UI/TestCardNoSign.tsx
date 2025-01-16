@@ -23,15 +23,15 @@ const TestCardNoSign = ({
   href
 }: TestProps) => {
   return (
-    <TestCard withLink href={href}>
-      <TestCardMedia imgSrc={imgSrc} className="lg:max-w-[600px] lg:h-[350px]">
+    <TestCard withLink href={href} className="lg:max-w-[542px] max-w-[400px]">
+      <TestCardMedia imgSrc={imgSrc} className="lg:max-w-[600px] lg:h-[350px] max-w-[400px]">
         {" "}
         <TestCardTitle className=" lg:w-[300px] lg:h-[64px]  lg:text-[24px] lg:bottom-[50%] lg:right-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%]">
           {testTitle}
         </TestCardTitle>
       </TestCardMedia>
-      <TestCardSubtitle className="max-w-[600px]">{testDescriptionTitle}</TestCardSubtitle>
-      <TestCardDescription className="max-w-[556px]">{description}</TestCardDescription>
+      <TestCardSubtitle className="lg:max-w-[471px] max-w-[311px] lg:mx-auto ml-8 ">{testDescriptionTitle}</TestCardSubtitle>
+      <TestCardDescription className="max-w-[542px] mx-auto  px-8  lg:text-xl">{description}</TestCardDescription>
     </TestCard>
   );
 };

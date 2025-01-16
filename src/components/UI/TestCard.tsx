@@ -1,20 +1,20 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/UI/button";
 import Link from "next/link";
 
 // Main container for the card
 interface TestCardProps extends React.HTMLAttributes<HTMLDivElement> {
   href?: string;
   withLink?: boolean;
+  isCarouselCard?:boolean;
 }
 
 const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
-  ({ className, children, href, withLink, ...props }, ref) => (
+  ({ className, children, href, withLink,isCarouselCard, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        "flex flex-col gap-1 bg-white align-middle  cursor-pointer",
+        "flex flex-col gap-1 bg-white justify-center   cursor-pointer rounded-[30px] border pb-5 shadow-[0px_4px_4px_0px_#00000040]",
         className
       )}
       {...props}
@@ -22,12 +22,13 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
       {children}
       {/* Embedded Button */}
       {withLink && href && (
-        <div className="flex justify-start -mt-2 md:mt-0">
-          <Button asChild variant="link" className="underline -ml-4 font-bold">
-            <Link href={href} className="underline -ml-6 font-bold">
-              Толук оку
-            </Link>
-          </Button>
+        <div className="flex justify-start -mt-2 md:mt-2">
+          <Link
+            href={href}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-8 ${isCarouselCard ? 'lg:text-base':"lg:text-base"}`}
+          >
+            Толук оку
+          </Link>
         </div>
       )}
     </div>
@@ -54,7 +55,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
     >
       {imgSrc && (
         <div
-          className="z-10 absolute inset-0 bg-cover bg-center"
+          className="z-10 absolute inset-0 bg-cover bg-center rounded-t-[30px]"
           style={{ backgroundImage: `url(${imgSrc})` }}
         />
       )}
@@ -97,7 +98,7 @@ const TestCardSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
-    className={cn("lg:text-xl font-medium max-w-[358px]", className)}
+    className={cn("lg:text-xl text-xs font-medium max-w-[358px] min-h-[32px]", className)}
     {...props}
   />
 ));

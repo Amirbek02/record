@@ -6,7 +6,7 @@ import {
   CarouselDots,
 } from "@/components/UI/carousel";
 import Footer from "../footer/Footer";
-import TestCarouselCard from "../TestCarouselCard";
+import TestCarouselCard from "../../UI/TestCarouselCard";
 import { mainTestsData } from "./mainTest";
 import { VideoLessons } from "./mainTest";
 import Image from "next/image";

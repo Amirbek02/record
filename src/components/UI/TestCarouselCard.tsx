@@ -12,6 +12,7 @@ interface TestProps {
   testDescriptionTitle: string;
   description: string;
   imgSrc: string;
+  href:string
 }
 
 const TestCarouselCard = ({
@@ -19,9 +20,10 @@ const TestCarouselCard = ({
   testDescriptionTitle,
   description,
   imgSrc,
+  href
 }: TestProps) => {
   return (
-    <TestCard withLink>
+    <TestCard withLink href={href}>
       <TestCardMedia imgSrc={imgSrc}>
         {" "}
         <TestCardTitle>{testTitle}</TestCardTitle>
