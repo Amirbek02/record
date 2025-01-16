@@ -27,7 +27,7 @@ const VideoCourses = () => {
           {videoCourses.map((item) => (
             <CarouselItem
               key={item.id}
-              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-0"
+              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-2"
             >
               <VideoCarouselCard
                 testTitle={item.title}
@@ -37,7 +37,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:flex items-center" />}
       </Carousel>
       <Carousel
         opts={{
@@ -53,7 +53,7 @@ const VideoCourses = () => {
           {videoCourses.map((item) => (
             <CarouselItem
               key={item.id}
-              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-0"
+              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-2"
             >
               <VideoCarouselCard
                 testTitle={item.title}
@@ -63,7 +63,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] items-center hidden md:flex " />}
       </Carousel>
       <Carousel
         opts={{
@@ -79,7 +79,7 @@ const VideoCourses = () => {
           {videoCourses.map((item) => (
             <CarouselItem
               key={item.id}
-              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-0"
+              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-2"
             >
               <VideoCarouselCard
                 testTitle={item.title}
@@ -89,7 +89,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:flex items-center" />}
       </Carousel>
       <Carousel
         opts={{
@@ -105,7 +105,7 @@ const VideoCourses = () => {
           {videoCourses.map((item) => (
             <CarouselItem
               key={item.id}
-              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-0"
+              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-2"
             >
               <VideoCarouselCard
                 testTitle={item.title}
@@ -115,7 +115,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:flex items-center" />}
       </Carousel>
       <Carousel
         opts={{
@@ -131,7 +131,7 @@ const VideoCourses = () => {
           {videoCourses.map((item) => (
             <CarouselItem
               key={item.id}
-              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-0"
+              className="pl-4 md:basis-[33.3%] md:min-w-[28.5%] basis-[65%] min-w-[65%] first:pl-2"
             >
               <VideoCarouselCard
                 testTitle={item.title}
@@ -141,7 +141,7 @@ const VideoCourses = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:block" />}
+        {slideCount > 3 && <CarouselDots className="mt-[50px] hidden md:flex items-center" />}
       </Carousel>
         </div>
     );
