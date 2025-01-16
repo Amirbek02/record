@@ -5,11 +5,10 @@ import HeaderSign from "@/components/user/header/HeaderSign";
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-       <main className="flex gap-10 bg-[#FAFAFC] w-full">
-        <HeaderSign/>
-   
+      <main className="flex gap-10 bg-[#FAFAFC] w-full">
+        <HeaderSign />
+
         {children}
-       
       </main>
       <Footer />
     </>

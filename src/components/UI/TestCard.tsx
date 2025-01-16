@@ -25,7 +25,7 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
         <div className="flex justify-start -mt-2 md:mt-2">
           <Link
             href={href}
-            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-base':"lg:text-base"}`}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-sm':"lg:text-lg"}`}
           >
             Толук оку
           </Link>
@@ -59,14 +59,14 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
           style={{ backgroundImage: `url(${imgSrc})` }}
         />
       )}
-      {videoSrc && (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src={videoSrc}
-          autoPlay
-          loop
-          muted
-          controls
+    {videoSrc && (
+        <iframe
+          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
+          src={`https://www.youtube.com/embed/${videoSrc}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          aria-hidden="true"
         />
       )}
       {children}

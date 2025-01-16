@@ -8,7 +8,7 @@ const mocktests = [
       "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
     tag: "Кыргыз тил боюнча негизги тестке кош келиңиз",
     imgSrc: "/images/test.png",
-    pathName: "/exam-test/kyrgyz",
+    pathName: "/in/all-tests/kyrgyz",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const mocktests = [
     description:
       "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
     imgSrc: "/images/test.png",
-    pathName: "/exam-test/mathematics",
+    pathName: "/in/all-tests/mathematics",
   },
 ];
 const AllTestListIn = () => {
