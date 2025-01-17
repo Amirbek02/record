@@ -5,24 +5,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-	{ label: "Сынамык тест", href: "/test" },
-	{ label: "Видео сабак", href: "/video" },
-	{ label: "Биз жөнүндө", href: "/about" },
+	{ label: "Сынамык тест", href: "/exam-test" },
+	{ label: "Видео сабак", href: "/#videoLessons" },
+	{ label: "Биз жөнүндө", href: "/" },
 ];
 
 const link = [
 	{
-		path: "",
+		path: "/",
 		icon: "/icons/home.svg",
 		post: "Башкы бет",
 	},
 	{
-		path: "",
+		path: "/exam-test",
 		icon: "/icons/test.svg",
 		post: "Тест",
 	},
 	{
-		path: "",
+		path: "/#videoLessons",
 		icon: "/icons/pc.svg",
 		post: "Видео сабак",
 	},
@@ -55,7 +55,7 @@ const Header = () => {
 		<div className="max-w-[1440px] w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 			<div className="flex justify-between w-full md:w-[160px]">
 				<div className="flex flex-col items-center order-2">
-					<Link href="#">
+					<Link href="/">
 						<Image
 							src="/images/logo.svg"
 							alt=""
@@ -101,7 +101,7 @@ const Header = () => {
 					<div className="flex flex-col gap-[24px] mt-[61px]">
 						{link.map((item, index) => (
 							<Link
-								href="ac"
+								href={item.path}
 								key={index}
 								className="flex gap-[16px] items-center">
 								<Image
@@ -140,12 +140,16 @@ const Header = () => {
 				))}
 			</nav>
 			<div className="hidden gap-[12px] md:flex">
-				<button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
-					Кирүү
-				</button>
-				<button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
-					Катталуу
-				</button>
+			<Link href='/sign-in'>
+        <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
+          Кирүү
+        </button>
+        </Link>
+        <Link href='/sign-up'>
+        <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
+          Катталуу
+        </button>
+        </Link>
 			</div>
 		</div>
 	);

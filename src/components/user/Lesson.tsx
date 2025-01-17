@@ -38,7 +38,7 @@ const VideoLessons = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4" id='videoLessons'>
       <div className="text-center mb-8">
         <h2 className="text-xl md:text-2xl text-[#002038] lg:text-[32px] font-medium mb-2">
           Видео сабактар

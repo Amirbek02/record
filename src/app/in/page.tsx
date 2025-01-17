@@ -1,12 +1,10 @@
 import React from "react";
-import MainTestCarousel from "@/components/user/mainTest/Main-test";
-import PreparationBanner from "@/components/user/Preparation";
+import MainPage from "@/components/user/UserIn/mainpage/MainPage";
 
 const Homepage = () => {
   return (
     <section>
-      <PreparationBanner/>
-      <MainTestCarousel />
+   <MainPage/>
     </section>
   );
 };

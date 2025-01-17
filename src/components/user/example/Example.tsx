@@ -1,8 +1,6 @@
 import React from "react";
 
 interface ExamplePageProps {
-  title: string;
-  subtitle: string;
   sectionTitle: string;
   instructionsTitle: string;
   comparisonDetails: {
@@ -24,8 +22,6 @@ interface ExamplePageProps {
 }
 
 const ExamplePage: React.FC<ExamplePageProps> = ({
-  title,
-  subtitle,
   sectionTitle,
   instructionsTitle,
   comparisonDetails,
@@ -37,12 +33,6 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
     <div className="max-w-6xl mx-auto px-4 py-8">
       {comparisonDetails.points.map((point, index) => (
         <div key={index} className="text-center mb-3 sm:mb-8">
-          <h2 className="text-[16px] md:text-2xl lg:text-3xl text-[#4C4C4C] font-medium mb-2">
-            {title}
-          </h2>
-          <p className="font-bold text-xl sm:text-2xl lg:text-3xl text-red">
-            {subtitle}
-          </p>
           <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
             {sectionTitle}
           </h1>

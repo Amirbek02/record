@@ -1,20 +1,20 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/UI/button";
 import Link from "next/link";
 
 // Main container for the card
 interface TestCardProps extends React.HTMLAttributes<HTMLDivElement> {
   href?: string;
   withLink?: boolean;
+  isCarouselCard?:boolean;
 }
 
 const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
-  ({ className, children, href, withLink, ...props }, ref) => (
+  ({ className, children, href, withLink,isCarouselCard, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        "flex flex-col gap-1 bg-white align-middle  cursor-pointer",
+        "flex flex-col gap-1 bg-white justify-center   cursor-pointer rounded-[30px] border pb-5 shadow-[0px_4px_4px_0px_#00000040]",
         className
       )}
       {...props}
@@ -22,12 +22,13 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
       {children}
       {/* Embedded Button */}
       {withLink && href && (
-        <div className="flex justify-start -mt-2 md:mt-0">
-          <Button asChild variant="link" className="underline -ml-4 font-bold">
-            <Link href={href} className="underline -ml-6 font-bold">
-              Толук оку
-            </Link>
-          </Button>
+        <div className="flex justify-start -mt-2 md:mt-2">
+          <Link
+            href={href}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-sm':"lg:text-lg"}`}
+          >
+            Толук оку
+          </Link>
         </div>
       )}
     </div>
@@ -47,25 +48,25 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
     <div
       ref={ref}
       className={cn(
-        "max-w-[356px] h-[225px] lg:h-[275px] lg:max-w-[400px] relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
+        "w-full h-[225px] lg:h-[275px]  relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
         className
       )}
       {...props}
     >
       {imgSrc && (
         <div
-          className="z-10 absolute inset-0 bg-cover bg-center"
+          className="z-10 absolute inset-0 bg-cover bg-center rounded-t-[30px]"
           style={{ backgroundImage: `url(${imgSrc})` }}
         />
       )}
-      {videoSrc && (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src={videoSrc}
-          autoPlay
-          loop
-          muted
-          controls
+    {videoSrc && (
+        <iframe
+          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
+          src={`https://www.youtube.com/embed/${videoSrc}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          aria-hidden="true"
         />
       )}
       {children}
@@ -97,7 +98,7 @@ const TestCardSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
-    className={cn("lg:text-xl font-medium max-w-[358px]", className)}
+    className={cn("lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]", className)}
     {...props}
   />
 ));
@@ -111,7 +112,7 @@ const TestCardDescription = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "text-xs lg:text-base  text-[#25264170] font-medium",
+      "text-xs lg:text-base px-1 text-[#25264170] font-medium",
       className
     )}
     {...props}

@@ -12,6 +12,7 @@ export interface ResultProps {
   total_questions: number;
   time_spent: number;
   emoji: string;
+  subjectName:string;
 }
 const ResultTest = () => {
   const [sendResult, setSendResult] = React.useState(false);
@@ -22,6 +23,7 @@ const ResultTest = () => {
     total_questions: 30,
     time_spent: 3400,
     emoji: "/images/line.png",
+    subjectName:'Математика'
   };
 
   const handleEnd = () => setSendResult(true);
@@ -39,6 +41,10 @@ const ResultTest = () => {
 
   return (
     <div>
+        <h4 className="lg:text-[32px] text-xl font-medium text-darkGrey text-center mt-5">{result.subjectName}</h4>
+       <p className="lg:text-[28px] md:text-lg font-normal text-darkGrey hidden md:block text-center py-10">
+        Тестти аткаруунун жыйынтыгы
+      </p>
       <Clock
         time={result.time_spent}
         className="absolute  right-[7%] md:top-[200px] top-[20%]"
