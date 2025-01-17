@@ -1,8 +1,12 @@
-import React from 'react' 
+import React from "react";
+import AllTestListIn from "@/components/user/UserIn/AllTestList.tsx/AllTestListIn";
+
 const AllTests = () => {
   return (
-    <div> AllTests</div>
-  )
-}
+    <section>
+    <AllTestListIn/>
+    </section>
+  );
+};
 
-export default AllTests
+export default AllTests;

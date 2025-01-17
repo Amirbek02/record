@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import VideoPlayer from "@/components/user/videoLessons/VideoPlayer";
 
 const VideoLessons = () => {
   return (
-    <div>page</div>
-  )
-}
+    <section>
+      <VideoPlayer />
+    </section>
+  );
+};
 
-export default VideoLessons
+export default VideoLessons;

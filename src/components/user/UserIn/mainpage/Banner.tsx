@@ -32,7 +32,7 @@ const banners: BannerData[] = [
   },
 ];
 
-export default function PreparationBanner() {
+export default function Banner() {
   const isDesktop = useMediaQuery({ minWidth: 700 });
   const isMobile = useMediaQuery({ maxWidth: 699 });
 
@@ -92,7 +92,7 @@ export default function PreparationBanner() {
             )}
 
             {isMobile && (
-              <div className="relative flex items-center justify-between bg-[#2E3095] rounded-tr-[20px] rounded-bl-[150px] rounded-tl-[100px] rounded-br-[170px] max-w-[338px] h-[105px] mx-auto p-6">
+              <div className="border border-red relative flex items-center justify-between bg-[#2E3095] rounded-tr-[20px] rounded-bl-[150px] rounded-tl-[100px] rounded-br-[170px] max-w-[338px] h-[105px] mx-auto p-6">
                 <div className="absolute left-[-80px] bottom-0 w-[250px]">
                   <Image
                     src={banner.imageSrc}

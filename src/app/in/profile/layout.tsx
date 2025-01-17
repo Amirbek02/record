@@ -1,4 +1,5 @@
 import React from "react";
+import NavTabs from "@/components/user/UserIn/profile/NavTabs";
 
 const layout = ({
   children,
@@ -6,9 +7,10 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div>
+    <main>
+      <NavTabs/>
       <section>{children}</section>
-    </div>
+    </main>
   );
 };
 

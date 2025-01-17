@@ -1,5 +1,5 @@
 import React from "react";
-import TestCarouselCard from "../TestCarouselCard";
+import TestCarouselCard from "../../../UI/TestCarouselCard";
 
 type TestData = {
   id: number;
@@ -23,6 +23,7 @@ const FurtherTestMobile: React.FC<FurtherTestMobileProps> = ({ testData }) => {
           testTitle={data.testTitle}
           testDescriptionTitle={data.testDescriptionTitle}
           description={data.description}
+          href='#'
         />
       ))}
     </div>

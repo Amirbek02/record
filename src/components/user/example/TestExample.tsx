@@ -4,8 +4,6 @@ import ExamplePage from "./Example";
 const TestExample = () => {
   return (
     <ExamplePage
-      title="Сынамык тестке кош келдиңиз!"
-      subtitle="ЖРТ га даярдоо"
       sectionTitle="1-бөлүм. Математика"
       instructionsTitle="Көрсөтмө"
       comparisonDetails={{

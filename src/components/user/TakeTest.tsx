@@ -6,20 +6,14 @@ const TakeTest = () => {
   return (
     <div>
       <div className="flex justify-center items-center flex-col px-[15px]  small:px-[35px] pb-[120px] pt-[40px] ">
-        {/* <div className="flex justify-center items-center flex-col ">
-          <p className="text-center font-montserrat text-[rgb(76,76,76)] text-[20px] lg:text-[36px] font-[500] leading-[24px] lg:leading-[44px]  tracking-[0.2px]">
-            Сынамык тестке кош келдиңиз!
-          </p>
-          <h1 className="text-[rgb(240,26,38)] lg:text-[rgba(192,5,16,1)] font-montserrat text-[22px] font-[700] leading-[27px] lg:leading-[44px] lg:text-[36px]">
-            ЖРТ га даярдоо
-          </h1>
+        <div className="flex justify-center items-center flex-col ">
           <p className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] lg:hidden">
             Негизги тест
           </p>
           <p className="font-montserrat text-[#4c4c4c] underline decoration-solid  text-[32px] font-[500] leading-[39px] tracking-[0.2px] hidden lg:block">
             1-бөлүм. Математика
           </p>
-        </div> */}
+        </div>
 
         <div className="pt-[24px] pb-[60px]">
           <h2 className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] pb-[24px] lg:hidden">

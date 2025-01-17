@@ -73,13 +73,13 @@ const Graduates: React.FC = () => {
           {graduates.map((graduate) => (
             <div
               key={graduate.id}
-              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] rounded-lg shadow-lg p-2 flex flex-col"
+              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items-center rounded-xl shadow-lg p-2 flex flex-col"
             >
               <div className="flex gap-5">
                 <Image
                   src={graduate.image}
                   alt={graduate.name}
-                  className="relative top-[-50px] rounded-full object-cover w-[150px] h-[150px] sm:w-[120px] sm:h-[120px] xs:w-[100px] xs:h-[100px]"
+                  className="relative top-[-40px] md:top-[-50px] lg:top-[-50px]  left-[-20px] md:left-0 lg:left-0 rounded-full object-cover w-[110px] h-[110px] lg:w-[120px] lg:h-[120px] xs:w-[100px] xs:h-[100px]"
                   width={150}
                   height={150}
                 />

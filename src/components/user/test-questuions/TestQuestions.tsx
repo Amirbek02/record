@@ -5,7 +5,7 @@ import tests from "./Test";
 import Timer from "@/components/UI/timer";
 import Image from "next/image";
 
-const TestIII = ({ initialTime = 30 * 60 }) => {
+const TestQuestions = ({ initialTime = 30 * 60 }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const totalTime = initialTime;
@@ -38,13 +38,7 @@ const TestIII = ({ initialTime = 30 * 60 }) => {
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-8">
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-[#4C4C4C] font-medium mb-2">
-          Сынамык тестке кош келдиңиз!
-        </h2>
         <div className="text-center">
-          <p className="font-bold text-xl sm:text-2xl lg:text-3xl text-red">
-            ЖРТ га даярдоо
-          </p>
           <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
             1-бөлүм. Математика
           </h1>
@@ -155,4 +149,4 @@ const TestIII = ({ initialTime = 30 * 60 }) => {
   );
 };
 
-export default TestIII;
+export default TestQuestions;

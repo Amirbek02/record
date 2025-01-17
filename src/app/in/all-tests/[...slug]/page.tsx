@@ -1,7 +1,9 @@
-import React from 'react'
-import FurtherTestCarousel from '@/components/user/futherTests/FurtherTestCarousel'
-import TakeTest from '@/components/user/TakeTest';
-import TestIII from '@/components/user/test/TestIII';
+import React from "react";
+import FurtherTestCarousel from "@/components/user/UserIn/furtherTests/FurtherTestCarousel";
+import TakeTest from "@/components/user/TakeTest";
+import TestExample from "@/components/user/example/TestExample";
+import TestIII from "@/components/user/test-questuions/TestQuestions";
+import GoodResultTest from "@/components/user/UserIn/GoodResultTest";
 
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;
@@ -9,10 +11,9 @@ const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const routeComponents: Record<string, React.ReactNode> = {
     1: <FurtherTestCarousel />,
     2: <TakeTest />,
-    3: <h1>Корсотмо бети</h1>,
+    3: <TestExample/>,
     4: <TestIII />,
-    5:  <h1>Результат бети</h1>,
- 
+    5: <GoodResultTest/>,
 
     // Add more routes/components as needed
   };
