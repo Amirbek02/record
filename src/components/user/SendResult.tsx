@@ -2,6 +2,7 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+// import { redirect } from 'next/navigation'
 import { z } from "zod";
 import { Button } from "@/components/UI/button";
 import {
@@ -15,6 +16,7 @@ import {
 import { Input } from "@/components/UI/input";
 //external dependencies
 import { CircleArrowRight } from "lucide-react";
+
 
 const patterns = {
   whatsApp: /^0\d{9}$/,
@@ -35,6 +37,7 @@ const formSchema = z.object({
 });
 
 const SendResult = () => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +46,8 @@ const SendResult = () => {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    // redirect("/sended-result")
+
   }
   return (
     <Form {...form}>

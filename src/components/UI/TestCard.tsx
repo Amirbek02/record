@@ -1,34 +1,36 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/UI/button";
+import Link from "next/link";
 
 // Main container for the card
 interface TestCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  onButtonClick?: () => void;
-  withLink?:boolean
+  href?: string;
+  withLink?: boolean;
+  isCarouselCard?:boolean;
 }
 
 const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
-  ({ className, children, onButtonClick,withLink, ...props }, ref) => (
+  ({ className, children, href, withLink,isCarouselCard, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        "flex flex-col gap-1 bg-white align-middle  cursor-pointer",
+        "flex flex-col gap-1 bg-white justify-center   cursor-pointer rounded-[30px] border pb-5 shadow-[0px_4px_4px_0px_#00000040]",
         className
       )}
       {...props}
     >
       {children}
       {/* Embedded Button */}
-     { withLink && (<div className="flex justify-start -mt-2 md:mt-0">
-        <Button
-          variant="link"
-          className="underline -ml-4 font-bold"
-          onClick={onButtonClick}
-        >
-          Толук оку
-        </Button>
-      </div>)}
+      {withLink && href && (
+        <div className="flex justify-start -mt-2 md:mt-2">
+          <Link
+            href={href}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-sm':"lg:text-lg"}`}
+          >
+            Толук оку
+          </Link>
+        </div>
+      )}
     </div>
   )
 );
@@ -37,34 +39,34 @@ TestCard.displayName = "TestCard";
 // Background section for an image
 interface TestCardMediaProps extends React.HTMLAttributes<HTMLDivElement> {
   imgSrc?: string; // Image source
-  videoSrc?: string; 
-  children?:React.ReactNode// Video source
+  videoSrc?: string;
+  children?: React.ReactNode; // Video source
 }
 
 const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
-  ({ className, imgSrc, videoSrc,children, ...props }, ref) => (
+  ({ className, imgSrc, videoSrc, children, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        "max-w-[356px] h-[225px] lg:h-[275px] lg:max-w-[400px] relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
+        "w-full h-[225px] lg:h-[275px]  relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey",
         className
       )}
       {...props}
     >
       {imgSrc && (
         <div
-          className="z-10 absolute inset-0 bg-cover bg-center"
+          className="z-10 absolute inset-0 bg-cover bg-center rounded-t-[30px]"
           style={{ backgroundImage: `url(${imgSrc})` }}
         />
       )}
-      {videoSrc && (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src={videoSrc}
-          autoPlay
-          loop
-          muted
-          controls
+    {videoSrc && (
+        <iframe
+          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
+          src={`https://www.youtube.com/embed/${videoSrc}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          aria-hidden="true"
         />
       )}
       {children}
@@ -94,7 +96,11 @@ const TestCardSubtitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <h2 ref={ref} className={cn("lg:text-xl font-medium max-w-[358px]", className)} {...props} />
+  <h2
+    ref={ref}
+    className={cn("lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]", className)}
+    {...props}
+  />
 ));
 TestCardSubtitle.displayName = "TestCardSubtitle";
 
@@ -105,7 +111,10 @@ const TestCardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs lg:text-base  text-[#25264170] font-medium", className)}
+    className={cn(
+      "text-xs lg:text-base px-1 text-[#25264170] font-medium",
+      className
+    )}
     {...props}
   ></p>
 ));
