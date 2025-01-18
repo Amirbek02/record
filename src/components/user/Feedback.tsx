@@ -1,22 +1,22 @@
 //feedback
-"use client";
-import Image from "next/image";
-import { Input } from "../UI/input";
-import { useState } from "react";
+'use client';
+import Image from 'next/image';
+import { Input } from '../UI/input';
+import { useState } from 'react';
 
 const Feedback = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    lastname: "",
-    email: "",
-    number: "",
+    username: '',
+    lastname: '',
+    email: '',
+    number: '',
   });
 
   const [errors, setErrors] = useState({
-    username: "",
-    lastname: "",
-    email: "",
-    number: "",
+    username: '',
+    lastname: '',
+    email: '',
+    number: '',
   });
 
   const validateField = (field: string, value: string) => {
@@ -24,33 +24,34 @@ const Feedback = () => {
     const phoneRegex = /^[0-9]{10,15}$/;
 
     switch (field) {
-      case "username":
-        return value.trim() ? "" : "Атыңызды жазуу милдеттүү!";
-      case "lastname":
-        return value.trim() ? "" : "Фамилияңызды жазуу милдеттүү!";
-      case "email":
-        if (!value.trim()) return "Email дарегиңизди жазуу милдеттүү!";
-        if (!emailRegex.test(value)) return "Туура email дарегин киргизиңиз!";
-        return "";
-      case "number":
-        if (!value.trim()) return "Телефон номериңизди жазуу милдеттүү!";
-        if (!phoneRegex.test(value)) return "Туура телефон номерин киргизиңиз!";
-        return "";
+      case 'username':
+        return value.trim() ? '' : 'Атыңызды жазуу милдеттүү!';
+      case 'lastname':
+        return value.trim() ? '' : 'Фамилияңызды жазуу милдеттүү!';
+      case 'email':
+        if (!value.trim()) return 'Email дарегиңизди жазуу милдеттүү!';
+        if (!emailRegex.test(value)) return 'Туура email дарегин киргизиңиз!';
+        return '';
+      case 'number':
+        if (!value.trim()) return 'Телефон номериңизди жазуу милдеттүү!';
+        if (!phoneRegex.test(value)) return 'Туура телефон номерин киргизиңиз!';
+        return '';
       default:
-        return "";
+        return '';
     }
   };
 
   const validateForm = () => {
-    const newErrors = Object.keys(formData).reduce((acc, field) => {
-      const error = validateField(
-        field,
-        formData[field as keyof typeof formData]
-      );
-      return { ...acc, [field]: error };
-    }, {});
+    const newErrors: Record<keyof typeof formData, string> = Object.keys(formData).reduce(
+      (acc, field) => {
+        const error = validateField(field, formData[field as keyof typeof formData]);
+        return { ...acc, [field]: error };
+      },
+      {} as Record<keyof typeof formData, string>,
+    );
+
     setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error !== "");
+    return !Object.values(newErrors).some((error) => error !== '');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,21 +70,21 @@ const Feedback = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      alert("Форма успешно отправлена!");
-      console.log("Данные формы:", formData);
+      alert('Форма успешно отправлена!');
+      console.log('Данные формы:', formData);
 
       // Reset form
       setFormData({
-        username: "",
-        lastname: "",
-        email: "",
-        number: "",
+        username: '',
+        lastname: '',
+        email: '',
+        number: '',
       });
       setErrors({
-        username: "",
-        lastname: "",
-        email: "",
-        number: "",
+        username: '',
+        lastname: '',
+        email: '',
+        number: '',
       });
     }
   };
@@ -113,34 +114,31 @@ const Feedback = () => {
 
             {[
               {
-                id: "username",
-                type: "text",
-                placeholder: "Атыңыз",
+                id: 'username',
+                type: 'text',
+                placeholder: 'Атыңыз',
                 error: errors.username,
               },
               {
-                id: "lastname",
-                type: "text",
-                placeholder: "Фамилия",
+                id: 'lastname',
+                type: 'text',
+                placeholder: 'Фамилия',
                 error: errors.lastname,
               },
               {
-                id: "email",
-                type: "email",
-                placeholder: "Email",
+                id: 'email',
+                type: 'email',
+                placeholder: 'Email',
                 error: errors.email,
               },
               {
-                id: "number",
-                type: "tel",
-                placeholder: "Телефон номер",
+                id: 'number',
+                type: 'tel',
+                placeholder: 'Телефон номер',
                 error: errors.number,
               },
             ].map((field) => (
-              <div
-                key={field.id}
-                className="justify-center  pl-0 flex flex-col items-center"
-              >
+              <div key={field.id} className="justify-center  pl-0 flex flex-col items-center">
                 <Input
                   id={field.id}
                   type={field.type}
@@ -148,7 +146,7 @@ const Feedback = () => {
                   value={formData[field.id as keyof typeof formData]}
                   onChange={handleInputChange}
                   className={`rounded-xl w-full max-w-[400px] h-[56px] ${
-                    field.error ? "border-red-500" : ""
+                    field.error ? 'border-red-500' : ''
                   }`}
                 />
                 {field.error && (
@@ -162,8 +160,7 @@ const Feedback = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]"
-              >
+                className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]">
                 Жиберүү
               </button>
             </div>
