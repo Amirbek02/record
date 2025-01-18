@@ -1,11 +1,10 @@
-"use client";
+'use client';
 //section after header
-import React, { useState } from "react";
-import girl from "../../../../public/images/education.png";
-import Image from "next/image";
-import { MdEmail } from "react-icons/md";
-import { IoMdPlay } from "react-icons/io";
-import TakeTheTestForm from "../TakeTheTestForm";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { MdEmail } from 'react-icons/md';
+import { IoMdPlay } from 'react-icons/io';
+import TakeTheTestForm from '../TakeTheTestForm';
 
 const MainSection = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,15 +22,14 @@ const MainSection = () => {
             Oнлайн даярдан
           </h1>
           <p className="hidden md:block text-black text-[13px] mt-[8px] mb-[20px] w-full lg:w-[80%] lg:text-[18px]">
-            КРнын ЖОЖдоруна өтүү үчүн негизги тестти сөзсүз тапшыруу керек.
-            Медициналык жана фармацевтикалык адистикке өтүү үчүн химия жана
-            биология предметтик  тесттерин сөзсүз тапшыруу керек
+            КРнын ЖОЖдоруна өтүү үчүн негизги тестти сөзсүз тапшыруу керек. Медициналык жана
+            фармацевтикалык адистикке өтүү үчүн химия жана биология предметтик  тесттерин сөзсүз
+            тапшыруу керек
           </p>
           <div className="md:flex md:gap-[20px] md:items-center">
             <button
               onClick={openModal}
-              className="py-[12px] md:px-[47px] px-[67px] rounded-[80px] bg-blue-600 text-[#FFF] text-[16px] font-semibold mt-[8px]"
-            >
+              className="py-[12px] md:px-[47px] px-[67px] rounded-[80px] bg-blue-600 text-[#FFF] text-[16px] font-semibold mt-[8px]">
               Тест тапшыруу
             </button>
             <div className="mt-[29px] md:mt-[5px] flex gap-[10px] items-center justify-center">
@@ -48,7 +46,9 @@ const MainSection = () => {
             <div className="absolute left-[55px] w-[202px] h-[400px] rounded-[60px] bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px]"></div>
             <div className="w-[240px] xl:w-[400px]  absolute top-[6px] left-[50px] md:left-[20px] xl:left-[-170px] ">
               <Image
-                src={girl}
+                src="/images/education.png"
+                width={500}
+                height={317}
                 alt=""
                 className=" h-[317px] w-[500px] object-cover z-20 xl:w-[700px] xl:h-[530px]"
               />
@@ -67,14 +67,10 @@ const MainSection = () => {
               </div>
             </div>
             <div className="absolute left-[-20px] xl:left-[-230px] top-[80px] xl:top-[90px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] xl:w-[172px] xl:h-[61px] border-[0.35px] border-green rounded-[10px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">
-                200 Бал
-              </h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
             </div>
             <div className="absolute top-[120px] xl:top-[170px] left-[210px] xl:left-[120px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] border-[0.35px] border-green rounded-[10px] xl:w-[172px] xl:h-[61px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">
-                200 Бал
-              </h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
             </div>
           </div>
         </div>
@@ -82,8 +78,7 @@ const MainSection = () => {
         {isModalVisible && (
           <div
             className="fixed inset-0 bg-[#212121AD] flex items-center justify-center z-50"
-            onClick={closeModal}
-          >
+            onClick={closeModal}>
             <TakeTheTestForm />
           </div>
         )}
