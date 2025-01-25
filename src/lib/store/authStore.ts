@@ -18,8 +18,8 @@ interface AuthState {
 	error: string | null;
 	successMessage: string | null;
 	login: (email: string, password: string) => Promise<void>;
-	register: (formData: IFormData) => Promise<void>;
-	logout: () => void;
+	// register: (formData: IFormData) => Promise<void>;
+	// logout: () => void;
 	clearMessages: () => void;
 }
 
@@ -72,62 +72,10 @@ const useAuthStore = create<AuthState>()(
 				}
 			},
 
-			register: async (formData) => {
-				set({ isLoading: true, error: null, successMessage: null });
-
-				const validationError = validateFormData(formData);
-				if (validationError) {
-					set({ error: validationError });
-					set({ isLoading: false });
-					return;
-				}
-
-				const userData = {
-					first_name: formData.name.trim(),
-					last_name: formData.lastName.trim(),
-					email: formData.email.trim(),
-					password: formData.password,
-					password_confirm: formData.confirmPassword,
-					user_status: "Менеджер",
-					paid: "Не оплачено",
-				};
-
-				try {
-					const response = await apiClient.post("/sign-up/", userData);
-					if (response.status === 200) {
-						set({
-							successMessage:
-								"Registration code has been sent to your email.",
-						});
-					}
-				} catch (error: any) {
-					const errorResponse = error.response?.data;
-					const emailError = errorResponse?.email?.[0] || "";
-					const lastNameError = errorResponse?.last_name?.[0] || "";
-					set({
-						error:
-							`${emailError} ${lastNameError}`.trim() ||
-							"Validation error occurred.",
-					});
-				} finally {
-					set({ isLoading: false });
-				}
-			},
-
-			logout: () => {
-				set({
-					isAuthenticated: false,
-					user: null,
-					token: null,
-					successMessage: "You have been logged out.",
-				});
-				localStorage.removeItem("token");
-			},
-
 			clearMessages: () => set({ error: null, successMessage: null }),
 		}),
 		{
-			name: "auth", // persist under the key "auth" in localStorage
+			name: "auth",
 		}
 	)
 );
