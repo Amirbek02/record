@@ -20,7 +20,22 @@ interface AuthState {
 	login: (email: string, password: string) => Promise<void>;
 	register: (formData: IFormData) => Promise<void>;
 	logout: () => void;
+	clearMessages: () => void;
 }
+
+const apiClient = axios.create({
+	baseURL: "https://api.recordonline.kg/api/v1",
+	headers: { "Content-Type": "application/json" },
+});
+
+const validateFormData = (formData: IFormData): string | null => {
+	if (!formData.email.includes("@")) return "Invalid email format.";
+	if (formData.password !== formData.confirmPassword)
+		return "Passwords do not match.";
+	if (!formData.name || !formData.lastName)
+		return "Name fields cannot be empty.";
+	return null;
+};
 
 const useAuthStore = create<AuthState>()(
 	persist(
@@ -34,29 +49,24 @@ const useAuthStore = create<AuthState>()(
 
 			login: async (email, password) => {
 				set({ isLoading: true, error: null });
+
 				try {
-					const response = await axios.post(
-						"https://api.example.com/login",
+					const { data } = await axios.post(
+						"https://api.recordonline.kg/api/v1/sign-in/",
 						{ email, password },
-						{
-							headers: { "Content-Type": "application/json" },
-						}
+						{ headers: { "Content-Type": "application/json" } }
 					);
-					if (response.status === 200) {
-						set({
-							isAuthenticated: true,
-							user: response.data.user,
-							token: response.data.token,
-							successMessage: "Login successful.",
-						});
-					}
-				} catch (error: any) {
-					console.error("Login Error:", error.response?.data);
+
 					set({
-						error:
-							error.response?.data?.message ||
-							"Login failed. Please try again.",
+						token: data.token,
+						user: data.user,
+						isAuthenticated: true,
 					});
+					localStorage.setItem("token", data.token);
+					console.log("Login successful:", data.token);
+				} catch (error: any) {
+					set({ error: error.response?.data?.message || "Login failed" });
+					console.error("Login error:", error.response?.data);
 				} finally {
 					set({ isLoading: false });
 				}
@@ -64,6 +74,14 @@ const useAuthStore = create<AuthState>()(
 
 			register: async (formData) => {
 				set({ isLoading: true, error: null, successMessage: null });
+
+				const validationError = validateFormData(formData);
+				if (validationError) {
+					set({ error: validationError });
+					set({ isLoading: false });
+					return;
+				}
+
 				const userData = {
 					first_name: formData.name.trim(),
 					last_name: formData.lastName.trim(),
@@ -74,28 +92,8 @@ const useAuthStore = create<AuthState>()(
 					paid: "Не оплачено",
 				};
 
-				if (!userData.email.includes("@")) {
-					set({ error: "Invalid email format." });
-					return;
-				}
-				if (userData.password !== userData.password_confirm) {
-					set({ error: "Passwords do not match." });
-					return;
-				}
-				if (!userData.first_name || !userData.last_name) {
-					set({ error: "Name fields cannot be empty." });
-					return;
-				}
-
 				try {
-					const response = await axios.post(
-						"https://api.recordonline.kg/api/v1/sign-up/",
-						userData,
-						{
-							headers: { "Content-Type": "application/json" },
-						}
-					);
-
+					const response = await apiClient.post("/sign-up/", userData);
 					if (response.status === 200) {
 						set({
 							successMessage:
@@ -103,22 +101,14 @@ const useAuthStore = create<AuthState>()(
 						});
 					}
 				} catch (error: any) {
-					console.error("Register Error:", error.response?.data);
-
 					const errorResponse = error.response?.data;
-					if (errorResponse) {
-						const emailError = errorResponse.email?.[0] || "";
-						const lastNameError = errorResponse.last_name?.[0] || "";
-						set({
-							error:
-								`${emailError} ${lastNameError}`.trim() ||
-								"Validation error occurred.",
-						});
-					} else {
-						set({
-							error: "An unexpected error occurred. Please try again.",
-						});
-					}
+					const emailError = errorResponse?.email?.[0] || "";
+					const lastNameError = errorResponse?.last_name?.[0] || "";
+					set({
+						error:
+							`${emailError} ${lastNameError}`.trim() ||
+							"Validation error occurred.",
+					});
 				} finally {
 					set({ isLoading: false });
 				}
@@ -131,10 +121,13 @@ const useAuthStore = create<AuthState>()(
 					token: null,
 					successMessage: "You have been logged out.",
 				});
+				localStorage.removeItem("token");
 			},
+
+			clearMessages: () => set({ error: null, successMessage: null }),
 		}),
 		{
-			name: "auth",
+			name: "auth", // persist under the key "auth" in localStorage
 		}
 	)
 );
