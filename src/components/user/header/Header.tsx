@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import CustomButton from "@/components/UI/CustomButton";
 
 const links = [
 	{ label: "Сынамык тест", href: "/exam-test" },
@@ -92,7 +93,7 @@ const Header = () => {
 				<div className="md:hidden ">
 					<aside
 						ref={sidebarRef}
-						className={` flex flex-col items-center fixed z-50 top-[80px] left-[-15px] w-[296px] h-full bg-[#FFFF]  transform ${
+						className={` flex flex-col justify-center items-center fixed z-50 top-[84px] left-[-15px] w-[296px] pb-[100px] h-full bg-[#FFFF]  transform ${
 							isSidebarOpen ? "translate-x-0" : "-translate-x-full"
 						} transition-transform duration-300 z-100`}
 						style={{
@@ -122,6 +123,17 @@ const Header = () => {
 									</h1>
 								</Link>
 							))}
+						</div>
+						<div className="mt-auto flex flex-col gap-[10px] ">
+							<Link href="/sign-in">
+								<CustomButton title="Кирүү" textStyles="text-[#fff] " />
+							</Link>
+							<Link href="/sign-up">
+								<CustomButton
+									title="Катталуу "
+									textStyles="text-[#fff]"
+								/>
+							</Link>
 						</div>
 					</aside>
 				</div>
