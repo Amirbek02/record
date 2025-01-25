@@ -3,11 +3,17 @@ import { persist } from 'zustand/middleware';
 import axios from 'axios';
 
 export interface IFormData {
-  name: string;
-  lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  password_confirm: string;
+  user_status: string;
+  first_name: string;
+  last_name: string;
+  paid: string;
+}
+
+export interface IRegisterData extends IFormData {
+  token?: string;
 }
 
 interface AuthState {
@@ -18,6 +24,8 @@ interface AuthState {
   error: string | null;
   successMessage: string | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (formData: IFormData) => Promise<void>;
+  verification: (email: string, code: number) => Promise<void>;
   clearMessages: () => void;
 }
 
@@ -55,6 +63,59 @@ const useAuthStore = create<AuthState>()(
           } else {
             set({ error: 'Кирүү мүмкүн эмес' });
             console.error('Кирүүдө ката кетти:', error);
+          }
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+      register: async (formData: IFormData) => {
+        set({ isLoading: true, error: null });
+
+        try {
+          const { data } = await axios.post(
+            'https://api.recordonline.kg/api/v1/sign-up/',
+            formData,
+            { headers: { 'Content-Type': 'application/json' } },
+          );
+
+          set({
+            successMessage: 'Катталуу ийгиликтүү аткарылды!',
+            token: data.token,
+            user: data.user,
+            isAuthenticated: true,
+          });
+          localStorage.setItem('token', data.token);
+          console.log('Катталуу ийгиликтүү:', data.token);
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
+            set({ error: error.response?.data?.message || 'Катталуу мүмкүн эмес' });
+            console.error('Катталууда ката кетти:', error.response?.data);
+          } else {
+            set({ error: 'Катталуу мүмкүн эмес' });
+            console.error('Катталууда ката кетти:', error);
+          }
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+      verification: async (email: string, code: number) => {
+        set({ isLoading: true, error: null });
+
+        try {
+          await axios.post(
+            'https://api.recordonline.kg/api/v1/sign-up-confirmation/',
+            { email, code },
+            { headers: { 'Content-Type': 'application/json' } },
+          );
+
+          console.log('Тастыкталды');
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
+            set({ error: error.response?.data?.message || 'Тастыктоо мүмкүн эмес' });
+            console.error('Тастыктоодо ката кетти:', error.response?.data);
+          } else {
+            set({ error: 'Тастыктоо мүмкүн эмес' });
+            console.error('Тастыктоодо ката кетти:', error);
           }
         } finally {
           set({ isLoading: false });
