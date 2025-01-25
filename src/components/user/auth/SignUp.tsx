@@ -17,21 +17,23 @@ const SignUp = () => {
     password: '',
   });
 
-  React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      loginWithToken(token);
-    }
-  }, []);
-
   const loginWithToken = async (token: string) => {
     try {
       await login('', token);
       router.push('/in');
     } catch (err) {
-      console.error('Error during token login:', err);
+      console.error('Токен менен кирүү учурунда ката кетти:', err);
     }
   };
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      loginWithToken(token);
+    } else {
+      router.push('/sign-in');
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -45,8 +47,7 @@ const SignUp = () => {
       await login(email, password);
       router.push('/in');
     } catch (err) {
-      console.error('Error during login:', err);
-      alert(error || 'Failed to log in. Please try again.');
+      console.error('Кирүү учурунда ката кетти:', err);
     }
   };
 
@@ -127,8 +128,11 @@ const SignUp = () => {
           </Link>
         </div>
 
+        {error && <h3 className="font-montserrat text-[12px] text-red-500 mb-[20px]">{error}</h3>}
+
         <CustomButton
           title="Кирүү"
+          {...(error && { disabled: true })}
           containerStyles="rounded-[5px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[32px]"
           textStyles="font-[500] mm:font-[700] text-[21px] mm:text-[24px] leading-[29px] text-[rgb(255,255,255)]"
           onClick={handleSignIn}
