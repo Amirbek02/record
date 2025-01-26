@@ -51,7 +51,7 @@ export default function Banner() {
         return (
           <div key={banner.id}>
             {isDesktop && (
-              <div className="relative ml-10  flex items-center justify-between bg-[#2E3095] rounded-tl-[300px] rounded-tr-[30px] rounded-br-[200px] max-w-[838px] h-[200px] mx-auto p-4 lg:pt-[30px]">
+              <div className="relative ml-10  flex items-center justify-between bg-[#2E3095] sm:mt-[50px] md:mt-[90px] rounded-tl-[300px] rounded-tr-[30px] rounded-br-[200px] max-w-[838px] h-[200px] mx-auto p-4 lg:pt-[10px]">
                 <div className="absolute left-[-200px] bottom-0 w-[500px]">
                   <Image
                     src={banner.imageSrc}
