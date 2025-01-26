@@ -133,8 +133,8 @@ const Header = () => {
           <Link
             key={index}
             href={link.href}
-            className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-              pathname === link.href ? " font-bold" : ""
+            className={`lg:text-[20px]  xl:text-[22px] md:text-[16px] ${
+              pathname === link.href ? " font-bold text-[#2E3095]" : ""
             }`}
           >
             {link.label}

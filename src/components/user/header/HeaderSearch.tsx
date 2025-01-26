@@ -81,18 +81,17 @@ const HeaderSearch = () => {
       </div>
       <aside
         ref={sidebarRef}
-        className={` flex flex-col items-center  fixed top-[80px] z-10  left-0 w-[296px] h-full bg-[#FFFF]  transform ${
+        className={` flex flex-col items-center  fixed top-[80px]  z-30  left-0 w-[296px] h-full bg-[#FFFF]  transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 z-100`}
         style={{
           borderRadius: "0px 40px 40px 0px",
-          boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
         }}
       >
         <div className="flex flex-col  gap-[24px] mt-[61px]">
           {link.map((item, index) => (
             <Link
-              href="ac"
+              href={item.path}
               key={index}
               className="flex gap-[16px] items-center"
             >
