@@ -61,12 +61,15 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
       )}
     {videoSrc && (
         <iframe
-          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
-          src={`https://www.youtube.com/embed/${videoSrc}`}
+          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20 "
+          src={`https://www.youtube-nocookie.com/embed/${videoSrc}?rel=0&modestbranding=1&showinfo=0`}
           title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           aria-hidden="true"
+          sandbox="allow-same-origin allow-scripts"
+          style={{ border: "none"}} 
+          
         />
       )}
       {children}

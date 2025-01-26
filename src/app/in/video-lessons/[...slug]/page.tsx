@@ -1,9 +1,10 @@
 import React from 'react'
+import VideoLessons from '@/components/user/videoLessons/videoLessonList/VideoLessons'
 
 
 const page = () => {
   return (
-    <div>each video lessons</div>
+    <div><VideoLessons/></div>
   )
 }
 
