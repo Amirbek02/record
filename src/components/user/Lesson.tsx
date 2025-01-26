@@ -33,7 +33,7 @@ const VideoLessons = () => {
 
       <div className="flex flex-col items-center">
         {freeVideos.length > 0 && (
-          <div className="space-y-4 w-[800px]">
+          <div className="space-y-4 max-w-[800px]">
             <div className="relative w-full h-auto pb-[56.25%] ">
               <iframe
                 className="absolute top-0 left-0 w-full h-full rounded-xl border"
