@@ -1,7 +1,7 @@
-"use client";
-import React, { useEffect } from "react";
-import Link from "next/link";
-import useVideoStore from "@/useVideoStore";
+'use client';
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import useVideoStore from '@/useVideoStore';
 
 const VideoLessons = () => {
   const { videos, isLoading, error, fetchVideos } = useVideoStore();
@@ -31,20 +31,19 @@ const VideoLessons = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <div className="flex flex-col items-center">
         {freeVideos.length > 0 && (
-          <div className="space-y-4 items-center">
-            <div className="relative w-full h-auto pb-[56.25%] md:max-w-[900px] lg:max-w-[525px]">
+          <div className="space-y-4 w-[800px]">
+            <div className="relative w-full h-auto pb-[56.25%] ">
               <iframe
                 className="absolute top-0 left-0 w-full h-full rounded-xl border"
                 src={`https://www.youtube.com/embed/${new URLSearchParams(
-                  new URL(freeVideos[0].video_url).search
-                ).get("v")}`}
+                  new URL(freeVideos[0].video_url).search,
+                ).get('v')}`}
                 title={freeVideos[0].subject_name}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+                allowFullScreen></iframe>
 
               <span className="absolute m-2 bottom-0 right-0 w-[154px] text-center cursor-pointer bg-[#4C4C4C] hover:bg-[#2E3095] text-white px-4 py-1 rounded-full z-10">
                 {freeVideos[0].subject_category_name}
@@ -63,7 +62,7 @@ const VideoLessons = () => {
           </div>
         )}
 
-        <div className="space-y-0">
+        {/* <div className="space-y-0">
           {freeVideos.slice(1).map((video) => (
             <div
               key={video.id}
@@ -99,8 +98,8 @@ const VideoLessons = () => {
                 </Link>
               </div>
             </div>
-          ))}
-        </div>
+          ))} */}
+        {/* </div> */}
       </div>
     </div>
   );
