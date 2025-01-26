@@ -53,8 +53,8 @@ const Header = () => {
 	}, []);
 
 	return (
-		<div className="sticky z-50 top-0 bg-[#ffffff]  max-w-[1440px] w-full py-[8px]">
-			<div className=" sticky z-50 top-0  w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
+		<div className="sticky z-50 top-0 bg-[#ffffff]  mx-auto w-full py-[8px] ">
+			<div className=" top-0  w-[90%] flex items-center justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 				<div className="flex justify-between w-full md:w-[160px]">
 					<div className="flex flex-col items-center order-2">
 						<Link href="/">
