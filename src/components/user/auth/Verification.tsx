@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuthStore from '@/lib/store/authStore';
+import Link from 'next/link';
 
 const Verification = () => {
   const { verification, error, isLoading } = useAuthStore();
@@ -27,13 +28,7 @@ const Verification = () => {
     try {
       await verification(email, code);
 
-      if (!error) {
-        setIsVerified(true);
-        router.push('/in');
-      } else {
-        setIsVerified(false);
-        alert(error || 'Кирүү катасы! Кодду же email текшерип көрүңүз.');
-      }
+      router.push('/in');
     } catch (err) {
       console.error('Error during login:', err);
       setIsVerified(false);
@@ -45,9 +40,11 @@ const Verification = () => {
 
   return (
     <div className="flex justify-center items-center flex-col w-full h-auto">
-      <div className="pt-[24px] xl:pt-[120px]">
-        <Image src="/icons/record-logo.svg" width={290} height={95} alt="signIn" />
-      </div>
+      <Link href="/">
+        <div className="pt-[26px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
+          <Image src="/icons/record-logo.svg" width={290} height={95} alt="Sign In" />
+        </div>
+      </Link>
 
       <form className="flex justify-center items-center flex-col relative">
         <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px] pb-[40px]">

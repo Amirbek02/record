@@ -24,11 +24,14 @@ const NavTabs = () => {
     <nav>
       <ul className="flex gap-9">
         {tabs.map((tab, index) => (
-          <li key={index} className="list-none">
+          <li key={index} className="list-none  ">
             <Link
               href={tab.pathName}
-              className={`link ${pathname === tab.pathName ? "font-semibold"
-                : "font-normal hover:bg-gray-200 hover:text-black"} text-xl text-darkGrey`}
+              className={`link ${
+                pathname === tab.pathName
+                  ? "font-semibold "
+                  : "font-normal  hover:bg-gray-200 hover:text-black"
+              } text-xl text-darkGrey`}
             >
               {tab.tab}
             </Link>

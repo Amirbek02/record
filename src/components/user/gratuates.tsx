@@ -1,99 +1,66 @@
-"use client";
-
-import React from "react";
+'use client'
+import React, { useEffect } from "react";
 import Image from "next/image";
+import { useGraduates } from "@/store/Graduates";
 
-interface Graduate {
-  id: number;
-  name: string;
-  score: number;
-  image: string;
-  feedback: string;
-}
+const Graduates = () => {
+  const { graduates, isLoading, error, fetchGraduates } = useGraduates();
 
-const graduates: Graduate[] = [
-  {
-    id: 1,
-    name: "Алина Тургунова",
-    score: 230,
-    image: "/images/graduates.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-  {
-    id: 2,
-    name: "Мадина Асылова",
-    score: 220,
-    image: "/images/graduates1.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-  {
-    id: 3,
-    name: "Айбек Бийбосунов",
-    score: 225,
-    image: "/images/graduates2.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-  {
-    id: 1,
-    name: "Алина Тургунова",
-    score: 230,
-    image: "/images/graduates.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-  {
-    id: 2,
-    name: "Мадина Асылова",
-    score: 220,
-    image: "/images/graduates1.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-  {
-    id: 3,
-    name: "Айбек Бийбосунов",
-    score: 225,
-    image: "/images/graduates2.jpeg",
-    feedback:
-      "Бул курс мага абдан жардам берди, кайра кайталап көргөнгө эң сонун экен.",
-  },
-];
+  useEffect(() => {
+    fetchGraduates();
+  }, [fetchGraduates]);
 
-const Graduates: React.FC = () => {
+  if (isLoading) {
+    return (
+      <section className="bg-[#2E3095] lg:mt-64 mt-0 md:mt-40 py-12">
+        <div className="container max-w-6xl mx-auto px-4">
+          <p className="text-gray-400 text-center">Жүктөлүүдө...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="bg-[#2E3095] lg:mt-64 mt-0 md:mt-40 py-12">
+        <div className="container max-w-6xl mx-auto px-4">
+          <p className="text-red-500 text-center">Ката: {error}</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="bg-[#2E3095] lg:mt-64 mt-0 md:mt-40  py-12">
+    <section className="bg-[#2E3095] lg:mt-64 mt-0 md:mt-40 py-12">
       <div className="container max-w-6xl mx-auto px-4">
         <h2 className="text-gray-400 text-center text-[24px] md:text-[40px] font-bold mb-20">
           Биздин бүтүрүүчүлөр
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mb-20">
-          {graduates.map((graduate) => (
+          {graduates.map((graduate: any) => (
             <div
               key={graduate.id}
-              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items-center rounded-xl shadow-lg p-2 flex flex-col"
+              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items- rounded-xl shadow-lg p-2 flex flex-col"
             >
               <div className="flex gap-5">
                 <Image
                   src={graduate.image}
-                  alt={graduate.name}
-                  className="relative top-[-40px] md:top-[-50px] lg:top-[-50px]  left-[-20px] md:left-0 lg:left-0 rounded-full object-cover w-[110px] h-[110px] lg:w-[120px] lg:h-[120px] xs:w-[100px] xs:h-[100px]"
+                  alt={graduate.first_name}
+                  className="relative top-[-40px] md:top-[-50px] lg:top-[-50px] left-[20px] md:left-10 lg:left-0 rounded-full object-cover w-[110px] h-[110px] lg:w-[120px] lg:h-[120px] xs:w-[100px] xs:h-[100px]"
                   width={150}
                   height={150}
                 />
                 <div className="flex flex-col gap-1 items-center mt-2">
-                  <p className="text-red font-bold text-[24px]  xl:text-[30px]">
+                  <p className="text-red font-bold text-[24px] xl:text-[30px]">
                     {graduate.score} бал
                   </p>
                   <h3 className="text-[12px] xl:text-[15px] font-bold text-gray-400">
-                    {graduate.name}
+                    {graduate.first_name} {graduate.last_name}
                   </h3>
                 </div>
               </div>
               <p className="text-gray-400 relative top-[-20px] text-center">
-                {graduate.feedback}
+                {graduate.review}
               </p>
             </div>
           ))}
