@@ -8,7 +8,7 @@ const AllVideoLessonList = () => {
 
   React.useEffect(() => {
     fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category-video/`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category-video`,
       "subVideoCategories"
     );
   }, [fetch]);

@@ -80,7 +80,7 @@ const VideoLessonCarousel = () => {
   );
   const unPaidVideos = allVideos?.filter((video) => !video.is_paid) || [];
   const combinedVideos = [...paidVideos, ...unPaidVideos];
-  const isUserRegistered = Boolean(localStorage.getItem("token"));
+  // const isUserRegistered = Boolean(localStorage.getItem("token"));
   return (
     <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8">
       <h1 className="text-xl font-semibold">Видео сабак</h1>
@@ -104,7 +104,7 @@ const VideoLessonCarousel = () => {
                 testTitle={item.subject_category.subject_category_name}
                 testDescriptionTitle={item.subject_name}
                 description={item.description}
-                disabled={item.is_paid && !isUserRegistered}
+                disabled={item.is_paid}
                 href={`${item.video_category.id}/${item.id}`}
               />
             </CarouselItem>

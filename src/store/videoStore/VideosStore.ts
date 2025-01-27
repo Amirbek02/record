@@ -46,9 +46,6 @@ interface VideosState {
   ) => Promise<void>;
 }
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NjE5MDQyLCJpYXQiOjE3Mzc3NTUwNDIsImp0aSI6IjQwMjI1NTEzYWM3NjQ5YTBiYTNjOWU5OGM5ZjVjYjExIiwidXNlcl9pZCI6Nn0.ntJ9C-1sdFfrTa452d0P1WAFsO7X5v7HIMoTI97BjJ8";
-
 const useVideosStore = create<VideosState>()((set) => ({
   allVideos: null,
   videoCategories: null,
@@ -56,10 +53,15 @@ const useVideosStore = create<VideosState>()((set) => ({
   video: null,
   fetch: async (url, type) => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Token not found. User might not be logged in.");
+      }
+
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Use the dynamic token
           "Content-Type": "application/json",
         },
       });
