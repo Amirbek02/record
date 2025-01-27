@@ -23,7 +23,10 @@ const TestCardNoSign = ({
 	href,
 }: TestProps) => {
 	return (
-		<TestCard withLink href={href} className="lg:max-w-[542px] max-w-[400px]">
+		<TestCard
+			withLink
+			href={href}
+			className=" lg:max-w-[542px] max-w-[400px]">
 			<TestCardMedia
 				imgSrc={imgSrc}
 				className="lg:max-w-[600px] lg:h-[350px] max-w-[400px]">

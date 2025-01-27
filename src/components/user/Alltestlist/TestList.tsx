@@ -16,6 +16,7 @@ type Props = {
 	test_category: {
 		test_category_name: string;
 	};
+	first_test: boolean;
 	description: string;
 	background_image: string;
 	title: string;
@@ -39,9 +40,9 @@ const TestList = ({
 	const slug = params?.slug;
 	const idParams = Array.isArray(slug) ? Number(slug[0]) : undefined;
 
-	const subjectCategoryIds = test.filter(
-		(test) => test.subject_category?.id === idParams
-	);
+	const subjectCategoryIds = test
+		.filter((test) => test.subject_category?.id === idParams)
+		.filter((el) => el.first_test === true);
 
 	const testCategory = subjectCategoryIds.find(
 		(el) => el.test_category?.test_category_name

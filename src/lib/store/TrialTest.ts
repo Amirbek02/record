@@ -13,6 +13,7 @@ type Test = {
 	test_category: {
 		test_category_name: string;
 	};
+	first_test: boolean;
 	description: string;
 	background_image: string;
 	title: string;
@@ -34,7 +35,7 @@ interface TrialTestState {
 }
 
 const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3OTcyOTY1LCJpYXQiOjE3Mzc5NzI2NjUsImp0aSI6IjRhNjJmMjdlYzU3OTQ3N2U5NTViZTMxZGY5MzE1ZDRmIiwidXNlcl9pZCI6MX0.3bX1fMMzOYnO4oSJ963O5Wze9LBVWFhOjctOxE5sptQ";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM3OTc4ODE0LCJpYXQiOjE3Mzc5Nzg1MTQsImp0aSI6IjhkYWEzMDA4MjQ5NjQxOTY4MTZjNGMxY2JmY2QyMDMxIiwidXNlcl9pZCI6MX0.xtmXOuma4NZAFYu8JQNJtdJY2Ef4D9i0to9cTcjV34Y";
 const useTrialTestStore = create<TrialTestState>((set) => ({
 	data: [],
 	loading: false,
