@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaRegEyeSlash } from 'react-icons/fa';
 import { FaRegEye } from 'react-icons/fa';
+import { jwtDecode } from 'jwt-decode';
+import Link from 'next/link';
 
 const SignIn = () => {
   const [formData, setFormData] = useState<IFormData>({
@@ -28,7 +30,18 @@ const SignIn = () => {
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      loginWithToken(token);
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
+          loginWithToken(token);
+        } else {
+          console.warn('Token expired, redirecting...');
+          router.push('/sign-up');
+        }
+      } catch (error) {
+        console.error('Invalid token format:', error);
+        router.push('/sign-up');
+      }
     } else {
       router.push('/sign-up');
     }
@@ -84,11 +97,7 @@ const SignIn = () => {
         paid,
       });
 
-      if (!error) {
-        router.push('/verification');
-      } else {
-        console.log(`Ошибка: ${error || 'Неизвестная ошибка'}`);
-      }
+      router.push('/verification');
     } catch (err) {
       console.error('Ошибка регистрации:', err);
     }
@@ -100,9 +109,11 @@ const SignIn = () => {
 
   return (
     <div className="flex justify-center items-center flex-col w-full h-auto ">
-      <div className="pt-[24px] xl:pt-[120px]">
-        <Image src="/icons/record-logo.svg" width={290} height={95} alt="sighIn"></Image>
-      </div>
+      <Link href="/">
+        <div className="pt-[26px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
+          <Image src="/icons/record-logo.svg" width={290} height={95} alt="Sign In" />
+        </div>
+      </Link>
 
       <form className="flex justify-center items-center flex-col relative">
         <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px]  pb-[40px]  ">

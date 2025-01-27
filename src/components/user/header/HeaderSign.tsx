@@ -1,34 +1,34 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import React from 'react';
 
 export const link = [
   {
-    path: "/in",
-    icon: "/icons/home.svg",
-    post: "Башкы бет",
+    path: '/in',
+    icon: '/icons/home.svg',
+    post: 'Башкы бет',
   },
   {
-    path: "/in/all-tests",
-    icon: "/icons/test.svg",
-    post: "Тест",
+    path: '/in/all-tests',
+    icon: '/icons/test.svg',
+    post: 'Тест',
   },
   {
-    path: "/in/video-lessons",
-    icon: "/icons/pc.svg",
-    post: "Видео сабак",
+    path: '/in/video-lessons',
+    icon: '/icons/pc.svg',
+    post: 'Видео сабак',
   },
   {
-    path: "/in/payment",
-    icon: "/icons/pay.svg",
-    post: "Төлөм",
+    path: '/in/payment',
+    icon: '/icons/pay.svg',
+    post: 'Төлөм',
   },
   {
-    path: "/in/profile",
-    icon: "/icons/chel.svg",
-    post: "Жеке кабинет",
+    path: '/in/profile',
+    icon: '/icons/chel.svg',
+    post: 'Жеке кабинет',
   },
 ];
 
@@ -37,20 +37,19 @@ const HeaderSign = () => {
   const router = useRouter();
 
   const loginOut = () => {
-    localStorage.removeItem("token");
-    router.push("/");
+    localStorage.removeItem('token');
+    router.push('/');
   };
   return (
     <div className="lg:block hidden">
       <div
         className={` flex flex-col items-center top-0 pt-[30px] left-0 w-[296px] h-full bg-[#FFFF]  `}
         style={{
-          borderRadius: "0px 40px 40px 0px",
-          boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
-        }}
-      >
-        <div className="flex  flex-col items-center mb-[70px]">
-          <Link href="/">
+          borderRadius: '0px 40px 40px 0px',
+          boxShadow: ' 10px 4px 4px 0px rgba(229, 229, 255, 0.54)',
+        }}>
+        <div className="flex flex-col items-center mb-[70px]">
+          <Link href="/in">
             <Image
               src="/images/logo.svg"
               alt=""
@@ -65,25 +64,12 @@ const HeaderSign = () => {
         </div>
         <div className="flex  flex-col gap-[24px] mt-[61px]">
           {link.map((item, index) => (
-            <Link
-              href={item.path}
-              key={index}
-              className="flex gap-[16px] items-center"
-            >
-              <Image
-                src={item.icon}
-                width={23}
-                height={23}
-                alt=""
-                className=""
-              />
+            <Link href={item.path} key={index} className="flex gap-[16px] items-center">
+              <Image src={item.icon} width={23} height={23} alt="" className="" />
               <h1
                 className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                  pathname === item.path
-                    ? "text-[#2E3095] font-bold"
-                    : "text-[#2E3095] font-normal"
-                }`}
-              >
+                  pathname === item.path ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
+                }`}>
                 {item.post}
               </h1>
             </Link>
@@ -92,31 +78,23 @@ const HeaderSign = () => {
         <div className="mt-auto mb-[30px] ml-[-65px]">
           <Link
             href="in/profile"
-            className={`flex gap-[20px] items-center h-[20px] border-l-[1px] `}
-          >
+            className={`flex gap-[20px] items-center h-[20px] border-l-[1px] `}>
             <Image src="/icons/settings.svg" width={23} height={23} alt="" />
             <h1
               className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === "/test"
-                  ? "text-[#2E3095] font-bold"
-                  : "text-[#2E3095] font-normal"
-              }`}
-            >
+                pathname === '/test' ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
+              }`}>
               Жөндөө
             </h1>
           </Link>
           <div
             onClick={loginOut}
-            className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}
-          >
+            className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}>
             <Image src="/icons/exit.svg" width={23} height={23} alt="" />
             <h1
               className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === "/test"
-                  ? "text-[#2E3095] font-bold"
-                  : "text-[#2E3095] font-normal"
-              } `}
-            >
+                pathname === '/test' ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
+              } `}>
               Чыгуу
             </h1>
           </div>
