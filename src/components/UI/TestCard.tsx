@@ -68,7 +68,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
           allowFullScreen
           aria-hidden="true"
           sandbox="allow-same-origin allow-scripts"
-          style={{ border: "none"}} 
+          style={{ border: "none",pointerEvents:'none'}} 
           
         />
       )}

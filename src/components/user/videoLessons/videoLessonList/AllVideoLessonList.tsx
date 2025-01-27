@@ -4,22 +4,18 @@ import VideoLessonsList from "./VideoLessonsList";
 import useVideosStore from "@/store/videoStore/VideosStore";
 
 const AllVideoLessonList = () => {
-  const { fetch,subVideoCategories } = useVideosStore();
+  const { fetch, subVideoCategories } = useVideosStore();
 
   React.useEffect(() => {
-    // Fetch videos
-    // fetch("https://api.recordonline.kg/api/v1/categories/", "categories");'
     fetch(
-      "https://api.recordonline.kg/api/v1/subject-categories/",
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category-video/`,
       "subVideoCategories"
     );
   }, [fetch]);
-  console.log('this is a subject', subVideoCategories);
+  console.log("this is a subject", subVideoCategories);
   return (
-    <div>
-      <VideoLessonsList
-       subvideoCategories={subVideoCategories}
-      />
+    <div className="flex flex-col gap-10">
+      <VideoLessonsList subvideoCategories={subVideoCategories} isMainTestVideos />
     </div>
   );
 };

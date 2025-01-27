@@ -2,41 +2,39 @@
 import React from "react";
 import VideoOrTestContainer from "@/components/UI/VideoOrTestContainer";
 import Link from "next/link";
- type Category={
-  category_name:string
- }
+ 
 
  export type SubVideoCategory = {
   id: number;
-  subject_category_name: string;
+  category_name: string;
   last_update_date: string; // Using ISO string format for dates
   created_date: string;
 };
 
 const VideoLessonsList = ({
   subvideoCategories,
-  category,
+  isMainTestVideos
 }: {
   subvideoCategories:SubVideoCategory[]|null;
-  category?:Category
+  isMainTestVideos?:boolean
 }) => {
-  console.log(category)
+  
   return (
     <div className="">
       <div>
-        <p className="">
-          {category?.category_name}
+        <p className="text-2xl font-bold mb-5">
+          {isMainTestVideos? "Негизги предметтер" :"Кошумча предметтер"}
         </p>
-        <div className=" ">
+        <div className="flex flex-wrap gap-5">
           {subvideoCategories?.map((subvideo) => (
             <Link key={subvideo.id} href={`/in/video-lessons/${subvideo.id}`}>
               <VideoOrTestContainer
-                subjectName={subvideo.subject_category_name}
-              />hii1
+                subjectName={subvideo.category_name}
+              />
             </Link>
           ))}
         </div>
-      </div>
+      </div> 
     </div>
   );
 };
