@@ -1,6 +1,7 @@
 'use client';
 import CustomButton from '@/components/UI/CustomButton';
 import useAuthStore from '@/lib/store/authStore';
+import { jwtDecode } from 'jwt-decode';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -29,7 +30,18 @@ const SignUp = () => {
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      loginWithToken(token);
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
+          loginWithToken(token);
+        } else {
+          console.warn('Token expired, redirecting...');
+          router.push('/sign-in');
+        }
+      } catch (error) {
+        console.error('Invalid token format:', error);
+        router.push('/sign-in');
+      }
     } else {
       router.push('/sign-in');
     }
@@ -56,9 +68,11 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center items-center flex-col w-[360px] mm:w-auto">
-      <div className="pt-[26px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
-        <Image src="/icons/record-logo.svg" width={290} height={95} alt="Sign In" />
-      </div>
+      <Link href="/">
+        <div className="pt-[26px] xl:pt-[120px] pb-[82px] xl:pb-[40px]">
+          <Image src="/icons/record-logo.svg" width={290} height={95} alt="Sign In" />
+        </div>
+      </Link>
       <h1 className="hidden xl:block font-montserrat font-medium text-[36px] leading-[44px] tracking-[2%] text-[rgb(76,76,76)] pb-[75px]">
         Кош келдиңиз!
       </h1>

@@ -3,18 +3,30 @@ import React from 'react';
 import MainPage from '@/components/user/UserIn/mainpage/MainPage';
 import { useRouter } from 'next/navigation';
 import useAuthStore, { IRegisterData } from '@/lib/store/authStore';
+import { jwtDecode } from 'jwt-decode';
 
 const Homepage = () => {
-  // const { register } = useAuthStore();
-  // const router = useRouter();
-  // React.useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     loginWithToken(token);
-  //   } else {
-  //     router.push('/sign-up');
-  //   }
-  // }, []);
+  const { register } = useAuthStore();
+  const router = useRouter();
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
+          loginWithToken(token);
+        } else {
+          console.warn('Token expired, redirecting...');
+          router.push('/sign-up');
+        }
+      } catch (error) {
+        console.error('Invalid token format:', error);
+        router.push('/sign-up');
+      }
+    } else {
+      router.push('/sign-up');
+    }
+  }, []);
 
   // const loginWithToken = async (token: string) => {
   //   try {

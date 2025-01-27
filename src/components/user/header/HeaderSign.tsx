@@ -41,7 +41,7 @@ const HeaderSign = () => {
     router.push('/');
   };
   return (
-    <div>
+    <div className="lg:block hidden">
       <div
         className={` flex flex-col items-center top-0 pt-[30px] left-0 w-[296px] h-full bg-[#FFFF]  `}
         style={{
@@ -49,7 +49,7 @@ const HeaderSign = () => {
           boxShadow: ' 10px 4px 4px 0px rgba(229, 229, 255, 0.54)',
         }}>
         <div className="flex flex-col items-center mb-[70px]">
-          <Link href="/">
+          <Link href="/in">
             <Image
               src="/images/logo.svg"
               alt=""
@@ -62,7 +62,7 @@ const HeaderSign = () => {
             Аналитикалык жана билим берүү уюму
           </h1>
         </div>
-        <div className="flex flex-col gap-[24px] mt-[61px]">
+        <div className="flex  flex-col gap-[24px] mt-[61px]">
           {link.map((item, index) => (
             <Link href={item.path} key={index} className="flex gap-[16px] items-center">
               <Image src={item.icon} width={23} height={23} alt="" className="" />
