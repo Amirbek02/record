@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const links = [
   { label: 'Сынамык тест', href: '/exam-test' },
@@ -29,6 +30,7 @@ const link = [
 ];
 
 const Header = () => {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -124,18 +126,33 @@ const Header = () => {
           </Link>
         ))}
       </nav>
-      <div className="hidden gap-[12px] md:flex">
-        <Link href="/sign-in">
-          <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
-            Кирүү
-          </button>
-        </Link>
-        <Link href="/sign-up">
-          <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
-            Катталуу
-          </button>
-        </Link>
-      </div>
+      {!session ? (
+        <div className="hidden gap-[12px] md:flex">
+          <Link href="/sign-in">
+            <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
+              Кирүү
+            </button>
+          </Link>
+          <Link href="/sign-up">
+            <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
+              Катталуу
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div className="hidden gap-[12px] md:flex">
+          <Link href="/profile">
+            <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px] border-[1.5px] border-[black]  rounded-[80px] text-[#6C6C6C]">
+              Профиль
+            </button>
+          </Link>
+          <Link href="/sign-out">
+            <button className="md:py-[10px] md:px-[13px]  lg:pt-[14.93px] lg:pb-[15.87px] lg:pl-[31px] lg:pr-[25px] font-medium text-[16px] lg:text-[22px]  rounded-[80px] bg-[#2E3095] text-[#fff]">
+              Чыгуу
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

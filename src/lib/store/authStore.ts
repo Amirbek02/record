@@ -25,7 +25,7 @@ interface AuthState {
   successMessage: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (formData: IFormData) => Promise<void>;
-  verification: (email: string, code: number) => Promise<void>;
+  verification: (email: string, code: string) => Promise<void>;
   clearMessages: () => void;
 }
 
@@ -98,7 +98,7 @@ const useAuthStore = create<AuthState>()(
           set({ isLoading: false });
         }
       },
-      verification: async (email: string, code: number) => {
+      verification: async (email: string, code: string) => {
         set({ isLoading: true, error: null });
 
         try {

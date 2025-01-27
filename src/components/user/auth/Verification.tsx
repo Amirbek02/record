@@ -14,7 +14,7 @@ const Verification = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
-    code: 0,
+    code: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
