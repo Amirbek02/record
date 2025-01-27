@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   { label: 'Сынамык тест', href: '/exam-test' },
   { label: 'Видео сабак', href: '/#videoLessons' },
-  { label: 'Биз жөнүндө', href: '/' },
+  { label: 'Биз жөнүндө', href: '/#' },
 ];
 
 const link = [
