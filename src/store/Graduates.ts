@@ -8,7 +8,7 @@ const REFRESH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoi
 export const useGraduates = create((set) => ({
   graduates: [],
   isLoading: false,
-  error: null,
+  error: null, 
   
   fetchGraduates: async () => {
     set({ isLoading: true, error: null });
