@@ -33,7 +33,12 @@ interface TrialTestState {
   getSubById: (id: number) => Promise<void>;
 }
 
-const token = localStorage.getItem('token');
+const getToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+};
 const useTrialTestStore = create<TrialTestState>((set) => ({
   data: [],
   loading: false,
@@ -44,7 +49,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get('https://api.recordonline.kg/api/v1/subjectcategories/', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ data: response.data, loading: false });
@@ -63,7 +68,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
         `https://api.recordonline.kg/api/v1/subjectcategories/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -81,7 +86,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get(`https://api.recordonline.kg/api/v1/tests/`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ test: response.data, loading: false });
