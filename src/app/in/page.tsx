@@ -6,14 +6,13 @@ import useAuthStore, { IVerificationResponse } from '@/lib/store/authStore';
 import { jwtDecode } from 'jwt-decode';
 
 const Homepage = () => {
-  const { verification, login } = useAuthStore();
+  const { verification } = useAuthStore();
   const router = useRouter();
 
   const loginWithToken = React.useCallback(
     async (token: string) => {
       try {
         await verification({ token } as IVerificationResponse);
-        await login('', token);
         router.push('/in');
       } catch (err) {
         console.error('Error during token login:', err);
