@@ -54,7 +54,7 @@ const Header = () => {
 	}, []);
 
 	return (
-		<div className="max-w-[1440px] w-full sticky z-50 top-0 bg-[#fff]">
+		<div className="w-full sticky z-50 top-0 bg-[#fff]">
 			<div className=" w-[90%] flex items-center  justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
 				<div className="flex justify-between w-full md:w-[160px]">
 					<div className="flex flex-col items-center order-2">
