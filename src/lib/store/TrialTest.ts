@@ -48,8 +48,12 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
         },
       });
       set({ data: response.data, loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
   getSubById: async (id: number) => {
@@ -64,8 +68,12 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
         },
       );
       set({ data: [response.data], loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
   getTest: async () => {
@@ -77,8 +85,12 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
         },
       });
       set({ test: response.data, loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
 }));
