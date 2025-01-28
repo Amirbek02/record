@@ -41,7 +41,7 @@ const MainSection = () => {
 
         <div className=" mr-[320px]  md:mr-[300px]">
           <div className="relative w-[full] md:mt-[-150px]">
-            <div className="absolute left-[55px] w-[202px] h-[400px] rounded-[60px] pb-20 bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px] p-6">
+            <div className="absolute top-[-20px] lg:top-[-20px] xl:top-[0] left-[55px] w-[202px] h-[400px] rounded-[60px] bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px] p-6">
               <video
                 className=" h-[317px] w-[500px] m-auto object-cover mt-2 z-20 xl:w-[280px] xl:h-[500px] rounded-t-[20px]  "
                 autoPlay
