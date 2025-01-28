@@ -33,7 +33,12 @@ interface TrialTestState {
   getSubById: (id: number) => Promise<void>;
 }
 
-const token = localStorage.getItem('token');
+const getToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+};
 const useTrialTestStore = create<TrialTestState>((set) => ({
   data: [],
   loading: false,
@@ -44,12 +49,16 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get('https://api.recordonline.kg/api/v1/subjectcategories/', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ data: response.data, loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
   getSubById: async (id: number) => {
@@ -59,13 +68,17 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
         `https://api.recordonline.kg/api/v1/subjectcategories/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         },
       );
       set({ data: [response.data], loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
   getTest: async () => {
@@ -73,12 +86,16 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get(`https://api.recordonline.kg/api/v1/tests/`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ test: response.data, loading: false });
-    } catch (error: any) {
-      set({ error: error?.message || 'error', loading: false });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
     }
   },
 }));

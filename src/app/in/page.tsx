@@ -2,12 +2,25 @@
 import React from 'react';
 import MainPage from '@/components/user/UserIn/mainpage/MainPage';
 import { useRouter } from 'next/navigation';
-import useAuthStore, { IRegisterData } from '@/lib/store/authStore';
+import useAuthStore, { IVerificationResponse } from '@/lib/store/authStore';
 import { jwtDecode } from 'jwt-decode';
 
 const Homepage = () => {
-  const { register } = useAuthStore();
+  const { verification } = useAuthStore();
   const router = useRouter();
+
+  const loginWithToken = React.useCallback(
+    async (token: string) => {
+      try {
+        await verification({ token } as IVerificationResponse);
+        router.push('/in');
+      } catch (err) {
+        console.error('Error during token login:', err);
+      }
+    },
+    [verification, router],
+  );
+
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -26,16 +39,8 @@ const Homepage = () => {
     } else {
       router.push('/sign-up');
     }
-  }, []);
+  }, [loginWithToken, router]);
 
-  // const loginWithToken = async (token: string) => {
-  //   try {
-  //     await register({ token } as IRegisterData);
-  //     router.push('/in');
-  //   } catch (err) {
-  //     console.error('Error during token login:', err);
-  //   }
-  // };
   return (
     <section>
       <MainPage />
