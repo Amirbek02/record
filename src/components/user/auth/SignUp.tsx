@@ -18,16 +18,16 @@ const SignUp = () => {
     password: '',
   });
 
-  const loginWithToken = async (token: string) => {
-    try {
-      await login('', token);
-      router.push('/in');
-    } catch (err) {
-      console.error('Токен менен кирүү учурунда ката кетти:', err);
-    }
-  };
-
   React.useEffect(() => {
+    const loginWithToken = async (token: string) => {
+      try {
+        await login('', token);
+        router.push('/in');
+      } catch (err) {
+        console.error('Токен менен кирүү учурунда ката кетти:', err);
+      }
+    };
+
     const token = localStorage.getItem('token');
     if (token) {
       try {
@@ -45,7 +45,7 @@ const SignUp = () => {
     } else {
       router.push('/sign-in');
     }
-  }, []);
+  }, [login, router]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

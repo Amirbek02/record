@@ -53,7 +53,7 @@ export const Register: React.FC<Props> = ({ onClose }) => {
       router.push('/verification');
 
       onClose?.();
-    } catch (error) {
+    } catch {
       return toast.error('E-Mail же сырсөз туура эмес', {
         icon: '❌',
       });
@@ -144,7 +144,7 @@ export const Register: React.FC<Props> = ({ onClose }) => {
             </div>
           </div>
           <Button
-            loading={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting}
             className="mm:rounded-[5px] xl:rounded-[12px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[14px] xl:mb-[114px] bg-customGray xl:bg-customBlue">
             Катталуу
           </Button>

@@ -8,6 +8,19 @@ import { jwtDecode } from 'jwt-decode';
 const Homepage = () => {
   const { register } = useAuthStore();
   const router = useRouter();
+
+  const loginWithToken = React.useCallback(
+    async (token: string) => {
+      try {
+        await register({ token } as IRegisterData);
+        router.push('/in');
+      } catch (err) {
+        console.error('Error during token login:', err);
+      }
+    },
+    [register, router],
+  );
+
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -26,16 +39,8 @@ const Homepage = () => {
     } else {
       router.push('/sign-up');
     }
-  }, []);
+  }, [loginWithToken, router]);
 
-  const loginWithToken = async (token: string) => {
-    try {
-      await register({ token } as IRegisterData);
-      router.push('/in');
-    } catch (err) {
-      console.error('Error during token login:', err);
-    }
-  };
   return (
     <section>
       <MainPage />
