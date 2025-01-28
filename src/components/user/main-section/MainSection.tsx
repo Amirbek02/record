@@ -80,10 +80,10 @@ const MainSection = () => {
               </div>
             </div>
             <div className="absolute left-[-20px] xl:left-[-230px] top-[80px] xl:top-[90px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] xl:w-[172px] xl:h-[61px] border-[0.35px] border-green rounded-[10px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 баллл</h3>
             </div>
             <div className="absolute top-[120px] xl:top-[170px] left-[210px] xl:left-[120px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] border-[0.35px] border-green rounded-[10px] xl:w-[172px] xl:h-[61px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 баллл</h3>
             </div>
           </div>
         </div>
