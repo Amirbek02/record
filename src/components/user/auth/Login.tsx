@@ -1,10 +1,10 @@
 'use client';
-import useAuthStore from '@/lib/store/authStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import useAuthStore from '@/store/authStore';
 import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import { formLoginSchema, TFormLoginValues } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,36 +23,18 @@ const Login: React.FC<Props> = ({ onClose }) => {
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter();
 
-  // React.useEffect(() => {
-  //   const loginWithToken = async (token: string) => {
-  //     try {
-  //       await login({ token } as unknown as ILoginData);
-  //       router.push('/in');
-  //     } catch (err) {
-  //       console.error('Токен менен кирүү учурунда ката кетти:', err);
-  //     }
-  //   };
+  const loginWithToken = async () => {
+    try {
+      router.push('/in');
+    } catch (err) {
+      console.error('Токен менен кирүү учурунда ката кетти:', err);
+    }
+  };
 
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     try {
-  //       const decoded = jwtDecode(token);
-  //       if (decoded.exp && decoded.exp * 1000 > Date.now()) {
-  //         loginWithToken(token);
-  //       } else {
-  //         console.warn('Token expired, redirecting...');
-  //         router.push('/sign-in');
-  //       }
-  //     } catch (error) {
-  //       console.error('Invalid token format:', error);
-  //       router.push('/sign-in');
-  //     }
-  //   } else {
-  //     router.push('/sign-in');
-  //   }
-  // }, [login, router]);
-
-  console.log('login error', error);
+  const token = localStorage.getItem('token');
+  if (token) {
+    loginWithToken();
+  }
 
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginSchema),
@@ -63,14 +45,15 @@ const Login: React.FC<Props> = ({ onClose }) => {
   });
   const onSubmit = async (data: TFormLoginValues) => {
     try {
-      const response = await login({
+      useAuthStore.setState({ error: null });
+
+      await login({
         email: data.email,
         password: data.password,
       });
-      console.log('response sdkjfhklasjhdflkj' + response);
 
-      if (!error) {
-        toast.error('Катталуу ийгиликтүү 📝. Почтаңызды тастыктаңыз', {
+      if (!useAuthStore.getState().error) {
+        toast.success('Катталуу ийгиликтүү 📝. Почтаңызды тастыктаңыз', {
           icon: '✅',
         });
         router.push('/in');

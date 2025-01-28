@@ -47,11 +47,14 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getSub: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get('https://api.recordonline.kg/api/v1/subjectcategories/', {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
         },
-      });
+      );
       set({ data: response.data, loading: false });
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -65,7 +68,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await axios.get(
-        `https://api.recordonline.kg/api/v1/subjectcategories/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/${id}`,
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -84,7 +87,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getTest: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get(`https://api.recordonline.kg/api/v1/tests/`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

@@ -4,14 +4,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { Button } from '../../UI/button';
-import useAuthStore, { IRegisterData } from '@/lib/store/authStore';
+import useAuthStore from '@/store/authStore';
 import { formRegisterSchema, TFormRegisterValues } from './schema';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { FormInput } from './form-input';
-import { jwtDecode } from 'jwt-decode';
 
 interface Props {
   onClose?: VoidFunction;
@@ -23,35 +22,18 @@ export const Register: React.FC<Props> = ({ onClose }) => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { register } = useAuthStore();
   const router = useRouter();
-
-  React.useEffect(() => {
-    const loginWithToken = async (token: string) => {
-      try {
-        await register({ token } as IRegisterData);
-        router.push('/in');
-      } catch (err) {
-        console.error('Токен менен кирүү учурунда ката кетти:', err);
-      }
-    };
-
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
-          loginWithToken(token);
-        } else {
-          console.warn('Token expired, redirecting...');
-          router.push('/sign-up');
-        }
-      } catch (error) {
-        console.error('Invalid token format:', error);
-        router.push('/sign-up');
-      }
-    } else {
-      router.push('/sign-up');
+  const loginWithToken = async () => {
+    try {
+      router.push('/in');
+    } catch (err) {
+      console.error('Токен менен кирүү учурунда ката кетти:', err);
     }
-  }, [register, router]);
+  };
+
+  const token = localStorage.getItem('token');
+  if (token) {
+    loginWithToken();
+  }
 
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),

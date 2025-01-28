@@ -32,11 +32,11 @@ const HeaderSearch = () => {
   };
   return (
     <div>
-      <div
-        ref={sidebarRef}
-        onClick={toggleSidebar}
-        className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
-        <div className="flex flex-wrap items-center justify-between  lg:hidden ">
+      <div className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
+        <div
+          className="flex flex-wrap items-center justify-between  lg:hidden "
+          ref={sidebarRef}
+          onClick={toggleSidebar}>
           <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
             <button type="button">
               <svg
