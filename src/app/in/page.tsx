@@ -2,23 +2,24 @@
 import React from 'react';
 import MainPage from '@/components/user/UserIn/mainpage/MainPage';
 import { useRouter } from 'next/navigation';
-import useAuthStore, { IRegisterData } from '@/lib/store/authStore';
+import useAuthStore, { IVerificationResponse } from '@/lib/store/authStore';
 import { jwtDecode } from 'jwt-decode';
 
 const Homepage = () => {
-  const { register } = useAuthStore();
+  const { verification, login } = useAuthStore();
   const router = useRouter();
 
   const loginWithToken = React.useCallback(
     async (token: string) => {
       try {
-        await register({ token } as IRegisterData);
+        await verification({ token } as IVerificationResponse);
+        await login('', token);
         router.push('/in');
       } catch (err) {
         console.error('Error during token login:', err);
       }
     },
-    [register, router],
+    [verification, router],
   );
 
   React.useEffect(() => {

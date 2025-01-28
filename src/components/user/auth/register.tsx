@@ -4,13 +4,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { Button } from '../../UI/button';
-import useAuthStore from '@/lib/store/authStore';
+import useAuthStore, { IRegisterData } from '@/lib/store/authStore';
 import { formRegisterSchema, TFormRegisterValues } from './schema';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { FormInput } from './form-input';
+import { jwtDecode } from 'jwt-decode';
 
 interface Props {
   onClose?: VoidFunction;
@@ -22,6 +23,36 @@ export const Register: React.FC<Props> = ({ onClose }) => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { register } = useAuthStore();
   const router = useRouter();
+
+  React.useEffect(() => {
+    const loginWithToken = async (token: string) => {
+      try {
+        await register({ token } as IRegisterData);
+        router.push('/in');
+      } catch (err) {
+        console.error('Токен менен кирүү учурунда ката кетти:', err);
+      }
+    };
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
+          loginWithToken(token);
+        } else {
+          console.warn('Token expired, redirecting...');
+          router.push('/sign-up');
+        }
+      } catch (error) {
+        console.error('Invalid token format:', error);
+        router.push('/sign-up');
+      }
+    } else {
+      router.push('/sign-up');
+    }
+  }, [register, router]);
+
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {
@@ -75,6 +106,35 @@ export const Register: React.FC<Props> = ({ onClose }) => {
         <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px]  pb-[40px]  ">
           Катталуу
         </h1>
+        <div className="justify-center items-center flex-col pb-[10px] hidden xl:block ">
+          <div className="flex pb-[32px] items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] ">
+              <div className="flex justify-center items-center px-[10px] xl:px-[30px] py-[15px] xl:py-[19px] ">
+                <div className="pr-[10px] ">
+                  <Image src="/icons/iphone.svg" width={24} height={24} alt="sighIn"></Image>
+                </div>
+                <p className="text-[rgb(163,163,174)] font-montserrat text-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
+                  icloud аркылуу
+                </p>
+              </div>
+            </div>
+            <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px]">
+              <div className="flex justify-center items-center px-[10px] xl:px-[30px] py-[15px] xl:py-[19px]">
+                <div className="pr-[10px] ">
+                  <Image src="/icons/google.svg" width={24} height={24} alt="google"></Image>
+                </div>
+                <p className="text-[rgb(163,163,174)] font-montserrat ext-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
+                  Google аркылуу{' '}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="pb-[22px] text-[rgb(163,163,174)] font-montserrat text-[16px] font-[500] leading-[20px] tracking-[2%] flex items-center">
+            <span className="flex-1 border-t border-[rgb(163,163,174)] w-[100px]  mm:w-[150px] xl:w-[160px] pr-[16px] "></span>
+            <p className="px-[16px] ">Же</p>
+            <span className="flex-1 border-t border-[rgb(163,163,174)]  w-[100px] mm:w-[150px] xl:w-[160px] pl-[16px] "></span>
+          </div>
+        </div>
         <form
           className="flex justify-center items-center flex-col relative"
           onSubmit={form.handleSubmit(onSubmit)}>
@@ -113,35 +173,6 @@ export const Register: React.FC<Props> = ({ onClose }) => {
               className="absolute top-[90px] right-[25px] transform -translate-y-1/2 self-center text-[rgba(0,0,0,0.44)] w-[20px] h-[14px]">
               {showConfirmPassword ? <FaRegEyeSlash size={20} /> : <FaRegEye size={20} />}
             </button>
-          </div>
-          <div className="justify-center items-center flex-col pb-[10px] hidden xl:block ">
-            <div className="flex pb-[32px] items-center justify-between w-[270px] mm:w-[360px] xl:w-[500px]">
-              <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px] ">
-                <div className="flex justify-center items-center px-[10px] xl:px-[30px] py-[15px] xl:py-[19px] ">
-                  <div className="pr-[10px] ">
-                    <Image src="/icons/iphone.svg" width={24} height={24} alt="sighIn"></Image>
-                  </div>
-                  <p className="text-[rgb(163,163,174)] font-montserrat text-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
-                    icloud аркылуу
-                  </p>
-                </div>
-              </div>
-              <div className="box-border border-[0.6px] border-[rgb(228,228,228)] rounded-[4px] xl:rounded-[12px]">
-                <div className="flex justify-center items-center px-[10px] xl:px-[30px] py-[15px] xl:py-[19px]">
-                  <div className="pr-[10px] ">
-                    <Image src="/icons/google.svg" width={24} height={24} alt="google"></Image>
-                  </div>
-                  <p className="text-[rgb(163,163,174)] font-montserrat ext-[14px] xl:text-[16px] font-[400] leading-[17px] xl:leading-[20px] xl:pr-[20px]">
-                    Google аркылуу{' '}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="pb-[22px] text-[rgb(163,163,174)] font-montserrat text-[16px] font-[500] leading-[20px] tracking-[2%] flex items-center">
-              <span className="flex-1 border-t border-[rgb(163,163,174)] w-[100px]  mm:w-[150px] xl:w-[160px] pr-[16px] "></span>
-              <p className="px-[16px] ">Же</p>
-              <span className="flex-1 border-t border-[rgb(163,163,174)]  w-[100px] mm:w-[150px] xl:w-[160px] pl-[16px] "></span>
-            </div>
           </div>
           <Button
             disabled={form.formState.isSubmitting}
