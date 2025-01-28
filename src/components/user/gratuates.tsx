@@ -51,7 +51,7 @@ const Graduates = () => {
                 />
                 <div className="flex flex-col gap-1 items-center mt-2">
                   <p className="text-red font-bold text-[24px] xl:text-[30px]">
-                    {graduate.score} бал
+                    {graduate.score} балл
                   </p>
                   <h3 className="text-[12px] xl:text-[15px] font-bold text-gray-400">
                     {graduate.first_name} {graduate.last_name}

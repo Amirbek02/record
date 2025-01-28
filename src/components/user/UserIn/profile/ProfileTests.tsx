@@ -30,7 +30,7 @@ const ProfileTests = () => {
                     Математика
                   </h2>
                   <h2 className="hidden md:block text-[20px] font-medium text-[#4C4C4C] tracking-[2%] mr-[10px] lg:mr-[30px]">
-                    90 бал
+                    90 баллл
                   </h2>
                   <button className=" md:hidden w-[24px] h-[24px] flex items-center justify-center border-[1.5px] border-[#4C4C4C] rounded-full">
                     <ArrowRight className="w-[17px] h-[17px] text-[#4C4C4C]" />
@@ -62,7 +62,7 @@ const ProfileTests = () => {
                     Математика
                   </h2>
                   <h2 className="hidden md:block text-[20px] font-medium text-[#4C4C4C] tracking-[2%] mr-[10px] lg:mr-[30px]">
-                    90 бал
+                    90 баллл
                   </h2>
                   <button className=" md:hidden w-[24px] h-[24px] flex items-center justify-center border-[1.5px] border-[#4C4C4C] rounded-full">
                     <ArrowRight className="w-[17px] h-[17px] text-[#4C4C4C]" />

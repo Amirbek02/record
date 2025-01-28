@@ -11,11 +11,11 @@ import AnswerSheet from './AnswerSheet';
 
 const StudentsCardAccordion = () => {
   const students = [
-    { id: 1, name: "I. Математика 110 бал" },
-    { id: 2, name: "II. Математика 110 бал" },
-    { id: 3, name: "Кыргыз тил 90 бал" },
-    { id: 4, name: "Окуп жана түшүнү 110 бал" },
-    { id: 5, name: "Окшоштуктар 110 бал" },
+    { id: 1, name: "I. Математика 110 балл" },
+    { id: 2, name: "II. Математика 110 балл" },
+    { id: 3, name: "Кыргыз тил 90 балл" },
+    { id: 4, name: "Окуп жана түшүнү 110 балл" },
+    { id: 5, name: "Окшоштуктар 110 балл" },
   ];
 
   return (
@@ -23,7 +23,7 @@ const StudentsCardAccordion = () => {
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="main-test">
           <div className="flex items-center  justify-between bg-[#F6EEFF] p-3 rounded-lg">
-            <h1 className="text-[18px]">Негизги тест 110 бал</h1>
+            <h1 className="text-[18px]">Негизги тест 110 балл</h1>
             <div className="flex items-center gap-4">
               <button className="p-1 hover:text-blue-600">
                 <Pencil className="h-4 w-4" />

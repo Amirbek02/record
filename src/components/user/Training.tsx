@@ -5,22 +5,22 @@ const training = [
   {
     id: 1,
     imgSrc: "/images/Vector.svg",
-    title: "01. Видео сабак",
+    title: "1. Видео сабак",
     description:
-      "Видеосабактар көргөнгө ыңгайлуу. Каалаган убакта кайра кайра көргөнгө мүмкүнчүлүк түзөт.",
+      "Видеосабактар көргөнгө эң ыңгайлуу. Каалаган убакта кайра кайталап көргөнгө мүмкүнчүлүк түзөт.",
   },
   {
     id: 2,
     imgSrc: "/images/Vector1.svg",
-    title: "02. Тест",
+    title: "2. Тест",
     description:
-      "Сабактарды көргөн соң, тест тапшыруу менен канчалык теманы түшүнгөнүңүздү текшерсеңиз болот.",
+      "Сабактарды көргөн соң, тест тапшыруу менен теманы канчалык деңгээлде түшүнгөнүңүздү текшерсеңиз болот.",
   },
   {
     id: 3,
     imgSrc: "/images/Vector2.svg",
-    title: "03. Университет",
-    description: "Кесип, университет тандоо боюнча да сабактар болот",
+    title: "3. Кесип тандоо",
+    description: "Кесип тандоо, университет тандоо боюнча да он-лайн жолугушуулар болот",
   },
 ];
 
@@ -35,11 +35,10 @@ const Training = () => {
       <div className="max-w-7xl mx-auto p-4">
         <div className="text-center mb-8">
           <h2 className=" text-2xl md:text-3xl pb-6 text-white lg:text-[40px] font-medium mb-2">
-            ЖРТ ка кантип даярдайбыз?
+            Жалпы республикалык тестирлөөгө кантип даярдайбыз?
           </h2>
-          <p className="text-white hidden lg:block pb-4 sm:pb-16  text-center text-lg md:text-[25px]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod <br /> tempor incididunt ut labore et dolore magna aliqua.
+          <p className="text-white hidden lg:block pb-5 sm:pb-16  text-center text-lg md:text-[25px]">
+            Биздин платформада сиз ЖРТге натыйжалуу даярдык көрө аласыз. Видео сабактар, сабакты бышыктоочу тесттер, жана Zoom платформасы аркылуу дагы он-лайн жандуу сабактар.
           </p>
         </div>
 
