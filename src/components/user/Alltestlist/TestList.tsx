@@ -4,23 +4,7 @@ import TestCardNoSign from '@/components/UI/TestCardNoSign';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import useTrialTestStore from '@/lib/store/TrialTest';
-
-type Props = {
-  id: number;
-  subject_category: {
-    id: number;
-    subject_category_name: string;
-    last_update_date: string;
-    created_date: string;
-  };
-  test_category: {
-    test_category_name: string;
-  };
-  first_test: boolean;
-  description: string;
-  background_image: string;
-  title: string;
-};
+import { Props } from '@/app/(home)/exam-test/[...slug]/page';
 
 const TestList = ({}: { tests: Props[]; isMainTest?: boolean }) => {
   const params = useParams();
