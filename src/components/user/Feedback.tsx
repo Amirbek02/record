@@ -15,9 +15,19 @@ const Feedback = () => {
     email: "",
     number: "",
     message: "",
+    username: "",
+    lastname: "",
+    email: "",
+    number: "",
+    message: "",
   });
 
   const [errors, setErrors] = useState({
+    username: "",
+    lastname: "",
+    email: "",
+    number: "",
+    message: "",
     username: "",
     lastname: "",
     email: "",
@@ -27,6 +37,7 @@ const Feedback = () => {
 
   useEffect(() => {
     if (error) {
+      console.error("Ошибка:", error);
       console.error("Ошибка:", error);
     }
   }, [error]);
@@ -53,6 +64,7 @@ const Feedback = () => {
         return value.trim() ? "" : "Билдирүү жазуу милдеттүү!";
       default:
         return "";
+        return "";
     }
   };
 
@@ -66,11 +78,24 @@ const Feedback = () => {
       );
       return { ...acc, [field]: error };
     }, {} as Record<keyof typeof formData, string>);
+    const newErrors: Record<keyof typeof formData, string> = Object.keys(
+      formData
+    ).reduce((acc, field) => {
+      const error = validateField(
+        field,
+        formData[field as keyof typeof formData]
+      );
+      return { ...acc, [field]: error };
+    }, {} as Record<keyof typeof formData, string>);
 
     setErrors(newErrors);
     return !Object.values(newErrors).some((error) => error !== "");
+    return !Object.values(newErrors).some((error) => error !== "");
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -157,7 +182,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="bg-[#0F0F2F] py-[150px] ">
+    <div className="bg-[#0F0F2F] px-10 py-[150px] ">
       <div className="flex flex-col lg:flex-row justify-between mx-auto h-auto lg:items-center max-w-5xl">
         <div className="mb-6 lg:mb-0 flex flex-col items-center">
           <p className="font-bold lg:hidden block sm:text-2xl text-[20px] md:text-2xl p-3 lg:text-3xl text-white text-center lg:text-left">
@@ -183,10 +208,16 @@ const Feedback = () => {
                 id: "username",
                 type: "text",
                 placeholder: "Атыңыз",
+                id: "username",
+                type: "text",
+                placeholder: "Атыңыз",
                 error: errors.username,
                 apiError: error?.username,
               },
               {
+                id: "lastname",
+                type: "text",
+                placeholder: "Фамилия",
                 id: "lastname",
                 type: "text",
                 placeholder: "Фамилия",
@@ -200,6 +231,9 @@ const Feedback = () => {
                       id: "email",
                       type: "email",
                       placeholder: "Email",
+                      id: "email",
+                      type: "email",
+                      placeholder: "Email",
                       error: errors.email,
                       apiError: error?.email,
                     },
@@ -208,10 +242,16 @@ const Feedback = () => {
                 id: "number",
                 type: "tel",
                 placeholder: "Телефон номер",
+                id: "number",
+                type: "tel",
+                placeholder: "Телефон номер",
                 error: errors.number,
                 apiError: error?.phone_number,
               },
               {
+                id: "message",
+                type: "textarea",
+                placeholder: "Сиздин билдирүүңүз",
                 id: "message",
                 type: "textarea",
                 placeholder: "Сиздин билдирүүңүз",
@@ -224,9 +264,15 @@ const Feedback = () => {
                 className="justify-center pl-0 flex flex-col items-center"
               >
                 {field.type === "textarea" ? (
+              <div
+                key={field.id}
+                className="justify-center pl-0 flex flex-col items-center"
+              >
+                {field.type === "textarea" ? (
                   <textarea
                     id={field.id}
                     placeholder={field.placeholder}
+                    value={formData[field.id as keyof typeof formData] || ""}
                     value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
                     className={`rounded-xl w-full max-w-[400px] h-[120px] p-4 border bg-white text-gray-900 focus:outline-none s ${
@@ -238,6 +284,7 @@ const Feedback = () => {
                     id={field.id}
                     type={field.type}
                     placeholder={field.placeholder}
+                    value={formData[field.id as keyof typeof formData] || ""}
                     value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
                     className={`rounded-xl w-full max-w-[400px] h-[56px] ${
@@ -256,6 +303,8 @@ const Feedback = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
+                className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]"
+              >
                 className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]"
               >
                 Жиберүү
