@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   TestCard,
   TestCardMedia,
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
-} from "@/components/UI/TestCard";
+} from '@/components/UI/TestCard';
 
 interface TestProps {
   testTitle: string;
   testDescriptionTitle: string;
   description: string;
   imgSrc: string;
-  href:string
+  href: string;
 }
 
 const TestCarouselCard = ({
@@ -20,12 +20,12 @@ const TestCarouselCard = ({
   testDescriptionTitle,
   description,
   imgSrc,
-  href
+  href,
 }: TestProps) => {
   return (
     <TestCard withLink href={href} className="max-w-[420px]">
       <TestCardMedia imgSrc={imgSrc} className="w-full">
-        {" "}
+        {' '}
         <TestCardTitle>{testTitle}</TestCardTitle>
       </TestCardMedia>
       <TestCardSubtitle className="pl-5 max-w-[400px]">{testDescriptionTitle}</TestCardSubtitle>

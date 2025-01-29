@@ -1,6 +1,6 @@
 //ЖРТ га даярдоо  Сынамык тестке кош келдиңиз! 1
-
-import CustomButton from "../UI/CustomButton";
+'use client';
+import CustomButton from '../UI/CustomButton';
 
 const TakeTest = () => {
   return (
@@ -27,42 +27,37 @@ const TakeTest = () => {
           </p>
 
           <p className="text-[rgb(76,76,76)] font-montserrat text-[16px] lg:text-[24px] font-[500] leading-[28px] lg:pb-[10px] ">
-            Тест{" "}
+            Тест{' '}
             <span className="text-[rgb(240,26,38)] lg:text-[rgba(192,5,16,1)] font-[700]">
               30 тапшырмадан
-            </span>{" "}
+            </span>{' '}
             турат.
           </p>
           <p className="text-[rgb(76,76,76)] font-montserrat text-[16px] lg:text-[24px] font-[500] leading-[28px] lg:pb-[8px]">
-            Аны аткарууга{" "}
+            Аны аткарууга{' '}
             <span className="text-[rgb(240,26,38)] lg:text-[rgba(192,5,16,1)] font-[700]">
               30 мүнөт
-            </span>{" "}
+            </span>{' '}
             убакыт берилет.
           </p>
           <p className="text-[rgb(76,76,76)] font-montserrat text-[16px] lg:text-[24px] font-[500] leading-[28px]  lg:leading-[42px]  ">
-            Тапшырманы аткарып жатып, тандаган жообуңарды{" "}
-            <span className=" text-[rgb(0,131,53)] font-[700]">
-              өзгөртсөңөр болот
-            </span>
-            , бирок жоопту ар бир тапшырмада{" "}
+            Тапшырманы аткарып жатып, тандаган жообуңарды{' '}
+            <span className=" text-[rgb(0,131,53)] font-[700]">өзгөртсөңөр болот</span>, бирок
+            жоопту ар бир тапшырмада{' '}
             <span className="text-[rgb(240,26,38)] lg:text-[rgba(192,5,16,1)] font-[700]">
               бир гана жолу
-            </span>{" "}
+            </span>{' '}
             өзгөртө аласыз.
           </p>
           <p className="text-[rgb(76,76,76)] font-montserrat text-[16px] lg:text-[24px] font-[500] leading-[28px] lg:leading-[42px]">
-            Оңдой турган жаңы (туура) жоопту{" "}
-            <span className="text-[rgb(0,131,53)] font-[700]">
-              чарчы кылып боёшуңуз керек.
-            </span>{" "}
-            Тестти тапшыргандан кийин Сиз канча суроого туура жооп бергениңиз
-            тууралуу, туура жана туура эмес жооптордун жалпы пайыздык көрсөткүчү
-            камтылган
+            Оңдой турган жаңы (туура) жоопту{' '}
+            <span className="text-[rgb(0,131,53)] font-[700]">чарчы кылып боёшуңуз керек.</span>{' '}
+            Тестти тапшыргандан кийин Сиз канча суроого туура жооп бергениңиз тууралуу, туура жана
+            туура эмес жооптордун жалпы пайыздык көрсөткүчү камтылган
             <span className="text-[rgb(240,26,38)] lg:text-[rgba(192,5,16,1)] font-[700]">
-              {" "}
+              {' '}
               жыйынтыкты ватсап аркылуу
-            </span>{" "}
+            </span>{' '}
             аласыз.
           </p>
           <h3 className="text-[rgb(0,131,53)] lg:text-[rgb(240,26,38)] font-montserrat pt-[24px] text-[24px] font-[700] leading-[28px]">

@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import axios from "axios";
+import { create } from 'zustand';
+import axios from 'axios';
 
 interface ProcessedVideo {
   id: number;
@@ -26,10 +26,8 @@ const useVideoStore = create<VideoStore>((set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get(
-        "https://api.recordonline.kg/api/v1/video/"
-      );
-      console.log(response, "response");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/video/`);
+      console.log(response, 'response');
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const processedVideos = response.data.map((video: any) => ({
@@ -45,7 +43,7 @@ const useVideoStore = create<VideoStore>((set) => ({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       set({
-        error: error.response?.data?.message || "Видеону жүктөөдө ката чыкты.",
+        error: error.response?.data?.message || 'Видеону жүктөөдө ката чыкты.',
       });
     } finally {
       set({ isLoading: false });

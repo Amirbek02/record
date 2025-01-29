@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { TestCard, TestCardTitle, TestCardDescription } from '@/components/UI/VideoCoursesCard';
 import { Play, Pause } from 'lucide-react';
+import { TestCard, TestCardDescription, TestCardTitle } from '../UI/TestCard';
 
 interface TestProps {
   testTitle: string;
