@@ -54,7 +54,7 @@ const Header = () => {
 
   return (
     <div className="w-full sticky z-50 top-0 bg-[#fff]">
-      <div className=" w-[90%] flex items-center  justify-center md:justify-between pt-[25px] pb-[9px] mx-[auto] ">
+      <div className="mx-4 flex items-center  justify-center md:justify-between pt-[25px] pb-[9px] ">
         <div className="flex justify-between w-full md:w-[160px]">
           <div className="flex flex-col items-center order-2">
             <Link href="/">
@@ -93,7 +93,7 @@ const Header = () => {
         <div className="md:hidden ">
           <aside
             ref={sidebarRef}
-            className={` flex flex-col items-center fixed top-[68px] left-[-15] w-[296px] h-full bg-[#FFFF] transform ${
+            className={` flex flex-col items-center fixed top-[68px] left-[-15px] w-[296px] h-full bg-[#FFFF] transform ${
               isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
             } transition-transform duration-300 z-100`}
             style={{
