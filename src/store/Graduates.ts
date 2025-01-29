@@ -30,7 +30,7 @@ export const useGraduates = create<GraduatesState>((set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get('https://api.recordonline.kg/api/v1/graduates/');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/graduates/`);
 
       set({
         graduates: response.data,
@@ -45,11 +45,14 @@ export const useGraduates = create<GraduatesState>((set) => ({
 
           const newAccessToken = refreshResponse.data.access;
 
-          const retryResponse = await axios.get('https://api.recordonline.kg/api/v1/graduates/', {
-            headers: {
-              Authorization: `Bearer ${newAccessToken}`,
+          const retryResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/graduates/`,
+            {
+              headers: {
+                Authorization: `Bearer ${newAccessToken}`,
+              },
             },
-          });
+          );
 
           set({
             graduates: retryResponse.data,

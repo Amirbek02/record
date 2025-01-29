@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import TestCardNoSign from '@/components/UI/TestCardNoSign';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import useTrialTestStore from '@/lib/store/TrialTest';
+import useTrialTestStore from '@/store/TrialTest';
 import { Props } from '@/app/(home)/exam-test/[...slug]/page';
 
 const TestList = ({}: { tests: Props[]; isMainTest?: boolean }) => {

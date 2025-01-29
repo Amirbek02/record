@@ -1,12 +1,14 @@
 'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import useAuthStore, { IVerificationData } from '@/lib/store/authStore';
+import useAuthStore, { IVerificationData } from '@/store/authStore';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormInput } from './form-input';
 import { Button } from '@/components/UI/button';
 import toast from 'react-hot-toast';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface Props {
   onClose?: VoidFunction;
@@ -14,9 +16,34 @@ interface Props {
 
 const Verification: React.FC<Props> = () => {
   const { verification, error } = useAuthStore();
-
   const router = useRouter();
+  const loginWithToken = async () => {
+    try {
+      router.push('/in');
+    } catch (err) {
+      console.error('Токен менен кирүү учурунда ката кетти:', err);
+    }
+  };
+
+  const token = localStorage.getItem('token');
+  if (token) {
+    loginWithToken();
+  }
+
+  const validationSchema = z.object({
+    email: z
+      .string()
+      .nonempty('E-Mail талаасы бош болбош керек')
+      .email('Туура эмес E-Mail форматы'),
+    code: z
+      .string()
+      .nonempty('Код талаасы бош болбош керек')
+      .min(6, 'Код 6 символдон кем болбошу керек')
+      .max(6, 'Код 6 символдон ашык болбошу керек')
+      .regex(/^\d+$/, 'Код цифралардан гана турушу керек'),
+  });
   const form = useForm<IVerificationData>({
+    resolver: zodResolver(validationSchema),
     defaultValues: {
       email: '',
       code: '',

@@ -66,8 +66,8 @@ const Header = () => {
             </h1>
           </div>
           <div
-            className="flex flex-wrap items-center justify-between   md:hidden order-1"
             ref={sidebarRef}
+            className="flex flex-wrap items-center justify-between   md:hidden order-1"
             onClick={toggleSidebar}>
             <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
               <button type="button">

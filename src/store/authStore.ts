@@ -63,7 +63,7 @@ const useAuthStore = create<AuthState>()(
 
         try {
           const { data } = await axios.post(
-            'https://api.recordonline.kg/api/v1/sign-in/',
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/sign-in/`,
             formData,
             { headers: { 'Content-Type': 'application/json' } },
           );
@@ -92,7 +92,7 @@ const useAuthStore = create<AuthState>()(
 
         try {
           const { data } = await axios.post(
-            'https://api.recordonline.kg/api/v1/sign-up/',
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/sign-up/`,
             formData,
             { headers: { 'Content-Type': 'application/json' } },
           );
@@ -121,7 +121,7 @@ const useAuthStore = create<AuthState>()(
 
         try {
           const { data } = await axios.post(
-            'https://api.recordonline.kg/api/v1/sign-up-confirmation/',
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/sign-up-confirmation/`,
             formData,
             { headers: { 'Content-Type': 'application/json' } },
           );

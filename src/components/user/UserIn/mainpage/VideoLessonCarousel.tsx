@@ -61,6 +61,11 @@ const CarouselCardVideo = ({
             Сатып алуу
           </div>
         )}
+        {disabled && (
+          <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
+            Сатып алуу
+          </div>
+        )}
       </TestCard>
     </Link>
   );
