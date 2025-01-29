@@ -99,14 +99,7 @@ const TestCardSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
-<<<<<<< HEAD
-    className={cn(
-      "lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]",
-      className
-    )}
-=======
     className={cn('lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]', className)}
->>>>>>> bf8d00cb4c9dcab54f07b46f265a4e0cdc62a9eb
     {...props}
   />
 ));
