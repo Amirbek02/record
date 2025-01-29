@@ -6,11 +6,11 @@ import Link from "next/link";
 interface TestCardProps extends React.HTMLAttributes<HTMLDivElement> {
   href?: string;
   withLink?: boolean;
-  isCarouselCard?:boolean;
+  isCarouselCard?: boolean;
 }
 
 const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
-  ({ className, children, href, withLink,isCarouselCard, ...props }, ref) => (
+  ({ className, children, href, withLink, isCarouselCard, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
@@ -25,7 +25,9 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
         <div className="flex justify-start -mt-2 md:mt-2">
           <Link
             href={href}
-            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${isCarouselCard ? 'lg:text-sm':"lg:text-lg"}`}
+            className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${
+              isCarouselCard ? "lg:text-sm" : "lg:text-lg"
+            }`}
           >
             Толук оку
           </Link>
@@ -59,7 +61,7 @@ const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
           style={{ backgroundImage: `url(${imgSrc})` }}
         />
       )}
-    {videoSrc && (
+      {videoSrc && (
         <iframe
           className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
           src={`https://www.youtube.com/embed/${videoSrc}`}
@@ -98,7 +100,10 @@ const TestCardSubtitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h2
     ref={ref}
-    className={cn("lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]", className)}
+    className={cn(
+      "lg:text-xl pl-1 text-xs font-medium max-w-[358px] xl:min-h-[32px]",
+      className
+    )}
     {...props}
   />
 ));
