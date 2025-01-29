@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useFeedbackStore } from '@/store/useFeedbackStore';
 
 const Feedback = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { token, error } = useFeedbackStore() as { token: string; error: any };
   // console.log(error, "feedback errororor");.
 
