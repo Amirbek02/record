@@ -56,11 +56,11 @@ const CarouselCardVideo = ({
         <TestCardDescription className="max-w-[356px] lg:text-xs ml-5">
           {description}
         </TestCardDescription>
-      {disabled && (
-        <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
-          Сатып алуу
-        </div>
-      )}
+        {disabled && (
+          <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
+            Сатып алуу
+          </div>
+        )}
       </TestCard>
     </Link>
   );
@@ -72,7 +72,7 @@ const VideoLessonCarousel = () => {
 
   React.useEffect(() => {
     fetch(url, "videos");
-  }, [fetch,url]);
+  }, [fetch, url]);
   console.log(allVideos);
   const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(
     0,
@@ -91,7 +91,7 @@ const VideoLessonCarousel = () => {
           slidesToScroll: 1,
           containScroll: false,
         }}
-        className=" relative max-w-[350px] md:max-w-[1400px]"
+        className=" relative max-w-[750px] md:max-w-[1400px]"
       >
         <CarouselContent>
           {combinedVideos?.map((item) => (
