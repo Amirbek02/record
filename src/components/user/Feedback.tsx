@@ -2,14 +2,12 @@
 import Image from "next/image";
 import { Input } from "../UI/input";
 import { useEffect, useState } from "react";
-// import { useFeedbackStore } from "@/lib/store/useFeedbackStore";
 import { ToastContainer, toast } from "react-toastify";
 import { useFeedbackStore } from "@/store/useFeedbackStore";
-// import { ApiError } from "next/dist/server/api-utils";
 
 const Feedback = () => {
   const { token, error } = useFeedbackStore() as { token: string; error: any };
-  console.log(error, "feedback errororor");
+  // console.log(error, "feedback errororor");
 
   const [formData, setFormData] = useState({
     username: "",
@@ -50,9 +48,7 @@ const Feedback = () => {
         return "";
       case "number":
         if (!value.trim()) return "Телефон номериңизди жазуу милдеттүү!";
-        if (!phoneRegex.test(value))
-          return "Туура номерди киргизиңиз! М: 0505230605";
-        return "";
+        if (!phoneRegex.test(value)) return "";
       case "message":
         return value.trim() ? "" : "Билдирүү жазуу милдеттүү!";
       default:
