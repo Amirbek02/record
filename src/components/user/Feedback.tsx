@@ -3,9 +3,11 @@ import Image from "next/image";
 import { Input } from "../UI/input";
 import { useEffect, useState } from "react";
 import { useFeedbackStore } from "@/lib/store/useFeedbackStore";
+import { ToastContainer, toast } from "react-toastify";
+// import { ApiError } from "next/dist/server/api-utils";
 
 const Feedback = () => {
-  const { token, error } = useFeedbackStore();
+  const { token, error } = useFeedbackStore() as { token: string; error: any };
   console.log(error, "feedback errororor");
 
   const [formData, setFormData] = useState({
@@ -32,7 +34,8 @@ const Feedback = () => {
 
   const validateField = (field: string, value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10,15}$/;
+    // const phoneRegex = /^[0-9]{10,15}$/;
+    const phoneRegex = /^0\d{9}$/;
 
     switch (field) {
       case "username":
@@ -46,7 +49,8 @@ const Feedback = () => {
         return "";
       case "number":
         if (!value.trim()) return "Телефон номериңизди жазуу милдеттүү!";
-        if (!phoneRegex.test(value)) return "Туура телефон номерин киргизиңиз!";
+        if (!phoneRegex.test(value))
+          return "Туура номерди киргизиңиз! М: 0505230605";
         return "";
       case "message":
         return value.trim() ? "" : "Билдирүү жазуу милдеттүү!";
@@ -95,32 +99,62 @@ const Feedback = () => {
             last_name: formData.lastname,
             phone_number: formData.number,
             text: formData.message,
-            token, // Отправляем токен вместо email
+            token,
           }
         : {
             first_name: formData.username,
             last_name: formData.lastname,
             phone_number: formData.number,
             text: formData.message,
-            email: formData.email || undefined, // Отправляем email, если нет токена
+            email: formData.email || undefined,
           };
 
       try {
         const { sendFeedback } = useFeedbackStore.getState();
-        await sendFeedback(feedbackData);
-        alert("Маалымат ийгиликтүү жөнөтүлдү!");
-        console.log("Данные формы:", feedbackData);
+        const response = await sendFeedback(feedbackData);
 
-        // Сброс формы
-        setFormData({
-          username: "",
-          lastname: "",
-          email: "",
-          number: "",
-          message: "",
-        });
+        if (error && error.response?.data) {
+          setErrors((prev) => ({
+            ...prev,
+            ...error.response.data,
+          }));
+        } else {
+          setFormData({
+            username: "",
+            lastname: "",
+            email: "",
+            number: "",
+            message: "",
+          });
+
+          // Очищаем ошибки
+          setErrors({
+            username: "",
+            lastname: "",
+            email: "",
+            number: "",
+            message: "",
+          });
+          console.log("Данные формы успешно отправлены:", feedbackData);
+          // alert("Форма ийгиликтүү жөнөтүлдү!");
+          toast.success("Форма ийгиликтүү жөнөтүлдү!");
+        }
       } catch (error) {
-        console.error("Ошибка при отправке обратной связи:", error);
+        if (error instanceof Error) {
+          // Ловим стандартные ошибки
+          console.error("Ошибка при отправке обратной связи:", error.message);
+        } else {
+          // Ловим ошибку, если она не стандартная
+          console.error(
+            "Неизвестная ошибка при отправке обратной связи:",
+            error
+          );
+        }
+
+        setErrors((prev) => ({
+          ...prev,
+          apiError: "Ошибка соединения. Попробуйте снова.",
+        }));
       }
     }
   };
@@ -153,12 +187,14 @@ const Feedback = () => {
                 type: "text",
                 placeholder: "Атыңыз",
                 error: errors.username,
+                apiError: error?.username,
               },
               {
                 id: "lastname",
                 type: "text",
                 placeholder: "Фамилия",
                 error: errors.lastname,
+                apiError: error?.lastname,
               },
               ...(token
                 ? []
@@ -168,6 +204,7 @@ const Feedback = () => {
                       type: "email",
                       placeholder: "Email",
                       error: errors.email,
+                      apiError: error?.email,
                     },
                   ]),
               {
@@ -175,12 +212,14 @@ const Feedback = () => {
                 type: "tel",
                 placeholder: "Телефон номер",
                 error: errors.number,
+                apiError: error?.phone_number,
               },
               {
                 id: "message",
                 type: "textarea",
                 placeholder: "Сиздин билдирүүңүз",
                 error: errors.message,
+                apiError: error?.text,
               },
             ].map((field) => (
               <div
@@ -193,8 +232,8 @@ const Feedback = () => {
                     placeholder={field.placeholder}
                     value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
-                    className={`rounded-xl w-full max-w-[400px] h-[120px] p-4 border bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      field.error ? "border-red-500" : ""
+                    className={`rounded-xl w-full max-w-[400px] h-[120px] p-4 border bg-white text-gray-900 focus:outline-none s ${
+                      field.error ? "border-red-500 font-medium" : ""
                     }`}
                   />
                 ) : (
@@ -205,18 +244,13 @@ const Feedback = () => {
                     value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
                     className={`rounded-xl w-full max-w-[400px] h-[56px] ${
-                      field.error ? "border-red-500" : ""
+                      field.error ? "border-red-600  " : ""
                     }`}
                   />
                 )}
-                {field.error && (
-                  <p className="text-red lg:pl-16 text-center lg:text-start w-full text-sm">
-                    {field.error}
-                  </p>
-                )}
-                {error && (
-                  <p className="text-rose-500 font-medium text-center mt-[8px]">
-                    {error}
+                {(field.error || field.apiError) && (
+                  <p className="text-red lg:pl-16 text-center lg:text-start w-full text-[15px]">
+                    {field.error || field.apiError}
                   </p>
                 )}
               </div>
@@ -231,6 +265,7 @@ const Feedback = () => {
               </button>
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -55,8 +55,9 @@ export const useFeedbackStore = create<FeedbackState>((set, get) => ({
       console.log("Обратная связь отправлена успешно:", response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || "Произошла ошибка при отправке!";
+      // const errorMessage = error.response?.data?.message;
+      const errorMessage = error.response?.data;
+
       set({ error: errorMessage });
       console.error("Ошибка при отправке обратной связи:", errorMessage);
     }
