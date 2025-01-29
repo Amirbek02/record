@@ -22,18 +22,6 @@ export const Register: React.FC<Props> = ({ onClose }) => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const { register } = useAuthStore();
   const router = useRouter();
-  const loginWithToken = async () => {
-    try {
-      router.push('/in');
-    } catch (err) {
-      console.error('Токен менен кирүү учурунда ката кетти:', err);
-    }
-  };
-
-  const token = localStorage.getItem('token');
-  if (token) {
-    loginWithToken();
-  }
 
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),

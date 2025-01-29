@@ -46,12 +46,10 @@ const MainTestCarousel = () => {
       <h1 className="text-xl font-semibold">Негизги тест</h1>
       <Carousel
         opts={{ loop: true, align: 'start', slidesToScroll: 1, containScroll: false }}
-        className=" relative w-full md:max-w-[1400px]">
+        className=" relative w-full max-w-[1400px]">
         <CarouselContent>
           {mockTestsData.map((item) => (
-            <CarouselItem
-              key={item.id}
-              className="max-w-[285px]  md:basis-1/2 py-3 flex justify-center ">
+            <CarouselItem key={item.id} className=" max-w-[285px] py-3 flex justify-center ">
               <CarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}
