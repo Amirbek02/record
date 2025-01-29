@@ -1,10 +1,12 @@
-import React from 'react'
-import SignUp from '@/components/user/auth/SignUp'
+import React from 'react';
+import Login from '@/components/user/auth/Login';
 
 const Page = () => {
   return (
-    <div><SignUp/></div>
-  )
-}
+    <div>
+      <Login />
+    </div>
+  );
+};
 
-export default Page
+export default Page;

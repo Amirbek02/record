@@ -41,7 +41,7 @@ const MainSection = () => {
 
         <div className=" mr-[320px]  md:mr-[300px]">
           <div className="relative w-[full] md:mt-[-150px]">
-            <div className="absolute left-[55px] w-[202px] h-[400px] rounded-[60px] pb-20 bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px] p-6">
+            <div className="absolute top-[-20px] lg:top-[-20px] xl:top-[0] left-[55px] w-[202px] h-[400px] rounded-[60px] bg-[#008335] md:bg-[#2E3095] xl:w-[340px] xl:h-[610px] xl:left-[-130px] p-6">
               <video
                 className=" h-[317px] w-[500px] m-auto object-cover mt-2 z-20 xl:w-[280px] xl:h-[500px] rounded-t-[20px]  "
                 autoPlay
@@ -80,10 +80,10 @@ const MainSection = () => {
               </div>
             </div>
             <div className="absolute left-[-20px] xl:left-[-230px] top-[80px] xl:top-[90px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] xl:w-[172px] xl:h-[61px] border-[0.35px] border-green rounded-[10px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 балл</h3>
             </div>
             <div className="absolute top-[120px] xl:top-[170px] left-[210px] xl:left-[120px] hidden md:flex items-center justify-center backdrop-blur-[70px] bg-white/80 w-[105px] h-[43px] border-[0.35px] border-green rounded-[10px] xl:w-[172px] xl:h-[61px]">
-              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 Бал</h3>
+              <h3 className="text-[#595959] text-[16px] font-bold xl:text-[24px]">200 балл</h3>
             </div>
           </div>
         </div>

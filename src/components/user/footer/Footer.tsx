@@ -12,19 +12,18 @@ const Footer = () => {
   const shouldRenderFooter = !pathName.startsWith('/in/');
   return (
     <div
-      className={`first-line:w-[90%] mx-auto max-w-[1440px] px-[10px] py-[20px] ${
+      className={`first-line:w-[100%] mx-auto max-w-[1440px] px-[10px] py-[20px] ${
         shouldRenderFooter ? 'block' : 'hidden'
       }`}>
       <div className="flex flex-col md:flex-row md: justify-between items-center">
         <div>
           <Image src={logo} alt="" width={82} height={31} className="md:w-[100px] lg:w-[170px]" />
-          <h1 className="text-[3.5px] text-center font-montserrat font-black text-[#2F2F99] lg:text-[6px]">
-            Аналитикалык жана билим берүү уюму
-          </h1>
+          <h1 className="text-[3.5px] text-center font-montserrat font-black text-[#2F2F99] lg:text-[6px]"></h1>
         </div>
-        <p className="w-[229px] text-[10px] md:text-[15px] md:w-[300px] lg:w-[448px] leading-[16px] lg:leading-[32px] text-center mt-[30px] text-[#4C4C4C] lg:text-[20px]">
-          ЖРТ абитуриенттин билим деңгээлин жана логикалык ой жүгүртүүсүн баалоо максатында
-          өткөрүлөт
+        <p className="w-[229px] text-[10px] md:text-[15px] md:w-[300px] lg:w-[748px] leading-[16px] lg:leading-[32px] text-center mt-[30px] text-[#4C4C4C] lg:text-[20px]">
+          Тесттин негизги максаты – абитуриенттин жалпы билим деңгээлин, анын жогорку окуу жайына
+          окууга даярдыгын аныктоо. Бул тест мектепте алган бааларыңызга карабастан, чындыгында сиз
+          эмнелерди билип жасай ала турганыңызды көрсөтүүгө мүмкүндүк
         </p>
         <nav className="mt-[20px] flex gap-[17px] md:flex-col">
           <div className="flex gap-[9px] items-center md:gap-[15px]">

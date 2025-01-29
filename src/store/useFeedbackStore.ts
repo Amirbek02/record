@@ -1,5 +1,5 @@
-import axios from "axios";
-import { create } from "zustand";
+import axios from 'axios';
+import { create } from 'zustand';
 
 interface FeedbackData {
   first_name: string;
@@ -23,9 +23,9 @@ export const useFeedbackStore = create<FeedbackState>((set, get) => ({
 
   setToken: (token) => {
     if (token) {
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
     } else {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
     }
     set({ token });
   },
@@ -40,25 +40,24 @@ export const useFeedbackStore = create<FeedbackState>((set, get) => ({
 
     try {
       const response = await axios.post(
-        "https://api.recordonline.kg/api/v1/feedbacks/",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/feedbacks/`,
         {
           ...data,
           email: token ? undefined : data.email,
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             ...(token && { Authorization: `Bearer ${token}` }),
           },
-        }
+        },
       );
-      console.log("Обратная связь отправлена успешно:", response.data);
+      console.log('Обратная связь отправлена успешно:', response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || "Произошла ошибка при отправке!";
+      const errorMessage = error.response?.data?.message || 'Произошла ошибка при отправке!';
       set({ error: errorMessage });
-      console.error("Ошибка при отправке обратной связи:", errorMessage);
+      console.error('Ошибка при отправке обратной связи:', errorMessage);
     }
   },
 }));

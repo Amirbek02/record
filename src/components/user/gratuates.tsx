@@ -1,7 +1,7 @@
-'use client'
-import React, { useEffect } from "react";
-import Image from "next/image";
-import { useGraduates } from "@/store/Graduates";
+'use client';
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import { useGraduates } from '@/store/Graduates';
 
 const Graduates = () => {
   const { graduates, isLoading, error, fetchGraduates } = useGraduates();
@@ -37,11 +37,10 @@ const Graduates = () => {
           Биздин бүтүрүүчүлөр
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mb-20">
-          {graduates.map((graduate: any) => (
+          {graduates.map((graduate) => (
             <div
               key={graduate.id}
-              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items- rounded-xl shadow-lg p-2 flex flex-col"
-            >
+              className="bg-gradient-to-b from-[#1A1A25] to-[#2E3095] items- rounded-xl shadow-lg p-2 flex flex-col">
               <div className="flex gap-5">
                 <Image
                   src={graduate.image}
@@ -52,16 +51,16 @@ const Graduates = () => {
                 />
                 <div className="flex flex-col gap-1 items-center mt-2">
                   <p className="text-red font-bold text-[24px] xl:text-[30px]">
-                    {graduate.score} бал
+                    {graduate.score} балл
                   </p>
                   <h3 className="text-[12px] xl:text-[15px] font-bold text-gray-400">
                     {graduate.first_name} {graduate.last_name}
                   </h3>
                 </div>
               </div>
-              <p className="text-gray-400 relative top-[-20px] text-center">
+              <div className="text-gray-400 relative top-[-20px] text-center">
                 {graduate.review}
-              </p>
+              </div>
             </div>
           ))}
         </div>

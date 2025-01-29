@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Input } from "../UI/input";
 import { useEffect, useState } from "react";
-import { useFeedbackStore } from "@/lib/store/useFeedbackStore";
+import { useFeedbackStore } from "@/store/useFeedbackStore";
 
 const Feedback = () => {
   const { token, error } = useFeedbackStore();
@@ -126,7 +126,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="bg-[#0F0F2F] py-[150px] ">
+    <div className="bg-[#0F0F2F] px-10 py-[150px] ">
       <div className="flex flex-col lg:flex-row justify-between mx-auto h-auto lg:items-center max-w-5xl">
         <div className="mb-6 lg:mb-0 flex flex-col items-center">
           <p className="font-bold lg:hidden block sm:text-2xl text-[20px] md:text-2xl p-3 lg:text-3xl text-white text-center lg:text-left">

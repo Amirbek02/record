@@ -1,43 +1,61 @@
 'use client';
-import CustomButton from '@/components/UI/CustomButton';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import useAuthStore from '@/lib/store/authStore';
+import useAuthStore, { IVerificationData } from '@/store/authStore';
 import Link from 'next/link';
+import { FormProvider, useForm } from 'react-hook-form';
+import { FormInput } from './form-input';
+import { Button } from '@/components/UI/button';
+import toast from 'react-hot-toast';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const Verification = () => {
-  const { verification, error, isLoading } = useAuthStore();
-  console.log(verification);
+interface Props {
+  onClose?: VoidFunction;
+}
 
-  const [isVerified, setIsVerified] = useState(false);
+const Verification: React.FC<Props> = () => {
+  const { verification, error } = useAuthStore();
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: '',
-    code: 0,
+
+  const validationSchema = z.object({
+    email: z
+      .string()
+      .nonempty('E-Mail талаасы бош болбош керек')
+      .email('Туура эмес E-Mail форматы'),
+    code: z
+      .string()
+      .nonempty('Код талаасы бош болбош керек')
+      .min(6, 'Код 6 символдон кем болбошу керек')
+      .max(6, 'Код 6 символдон ашык болбошу керек')
+      .regex(/^\d+$/, 'Код цифралардан гана турушу керек'),
   });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleVerification = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const { email, code } = formData;
+  const form = useForm<IVerificationData>({
+    resolver: zodResolver(validationSchema),
+    defaultValues: {
+      email: '',
+      code: '',
+    },
+  });
+  const onSubmit = async (data: IVerificationData) => {
     try {
-      await verification(email, code);
-
-      router.push('/in');
+      await verification({ email: data.email, code: data.code });
+      if (!error) {
+        toast.success('Катталуу ийгиликтүү 📝.', {
+          icon: '✅',
+        });
+        router.push('/in');
+      }
     } catch (err) {
-      console.error('Error during login:', err);
-      setIsVerified(false);
+      console.error('Verification error: ', err); // Добавьте логирование ошибки
+      toast.error('E-Mail же код туура эмес', {
+        icon: '❌',
+      });
     }
   };
 
   const inputClass =
-    'font-montserrat font-[400] box-border border-[0.6px] border-gray-300 placeholder-gray-300 text-[rgb(163,163,174)] w-[270px] mm:w-[356px] xl:w-[500px] rounded-[4px] xl:rounded-[12px] py-[19px] pl-[15px] mb-[20px] text-[16px] leading-[20px]';
-
+    'font-montserrat font-[400] placeholder-gray-300 text-[rgb(163,163,174)] w-[270px] mm:w-[356px] xl:w-[500px]  mb-[20px] text-[16px] leading-[20px]';
   return (
     <div className="flex justify-center items-center flex-col w-full h-auto">
       <Link href="/">
@@ -46,45 +64,26 @@ const Verification = () => {
         </div>
       </Link>
 
-      <form className="flex justify-center items-center flex-col relative">
-        <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px] pb-[40px]">
-          Катталуу
-        </h1>
+      <FormProvider {...form}>
+        <form
+          className="flex justify-center items-center flex-col relative"
+          onSubmit={form.handleSubmit(onSubmit)}>
+          <h1 className="font-montserrat text-[rgb(85,87,87)] font-[500] text-[28px] xl:text-[32px] leading-[34px] xl:leading-[39px] pt-[82px] xl:pt-[76px] pb-[40px]">
+            Катталуу
+          </h1>
 
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="qwerty@gmail.com"
-          value={formData.email}
-          onChange={handleInputChange}
-          className={inputClass}
-        />
+          <FormInput className={inputClass} placeholder="Email" name="email" required />
 
-        <input
-          type="number"
-          id="number"
-          name="code"
-          placeholder="Код"
-          value={formData.code}
-          onChange={handleInputChange}
-          className={inputClass}
-        />
-        {error && <h3 className="font-medium text-[12px] text-red-500 mb-[20px]">{error}</h3>}
-        {isVerified && (
-          <h3 className="font-medium text-[12px] text-green-500 mb-[20px]">
-            Верификация ийгиликтүү аяктады!
-          </h3>
-        )}
-        <CustomButton
-          type="submit"
-          {...(isLoading && { disabled: true })}
-          onClick={handleVerification}
-          title="Кирүү"
-          containerStyles="mm:rounded-[5px] xl:rounded-[12px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[14px] xl:mb-[114px] bg-customGray xl:bg-customBlue"
-          textStyles="font-[500] mm:font-[700] text-[21px] mm:text-[24px] leading-[29px] tracking-[4.5%] text-[rgb(75,75,75)] xl:text-[rgb(255,255,255)]"
-        />
-      </form>
+          <FormInput className={` ${inputClass}`} name="code" placeholder="Код" required />
+          {error && <h3 className="font-medium text-[12px] text-red-500 mb-[20px]">{error}</h3>}
+
+          <Button
+            disabled={form.formState.isSubmitting}
+            className="mm:rounded-[5px] xl:rounded-[12px] h-[45px] mm:h-[56px] mm:w-[356px] xl:w-[500px] mb-[14px] xl:mb-[114px] bg-customGray xl:bg-customBlue">
+            Катталуу
+          </Button>
+        </form>
+      </FormProvider>
     </div>
   );
 };

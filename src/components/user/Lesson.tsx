@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import useVideoStore from '@/useVideoStore';
+import useVideoStore from '@/store/useVideoStore';
 
 const VideoLessons = () => {
   const { videos, isLoading, error, fetchVideos } = useVideoStore();

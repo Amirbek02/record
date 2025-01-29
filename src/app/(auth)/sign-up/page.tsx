@@ -1,9 +1,11 @@
-import React from 'react'
-import SignIn from '@/components/user/auth/SignIn'
+import { Register } from '@/components/user/auth/register';
+import React from 'react';
+// import SignIn from '@/components/user/auth/SignIn'
 const page = () => {
   return (
-   <SignIn/>
-  )
-}
+    //  <SignIn/>
+    <Register />
+  );
+};
 
-export default page
+export default page;
