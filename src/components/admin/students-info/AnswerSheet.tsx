@@ -15,7 +15,7 @@ const AnswerSheet = () => {
     <Card className=" max-w-[505px] bg-white p-2">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-purple-900">
-          II. Математика 110 бал
+          II. Математика 110 баллл
         </CardTitle>
       </CardHeader>
       <CardContent>

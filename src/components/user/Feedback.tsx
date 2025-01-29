@@ -1,15 +1,19 @@
-//feedback
 'use client';
 import Image from 'next/image';
 import { Input } from '../UI/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useFeedbackStore } from '@/store/useFeedbackStore';
 
 const Feedback = () => {
+  const { token, error } = useFeedbackStore();
+  console.log(error, 'feedback errororor');
+
   const [formData, setFormData] = useState({
     username: '',
     lastname: '',
     email: '',
     number: '',
+    message: '',
   });
 
   const [errors, setErrors] = useState({
@@ -17,7 +21,14 @@ const Feedback = () => {
     lastname: '',
     email: '',
     number: '',
+    message: '',
   });
+
+  useEffect(() => {
+    if (error) {
+      console.error('Ошибка:', error);
+    }
+  }, [error]);
 
   const validateField = (field: string, value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,6 +40,7 @@ const Feedback = () => {
       case 'lastname':
         return value.trim() ? '' : 'Фамилияңызды жазуу милдеттүү!';
       case 'email':
+        if (token) return ''; // Если токен есть, email не проверяется
         if (!value.trim()) return 'Email дарегиңизди жазуу милдеттүү!';
         if (!emailRegex.test(value)) return 'Туура email дарегин киргизиңиз!';
         return '';
@@ -36,6 +48,8 @@ const Feedback = () => {
         if (!value.trim()) return 'Телефон номериңизди жазуу милдеттүү!';
         if (!phoneRegex.test(value)) return 'Туура телефон номерин киргизиңиз!';
         return '';
+      case 'message':
+        return value.trim() ? '' : 'Билдирүү жазуу милдеттүү!';
       default:
         return '';
     }
@@ -54,7 +68,7 @@ const Feedback = () => {
     return !Object.values(newErrors).some((error) => error !== '');
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -67,33 +81,51 @@ const Feedback = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert('Форма успешно отправлена!');
-      console.log('Данные формы:', formData);
 
-      // Reset form
-      setFormData({
-        username: '',
-        lastname: '',
-        email: '',
-        number: '',
-      });
-      setErrors({
-        username: '',
-        lastname: '',
-        email: '',
-        number: '',
-      });
+    if (validateForm()) {
+      const feedbackData = token
+        ? {
+            first_name: formData.username,
+            last_name: formData.lastname,
+            phone_number: formData.number,
+            text: formData.message,
+            token, // Отправляем токен вместо email
+          }
+        : {
+            first_name: formData.username,
+            last_name: formData.lastname,
+            phone_number: formData.number,
+            text: formData.message,
+            email: formData.email || undefined, // Отправляем email, если нет токена
+          };
+
+      try {
+        const { sendFeedback } = useFeedbackStore.getState();
+        await sendFeedback(feedbackData);
+        alert('Маалымат ийгиликтүү жөнөтүлдү!');
+        console.log('Данные формы:', feedbackData);
+
+        // Сброс формы
+        setFormData({
+          username: '',
+          lastname: '',
+          email: '',
+          number: '',
+          message: '',
+        });
+      } catch (error) {
+        console.error('Ошибка при отправке обратной связи:', error);
+      }
     }
   };
 
   return (
-    <div className="bg-[#0F0F2F] p-6">
+    <div className="bg-[#0F0F2F] py-[150px] ">
       <div className="flex flex-col lg:flex-row justify-between mx-auto h-auto lg:items-center max-w-5xl">
         <div className="mb-6 lg:mb-0 flex flex-col items-center">
-          <p className="font-bold lg:hidden block sm:text-2xl text-[20px] md:text-2xl p-3 lg:text-3xl text-white  text-center lg:text-left">
+          <p className="font-bold lg:hidden block sm:text-2xl text-[20px] md:text-2xl p-3 lg:text-3xl text-white text-center lg:text-left">
             Кайтарым байланыш
           </p>
           <Image
@@ -105,7 +137,6 @@ const Feedback = () => {
           />
         </div>
 
-        {/* Form Section */}
         <div className="w-full lg:w-1/2">
           <form onSubmit={handleSubmit} className="space-y-6">
             <p className="font-bold lg:block hidden text-2xl lg:text-3xl text-white text-center">
@@ -125,35 +156,58 @@ const Feedback = () => {
                 placeholder: 'Фамилия',
                 error: errors.lastname,
               },
-              {
-                id: 'email',
-                type: 'email',
-                placeholder: 'Email',
-                error: errors.email,
-              },
+              ...(token
+                ? []
+                : [
+                    {
+                      id: 'email',
+                      type: 'email',
+                      placeholder: 'Email',
+                      error: errors.email,
+                    },
+                  ]),
               {
                 id: 'number',
                 type: 'tel',
                 placeholder: 'Телефон номер',
                 error: errors.number,
               },
+              {
+                id: 'message',
+                type: 'textarea',
+                placeholder: 'Сиздин билдирүүңүз',
+                error: errors.message,
+              },
             ].map((field) => (
-              <div key={field.id} className="justify-center  pl-0 flex flex-col items-center">
-                <Input
-                  id={field.id}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  value={formData[field.id as keyof typeof formData]}
-                  onChange={handleInputChange}
-                  className={`rounded-xl w-full max-w-[400px] h-[56px] ${
-                    field.error ? 'border-red-500' : ''
-                  }`}
-                />
+              <div key={field.id} className="justify-center pl-0 flex flex-col items-center">
+                {field.type === 'textarea' ? (
+                  <textarea
+                    id={field.id}
+                    placeholder={field.placeholder}
+                    value={formData[field.id as keyof typeof formData] || ''}
+                    onChange={handleInputChange}
+                    className={`rounded-xl w-full max-w-[400px] h-[120px] p-4 border bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                      field.error ? 'border-red-500' : ''
+                    }`}
+                  />
+                ) : (
+                  <Input
+                    id={field.id}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    value={formData[field.id as keyof typeof formData] || ''}
+                    onChange={handleInputChange}
+                    className={`rounded-xl w-full max-w-[400px] h-[56px] ${
+                      field.error ? 'border-red-500' : ''
+                    }`}
+                  />
+                )}
                 {field.error && (
-                  <p className="text-red lg:pl-16 text-center  lg:text-start w-full text-sm">
+                  <p className="text-red lg:pl-16 text-center lg:text-start w-full text-sm">
                     {field.error}
                   </p>
                 )}
+                {error && <p className="text-rose-500 font-medium text-center mt-[8px]">{error}</p>}
               </div>
             ))}
 
