@@ -1,32 +1,32 @@
-'use client';
-import Image from 'next/image';
-import { Input } from '../UI/input';
-import { useEffect, useState } from 'react';
-import { useFeedbackStore } from '@/store/useFeedbackStore';
+"use client";
+import Image from "next/image";
+import { Input } from "../UI/input";
+import { useEffect, useState } from "react";
+import { useFeedbackStore } from "@/store/useFeedbackStore";
 
 const Feedback = () => {
   const { token, error } = useFeedbackStore();
-  console.log(error, 'feedback errororor');
+  console.log(error, "feedback errororor");
 
   const [formData, setFormData] = useState({
-    username: '',
-    lastname: '',
-    email: '',
-    number: '',
-    message: '',
+    username: "",
+    lastname: "",
+    email: "",
+    number: "",
+    message: "",
   });
 
   const [errors, setErrors] = useState({
-    username: '',
-    lastname: '',
-    email: '',
-    number: '',
-    message: '',
+    username: "",
+    lastname: "",
+    email: "",
+    number: "",
+    message: "",
   });
 
   useEffect(() => {
     if (error) {
-      console.error('Ошибка:', error);
+      console.error("Ошибка:", error);
     }
   }, [error]);
 
@@ -35,40 +35,44 @@ const Feedback = () => {
     const phoneRegex = /^[0-9]{10,15}$/;
 
     switch (field) {
-      case 'username':
-        return value.trim() ? '' : 'Атыңызды жазуу милдеттүү!';
-      case 'lastname':
-        return value.trim() ? '' : 'Фамилияңызды жазуу милдеттүү!';
-      case 'email':
-        if (token) return ''; // Если токен есть, email не проверяется
-        if (!value.trim()) return 'Email дарегиңизди жазуу милдеттүү!';
-        if (!emailRegex.test(value)) return 'Туура email дарегин киргизиңиз!';
-        return '';
-      case 'number':
-        if (!value.trim()) return 'Телефон номериңизди жазуу милдеттүү!';
-        if (!phoneRegex.test(value)) return 'Туура телефон номерин киргизиңиз!';
-        return '';
-      case 'message':
-        return value.trim() ? '' : 'Билдирүү жазуу милдеттүү!';
+      case "username":
+        return value.trim() ? "" : "Атыңызды жазуу милдеттүү!";
+      case "lastname":
+        return value.trim() ? "" : "Фамилияңызды жазуу милдеттүү!";
+      case "email":
+        if (token) return ""; // Если токен есть, email не проверяется
+        if (!value.trim()) return "Email дарегиңизди жазуу милдеттүү!";
+        if (!emailRegex.test(value)) return "Туура email дарегин киргизиңиз!";
+        return "";
+      case "number":
+        if (!value.trim()) return "Телефон номериңизди жазуу милдеттүү!";
+        if (!phoneRegex.test(value)) return "Туура телефон номерин киргизиңиз!";
+        return "";
+      case "message":
+        return value.trim() ? "" : "Билдирүү жазуу милдеттүү!";
       default:
-        return '';
+        return "";
     }
   };
 
   const validateForm = () => {
-    const newErrors: Record<keyof typeof formData, string> = Object.keys(formData).reduce(
-      (acc, field) => {
-        const error = validateField(field, formData[field as keyof typeof formData]);
-        return { ...acc, [field]: error };
-      },
-      {} as Record<keyof typeof formData, string>,
-    );
+    const newErrors: Record<keyof typeof formData, string> = Object.keys(
+      formData
+    ).reduce((acc, field) => {
+      const error = validateField(
+        field,
+        formData[field as keyof typeof formData]
+      );
+      return { ...acc, [field]: error };
+    }, {} as Record<keyof typeof formData, string>);
 
     setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error !== '');
+    return !Object.values(newErrors).some((error) => error !== "");
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -104,25 +108,25 @@ const Feedback = () => {
       try {
         const { sendFeedback } = useFeedbackStore.getState();
         await sendFeedback(feedbackData);
-        alert('Маалымат ийгиликтүү жөнөтүлдү!');
-        console.log('Данные формы:', feedbackData);
+        alert("Маалымат ийгиликтүү жөнөтүлдү!");
+        console.log("Данные формы:", feedbackData);
 
         // Сброс формы
         setFormData({
-          username: '',
-          lastname: '',
-          email: '',
-          number: '',
-          message: '',
+          username: "",
+          lastname: "",
+          email: "",
+          number: "",
+          message: "",
         });
       } catch (error) {
-        console.error('Ошибка при отправке обратной связи:', error);
+        console.error("Ошибка при отправке обратной связи:", error);
       }
     }
   };
 
   return (
-    <div className="bg-[#0F0F2F] py-[150px] ">
+    <div className="bg-[#0F0F2F] px-10 py-[150px] ">
       <div className="flex flex-col lg:flex-row justify-between mx-auto h-auto lg:items-center max-w-5xl">
         <div className="mb-6 lg:mb-0 flex flex-col items-center">
           <p className="font-bold lg:hidden block sm:text-2xl text-[20px] md:text-2xl p-3 lg:text-3xl text-white text-center lg:text-left">
@@ -145,49 +149,52 @@ const Feedback = () => {
 
             {[
               {
-                id: 'username',
-                type: 'text',
-                placeholder: 'Атыңыз',
+                id: "username",
+                type: "text",
+                placeholder: "Атыңыз",
                 error: errors.username,
               },
               {
-                id: 'lastname',
-                type: 'text',
-                placeholder: 'Фамилия',
+                id: "lastname",
+                type: "text",
+                placeholder: "Фамилия",
                 error: errors.lastname,
               },
               ...(token
                 ? []
                 : [
                     {
-                      id: 'email',
-                      type: 'email',
-                      placeholder: 'Email',
+                      id: "email",
+                      type: "email",
+                      placeholder: "Email",
                       error: errors.email,
                     },
                   ]),
               {
-                id: 'number',
-                type: 'tel',
-                placeholder: 'Телефон номер',
+                id: "number",
+                type: "tel",
+                placeholder: "Телефон номер",
                 error: errors.number,
               },
               {
-                id: 'message',
-                type: 'textarea',
-                placeholder: 'Сиздин билдирүүңүз',
+                id: "message",
+                type: "textarea",
+                placeholder: "Сиздин билдирүүңүз",
                 error: errors.message,
               },
             ].map((field) => (
-              <div key={field.id} className="justify-center pl-0 flex flex-col items-center">
-                {field.type === 'textarea' ? (
+              <div
+                key={field.id}
+                className="justify-center pl-0 flex flex-col items-center"
+              >
+                {field.type === "textarea" ? (
                   <textarea
                     id={field.id}
                     placeholder={field.placeholder}
-                    value={formData[field.id as keyof typeof formData] || ''}
+                    value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
                     className={`rounded-xl w-full max-w-[400px] h-[120px] p-4 border bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      field.error ? 'border-red-500' : ''
+                      field.error ? "border-red-500" : ""
                     }`}
                   />
                 ) : (
@@ -195,10 +202,10 @@ const Feedback = () => {
                     id={field.id}
                     type={field.type}
                     placeholder={field.placeholder}
-                    value={formData[field.id as keyof typeof formData] || ''}
+                    value={formData[field.id as keyof typeof formData] || ""}
                     onChange={handleInputChange}
                     className={`rounded-xl w-full max-w-[400px] h-[56px] ${
-                      field.error ? 'border-red-500' : ''
+                      field.error ? "border-red-500" : ""
                     }`}
                   />
                 )}
@@ -207,14 +214,19 @@ const Feedback = () => {
                     {field.error}
                   </p>
                 )}
-                {error && <p className="text-rose-500 font-medium text-center mt-[8px]">{error}</p>}
+                {error && (
+                  <p className="text-rose-500 font-medium text-center mt-[8px]">
+                    {error}
+                  </p>
+                )}
               </div>
             ))}
 
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]">
+                className="rounded-xl w-full max-w-[400px] h-[56px] text-white bg-lime-600 hover:bg-lime-700 lg:bg-blue-800 font-bold text-[18px] lg:text-[20px]"
+              >
                 Жиберүү
               </button>
             </div>
