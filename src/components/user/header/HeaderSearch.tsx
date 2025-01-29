@@ -4,12 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { link } from './HeaderSign';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { Modal } from '../../UI/modal';
+import { usePathname } from 'next/navigation';
 
 const HeaderSearch = () => {
   const pathname = usePathname();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -26,10 +27,6 @@ const HeaderSearch = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const loginOut = () => {
-    localStorage.removeItem('token');
-    router.push('/');
-  };
   return (
     <div>
       <div className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
@@ -109,9 +106,7 @@ const HeaderSearch = () => {
               Жөндөө
             </h1>
           </Link>
-          <div
-            className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}
-            onClick={loginOut}>
+          <div className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}>
             <Image src="/icons/exit.svg" width={23} height={23} alt="" />
             <h1
               className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
@@ -120,6 +115,7 @@ const HeaderSearch = () => {
               Чыгуу
             </h1>
           </div>
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
       </aside>
     </div>
