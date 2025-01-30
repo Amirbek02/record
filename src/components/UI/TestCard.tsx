@@ -25,8 +25,9 @@ const TestCard = React.forwardRef<HTMLDivElement, TestCardProps>(
           <Link
             href={href}
             className={`underline font-bold cursor-pointer text-xs  md:underline-offset-[3px] lg:underline-offset-[6px] ml-7 ${
-              isCarouselCard ? 'lg:text-sm' : 'lg:text-lg'
-            }`}>
+              isCarouselCard ? "lg:text-sm" : "lg:text-lg"
+            }`}
+          >
             Толук оку
           </Link>
         </div>
