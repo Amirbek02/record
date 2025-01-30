@@ -28,11 +28,11 @@ const Profile = () => {
   if (error) return <div>Ошибка: {error}</div>;
 
   return (
-    <div className="pb-5 sm:pb-16 sm:pt-20">
-      <div className="max-w-7xl mx-auto p-4">
+    <div className="pb-10 sm:pb-16  sm:pt-20">
+      <div className="max-w-7xl flex justify-center items-center mx-auto  pt-4">
         {profile && (
-          <div className="lg:flex gap-24">
-            <div className="flex w-[100px] h-[100px] flex-col items-center">
+          <div className="lg:flex md:flex  md:gap-20 gap-0 lg:gap-20  justify-center ">
+            <div className="flex justify-center mt-16 w-[100px] h-[100px] flex-col items-center">
               <Avatar>
                 <AvatarImage
                   className="border md:justify-center justify-center flex items-center rounded-full"
@@ -96,7 +96,7 @@ const Profile = () => {
                 <div className="flex flex-col">
                   <label htmlFor="password">Сыр соз </label>
                   <input
-                    className="border w-auto lg:w-[505px] h-[35px] rounded-sm"
+                    className="border w-auto lg:w-[500] md:w-[400px] sm:w-[350px] w-[305px] h-[35px] rounded-sm"
                     type="password"
                     id="password"
                     readOnly

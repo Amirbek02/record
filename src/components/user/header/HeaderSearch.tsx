@@ -7,16 +7,26 @@ import Link from "next/link";
 import { Modal } from "../../UI/modal";
 import { usePathname } from "next/navigation";
 
+import useProfileStore from "@/store/profileStore";
+
 const HeaderSearch = () => {
   const pathname = usePathname();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { profile } = useProfileStore((state) => state);
+  const [initials, setInitials] = useState<string>("");
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
   const sidebarRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (profile) {
+      const firstNameInitial = profile.first_name?.charAt(0).toUpperCase();
+      const lastNameInitial = profile.last_name?.charAt(0).toUpperCase();
 
+      setInitials(firstNameInitial + lastNameInitial);
+    }
+  }, [profile]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -79,7 +89,9 @@ const HeaderSearch = () => {
             href="/in/profile"
             className="w-[24px] h-[24px] sm:w-[36px] sm:h-[36px] rounded-full bg-green flex justify-center items-center"
           >
-            <h1 className="text-[#ffff] ">A</h1>
+            <h1 className="text-[#ffff] md:text-[15px] lg:text-[18px] text-[10px] ">
+              {initials || "AA"}
+            </h1>
           </Link>
         </div>
       </div>
