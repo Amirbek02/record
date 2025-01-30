@@ -37,7 +37,7 @@ export default function Banner() {
   const isMobile = useMediaQuery({ maxWidth: 699 });
 
   return (
-    <div className="lg:mt-[130px] mt-[40px] p-2 w-full">
+    <div className="lg:mt-[130px] mt-[40px] p-2 ">
       {banners.map((banner) => {
         const allSubjects = [
           banner.subjects,
@@ -51,7 +51,7 @@ export default function Banner() {
         return (
           <div key={banner.id}>
             {isDesktop && (
-              <div className="relative ml-20   flex items-center justify-between bg-[#2E3095] sm:mt-[50px] md:mt-[90px] rounded-tl-[300px] rounded-tr-[30px] rounded-br-[200px] max-w-[838px] h-[200px] mx-auto p-4 lg:pt-[10px]">
+              <div className="relative ml-10  flex items-center justify-between bg-[#2E3095] rounded-tl-[300px] rounded-tr-[30px] rounded-br-[200px] max-w-[838px] h-[200px] mx-auto p-4 lg:pt-[30px]">
                 <div className="absolute left-[-200px] bottom-0 w-[500px]">
                   <Image
                     src={banner.imageSrc}

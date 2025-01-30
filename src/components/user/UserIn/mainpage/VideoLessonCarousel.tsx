@@ -1,16 +1,21 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import useVideosStore from '@/store/videoStore/VideosStore';
+"use client";
+import React from "react";
+import Link from "next/link";
+import useVideosStore from "@/store/videoStore/VideosStore";
 
-import { Carousel, CarouselContent, CarouselItem, CarouselDots } from '@/components/UI/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselDots,
+} from "@/components/UI/carousel";
 import {
   TestCard,
   TestCardMedia,
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
-} from '@/components/UI/TestCard';
+} from "@/components/UI/TestCard";
 
 interface TestProps {
   testTitle: string;
@@ -30,7 +35,10 @@ const CarouselCardVideo = ({
   href, // Default to false
 }: TestProps) => {
   return (
-    <Link href={disabled ? '/in/payment' : `/in/video-lessons/${href}`} className=" w-full">
+    <Link
+      href={disabled ? "/in/payment" : `/in/video-lessons/${href}`}
+      className=" w-full"
+    >
       <TestCard
         isCarouselCard
         className={`w-full h-[320px] flex flex-col justify-stretch relative pointer-events-none ${
@@ -38,7 +46,9 @@ const CarouselCardVideo = ({
         }`} // Apply styles when disabled
       >
         <TestCardMedia videoSrc={videoSrc} className="w-full lg:h-[211px]">
-          <TestCardTitle className="lg:text-base lg:right-1">{testTitle}</TestCardTitle>
+          <TestCardTitle className="lg:text-base lg:right-1">
+            {testTitle}
+          </TestCardTitle>
         </TestCardMedia>
         <TestCardSubtitle className="lg:text-sm leading-none ml-5">
           {testDescriptionTitle}
@@ -46,6 +56,11 @@ const CarouselCardVideo = ({
         <TestCardDescription className="max-w-[356px] lg:text-xs ml-5">
           {description}
         </TestCardDescription>
+        {disabled && (
+          <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
+            Сатып алуу
+          </div>
+        )}
         {disabled && (
           <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
             Сатып алуу
@@ -61,10 +76,13 @@ const VideoLessonCarousel = () => {
   const { fetch, allVideos, error,isLoading } = useVideosStore();
 
   React.useEffect(() => {
-    fetch(url, 'videos');
+    fetch(url, "videos");
   }, [fetch, url]);
   console.log(allVideos);
-  const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(0, 4);
+  const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(
+    0,
+    4
+  );
   const unPaidVideos = allVideos?.filter((video) => !video.is_paid) || [];
   const combinedVideos = [...unPaidVideos,...paidVideos];
   // const isUserRegistered = Boolean(localStorage.getItem("token"));
@@ -91,7 +109,8 @@ const VideoLessonCarousel = () => {
           {combinedVideos?.map((item) => (
             <CarouselItem
               key={item.subject_category.id}
-              className=" max-w-[285px] py-3 flex justify-center md:basis-1/2 ">
+              className=" max-w-[285px] py-3 flex justify-center md:basis-1/2 "
+            >
               <CarouselCardVideo
                 videoSrc={item.video_url}
                 testTitle={item.subject_category.subject_category_name}

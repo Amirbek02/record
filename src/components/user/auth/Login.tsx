@@ -23,19 +23,6 @@ const Login: React.FC<Props> = ({ onClose }) => {
   const [isChecked, setIsChecked] = useState(false);
   const router = useRouter();
 
-  const loginWithToken = async () => {
-    try {
-      router.push('/in');
-    } catch (err) {
-      console.error('Токен менен кирүү учурунда ката кетти:', err);
-    }
-  };
-
-  const token = localStorage.getItem('token');
-  if (token) {
-    loginWithToken();
-  }
-
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginSchema),
     defaultValues: {

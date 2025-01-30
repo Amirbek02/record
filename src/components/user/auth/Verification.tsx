@@ -17,18 +17,6 @@ interface Props {
 const Verification: React.FC<Props> = () => {
   const { verification, error } = useAuthStore();
   const router = useRouter();
-  const loginWithToken = async () => {
-    try {
-      router.push('/in');
-    } catch (err) {
-      console.error('Токен менен кирүү учурунда ката кетти:', err);
-    }
-  };
-
-  const token = localStorage.getItem('token');
-  if (token) {
-    loginWithToken();
-  }
 
   const validationSchema = z.object({
     email: z

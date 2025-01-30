@@ -12,7 +12,7 @@ const Footer = () => {
   const shouldRenderFooter = !pathName.startsWith('/in/');
   return (
     <div
-      className={`first-line:w-[90%] mx-auto max-w-[1440px] px-[10px] py-[20px] ${
+      className={`first-line:w-[100%] mx-auto max-w-[1440px] px-[10px] py-[20px] ${
         shouldRenderFooter ? 'block' : 'hidden'
       }`}>
       <div className="flex flex-col md:flex-row md: justify-between items-center">
