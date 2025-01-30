@@ -43,7 +43,18 @@ const Profile = () => {
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <p className="text-[16px] font-bold">Cурот</p>
+              <input
+                id="image-upload"
+                accept="image/*"
+                type="file"
+                className="hidden"
+              />
+              <label
+                htmlFor="image-upload"
+                className="text-[16px] cursor-pointer font-bold"
+              >
+                Cурот
+              </label>{" "}
             </div>
 
             <div className="pt-10">
@@ -62,6 +73,15 @@ const Profile = () => {
                   />
                 </div>
 
+                <div className="flex flex-col">
+                  <label htmlFor="tel">Телефон номер</label>
+                  <input
+                    className="border w-auto lg:w-[505px] h-[35px] rounded-sm"
+                    type="tel"
+                    id="tel"
+                    value={profile.phone_number}
+                  />
+                </div>
                 <div className="flex flex-col">
                   <label htmlFor="email">Email</label>
                   <input
