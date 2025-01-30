@@ -33,7 +33,7 @@ const CarouselCardVideo = ({
     <Link href={disabled ? '/in/payment' : `/in/video-lessons/${href}`} className=" w-full">
       <TestCard
         isCarouselCard
-        className={`w-full flex flex-col justify-stretch relative ${
+        className={`w-full h-[320px] flex flex-col justify-stretch relative pointer-events-none ${
           disabled ? 'opacity-80 pointer-events-none' : ''
         }`} // Apply styles when disabled
       >
@@ -58,7 +58,7 @@ const CarouselCardVideo = ({
 
 const VideoLessonCarousel = () => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/video/`;
-  const { fetch, allVideos } = useVideosStore();
+  const { fetch, allVideos, error,isLoading } = useVideosStore();
 
   React.useEffect(() => {
     fetch(url, 'videos');
@@ -66,19 +66,27 @@ const VideoLessonCarousel = () => {
   console.log(allVideos);
   const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(0, 4);
   const unPaidVideos = allVideos?.filter((video) => !video.is_paid) || [];
-  const combinedVideos = [...paidVideos, ...unPaidVideos];
+  const combinedVideos = [...unPaidVideos,...paidVideos];
   // const isUserRegistered = Boolean(localStorage.getItem("token"));
+  if (isLoading) {
+    return <div>Жуктоо...</div>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <div className="text-red-500">Ката: {error}</div>;
+  }
+
   return (
-    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8">
-      <h1 className="text-xl font-semibold">Видео сабак</h1>
+    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8 items-end ">
+      <h1 className="text-xl font-semibold self-start">Видео сабак</h1>
       <Carousel
         opts={{
           loop: true,
-          align: 'start',
-          slidesToScroll: 1,
-          containScroll: false,
+          align: 'center',
+          containScroll: "trimSnaps"
         }}
-        className=" relative  md:max-w-[1400px]">
+        className=" relative w-full  md:max-w-[1400px]">
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem

@@ -34,10 +34,12 @@ const VideoCardLesson = ({
   disabled
 }: TestProps) => {
   return (
-    <Link href={disabled ? "/in/payment" : href } className=" w-full">
+    <Link href={disabled ? "/in/payment" : href } className={`w-full flex flex-col justify-stretch relative ${
+      disabled ? 'opacity-70 pointer-events-none' : ''
+    }`}>
     <TestCard
       isCarouselCard
-      className="w-full"
+      className="w-full h-[320px] flex flex-col justify-stretch"
     >
       <TestCardMedia
         videoSrc={videoSrc}
@@ -54,6 +56,11 @@ const VideoCardLesson = ({
       <TestCardDescription className="max-w-[356px]  lg:text-xs ml-5">
         {description}
       </TestCardDescription>
+      {disabled && (
+          <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
+            Сатып алуу
+          </div>
+        )}
     </TestCard>
     </Link>
   );
@@ -81,7 +88,7 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
 
   return (
     <div className="mt-[60px]">
-      {Object.entries(groupedByCategory).map(
+      {Object.entries(groupedByCategory).map( 
         ([subjectCategory, videos], index) => (
           <div key={index} className="mb-8">
             {/* Category Name */}
@@ -93,9 +100,8 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
             <Carousel
               opts={{
                 loop: true,
-                align: "start",
-                slidesToScroll: 1,
-                containScroll: false,
+                align: "center",
+                containScroll: "trimSnaps",
               }}
               className="relative w-full max-w-[1400px]"
             >

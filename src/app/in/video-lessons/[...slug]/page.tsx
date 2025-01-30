@@ -5,7 +5,7 @@ import useVideosStore from "@/store/videoStore/VideosStore";
 import VideoLesson from "@/components/user/videoLessons/videoLessonList/VideoLesson";
 
 const Page = ({ params }: { params: Promise<{ slug: string[] }> }) => {
-  const { fetch, videoCategories, video } = useVideosStore();
+  const { fetch, videoCategories, video, error,isLoading} = useVideosStore();
   const [slug, setSlug] = React.useState<string[] | null>(null);
   console.log(slug);
   React.useEffect(() => {
@@ -40,6 +40,15 @@ const Page = ({ params }: { params: Promise<{ slug: string[] }> }) => {
     "2": <VideoLesson video={video}/>, // Assuming video is handled inside this component
     // Add more routes/components as needed
   };
+
+  if (isLoading) {
+    return <div>Жуктоо...</div>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <div className="text-red-500">Ката: {error}</div>;
+  }
 
   return (
     <div>

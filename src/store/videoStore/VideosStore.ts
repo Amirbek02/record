@@ -44,6 +44,8 @@ interface VideosState {
     url: string,
     type: "videos" | "subCategoryVideos" | "subVideoCategories" | "video"
   ) => Promise<void>;
+  isLoading: boolean;
+  error: string | null;
 }
 
 const useVideosStore = create<VideosState>()((set) => ({
@@ -51,7 +53,11 @@ const useVideosStore = create<VideosState>()((set) => ({
   videoCategories: null,
   subVideoCategories: null,
   video: null,
+  isLoading: false,
+  error: null,
+
   fetch: async (url, type) => {
+    set({ isLoading: true, error: null });
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -61,7 +67,7 @@ const useVideosStore = create<VideosState>()((set) => ({
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`, // Use the dynamic token
+          // Authorization: `Bearer ${token}`, // Use the dynamic token
           "Content-Type": "application/json",
         },
       });
@@ -81,10 +87,17 @@ const useVideosStore = create<VideosState>()((set) => ({
       } else if (type === "subVideoCategories") {
         set({ subVideoCategories: data });
       } else if (type === "video") {
-        set({ video: data });
+        set({ video: data as VideoData|null });
       }
     } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message || "Видеону жүктөөдө ката чыкты." });
+      } else {
+        set({ error: "Видеону жүктөөдө ката чыкты." });
+      }
       console.error("Error fetching data:", error);
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));

@@ -1,7 +1,17 @@
 import React from "react";
 import { VideoData } from "@/store/videoStore/VideosStore";
 
-const VideoLesson = ({video}:{video:VideoData|null}) => {
+const VideoLesson = ({ video }: { video: VideoData | null }) => {
+  const extractVideoId = (videoUrl?:string) => {
+    if (!videoUrl) return null; 
+    try {
+      const url = new URL(videoUrl);
+      return new URLSearchParams(url.search).get("v");
+    } catch (e) {
+      console.error("Ошибка при обработке URL видео:", e);
+      return null;
+    }
+  };
   return (
     <div className="w-[90%] max-w-[1440px] mx-auto py-[30px]">
       <div>
@@ -9,23 +19,22 @@ const VideoLesson = ({video}:{video:VideoData|null}) => {
           <div className="relative rounded-[15px] w-full h-full overflow-hidden border-[8px] transition-all duration-500 ease-in-out md:border-[2px] md:border-[#008335]">
             <iframe
               className="w-full h-full"
-              src={`https://www.youtube-nocookie.com/embed/${video?.video_url}?rel=0&modestbranding=1&showinfo=0`}
+              src={`https://www.youtube.com/embed/${extractVideoId(
+                video?.video_url
+              )}`}
               title="YouTube video player"
-              // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              aria-hidden="true"
-              sandbox="allow-same-origin allow-scripts"
-              style={{ border: "none" }}
             />
-            <div
-              className='transition-all duration-500 ease-in-out md:hidden w-[127px] h-[26px] flex items-center justify-center rounded-[80px] bg-blue-600 absolute bottom-[15px] right-[15px]'
-            >
-              <h3 className=" ">{video?.subject_category.subject_category_name}</h3>
+            <div className="transition-all duration-500 ease-in-out md:hidden w-[127px] h-[26px] flex items-center justify-center rounded-[80px] bg-blue-600 absolute bottom-[15px] right-[15px]">
+              <h3 className=" ">
+                {video?.subject_category.subject_category_name}
+              </h3>
             </div>
           </div>
         </div>
         <h2 className="text-[16px] md:text-[20px] font-semibold md:font-medium ">
-         {video?.subject_name}
+          {video?.subject_name}
         </h2>
         <div className="flex gap-[10px] mt-[100px] md:mt-[70px] justify-end">
           <button className="hidden md:block w-[149px]  px-[15px] py-[10px] text-[#4C4C4C] bg-[#D0D0D0] rounded-[5px] font-medium text-[20px]">

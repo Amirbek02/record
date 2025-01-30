@@ -42,16 +42,16 @@ const CarouselCard = ({
 
 const MainTestCarousel = () => {
   return (
-    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center">
-      <h1 className="text-xl font-semibold">Негизги тест</h1>
+    <div className="mt-10 flex flex-col  justify-center items-end">
+      <h1 className="text-xl font-semibold self-start pl-10">Негизги тест</h1>
       <Carousel
-        opts={{ loop: true, align: 'start', slidesToScroll: 1, containScroll: false }}
-        className=" relative w-full md:max-w-[1400px]">
-        <CarouselContent>
+        opts={{ loop: true, align: "center"}}
+        className=" relative  w-full max-w-[360px] lg:max-w-[1400px] ">
+        <CarouselContent className='py-3 pl-9'>
           {mockTestsData.map((item) => (
             <CarouselItem
               key={item.id}
-              className="max-w-[285px]  md:basis-1/2 py-3 flex justify-center ">
+              className="max-w-[285px]  ">
               <CarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}
