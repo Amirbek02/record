@@ -41,8 +41,8 @@ const CarouselCardVideo = ({
     >
       <TestCard
         isCarouselCard
-        className={`w-full flex flex-col justify-stretch relative ${
-          disabled ? "opacity-80 pointer-events-none" : ""
+        className={`w-full h-[320px] flex flex-col justify-stretch relative pointer-events-none ${
+          disabled ? 'opacity-80 pointer-events-none' : ''
         }`} // Apply styles when disabled
       >
         <TestCardMedia videoSrc={videoSrc} className="w-full lg:h-[211px]">
@@ -73,7 +73,7 @@ const CarouselCardVideo = ({
 
 const VideoLessonCarousel = () => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/video/`;
-  const { fetch, allVideos } = useVideosStore();
+  const { fetch, allVideos, error,isLoading } = useVideosStore();
 
   React.useEffect(() => {
     fetch(url, "videos");
@@ -84,25 +84,32 @@ const VideoLessonCarousel = () => {
     4
   );
   const unPaidVideos = allVideos?.filter((video) => !video.is_paid) || [];
-  const combinedVideos = [...paidVideos, ...unPaidVideos];
+  const combinedVideos = [...unPaidVideos,...paidVideos];
   // const isUserRegistered = Boolean(localStorage.getItem("token"));
+  if (isLoading) {
+    return <div>Жуктоо...</div>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <div className="text-red-400">Ката: {error}</div>;
+  }
+
   return (
-    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8">
-      <h1 className="text-xl font-semibold">Видео сабак</h1>
+    <div className="mt-10 flex flex-col  justify-center mb-8 items-end ">
+      <h1 className="text-xl font-semibold self-start">Видео сабак</h1>
       <Carousel
         opts={{
           loop: true,
-          align: "start",
-          slidesToScroll: 1,
-          containScroll: false,
+          align: 'center',
+          containScroll: "trimSnaps"
         }}
-        className=" relative max-w-[750px] md:max-w-[1400px]"
-      >
+        className=" relative w-full  max-w-[400px] md:max-w-[700px]  lg:max-w-[1400px]">
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem
               key={item.subject_category.id}
-              className=" max-w-[285px] py-3 flex justify-center md:basis-1/2 "
+              className=" max-w-[285px] py-3 flex justify-center "
             >
               <CarouselCardVideo
                 videoSrc={item.video_url}

@@ -44,37 +44,49 @@ interface TestCardMediaProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TestCardMedia = React.forwardRef<HTMLDivElement, TestCardMediaProps>(
-  ({ className, imgSrc, videoSrc, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        'w-full h-[225px] lg:h-[275px]  relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey',
-        className,
-      )}
-      {...props}>
-      {imgSrc && (
-        <div
-          className="z-10 absolute inset-0 bg-cover bg-center rounded-t-[30px]"
-          style={{ backgroundImage: `url(${imgSrc})` }}
-        />
-      )}
-      {videoSrc && (
-        <iframe
-          className="absolute inset-0 w-full h-full rounded-t-[30px] z-20 "
-          src={`https://www.youtube-nocookie.com/embed/${videoSrc}?rel=0&modestbranding=1&showinfo=0`}
-          title="YouTube video player"
-          // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          aria-hidden="true"
-          sandbox="allow-same-origin allow-scripts"
-          style={{ border: 'none', pointerEvents: 'none' }}
-        />
-      )}
-      {children}
-    </div>
-  ),
+  ({ className, imgSrc, videoSrc, children, ...props }, ref) => {
+    const extractVideoId = (videoUrl?: string) => {
+      if (!videoUrl) return null; 
+      try {
+        const url = new URL(videoUrl);
+        return new URLSearchParams(url.search).get('v');
+      } catch (e) {
+        console.error('Ошибка при обработке URL видео:', e);
+        return null;
+      }
+    };
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'w-full h-[225px] lg:h-[275px] relative rounded-[6px] overflow-hidden transition-all duration-300 ease-in-out hover:border-[6px] hover:border-darkGrey',
+          className,
+        )}
+        {...props}
+      >
+        {imgSrc && (
+          <div
+            className="z-10 absolute inset-0 bg-cover bg-center rounded-t-[30px]"
+            style={{ backgroundImage: `url(${imgSrc})` }}
+          />
+        )}
+        {videoSrc && (
+          <iframe
+            className="absolute inset-0 w-full h-full rounded-t-[30px] z-20"
+            src={`https://www.youtube.com/embed/${extractVideoId(videoSrc)}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+         
+          />
+        )}
+        {children}
+      </div>
+    );
+  }
 );
+
 TestCardMedia.displayName = 'TestCardMedia';
+
 
 // Title section
 const TestCardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
