@@ -96,7 +96,7 @@ const VideoLessonCarousel = () => {
   }
 
   return (
-    <div className="mt-10 flex flex-col  justify-center mb-8 items-end border red ">
+    <div className="mt-10 flex flex-col  justify-center mb-8 items-end ">
       <h1 className="text-xl font-semibold self-start">Видео сабак</h1>
       <Carousel
         opts={{
