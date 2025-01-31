@@ -34,12 +34,13 @@ const VideoCardLesson = ({
   disabled
 }: TestProps) => {
   return (
-    <Link href={disabled ? "/in/payment" : href } className={`w-full flex flex-col justify-stretch relative ${
-      disabled ? 'opacity-70 pointer-events-none' : ''
-    }`}>
+    <Link href={disabled ? "/in/payment" : href } className='w-full'>
     <TestCard
       isCarouselCard
-      className="w-full h-[320px] flex flex-col justify-stretch"
+      className={`w-full flex flex-col h-[320px] justify-stretch relative  ${
+        disabled ? 'opacity-70 pointer-events-none' : ''
+      }`}
+    
     >
       <TestCardMedia
         videoSrc={videoSrc}
@@ -87,7 +88,7 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
   console.log(groupedByCategory);
 
   return (
-    <div className="mt-[60px]">
+    <div className="mt-[60px] max-auto">
       {Object.entries(groupedByCategory).map( 
         ([subjectCategory, videos], index) => (
           <div key={index} className="mb-8">
@@ -103,7 +104,7 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
                 align: "center",
                 containScroll: "trimSnaps",
               }}
-              className="relative w-full max-w-[1400px]"
+              className="relative w-full max-w-[400px] md:max-w-[700px]  lg:max-w-[1180px]"
             >
               <CarouselContent>
                 {videos.map((video) => (

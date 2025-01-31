@@ -92,11 +92,11 @@ const VideoLessonCarousel = () => {
 
   // Handle error state
   if (error) {
-    return <div className="text-red-500">Ката: {error}</div>;
+    return <div className="text-red-400">Ката: {error}</div>;
   }
 
   return (
-    <div className="mt-10 flex flex-col pl-8  mx-0 justify-center mb-8 items-end ">
+    <div className="mt-10 flex flex-col  justify-center mb-8 items-end border red ">
       <h1 className="text-xl font-semibold self-start">Видео сабак</h1>
       <Carousel
         opts={{
@@ -104,12 +104,12 @@ const VideoLessonCarousel = () => {
           align: 'center',
           containScroll: "trimSnaps"
         }}
-        className=" relative w-full  md:max-w-[1400px]">
+        className=" relative w-full  max-w-[400px] md:max-w-[700px]  lg:max-w-[1400px]">
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem
               key={item.subject_category.id}
-              className=" max-w-[285px] py-3 flex justify-center md:basis-1/2 "
+              className=" max-w-[285px] py-3 flex justify-center "
             >
               <CarouselCardVideo
                 videoSrc={item.video_url}

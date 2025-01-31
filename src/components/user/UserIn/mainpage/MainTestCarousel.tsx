@@ -42,12 +42,12 @@ const CarouselCard = ({
 
 const MainTestCarousel = () => {
   return (
-    <div className="mt-10 flex flex-col  justify-center items-end">
-      <h1 className="text-xl font-semibold self-start pl-10">Негизги тест</h1>
+    <div className="mt-10 flex flex-col  justify-center  md:p-2  md:items-center">
+      <h1 className="text-xl font-semibold self-start">Негизги тест</h1>
       <Carousel
         opts={{ loop: true, align: "center"}}
-        className=" relative  w-full max-w-[360px] lg:max-w-[1400px] ">
-        <CarouselContent className='py-3 pl-9'>
+        className=" relative  w-full max-w-[380px] md:max-w-[700px] lg:max-w-[1400px] ">
+        <CarouselContent className='py-3'>
           {mockTestsData.map((item) => (
             <CarouselItem
               key={item.id}
