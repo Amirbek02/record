@@ -20,10 +20,10 @@ interface TestContent {
 }
 
 
-const TestQuestions = ({ initialTime = 30 * 60 }) => {
+const Mathematika = ({ initialTime = 30 * 60 }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
+  const [answers, setAnswers] = useState({});
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [testFinished, setTestFinished] = useState(false);
@@ -51,7 +51,7 @@ const TestQuestions = ({ initialTime = 30 * 60 }) => {
   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
   const questions: TestContent[] = testContents
-  .filter(test => test.test.id === 1) 
+  .filter(test => test.test.id === 2) 
   // .slice(0, 30);
   
 
@@ -59,7 +59,7 @@ const currentQuestion = questions[currentQuestionIndex];
 
   const getAvailableOptions = () => {
     const options: string[] = [];
-    ["А", "Б", "В", "Г"].forEach(option => {
+    ["А", "Б", "В", "Г", "Д"].forEach(option => {
       if (option) {
         options.push(option);
       }
@@ -135,7 +135,7 @@ const finishTest = () => {
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
-          1-бөлүм. Математика
+          2-бөлүм. Математика
         </h1>
         <div className="flex lg:justify-end md:justify-end absolute right-10 justify-center m-3 top-0 right-0">
           <Timer timeLeft={timeLeft} totalTime={totalTime} />
@@ -210,4 +210,4 @@ const finishTest = () => {
   );
 };
 
-export default TestQuestions;
+export default Mathematika;

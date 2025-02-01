@@ -1,6 +1,8 @@
+import Link from "next/link";
 import React from "react";
 
 interface ExamplePageProps {
+  testId: number;
   sectionTitle: string;
   instructionsTitle: string;
   comparisonDetails: {
@@ -22,6 +24,7 @@ interface ExamplePageProps {
 }
 
 const ExamplePage: React.FC<ExamplePageProps> = ({
+  testId,
   sectionTitle,
   instructionsTitle,
   comparisonDetails,
@@ -97,9 +100,11 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
         <button className="border text-xs sm:text-xl font-semibold bg-[#E0E0E0] hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-[10px]">
           {backButtonText}
         </button>
+        <Link href={`/test/${testId}`}>
         <button className="border text-xs sm:text-xl font-semibold text-white bg-blue-800  hover:bg-sky-800 w-full md:w-[245px] py-2 rounded-[10px]">
           {startButtonText}
         </button>
+        </Link>
       </div>
     </div>
   );

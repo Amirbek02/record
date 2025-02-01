@@ -1,33 +1,34 @@
 import { create } from "zustand";
 import axios from "axios";
 
-
 const API_BASE_URL = "https://api.recordonline.kg/api/v1";
 const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NjYyNjg2LCJpYXQiOjE3Mzc3OTg2ODYsImp0aSI6IjA1MTZkOWJjNjlmNTQ3ZGQ5ZjRlZDdkZTk0MjEzODRhIiwidXNlcl9pZCI6MX0.OnCqcwRz3w5mchqvketF5eKI2H107W9OmVjc32CWS1Y";
 const REFRESH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczODQwMzQ4NiwiaWF0IjoxNzM3Nzk4Njg2LCJqdGkiOiI2ZWZjODg1MjU2OGE0NTllYWUwZDdjZGI2MjhmY2NjOSIsInVzZXJfaWQiOjF9.zzEsQEUGy73V5IIhWfFlOFj1Nt-BiJjioao-JTeK0EU";
 
-
-type TestCategory = {
+type TestContent = {
   id: number;
-  test_category_name: string;
-  created_date: string;
-  last_update_date: string;
+  test: {
+    id: number;
+    title: string;
+  };
+  question: {
+    id: number;
+    question_text: string;
+    question_image: string | null;
+    var_A_text: string;
+    var_B_text: string;
+    var_C_text: string;
+    var_D_text: string;
+    var_E_text: string | null;
+  };
 };
 
-type StoreState = {
-  testCategories: TestCategory[];
-  furtnerTests: any[];
-  subjectCategories: any[];
+type TestContentStore = {
+  testContents: TestContent[];
   isLoading: boolean;
   error: string | null;
+  fetchTestContents: () => Promise<void>;
 };
-
-type StoreActions = {
-  fetchTestCategories: () => Promise<void>;
-  fetchFurtnerTests: () => Promise<void>;
-  fetchSubjectCategories: () => Promise<void>;
-};
-
 
 const createAxiosInstance = (token: string) => {
   return axios.create({
@@ -38,11 +39,7 @@ const createAxiosInstance = (token: string) => {
   });
 };
 
-const handleApiError = async (
-  error: any,
-  endpoint: string,
-  set: any
-): Promise<any> => {
+const handleApiError = async (error: any, endpoint: string, set: any): Promise<any> => {
   if (error.response?.status === 401) {
     try {
       const refreshResponse = await axios.post(
@@ -62,7 +59,7 @@ const handleApiError = async (
       throw refreshError;
     }
   } else {
-    const errorMessage = error.response?.data || error.message;
+    const errorMessage = error.response?.data?.detail || error.message;
     set({
       error: errorMessage,
       isLoading: false
@@ -72,67 +69,26 @@ const handleApiError = async (
   }
 };
 
-
-type Store = StoreState & StoreActions;
-
-export const useApiStore = create<Store>((set) => ({
-  testCategories: [],
-  furtnerTests: [],
-  subjectCategories: [],
+export const useTestContentStore = create<TestContentStore>((set) => ({
+  testContents: [],
   isLoading: false,
   error: null,
 
-  fetchTestCategories: async () => {
+  fetchTestContents: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await createAxiosInstance(ACCESS_TOKEN).get("/testcategories/");
+      const response = await createAxiosInstance(ACCESS_TOKEN).get("/TestContent/");
       set({
-        testCategories: response.data,
+        testContents: response.data,
         isLoading: false
       });
-      console.log('API Response:', response.data);
+      console.log('Test Contents:', response.data);
     } catch (error: any) {
-      const data = await handleApiError(error, "/testcategories/", set);
+      const data = await handleApiError(error, "/TestContent/", set);
       set({
-        testCategories: data,
+        testContents: data,
         isLoading: false
       });
     }
   },
-
-  fetchFurtnerTests: async () => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await createAxiosInstance(ACCESS_TOKEN).get("/tests/");
-      set({
-        furtnerTests: response.data,
-        isLoading: false
-      });
-      console.log('testFurtner', response.data);
-    } catch (error: any) {
-      const data = await handleApiError(error, "/tests/", set);
-      set({
-        furtnerTests: data,
-        isLoading: false
-      });
-    }
-  },
-
-  fetchSubjectCategories: async () => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await createAxiosInstance(ACCESS_TOKEN).get("/subjectcategories/");
-      set({
-        subjectCategories: response.data,
-        isLoading: false
-      });
-      console.log('subjectCategoriesTest', response.data);
-    } catch (error: any) {
-      const data = await handleApiError(error, "/subjectcategories/", set);
-      set({
-        subjectCategories: data,
-        isLoading: false
-      });
-    }
-  }
 }));
