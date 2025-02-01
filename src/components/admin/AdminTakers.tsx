@@ -1,14 +1,12 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Image from "next/image";
-import menuData from "@/utils/adminmenu";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import menuData from '@/utils/adminmenu';
 
 const AdminMenu = () => {
   const [openMainSection, setOpenMainSection] = useState<number | null>(null);
-  const [openSubSections, setOpenSubSections] = useState<
-    Record<number, number | null>
-  >({});
+  const [openSubSections, setOpenSubSections] = useState<Record<number, number | null>>({});
 
   const toggleMainSection = (mainIndex: number) => {
     setOpenMainSection(openMainSection === mainIndex ? null : mainIndex);
@@ -31,8 +29,7 @@ const AdminMenu = () => {
             {/* Main Section Header */}
             <div
               className="flex justify-between items-center cursor-pointer bg-purple-200 rounded-lg p-3"
-              onClick={() => toggleMainSection(sectionIndex)}
-            >
+              onClick={() => toggleMainSection(sectionIndex)}>
               <h2 className="text-md font-medium">{section.title}</h2>
               <Image src="/icons/pensil.svg" width={24} height={24} alt="img" />
               <Image src="/icons/pensil.svg" width={24} height={24} alt="img" />
@@ -40,9 +37,8 @@ const AdminMenu = () => {
 
               <span
                 className={`transform transition-transform ${
-                  openMainSection === sectionIndex ? "rotate-90  " : ""
-                }`}
-              >
+                  openMainSection === sectionIndex ? 'rotate-90  ' : ''
+                }`}>
                 ▶
               </span>
             </div>
@@ -55,16 +51,12 @@ const AdminMenu = () => {
                     {/* Subsection Header */}
                     <div
                       className="flex justify-between items-center cursor-pointer bg-purple-50 rounded-lg p-2 mt-2"
-                      onClick={() => toggleSubSection(sectionIndex, itemIndex)}
-                    >
+                      onClick={() => toggleSubSection(sectionIndex, itemIndex)}>
                       <span className="font-medium">{item.title}</span>
                       <span
                         className={`transform transition-transform ${
-                          openSubSections[sectionIndex] === itemIndex
-                            ? "rotate-90"
-                            : ""
-                        }`}
-                      >
+                          openSubSections[sectionIndex] === itemIndex ? 'rotate-90' : ''
+                        }`}>
                         ▶
                       </span>
                     </div>
@@ -72,14 +64,13 @@ const AdminMenu = () => {
                     {/* Subsection Content */}
                     {openSubSections[sectionIndex] === itemIndex && (
                       <ul className="pl-4 mt-2 space-y-2">
-                        {item.cons.map((subItem, subIndex) => (
+                        {/* {item.cons.map((subItem, subIndex) => (
                           <li
                             key={subIndex}
-                            className="flex justify-between items-center bg-purple-100 rounded p-2 text-sm"
-                          >
+                            className="flex justify-between items-center bg-purple-100 rounded p-2 text-sm">
                             {subIndex + 1}. {subItem}
                           </li>
-                        ))}
+                        ))} */}
                       </ul>
                     )}
                   </div>

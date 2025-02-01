@@ -1,14 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  TestCard,
-  TestCardMedia,
-  TestCardTitle,
-  TestCardSubtitle,
-  TestCardDescription,
-} from '@/components/UI/VideoCoursesCard';
 import { Play, Pause } from 'lucide-react';
+import { TestCard, TestCardDescription, TestCardTitle } from '../UI/TestCard';
 
 interface TestProps {
   testTitle: string;
@@ -86,7 +80,7 @@ const VideoCarouselCard = ({
     <TestCard withLink={false}>
       {/* <TestCardSubtitle>{testDescriptionTitle}</TestCardSubtitle> */}
       <TestCardDescription className="max-w-[300px]">{description}</TestCardDescription>
-      
+
       <div className="relative w-full max-w-[300px]">
         <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
           <video
@@ -95,8 +89,7 @@ const VideoCarouselCard = ({
             controls={false}
             playsInline
             onTimeUpdate={handleTimeUpdate}
-            onClick={togglePlay}
-          >
+            onClick={togglePlay}>
             <source src={videoSrc} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -107,21 +100,15 @@ const VideoCarouselCard = ({
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                     p-4 rounded-full bg-black/30 text-white hover:bg-black/40 
                     transition-all duration-200 z-10"
-            onClick={togglePlay}
-          >
-            {isPlaying ? (
-              <Pause className="w-6 h-6" />
-            ) : (
-              <Play className="w-6 h-6" />
-            )}
+            onClick={togglePlay}>
+            {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
           </button>
         </div>
 
         <div className="flex items-center gap-2 mt-2 ml-4">
           <div
             className="flex-1 h-2 bg-gray-200 rounded-full cursor-pointer"
-            onClick={handleProgressBarClick}
-          >
+            onClick={handleProgressBarClick}>
             <div
               className="h-full bg-blue-600 rounded-full transition-all duration-100"
               style={{ width: `${progress}%` }}

@@ -12,9 +12,13 @@ import FurtherTestMobile from "./FurtherTestMobile";
 const FurtherTestCarousel = () => {
   const slideCount = mockTestsData.length;
   return (
-    <div className="flex flex-col  gap-8 items-end mt-3">
-      <h1 className='text-2xl font-bold text-red self-start ml-11 -mb-4'>ЖРТ га даярдоо</h1>
-      <h1 className="font-semibold text-[22px] self-start ml-11 -mb-2">Математика</h1>
+    <div className="flex flex-col pb-10 pl-4  gap-8 items-end mt-3">
+      <h1 className="text-2xl font-bold text-red self-start ml-11 -mb-4">
+        ЖРТ га даярдоо
+      </h1>
+      <h1 className="font-semibold text-[22px] self-start ml-11 -mb-2">
+        Математика
+      </h1>
       <FurtherTestMobile testData={mockTestsData} />
       <Carousel
         opts={{ loop: true, align: "center", containScroll: "trimSnaps" }}
@@ -31,7 +35,7 @@ const FurtherTestCarousel = () => {
                 testTitle={item.testTitle}
                 testDescriptionTitle={item.testDescriptionTitle}
                 description={item.description}
-                href='#'
+                href="#"
               />
             </CarouselItem>
           ))}
