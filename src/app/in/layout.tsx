@@ -6,11 +6,11 @@ import HeaderSearch from "@/components/user/header/HeaderSearch";
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <main className="flex gap-10 bg-[#FAFAFC] w-full h-full min-h-screen">
+      <main className="lg:flex md:flex gap-5">
         <HeaderSign />
         <div className="flex flex-col">
-        <HeaderSearch/>
-        {children}
+          <HeaderSearch />
+          {children}
         </div>
       </main>
       <Footer />

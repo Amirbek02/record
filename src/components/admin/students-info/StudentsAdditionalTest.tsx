@@ -11,11 +11,11 @@ import AnswerSheet from './AnswerSheet';
 
 const StudentsAdditionalTest = () => {
   const students = [
-    { id: 1, name: "Биология 110 бал" },
-    { id: 2, name: "Математика 110 бал" },
-    { id: 3, name: "Тарых 90 бал" },
-    { id: 4, name: "Англис тил 110 бал" },
-    { id: 5, name: "Химия 110 бал" },
+    { id: 1, name: "Биология 110 балл" },
+    { id: 2, name: "Математика 110 балл" },
+    { id: 3, name: "Тарых 90 балл" },
+    { id: 4, name: "Англис тил 110 балл" },
+    { id: 5, name: "Химия 110 балл" },
   ];
 
   return (

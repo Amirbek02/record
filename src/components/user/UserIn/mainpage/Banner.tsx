@@ -37,7 +37,7 @@ export default function Banner() {
   const isMobile = useMediaQuery({ maxWidth: 699 });
 
   return (
-    <div className="lg:mt-[130px] mt-[40px] p-2 ">
+    <div className=" md:ml-10 sm:ml-6  lg:mt-[130px] mt-[80px] p-2 ">
       {banners.map((banner) => {
         const allSubjects = [
           banner.subjects,

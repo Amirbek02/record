@@ -1,7 +1,8 @@
-import React from "react";
-import Banner from "./Banner";
-import MainTestCarousel from "./MainTestCarousel";
-import VideoLessonCarousel from "./VideoLessonCarousel";
+'use client';
+import React from 'react';
+import Banner from './Banner';
+import MainTestCarousel from './MainTestCarousel';
+import VideoLessonCarousel from './VideoLessonCarousel';
 
 const MainPage = () => {
   return (
