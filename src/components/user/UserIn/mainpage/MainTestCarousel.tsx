@@ -1,13 +1,18 @@
-import React from 'react';
-import { mockTestsData } from '../furtherTests/mockData';
-import { Carousel, CarouselContent, CarouselItem, CarouselDots } from '@/components/UI/carousel';
+import React from "react";
+import { mockTestsData } from "../furtherTests/mockData";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselDots,
+} from "@/components/UI/carousel";
 import {
   TestCard,
   TestCardMedia,
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
-} from '@/components/UI/TestCard';
+} from "@/components/UI/TestCard";
 
 interface TestProps {
   testTitle: string;
@@ -27,8 +32,10 @@ const CarouselCard = ({
   return (
     <TestCard withLink href={href} isCarouselCard className="w-full ">
       <TestCardMedia imgSrc={imgSrc} className="w-full lg:h-[211px]">
-        {' '}
-        <TestCardTitle className="lg:text-base lg:right-1">{testTitle}</TestCardTitle>
+        {" "}
+        <TestCardTitle className="lg:text-base lg:right-1">
+          {testTitle}
+        </TestCardTitle>
       </TestCardMedia>
       <TestCardSubtitle className="lg:text-sm leading-none ml-5">
         {testDescriptionTitle}
@@ -42,16 +49,15 @@ const CarouselCard = ({
 
 const MainTestCarousel = () => {
   return (
-    <div className="mt-10 flex flex-col  justify-center  md:p-2  md:items-center">
+    <div className="mt-10  md:ml-10 ml-4 lg:ml-4 flex flex-col  justify-center  md:p-2  md:items-center">
       <h1 className="text-xl font-semibold self-start">Негизги тест</h1>
       <Carousel
-        opts={{ loop: true, align: "center"}}
-        className=" relative  w-full max-w-[380px] md:max-w-[700px] lg:max-w-[1400px] ">
-        <CarouselContent className='py-3'>
+        opts={{ loop: true, align: "center" }}
+        className=" relative  w-full max-w-[780px] md:max-w-[900px] lg:max-w-[1400px] "
+      >
+        <CarouselContent className="py-3">
           {mockTestsData.map((item) => (
-            <CarouselItem
-              key={item.id}
-              className="max-w-[285px]  ">
+            <CarouselItem key={item.id} className="max-w-[285px]  ">
               <CarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}

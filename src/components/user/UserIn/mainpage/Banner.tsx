@@ -1,8 +1,8 @@
 //жалпы республикалык тестке онлайн даярдан баннер
-'use client';
-import React from 'react';
-import Image from 'next/image';
-import { useMediaQuery } from 'react-responsive';
+"use client";
+import React from "react";
+import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 type BannerData = {
   id: number;
@@ -20,15 +20,15 @@ type BannerData = {
 const banners: BannerData[] = [
   {
     id: 1,
-    imageSrc: '/images/education.png',
-    title: 'Жалпы республикалык тестке',
-    subtitle: 'Онлайн даярдан',
-    subjects: 'Кыргыз тил',
-    subjects1: 'Математика',
-    subjects2: 'Англис тил',
-    subjects3: 'Физика',
-    subjects4: 'Тарых',
-    subjects5: 'Биология',
+    imageSrc: "/images/education.png",
+    title: "Жалпы республикалык тестке",
+    subtitle: "Онлайн даярдан",
+    subjects: "Кыргыз тил",
+    subjects1: "Математика",
+    subjects2: "Англис тил",
+    subjects3: "Физика",
+    subjects4: "Тарых",
+    subjects5: "Биология",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function Banner() {
   const isMobile = useMediaQuery({ maxWidth: 699 });
 
   return (
-    <div className="lg:mt-[130px] mt-[40px] p-2 ">
+    <div className=" md:ml-10 sm:ml-6  lg:mt-[130px] mt-[80px] p-2 ">
       {banners.map((banner) => {
         const allSubjects = [
           banner.subjects,
@@ -64,11 +64,16 @@ export default function Banner() {
 
                 <div className="flex relative flex-col pl-0 xs:pl-[20px] sm:items-center sm:pl-[30px] sm:text-center lg:items-center lg:text-center text-white w-full">
                   <h2 className="text-xl font-semibold">{banner.title}</h2>
-                  <h1 className="text-3xl text-[#FFE500] font-bold mt-2">{banner.subtitle}</h1>
+                  <h1 className="text-3xl text-[#FFE500] font-bold mt-2">
+                    {banner.subtitle}
+                  </h1>
                   <div className=" hidden md:block  lg:block">
                     <ul className=" sm:flex max-w-[400px] items-center text-center justify-center  flex-wrap text-[16px] mt-2 gap-5">
                       {allSubjects.map((subject, index) => (
-                        <li key={index} className="flex  font-bold text-[16px] ">
+                        <li
+                          key={index}
+                          className="flex  font-bold text-[16px] "
+                        >
                           {subject}
                         </li>
                       ))}
@@ -100,7 +105,9 @@ export default function Banner() {
 
                 <div className="flex flex-col pl-[60px] items-center text-center text-white w-full">
                   <h2 className="text-[14px]">{banner.title}</h2>
-                  <h1 className="text-[16px] text-[#FFE500] font-bold mt-2">{banner.subtitle}</h1>
+                  <h1 className="text-[16px] text-[#FFE500] font-bold mt-2">
+                    {banner.subtitle}
+                  </h1>
                 </div>
               </div>
             )}
