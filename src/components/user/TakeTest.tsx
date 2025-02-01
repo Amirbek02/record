@@ -2,7 +2,7 @@
 'use client';
 import CustomButton from '../UI/CustomButton';
 import { useParams } from 'next/navigation';
-import { useTestContentStore } from '@/lib/store/TestApiStore';
+import { useTestContentStore } from '@/store/TestApiStore';
 import Link from 'next/link';
 
 const TakeTest = () => {
