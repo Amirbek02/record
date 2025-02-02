@@ -19,10 +19,15 @@ const HeaderSearch = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest('button')
+      ) {
         setSidebarOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -30,12 +35,9 @@ const HeaderSearch = () => {
   return (
     <div>
       <div className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
-        <div
-          className="flex flex-wrap items-center justify-between  lg:hidden "
-          ref={sidebarRef}
-          onClick={toggleSidebar}>
+        <div className="flex flex-wrap items-center justify-between  lg:hidden ">
           <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
-            <button type="button">
+            <button type="button" onClick={toggleSidebar}>
               <svg
                 className="w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,12 +108,11 @@ const HeaderSearch = () => {
               Жөндөө
             </h1>
           </Link>
-          <div className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}>
+          <div
+            onClick={() => setIsModalOpen(true)}
+            className="flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px] cursor-pointer">
             <Image src="/icons/exit.svg" width={23} height={23} alt="" />
-            <h1
-              className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === '/test' ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
-              } `}>
+            <h1 className="lg:text-[20px] text-[14px] xl:text-[22px] md:text-[16px] text-[#2E3095] font-normal">
               Чыгуу
             </h1>
           </div>

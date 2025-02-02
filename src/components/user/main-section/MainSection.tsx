@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { IoMdPlay } from 'react-icons/io';
 import TakeTheTestForm from '../TakeTheTestForm';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 
 const MainSection = () => {
+  useAxiosInterceptors();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);

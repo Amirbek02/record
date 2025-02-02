@@ -37,12 +37,12 @@ const CarouselCardVideo = ({
   return (
     <Link
       href={disabled ? "/in/payment" : `/in/video-lessons/${href}`}
-      className=" w-full"
+      className=" w-full "
     >
       <TestCard
         isCarouselCard
         className={`w-full h-[320px] flex flex-col justify-stretch relative pointer-events-none ${
-          disabled ? 'opacity-80 pointer-events-none' : ''
+          disabled ? "opacity-80 pointer-events-none" : ""
         }`} // Apply styles when disabled
       >
         <TestCardMedia videoSrc={videoSrc} className="w-full lg:h-[211px]">
@@ -87,7 +87,7 @@ const VideoLessonCarousel = () => {
     4
   );
   const unPaidVideos = allVideos?.filter((video) => !video.is_paid) || [];
-  const combinedVideos = [...unPaidVideos,...paidVideos];
+  const combinedVideos = [...unPaidVideos, ...paidVideos];
   // const isUserRegistered = Boolean(localStorage.getItem("token"));
   if (isLoading) {
     return <div>Жуктоо...</div>;
@@ -99,15 +99,16 @@ const VideoLessonCarousel = () => {
   }
 
   return (
-    <div className="mt-10 flex flex-col  justify-center mb-8 items-end ">
+    <div className="mt-10  md:ml-10 ml-4 lg:ml-4 flex flex-col  justify-center mb-8 items-end ">
       <h1 className="text-xl font-semibold self-start">Видео сабак</h1>
       <Carousel
         opts={{
           loop: true,
-          align: 'center',
-          containScroll: "trimSnaps"
+          align: "center",
+          containScroll: "trimSnaps",
         }}
-        className=" relative w-full  max-w-[400px] md:max-w-[700px]  lg:max-w-[1400px]">
+        className=" relative w-full  max-w-[900px] md:max-w-[900px]  lg:max-w-[1400px]"
+      >
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem

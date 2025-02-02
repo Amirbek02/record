@@ -2,8 +2,10 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import useVideoStore from '@/store/useVideoStore';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 
 const VideoLessons = () => {
+  useAxiosInterceptors();
   const { videos, isLoading, error, fetchVideos } = useVideoStore();
 
   useEffect(() => {

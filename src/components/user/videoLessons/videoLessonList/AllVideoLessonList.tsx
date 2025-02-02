@@ -2,8 +2,10 @@
 import React from 'react';
 import VideoLessonsList from './VideoLessonsList';
 import useVideosStore from '@/store/videoStore/VideosStore';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 
 const AllVideoLessonList = () => {
+  useAxiosInterceptors();
   const { fetch, subVideoCategories } = useVideosStore();
 
   React.useEffect(() => {
