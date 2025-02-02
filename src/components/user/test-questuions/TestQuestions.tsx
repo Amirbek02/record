@@ -51,7 +51,7 @@ const TestQuestions = ({ initialTime = 30 * 60 }) => {
   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
   const questions: TestContent[] = testContents
-  .filter(test => test.test.id === 1) 
+  // .filter(test => test.test.id === ) 
   // .slice(0, 30);
   
 
