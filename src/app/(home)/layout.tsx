@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "@/components/user/header/Header";
+import WhatsAppButton from "@/components/UI/WhatsAppButton";
 
 const layout = async ({
   children,
@@ -10,6 +11,7 @@ const layout = async ({
     <>
       <Header />
       <main>{children}</main>
+      <WhatsAppButton />
     </>
   );
 };
