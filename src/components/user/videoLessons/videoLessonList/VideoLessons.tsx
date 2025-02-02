@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { VideoData } from "@/store/videoStore/VideosStore";
+import userDataStore from "@/store/userDataStore";
 import Link from "next/link";
 import {
   TestCard,
@@ -22,7 +23,7 @@ interface TestProps {
   description: string;
   videoSrc: string;
   href: string;
-  disabled:boolean
+  disabled: boolean;
 }
 
 const VideoCardLesson = ({
@@ -31,44 +32,45 @@ const VideoCardLesson = ({
   description,
   videoSrc,
   href,
-  disabled
+  disabled,
 }: TestProps) => {
   return (
-    <Link href={disabled ? "/in/payment" : href } className='w-full'>
-    <TestCard
-      isCarouselCard
-      className={`w-full flex flex-col h-[320px] justify-stretch relative  ${
-        disabled ? 'opacity-70 pointer-events-none' : ''
-      }`}
-    
-    >
-      <TestCardMedia
-        videoSrc={videoSrc}
-        className="w-full  lg:h-[211px]"
+    <Link href={disabled ? "/in/payment" : href} className="w-full">
+      <TestCard
+        isCarouselCard
+        className={`w-full flex flex-col h-[320px] justify-stretch relative  ${
+          disabled ? "opacity-70 pointer-events-none" : ""
+        }`}
       >
-        {" "}
-        <TestCardTitle className="lg:text-base lg:right-1">
-          {testTitle}
-        </TestCardTitle>
-      </TestCardMedia>
-      <TestCardSubtitle className="lg:text-sm leading-none ml-5">
-        {testDescriptionTitle}
-      </TestCardSubtitle>
-      <TestCardDescription className="max-w-[356px]  lg:text-xs ml-5">
-        {description}
-      </TestCardDescription>
-      {disabled && (
+        <TestCardMedia videoSrc={videoSrc} className="w-full  lg:h-[211px]">
+          {" "}
+          <TestCardTitle className="lg:text-base lg:right-1">
+            {testTitle}
+          </TestCardTitle>
+        </TestCardMedia>
+        <TestCardSubtitle className="lg:text-sm leading-none ml-5">
+          {testDescriptionTitle}
+        </TestCardSubtitle>
+        <TestCardDescription className="max-w-[356px]  lg:text-xs ml-5">
+          {description}
+        </TestCardDescription>
+        {disabled && (
           <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
             Сатып алуу
           </div>
         )}
-    </TestCard>
+      </TestCard>
     </Link>
   );
 };
 
 const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
-  console.log(videosData, "this");
+  const { fetchUserData, userDataState } = userDataStore();
+  console.log(userDataState?.[0].paid,'userDataState')
+  const paid=userDataState?.[0].paid
+  React.useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
   if (!videosData) return <p>No videos available</p>;
   const groupedByCategory = videosData?.reduce<Record<string, VideoData[]>>(
     (acc, item) => {
@@ -89,7 +91,7 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
 
   return (
     <div className="mt-[60px] max-auto">
-      {Object.entries(groupedByCategory).map( 
+      {Object.entries(groupedByCategory).map(
         ([subjectCategory, videos], index) => (
           <div key={index} className="mb-8">
             {/* Category Name */}
@@ -116,11 +118,9 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
                       href={`/in/video-lessons/${video.video_category.id}/${video.id}`} // Add a link to the video
                       videoSrc={video.video_url}
                       testTitle={video.subject_category.subject_category_name}
-                      testDescriptionTitle={
-                        video.subject_name
-                      }
+                      testDescriptionTitle={video.subject_name}
                       description={video.description}
-                      disabled={video.is_paid }
+                      disabled={paid ? (video.is_paid && paid === "Не оплачено") : video.is_paid}
                     />
                   </CarouselItem>
                 ))}
