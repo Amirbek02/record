@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,8 +7,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/UI/alert-dialog';
-import { useRouter } from 'next/navigation';
+} from "@/components/UI/alert-dialog";
+import { useRouter } from "next/navigation";
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,14 +19,14 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
 
   const handleOut = () => {
-    localStorage.removeItem('token');
-    router.push('/');
+    localStorage.removeItem("token");
+    router.push("/");
     onClose();
   };
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
-      <AlertDialogContent className="rounded-xl">
+      <AlertDialogContent className="rounded-xl  ">
         <AlertDialogHeader>
           <AlertDialogTitle>Чын эле чыккыңыз келеби?</AlertDialogTitle>
         </AlertDialogHeader>

@@ -108,12 +108,11 @@ const HeaderSearch = () => {
               Жөндөө
             </h1>
           </Link>
-          <div className={`flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px]`}>
+          <div
+            onClick={() => setIsModalOpen(true)}
+            className="flex gap-[16px] items-center h-[20px] border-l-[1px] mt-[15px] cursor-pointer">
             <Image src="/icons/exit.svg" width={23} height={23} alt="" />
-            <h1
-              className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === '/test' ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
-              } `}>
+            <h1 className="lg:text-[20px] text-[14px] xl:text-[22px] md:text-[16px] text-[#2E3095] font-normal">
               Чыгуу
             </h1>
           </div>
