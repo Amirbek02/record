@@ -21,11 +21,13 @@ const HeaderSearch = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
+        !sidebarRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest("button")
       ) {
         setSidebarOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -33,13 +35,9 @@ const HeaderSearch = () => {
   return (
     <div>
       <div className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
-        <div
-          className="flex flex-wrap items-center justify-between  lg:hidden "
-          ref={sidebarRef}
-          onClick={toggleSidebar}
-        >
+        <div className="flex flex-wrap items-center justify-between  lg:hidden ">
           <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
-            <button type="button">
+            <button type="button" onClick={toggleSidebar}>
               <svg
                 className="w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"

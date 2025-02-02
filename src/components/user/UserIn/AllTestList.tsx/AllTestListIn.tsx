@@ -1,26 +1,29 @@
-import React from "react";
-import TestListIn from "./TestListIn";
+'use client';
+import React from 'react';
+import TestListIn from './TestListIn';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 const mocktests = [
   {
     id: 1,
-    title: "Кыргыз тил",
+    title: 'Кыргыз тил',
     description:
-      "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
-    tag: "Кыргыз тил боюнча негизги тестке кош келиңиз",
-    imgSrc: "/images/test.png",
-    pathName: "/in/all-tests/kyrgyz",
+      '30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!',
+    tag: 'Кыргыз тил боюнча негизги тестке кош келиңиз',
+    imgSrc: '/images/test.png',
+    pathName: '/in/all-tests/kyrgyz',
   },
   {
     id: 2,
-    title: "Математика",
-    tag: "Математика боюнча даярдалган видео сабакка кош келиңиз",
+    title: 'Математика',
+    tag: 'Математика боюнча даярдалган видео сабакка кош келиңиз',
     description:
-      "30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!",
-    imgSrc: "/images/test.png",
-    pathName: "/in/all-tests/mathematics",
+      '30 тапшырмадан турат, аны аткарууга 30 мүнөт убакыт берилет. Тапшырманы аткарып жатып, тандаган жообуңарды өзгөртсөңөр болот, бирок жоопту ар бир тапшырмада бир гана жолу өзгөртө аласыз!',
+    imgSrc: '/images/test.png',
+    pathName: '/in/all-tests/mathematics',
   },
 ];
 const AllTestListIn = () => {
+  useAxiosInterceptors();
   return (
     <>
       <TestListIn tests={mocktests} isMainTest />
