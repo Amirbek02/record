@@ -1,5 +1,6 @@
 import React from "react";
 import { VideoData } from "@/store/videoStore/VideosStore";
+import NextPrevButtons from "@/components/UI/nextPrevButtons";
 
 const VideoLesson = ({ video }: { video: VideoData | null }) => {
   const extractVideoId = (videoUrl?:string) => {
@@ -37,12 +38,7 @@ const VideoLesson = ({ video }: { video: VideoData | null }) => {
           {video?.subject_name}
         </h2>
         <div className="flex gap-[10px] mt-[100px] md:mt-[70px] justify-end">
-          <button className="hidden md:block w-[149px]  px-[15px] py-[10px] text-[#4C4C4C] bg-[#D0D0D0] rounded-[5px] font-medium text-[20px]">
-            Артка
-          </button>
-          <button className="w-[320px] md:w-[149px] px-[15px] py-[10px] text-[#fff] bg-blue-600 rounded-[5px] font-medium text-[20px]">
-            Алдыга
-          </button>
+        <NextPrevButtons/>
         </div>
       </div>
     </div>
