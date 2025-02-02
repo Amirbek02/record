@@ -1,15 +1,14 @@
 //ЖРТ га даярдоо  Сынамык тестке кош келдиңиз! 1
 'use client';
 import CustomButton from '../UI/CustomButton';
-import { useParams } from 'next/navigation';
-import { useTestContentStore } from '@/store/TestApiStore';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const TakeTest = () => {
-  const params = useParams();
-  const testId = params?.testId;
+  const router = useRouter();
+  const testId = router.push
   console.log(testId);
-  const {testContents, isLoading, error, fetchTestContents} = useTestContentStore();
+
   return (
     <div>
       <div className="flex justify-center items-center flex-col px-[15px]  small:px-[35px] pb-[120px] pt-[40px] ">
@@ -78,13 +77,13 @@ const TakeTest = () => {
             containerStyles="hidden lg:block bg-[rgba(224,224,224,1)] h-[40px] small:h-[50px] w-[220px] lg:w-[185px]  small:rounded-[5px] lg:self-end mr-[16px] "
             textStyles="font-[500] small:font-[700] text-[18px] small:text-[20px] lg:text-[24px] leading-[30px] font-poppins text-[rgba(76,76,76,1)]"
           />
-          <Link href={ `/all-tests/${testId}` }>
+          <Link href={ `/kyrgyz/` }>
               <CustomButton
             title="Тестти баштоо"
             containerStyles="h-[40px] small:h-[50px] w-[220px] lg:w-[218px] small:w-[360px] small:rounded-[5px] lg:self-end "
             textStyles="font-[500] small:font-[700] text-[18px] small:text-[20px] lg:text-[24px] leading-[30px] font-poppins text-[rgb(255,255,255)]"
           />
-            </Link>
+          </Link>
         </div>
       </div>
     </div>

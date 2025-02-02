@@ -9,6 +9,7 @@ import {
 import TestCarouselCard from "../../../UI/TestCarouselCard";
 import { mockTestsData } from "./mockData";
 import FurtherTestMobile from "./FurtherTestMobile";
+import Link from "next/link";
 const FurtherTestCarousel = () => {
   const slideCount = mockTestsData.length;
   return (
@@ -30,6 +31,7 @@ const FurtherTestCarousel = () => {
               key={item.id}
               className="max-w-[400px] flex justify-center pl-4"
             >
+             <Link href={`/in/all-tests/kyrgyz/${item.id}`}>
               <TestCarouselCard
                 imgSrc={item.imgSrc}
                 testTitle={item.testTitle}
@@ -37,6 +39,7 @@ const FurtherTestCarousel = () => {
                 description={item.description}
                 href="#"
               />
+             </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

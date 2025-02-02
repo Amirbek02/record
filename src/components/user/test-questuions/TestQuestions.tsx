@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Timer from "@/components/UI/timer";
 import Image from "next/image";
-import { useTestContentStore } from "@/lib/store/TestApiStore";
+import { useTestContentStore } from "../../../store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
  
 

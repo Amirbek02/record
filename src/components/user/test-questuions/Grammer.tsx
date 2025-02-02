@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Timer from "@/components/UI/timer";
 import Image from "next/image";
-import { useTestContentStore } from "@/lib/store/TestApiStore";
+import { useTestContentStore } from "../../../store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
 
 type Option = {
@@ -129,7 +129,7 @@ const Grammer = ({ initialTime = 30 * 60 }) => {
           <p className="text-start text-sm sm:text-base lg:text-lg mb-4">Суроо {currentQuestionIndex + 1}/{questions.length}</p>
           <div className="flex flex-col items-center mb-6">
             {currentQuestion.question_text ? (
-              <p className="text-start text-sm sm:text-base lg:text-lg">{currentQuestion.question_text}</p>
+              <p className="text-start text-sm sm:text-base lg:text-lg">{currentQuestion.question_text ? stripHtml(currentQuestion.question_text) : ""}</p>
             ) : (
               currentQuestion.question_image && (
                 <Image src={currentQuestion.question_image} alt="Question Image" width={740} height={210} className="mb-4" />
@@ -149,7 +149,7 @@ const Grammer = ({ initialTime = 30 * 60 }) => {
                   className="w-5 h-5"
                   disabled={testFinished || timeLeft <= 0}
                 />
-                <span className="font-medium">{key}. {text}</span>
+                <span className="font-medium">{key}. {text ? stripHtml(text) : ""}</span>
               </label>
             ))}
           </div>
