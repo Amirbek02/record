@@ -86,11 +86,7 @@ const useVideosStore = create<VideosState>()((set) => ({
         set({ videoCategories: data });
       } else if (type === 'subVideoCategories') {
         set({ subVideoCategories: data });
-<<<<<<< HEAD
       } else if (type === "video") {
-=======
-      } else if (type === 'video') {
->>>>>>> 06b44df6ebe5c395b407537ab9f3ac91ffbf97f1
         set({ video: data as VideoData | null });
       }
     } catch (error) {
