@@ -106,7 +106,7 @@ const Header = () => {
                   <Image src={item.icon} width={23} height={23} alt="" className="" />
                   <h1
                     className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                      pathname === item.path
+                      pathname.startsWith(item.path)
                         ? 'text-[#2E3095] font-bold'
                         : 'text-[#2E3095] font-normal'
                     }`}>
@@ -136,7 +136,7 @@ const Header = () => {
               key={index}
               href={link.href}
               className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === link.href ? 'text-[#2E3095] font-bold' : 'text-[#252641] font-normal'
+                pathname.startsWith(link.href) ? 'text-[#2E3095] font-bold' : 'text-[#252641] font-normal'
               }`}>
               {link.label}
             </Link>

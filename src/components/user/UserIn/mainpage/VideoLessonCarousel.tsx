@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import useVideosStore from "@/store/videoStore/VideosStore";
-
+import userDataStore from "@/store/userDataStore";
 import {
   Carousel,
   CarouselContent,
@@ -74,10 +74,13 @@ const CarouselCardVideo = ({
 const VideoLessonCarousel = () => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/video/`;
   const { fetch, allVideos, error,isLoading } = useVideosStore();
+  const{fetchUserData,userDataState}=userDataStore()
+   const paid=userDataState?.[0].paid
 
   React.useEffect(() => {
-    fetch(url, "videos");
-  }, [fetch, url]);
+    fetch(url, "videos")
+    fetchUserData();
+  }, [fetch, url,fetchUserData]);
   console.log(allVideos);
   const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(
     0,
@@ -116,7 +119,7 @@ const VideoLessonCarousel = () => {
                 testTitle={item.subject_category.subject_category_name}
                 testDescriptionTitle={item.subject_name}
                 description={item.description}
-                disabled={item.is_paid}
+                disabled={paid ? (item.is_paid && paid === "Не оплачено") : item.is_paid}
                 href={`${item.video_category.id}/${item.id}`}
               />
             </CarouselItem>

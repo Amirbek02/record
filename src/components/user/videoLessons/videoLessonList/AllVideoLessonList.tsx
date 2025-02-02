@@ -8,11 +8,14 @@ const AllVideoLessonList = () => {
 
   React.useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/category-video`, 'subVideoCategories');
+
   }, [fetch]);
   console.log('this is a subject', subVideoCategories);
   return (
     <div className="mx-6 flex flex-col gap-10">
-      <VideoLessonsList subvideoCategories={subVideoCategories} isMainTestVideos />
+      <VideoLessonsList subvideoCategories={subVideoCategories}  isMainTestVideos />
+    
+      
     </div>
   );
 };

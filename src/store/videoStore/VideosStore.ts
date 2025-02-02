@@ -31,8 +31,8 @@ export interface VideoData {
   video_url: string;
   video_order: number;
   is_paid: boolean;
-  last_update_date: string; // ISO date string
-  created_date: string; // ISO date string
+  last_update_date: string;
+  created_date: string;
 }
 
 interface VideosState {
@@ -87,7 +87,7 @@ const useVideosStore = create<VideosState>()((set) => ({
       } else if (type === "subVideoCategories") {
         set({ subVideoCategories: data });
       } else if (type === "video") {
-        set({ video: data as VideoData|null });
+        set({ video: data as VideoData | null });
       }
     } catch (error) {
       if (error instanceof Error) {

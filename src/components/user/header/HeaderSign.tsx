@@ -62,13 +62,20 @@ const HeaderSign = () => {
         <div className="flex flex-col gap-[24px] mt-[61px]">
           {link.map((item, index) => (
             <Link href={item.path} key={index} className="flex gap-[16px] items-center">
-              <Image src={item.icon} width={23} height={23} alt="" />
+              <Image src={item.icon} width={23} height={23} alt="image" />
               <h1
-                className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                  pathname === item.path ? 'text-[#2E3095] font-bold' : 'text-[#2E3095] font-normal'
-                }`}>
-                {item.post}
-              </h1>
+  className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
+    item.path === '/in'
+      ? pathname === '/in'
+        ? 'text-[#2E3095] font-bold'
+        : 'text-[#2E3095] font-normal'
+      : pathname.startsWith(item.path)
+      ? 'text-[#2E3095] font-bold'
+      : 'text-[#2E3095] font-normal'
+  }`}>
+  {item.post}
+</h1>
+
             </Link>
           ))}
         </div>
