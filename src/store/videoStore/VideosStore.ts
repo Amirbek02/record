@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 export type SubjectCategory = {
   id: number;
@@ -42,7 +42,7 @@ interface VideosState {
   video: VideoData | null;
   fetch: (
     url: string,
-    type: "videos" | "subCategoryVideos" | "subVideoCategories" | "video"
+    type: 'videos' | 'subCategoryVideos' | 'subVideoCategories' | 'video',
   ) => Promise<void>;
   isLoading: boolean;
   error: string | null;
@@ -59,16 +59,16 @@ const useVideosStore = create<VideosState>()((set) => ({
   fetch: async (url, type) => {
     set({ isLoading: true, error: null });
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (!token) {
-        throw new Error("Token not found. User might not be logged in.");
+        throw new Error('Token not found. User might not be logged in.');
       }
 
       const response = await fetch(url, {
-        method: "GET",
+        method: 'GET',
         headers: {
           // Authorization: `Bearer ${token}`, // Use the dynamic token
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
@@ -77,25 +77,25 @@ const useVideosStore = create<VideosState>()((set) => ({
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data);
+      console.log('Fetched data:', data);
 
       // Update the appropriate state based on the type
-      if (type === "videos") {
+      if (type === 'videos') {
         set({ allVideos: data });
-      } else if (type === "subCategoryVideos") {
+      } else if (type === 'subCategoryVideos') {
         set({ videoCategories: data });
-      } else if (type === "subVideoCategories") {
+      } else if (type === 'subVideoCategories') {
         set({ subVideoCategories: data });
-      } else if (type === "video") {
-        set({ video: data as VideoData|null });
+      } else if (type === 'video') {
+        set({ video: data as VideoData | null });
       }
     } catch (error) {
       if (error instanceof Error) {
-        set({ error: error.message || "Видеону жүктөөдө ката чыкты." });
+        set({ error: error.message || 'Видеону жүктөөдө ката чыкты.' });
       } else {
-        set({ error: "Видеону жүктөөдө ката чыкты." });
+        set({ error: 'Видеону жүктөөдө ката чыкты.' });
       }
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     } finally {
       set({ isLoading: false });
     }

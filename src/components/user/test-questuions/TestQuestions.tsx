@@ -51,7 +51,7 @@ const TestQuestions = ({ initialTime = 30 * 60 }) => {
   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
   const questions: TestContent[] = testContents
-  // .filter(test => test.test.id === ) 
+  .filter(test => test.test.id === 1) 
   // .slice(0, 30);
   
 
@@ -90,9 +90,10 @@ const finishTest = () => {
     let incorrectCount = 0;
 
     questions.forEach((question, index) => {
-        const selectedAnswer = answers[index];
+      const selectedAnswer = answers[index]?.toLowerCase(); 
+      const correctAnswer = question.true_answer.toLowerCase()
         if (selectedAnswer) {
-            if (selectedAnswer === question.true_answer) {
+            if (selectedAnswer === correctAnswer) {
                 correctCount++;
             } else {
                 incorrectCount++;
@@ -105,6 +106,7 @@ const finishTest = () => {
     setTestFinished(true);
 };
 
+
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prev) => prev - 1);
@@ -116,7 +118,7 @@ const finishTest = () => {
   if (testFinished) {
     return (
       <ResultTest
-        emoji={correctAnswers > incorrectAnswers ? "/images/emoji/emoji_1.png" : "/images/emoji/emoji_2.png"} 
+        emoji={correctAnswers > incorrectAnswers ? "/images/goodemogi.png" : "/images/smile.svg"} 
         correct_answers={correctAnswers}
         incorrect_answers={incorrectAnswers}
         total_questions={questions.length}
@@ -125,6 +127,7 @@ const finishTest = () => {
       />
     );
   }
+
   const stripHtml = (html: string) => {
     return html.replace(/<[^>]+>/g, "");
   };
@@ -132,12 +135,12 @@ const finishTest = () => {
   const availableOptions = getAvailableOptions();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 h-screen">
       <div className="text-center mb-8">
         <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
           1-бөлүм. Математика
         </h1>
-        <div className="flex lg:justify-end md:justify-end absolute right-10 justify-center m-3 top-0 right-0">
+        <div className="flex lg:justify-end md:justify-end absolute right-2 justify-center m-3 top-10 right-0">
           <Timer timeLeft={timeLeft} totalTime={totalTime} />
           {timeLeft <= 0 && (
             <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>
@@ -191,7 +194,7 @@ const finishTest = () => {
         </div>
       </div>
 
-      <div className="lg:flex gap-4 md:flex md:justify-end flex-none justify-center mt-8">
+      <div className="lg:flex gap-4 flex flex-col md:flex md:flex-row md:justify-end  justify-center mt-8">
         <button
           onClick={handlePrev}
           disabled={currentQuestionIndex === 0}

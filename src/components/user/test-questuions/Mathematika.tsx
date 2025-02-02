@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Timer from "@/components/UI/timer";
 import Image from "next/image";
-import { useTestContentStore } from "@/lib/store/TestApiStore";
+import { useTestContentStore } from "../../../store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
  
 
@@ -86,23 +86,25 @@ const currentQuestion = questions[currentQuestionIndex];
 };
 
 const finishTest = () => {
-    let correctCount = 0;
-    let incorrectCount = 0;
+  let correctCount = 0;
+  let incorrectCount = 0;
+  console.log('answers', answers);
 
-    questions.forEach((question, index) => {
-        const selectedAnswer = answers[index];
-        if (selectedAnswer) {
-            if (selectedAnswer === question.true_answer) {
-                correctCount++;
-            } else {
-                incorrectCount++;
-            }
-        }
-    });
+  questions.forEach((question, index) => {
+    const selectedAnswer = answers[index]?.toLowerCase(); 
+    const correctAnswer = question.true_answer.toLowerCase()
+      if (selectedAnswer) {
+          if (selectedAnswer === correctAnswer) {
+              correctCount++;
+          } else {
+              incorrectCount++;
+          }
+      }
+  });
 
-    setCorrectAnswers(correctCount);
-    setIncorrectAnswers(incorrectCount);
-    setTestFinished(true);
+  setCorrectAnswers(correctCount);
+  setIncorrectAnswers(incorrectCount);
+  setTestFinished(true);
 };
 
   const handlePrev = () => {

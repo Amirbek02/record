@@ -50,7 +50,7 @@ const FurtherTestCarousel = () => {
         <CarouselContent className="ml-4 py-2">
           {subjectCategoryTests.map((item) => (
             <CarouselItem key={item.id} className="max-w-[400px] flex justify-center pl-4">
-              <Link href={`/in/all-tests/${item.test_category?.id}/${item.id}`}>
+              <Link href={`/in/all-tests/${item.subject_category.id}/${item.id}`}>
                 <TestCarouselCard
                   imgSrc={item.background_image}
                   testTitle={item.test_category.test_category_name}

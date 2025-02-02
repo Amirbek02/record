@@ -39,6 +39,7 @@ const getToken = (): string | null => {
   }
   return null;
 };
+
 const useTrialTestStore = create<TrialTestState>((set) => ({
   data: [],
   loading: false,

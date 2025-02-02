@@ -43,7 +43,7 @@ const getToken = (): string | null => {
 };
 
 const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NTAyOTMwLCJpYXQiOjE3Mzg1MDI2MzAsImp0aSI6IjZmNzc0MDg3MDczYTRmMmFhZmJmMWRiNjEzNWU5YTVhIiwidXNlcl9pZCI6MTF9.wUAz1YsihLzYp4retXZTPbtMvUWtZT059dygDrVOe2g";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NTEzNzgwLCJpYXQiOjE3Mzg1MTM0ODAsImp0aSI6IjViM2JhN2U2MzZhNzRmMTRiYWY0ODVkYjM5MWMwNDc4IiwidXNlcl9pZCI6MTF9.oR_5qC4hmdbfaapLY_9wWxUTp9kHezULoLaR9TbvPmc";
 const userInTests = create<TrialTestState>((set) => ({
 	data: [],
 	loading: false,
