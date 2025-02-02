@@ -1,30 +1,30 @@
-'use client';
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+"use client";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { label: 'Башкы бет', href: '/' },
-  { label: 'Сынамык тест', href: '/exam-test' },
-  { label: 'Видео сабак', href: '/#videoLessons' },
+  { label: "Башкы бет", href: "/" },
+  { label: "Сынамык тест", href: "/exam-test" },
+  { label: "Видео сабак", href: "/#videoLessons" },
 ];
 
 const link = [
   {
-    path: '/',
-    icon: '/icons/home.svg',
-    post: 'Башкы бет',
+    path: "/",
+    icon: "/icons/home.svg",
+    post: "Башкы бет",
   },
   {
-    path: '/exam-test',
-    icon: '/icons/test.svg',
-    post: 'Тест',
+    path: "/exam-test",
+    icon: "/icons/test.svg",
+    post: "Тест",
   },
   {
-    path: '/#videoLessons',
-    icon: '/icons/pc.svg',
-    post: 'Видео сабак',
+    path: "/#videoLessons",
+    icon: "/icons/pc.svg",
+    post: "Видео сабак",
   },
 ];
 
@@ -42,14 +42,14 @@ const Header = () => {
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node) &&
-        !(event.target as HTMLElement).closest('button')
+        !(event.target as HTMLElement).closest("button")
       ) {
         setSidebarOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -77,7 +77,8 @@ const Header = () => {
                   className="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 17 14">
+                  viewBox="0 0 17 14"
+                >
                   <path
                     stroke="currentColor"
                     strokeLinecap="round"
@@ -94,22 +95,35 @@ const Header = () => {
           <aside
             ref={sidebarRef}
             className={` flex flex-col items-center fixed top-[68px] left-[-15px] w-[296px] h-full bg-[#FFFF] transform ${
-              isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+              isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } transition-transform duration-300 z-100`}
             style={{
-              borderRadius: '0px 40px 40px 0px',
-              boxShadow: ' 10px 4px 4px 0px rgba(229, 229, 255, 0.54)',
-            }}>
+              borderRadius: "0px 40px 40px 0px",
+              boxShadow: " 10px 4px 4px 0px rgba(229, 229, 255, 0.54)",
+            }}
+          >
             <div className="flex flex-col gap-[24px] mt-[61px]">
               {link.map((item, index) => (
-                <Link href={item.path} key={index} className="flex gap-[16px] items-center">
-                  <Image src={item.icon} width={23} height={23} alt="" className="" />
+                <Link
+                  href={item.path}
+                  key={index}
+                  className="flex gap-[16px] items-center"
+                  onClick={toggleSidebar}
+                >
+                  <Image
+                    src={item.icon}
+                    width={23}
+                    height={23}
+                    alt=""
+                    className=""
+                  />
                   <h1
                     className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
                       pathname === item.path
-                        ? 'text-[#2E3095] font-bold'
-                        : 'text-[#2E3095] font-normal'
-                    }`}>
+                        ? "text-[#2E3095] font-bold"
+                        : "text-[#2E3095] font-normal"
+                    }`}
+                  >
                     {item.post}
                   </h1>
                 </Link>
@@ -136,8 +150,11 @@ const Header = () => {
               key={index}
               href={link.href}
               className={`lg:text-[20px] xl:text-[22px] md:text-[16px] ${
-                pathname === link.href ? 'text-[#2E3095] font-bold' : 'text-[#252641] font-normal'
-              }`}>
+                pathname === link.href
+                  ? "text-[#2E3095] font-bold"
+                  : "text-[#252641] font-normal"
+              }`}
+            >
               {link.label}
             </Link>
           ))}
