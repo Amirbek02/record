@@ -1,50 +1,79 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import NextPrevButtons from "../../../UI/nextPrevButtons";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselDots,
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselDots,
 } from "@/components/UI/carousel";
 import TestCarouselCard from "../../../UI/TestCarouselCard";
 import { mockTestsData } from "./mockData";
 import FurtherTestMobile from "./FurtherTestMobile";
+import { useParams } from "next/navigation";
+import userInTests from "@/store/userInTests";
+import Link from "next/link";
+
 const FurtherTestCarousel = () => {
-  const slideCount = mockTestsData.length;
-  return (
-    <div className="flex flex-col pb-10 pl-4  gap-8 items-end mt-3">
-      <h1 className="text-2xl font-bold text-red self-start ml-11 -mb-4">
-        ЖРТ га даярдоо
-      </h1>
-      <h1 className="font-semibold text-[22px] self-start ml-11 -mb-2">
-        Математика
-      </h1>
-      <FurtherTestMobile testData={mockTestsData} />
-      <Carousel
-        opts={{ loop: true, align: "center", containScroll: "trimSnaps" }}
-        className="  relative hidden md:block w-[95%] max-w-[1440px]"
-      >
-        <CarouselContent className="ml-4 py-2">
-          {mockTestsData.map((item) => (
-            <CarouselItem
-              key={item.id}
-              className="max-w-[400px] flex justify-center pl-4"
-            >
-              <TestCarouselCard
-                imgSrc={item.imgSrc}
-                testTitle={item.testTitle}
-                testDescriptionTitle={item.testDescriptionTitle}
-                description={item.description}
-                href="#"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {slideCount > 2 && <CarouselDots className="mt-[50px]" />}
-      </Carousel>
-      <NextPrevButtons />
-    </div>
-  );
+	const { test, getTests } = userInTests();
+	const params = useParams();
+	const slug = params?.slug;
+	const idParams = Array.isArray(slug) ? Number(slug[0]) : undefined;
+	console.log(idParams);
+
+	console.log(test);
+
+	useEffect(() => {
+		getTests();
+	}, [getTests]);
+
+	const subjectCategoryIds = test.filter(
+		(test) => test.test_category?.id === idParams
+	);
+
+	console.log(subjectCategoryIds);
+
+	const testCategory = subjectCategoryIds.find(
+		(el) => el.test_category?.test_category_name
+	)?.test_category?.test_category_name;
+	console.log(testCategory);
+
+	const slideCount = mockTestsData.length;
+
+	return (
+		<div className="flex flex-col pb-10 pl-4  gap-8 items-end mt-3 max-w-[1440px]">
+			<h1 className="text-2xl font-bold text-red self-start ml-11 -mb-4">
+				ЖРТ га даярдоо
+			</h1>
+			<h1 className="font-semibold text-[22px] self-start ml-11 -mb-2">
+				{testCategory}
+			</h1>
+			<FurtherTestMobile testData={mockTestsData} />
+			<Carousel
+				opts={{ loop: true, align: "center", containScroll: "trimSnaps" }}
+				className="relative hidden md:block ">
+				<CarouselContent className="ml-4 py-2">
+					{subjectCategoryIds.map((item) => (
+						<Link href={`/in/all-tests/1/${item.id}`}>
+							<CarouselItem
+								key={item.id}
+								className="max-w-[400px] flex justify-center pl-4">
+								<TestCarouselCard
+									imgSrc={item.background_image}
+									testTitle={item.test_category.test_category_name}
+									testDescriptionTitle={item.title}
+									description={item.description}
+									href="#"
+								/>
+							</CarouselItem>
+						</Link>
+					))}
+				</CarouselContent>
+				{slideCount > 2 && <CarouselDots className="mt-[50px]" />}
+			</Carousel>
+			<NextPrevButtons />
+		</div>
+	);
 };
 
 export default FurtherTestCarousel;
