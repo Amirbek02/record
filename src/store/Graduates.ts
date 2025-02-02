@@ -20,7 +20,6 @@ interface GraduatesState {
   error: string | null;
   fetchGraduates: () => Promise<void>;
 }
-
 export const useGraduates = create<GraduatesState>((set) => ({
   graduates: [],
   isLoading: false,

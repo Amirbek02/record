@@ -46,7 +46,7 @@ const HeaderSign = () => {
           boxShadow: '10px 4px 4px 0px rgba(229, 229, 255, 0.54)',
         }}>
         <div className="flex flex-col items-center mb-[70px]">
-          <Link href="/in">
+          <Link href="/">
             <Image
               src="/images/logo.svg"
               alt=""

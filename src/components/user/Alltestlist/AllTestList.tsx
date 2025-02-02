@@ -3,8 +3,10 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import TestCardNoSign from '@/components/UI/TestCardNoSign';
 import useTrialTestStore from '@/store/TrialTest';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 
 const AllTestList = () => {
+  useAxiosInterceptors();
   const { data, loading, error, getSub } = useTrialTestStore();
 
   useEffect(() => {
