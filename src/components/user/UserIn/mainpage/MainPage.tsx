@@ -3,6 +3,7 @@ import React from 'react';
 import Banner from './Banner';
 import MainTestCarousel from './MainTestCarousel';
 import VideoLessonCarousel from './VideoLessonCarousel';
+import withAuth from '@/utils/withAuth';
 
 const MainPage = () => {
   return (
@@ -14,4 +15,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default withAuth(MainPage);

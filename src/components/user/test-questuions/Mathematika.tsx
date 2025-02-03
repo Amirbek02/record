@@ -1,10 +1,11 @@
 'use client';
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter,useParams } from "next/navigation";
 import Timer from "@/components/UI/timer";
 import Image from "next/image";
 import { useTestContentStore } from "@/store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
+import useTestStore from "@/store/useTestStore";
  
 
 interface TestContent {
@@ -28,15 +29,17 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [testFinished, setTestFinished] = useState(false);
   const totalTime = initialTime;
-  const { testContents, isLoading, error, fetchTestContents, } = useTestContentStore();
+  const { testContents, isLoading, error, filteredTests,filterByCategory } = useTestStore();
 
+const params = useParams();
+const slug = params?.slug;
+const idParams = Array.isArray(slug) ? Number(slug[1]) : Number(slug);
 
+  React.useEffect(() => {
+    filterByCategory(2);
+  }, [filterByCategory,idParams]);
 
-  useEffect(() => {
-    fetchTestContents();
-  }, []);
-
-  
+  console.log(filteredTests,'FILTERED')
   useEffect(() => {
     if (timeLeft <= 0) {
       finishTest();

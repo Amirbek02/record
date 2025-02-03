@@ -1,11 +1,11 @@
-'use client';
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { link } from './HeaderSign';
-import Link from 'next/link';
-import { Modal } from '../../UI/modal';
-import { usePathname } from 'next/navigation';
+"use client";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { link } from "./HeaderSign";
+import Link from "next/link";
+import { Modal } from "../../UI/modal";
+import { usePathname } from "next/navigation";
 
 const HeaderSearch = () => {
 	const pathname = usePathname();
@@ -21,7 +21,8 @@ const HeaderSearch = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
+        !sidebarRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest("button")
       ) {
         setSidebarOpen(false);
       }
@@ -95,6 +96,10 @@ const HeaderSearch = () => {
               href={item.path}
               key={index}
               className="flex gap-[16px] items-center"
+<<<<<<< HEAD
+=======
+              onClick={toggleSidebar}
+>>>>>>> 00f192672742c21977c0271435169960cfaeb114
             >
               <Image
                 src={item.icon}

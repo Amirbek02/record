@@ -15,7 +15,7 @@ const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     1: <FurtherTestCarousel />,
     2: <TakeTest />,
     3: <TestExample/>,
-    4:[<Analogies/>,<Grammer/>,<Mathematika/>],
+    4:<Mathematika/>,
     5: <GoodResultTest/>,
 
     // Add more routes/components as needed
