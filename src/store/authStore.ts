@@ -66,9 +66,7 @@ const useAuthStore = create<AuthState>()(
             refreshToken: data.refresh,
             isAuthenticated: true,
           });
-
-          // Refresh токенди cookie'ге сактайбыз
-          Cookies.set('refreshToken', data.refresh, { expires: 7 }); // 7 күнгө жарамдуу
+          Cookies.set('refreshToken', data.refresh, { expires: 7 });
           localStorage.setItem('token', data.access);
           console.log('Кирүү ийгиликтүү аяктады:', data);
         } catch (error: unknown) {
