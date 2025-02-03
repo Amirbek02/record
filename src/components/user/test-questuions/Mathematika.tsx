@@ -86,23 +86,25 @@ const currentQuestion = questions[currentQuestionIndex];
 };
 
 const finishTest = () => {
-    let correctCount = 0;
-    let incorrectCount = 0;
+  let correctCount = 0;
+  let incorrectCount = 0;
+  console.log('answers', answers);
 
-    questions.forEach((question, index) => {
-        const selectedAnswer = answers[index];
-        if (selectedAnswer) {
-            if (selectedAnswer === question.true_answer) {
-                correctCount++;
-            } else {
-                incorrectCount++;
-            }
-        }
-    });
+  questions.forEach((question, index) => {
+    const selectedAnswer = answers[index]?.toLowerCase(); 
+    const correctAnswer = question.true_answer.toLowerCase()
+      if (selectedAnswer) {
+          if (selectedAnswer === correctAnswer) {
+              correctCount++;
+          } else {
+              incorrectCount++;
+          }
+      }
+  });
 
-    setCorrectAnswers(correctCount);
-    setIncorrectAnswers(incorrectCount);
-    setTestFinished(true);
+  setCorrectAnswers(correctCount);
+  setIncorrectAnswers(incorrectCount);
+  setTestFinished(true);
 };
 
   const handlePrev = () => {

@@ -7,9 +7,15 @@ import { useTestContentStore } from "../../../store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
 
 type Option = {
-    key: string;
-    text: string;
-    true_answer: string;
+  key: string;
+  text: string;
+  true_answer: string;
+  question_image?: string;
+  question_text?: string;
+  var_A_text?: string;
+  var_B_text?: string;
+  var_C_text?: string;
+  var_D_text?: string;
 }
 
 const Grammer = ({ initialTime = 30 * 60 }) => {
@@ -40,17 +46,20 @@ const Grammer = ({ initialTime = 30 * 60 }) => {
   if (error) return <p>Ката кетти: {error}</p>;
   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
-  const questions = testContents.filter(test => test.test?.id === 3);
+  const questions : Option[] = testContents.filter(test => test.test?.id === 5);
   const currentQuestion = questions[currentQuestionIndex];
   
   const getAvailableOptions = (): Option[] => {
-    return [
-      { key: "А", text: currentQuestion.var_A_text },
-      { key: "Б", text: currentQuestion.var_B_text },
-      { key: "В", text: currentQuestion.var_C_text },
-      { key: "Г", text: currentQuestion.var_D_text }
-    ].filter(option => option.text);
+    const options: Option[] = [
+      { key: "А", text: currentQuestion.var_A_text || "" },
+      { key: "Б", text: currentQuestion.var_B_text || "" },
+      { key: "В", text: currentQuestion.var_C_text || "" },
+      { key: "Г", text: currentQuestion.var_D_text || "" }
+    ];
+  
+    return options.filter(option => option.text); 
   };
+  
 
   const handleAnswerSelect = (option: string) => {
     if (timeLeft > 0) {
@@ -72,22 +81,24 @@ const Grammer = ({ initialTime = 30 * 60 }) => {
   const finishTest = () => {
     let correctCount = 0;
     let incorrectCount = 0;
+    console.log('answers', answers);
 
     questions.forEach((question, index) => {
-      const selectedAnswer = answers[index];
-      if (selectedAnswer) {
-        if (selectedAnswer === question.true_answer) {
-          correctCount++;
-        } else {
-          incorrectCount++;
+      const selectedAnswer = answers[index]?.toLowerCase(); 
+      const correctAnswer = question.true_answer.toLowerCase()
+        if (selectedAnswer) {
+            if (selectedAnswer === correctAnswer) {
+                correctCount++;
+            } else {
+                incorrectCount++;
+            }
         }
-      }
     });
 
     setCorrectAnswers(correctCount);
     setIncorrectAnswers(incorrectCount);
     setTestFinished(true);
-  };
+};
 
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
@@ -137,7 +148,7 @@ const Grammer = ({ initialTime = 30 * 60 }) => {
             )}
           </div>
 
-          <div className="flex flex-wrap gap-8 justify-center mt-4">
+          <div className="flex flex-col gap-8 justify-center mt-4">
             {availableOptions.map(({ key, text }) => (
               <label key={`${currentQuestionIndex}-${key}`} className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded">
                 <input

@@ -6,14 +6,16 @@ import { Button } from "../UI/button";
 import SendResult from "./SendResult";
 
 import Image from "next/image";
+
 export interface ResultProps {
   correct_answers: number;
   incorrect_answers: number;
   total_questions: number;
   time_spent: number;
   emoji: string;
-  subjectName:string;
+  subjectName: string;
 }
+
 const ResultTest: React.FC<ResultProps> = ({
   correct_answers,
   incorrect_answers,
@@ -39,7 +41,7 @@ const ResultTest: React.FC<ResultProps> = ({
   }, []);
 
   return (
-    <div>
+    <div className="relative">
       <h4 className="lg:text-[32px] text-xl font-medium text-darkGrey text-center mt-5">{subjectName}</h4>
       <p className="lg:text-[28px] md:text-lg font-normal text-darkGrey hidden md:block text-center py-10">
         Тестти аткаруунун жыйынтыгы
@@ -54,7 +56,8 @@ const ResultTest: React.FC<ResultProps> = ({
         incorrect_answers={incorrect_answers}
         total_questions={total_questions}
       />
-      {!(sendResult && isSmallScreen) && (
+
+      {!sendResult && !isSmallScreen && (
         <Image
           src={emoji}
           alt="emoji"
@@ -63,6 +66,7 @@ const ResultTest: React.FC<ResultProps> = ({
           className="mx-auto mb-5 mt-3 md:w-[150px] md:h-[150px]"
         />
       )}
+
       {sendResult ? (
         <SendResult />
       ) : (

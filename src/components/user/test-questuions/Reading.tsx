@@ -6,19 +6,20 @@ import Image from "next/image";
 import { useTestContentStore } from "../../../store/TestApiStore";
 import ResultTest from "../../user/ResultTest";
 
-type Option = {
-    key: string;
-    text: string;
+type Question = {
+    id: number;
+    question: number;
+    question_number: number;
+    question_text: string;
+    var_A_text: string;
+    var_B_text: string;
+    var_C_text: string;
+    var_D_text: string;
+    var_E_text: string;
     true_answer: string;
-    guestion_image?: string;
-    question_text?: string;
-    var_A_text?: string;
-    var_B_text?: string;
-    var_C_text?: string;
-    var_D_text?: string;
 }
 
-const Analogies = ({ initialTime = 30 * 60 }) => {
+const Reading = ({ initialTime = 30 * 60 }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -26,12 +27,12 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [testFinished, setTestFinished] = useState(false);
   const totalTime = initialTime;
-  const { testContents, isLoading, error, fetchTestContents } = useTestContentStore();
+  const { testContents, isLoading, error, fetchTestContentsReady } = useTestContentStore();
   const router = useRouter();
 
   useEffect(() => {
-    fetchTestContents();
-  }, []);
+    fetchTestContentsReady();
+  }, [fetchTestContentsReady]);
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -46,21 +47,24 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
   if (error) return <p>Ката кетти: {error}</p>;
   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
-  const questions: Option[] = testContents.filter(test => test?.test?.id === 3);
+
+  const questions: Question[] = testContents.filter(test => test.question === 3);
   const currentQuestion = questions[currentQuestionIndex];
-  
-  const getAvailableOptions = (): Option[] => {
+
+  const getAvailableOptions = () => {
+    if (!currentQuestion) return [];
+    
     return [
-      { key: "А", text: currentQuestion.var_A_text || "" },
-      { key: "Б", text: currentQuestion.var_B_text || "" },
-      { key: "В", text: currentQuestion.var_C_text || "" },
-      { key: "Г", text: currentQuestion.var_D_text || "" }
+      { key: "А", text: currentQuestion.var_A_text },
+      { key: "Б", text: currentQuestion.var_B_text },
+      { key: "В", text: currentQuestion.var_C_text },
+      { key: "Г", text: currentQuestion.var_D_text }
     ].filter(option => option.text);
   };
 
   const handleAnswerSelect = (option: string) => {
     if (timeLeft > 0) {
-      setAnswers((prev) => ({
+      setAnswers(prev => ({
         ...prev,
         [currentQuestionIndex]: option
       }));
@@ -69,7 +73,7 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
 
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+      setCurrentQuestionIndex(prev => prev + 1);
     } else {
       finishTest();
     }
@@ -78,28 +82,27 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
   const finishTest = () => {
     let correctCount = 0;
     let incorrectCount = 0;
-    console.log('answers', answers);
 
     questions.forEach((question, index) => {
-      const selectedAnswer = answers[index]?.toLowerCase(); 
-      const correctAnswer = question.true_answer.toLowerCase()
-        if (selectedAnswer) {
-            if (selectedAnswer === correctAnswer) {
-                correctCount++;
-            } else {
-                incorrectCount++;
-            }
+      const selectedAnswer = answers[index]?.toLowerCase();
+      const correctAnswer = question.true_answer.toLowerCase();
+      if (selectedAnswer) {
+        if (selectedAnswer === correctAnswer) {
+          correctCount++;
+        } else {
+          incorrectCount++;
         }
+      }
     });
 
     setCorrectAnswers(correctCount);
     setIncorrectAnswers(incorrectCount);
     setTestFinished(true);
-};
+  };
 
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
+      setCurrentQuestionIndex(prev => prev - 1);
     }
   };
 
@@ -111,43 +114,49 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
         incorrect_answers={incorrectAnswers}
         total_questions={questions.length}
         time_spent={totalTime - timeLeft}
-        subjectName="Математика"
+        subjectName="Окуу жана түшүнүү"
       />
     );
   }
 
   const stripHtml = (html: string) => {
-    return html.replace(/<[^>]+>/g, "");
+    return html?.replace(/<[^>]+>/g, "") || "";
   };
+
+  // Add safety check for currentQuestion
+  if (!currentQuestion) {
+    return <p>Суроо табылган жок</p>;
+  }
 
   const availableOptions = getAvailableOptions();
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">1-бөлүм. Окшоштуктар</h1>
+        <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">2-бөлүм. Окуу жана түшүнүү</h1>
         <div className="flex lg:justify-end md:justify-end absolute right-10 justify-center m-3 top-0 right-0">
           <Timer timeLeft={timeLeft} totalTime={totalTime} />
-          {timeLeft <= 0 && <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>}
+          {timeLeft <= 0 && <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бүттү!</p>}
         </div>
       </div>
 
       <div className="relative flex flex-col items-center justify-center">
         <div className="w-full">
-          <p className="text-start text-sm sm:text-base lg:text-lg mb-4">Суроо {currentQuestionIndex + 1}/{questions.length}</p>
+          <p className="text-start text-sm sm:text-base lg:text-lg mb-4">
+            Суроо {currentQuestionIndex + 1}/{questions.length}
+          </p>
           <div className="flex flex-col mb-6">
-            {currentQuestion.question_text ? (
-              <p className="text-start text-sm sm:text-base lg:text-lg">{currentQuestion.question_text ? stripHtml(currentQuestion.question_text) : ""}</p>
-            ) : (
-              currentQuestion.question_image   && (
-                <Image src={currentQuestion.question_image} alt="Question Image" width={740} height={210} className="mb-4" />
-              )
-            )}
+            <div className="text-start text-sm sm:text-base lg:text-lg">
+              {stripHtml(currentQuestion.question_text)}
+            </div>
           </div>
 
           <div className="flex flex-col gap-8 justify-center mt-4">
             {availableOptions.map(({ key, text }) => (
-              <label key={`${currentQuestionIndex}-${key}`} className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded">
+              <label
+                key={`${currentQuestionIndex}-${key}`}
+                className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded"
+              >
                 <input
                   type="radio"
                   name={`question-${currentQuestionIndex}`}
@@ -157,7 +166,7 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
                   className="w-5 h-5"
                   disabled={testFinished || timeLeft <= 0}
                 />
-                <span className="font-medium">{key}. {text ? stripHtml(text) : ""}</span>
+                <span className="font-medium">{key}. {stripHtml(text)}</span>
               </label>
             ))}
           </div>
@@ -165,11 +174,22 @@ const Analogies = ({ initialTime = 30 * 60 }) => {
       </div>
 
       <div className="lg:flex gap-4 md:flex md:justify-end flex-none justify-center mt-8">
-        <button onClick={handlePrev} disabled={currentQuestionIndex === 0} className="border text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl">Артка</button>
-        <button onClick={handleNext} className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl">{currentQuestionIndex === questions.length - 1 ? "Аяктоо" : "Алдыга"}</button>
+        <button
+          onClick={handlePrev}
+          disabled={currentQuestionIndex === 0}
+          className="border text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl"
+        >
+          Артка
+        </button>
+        <button
+          onClick={handleNext}
+          className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl"
+        >
+          {currentQuestionIndex === questions.length - 1 ? "Аяктоо" : "Алдыга"}
+        </button>
       </div>
     </div>
   );
 };
 
-export default Analogies;
+export default Reading;

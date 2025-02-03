@@ -91,4 +91,21 @@ export const useTestContentStore = create<TestContentStore>((set) => ({
       });
     }
   },
+  fetchTestContentsReady: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await createAxiosInstance(ACCESS_TOKEN).get("/okup-tushunuu-questions/");
+      set({
+        testContents: response.data,
+        isLoading: false
+      });
+      console.log('Test Contents:', response.data);
+    } catch (error: any) {
+      const data = await handleApiError(error, "/okup-tushunuu-questions/", set);
+      set({
+        testContents: data,
+        isLoading: false
+      });
+    }
+  }
 }));

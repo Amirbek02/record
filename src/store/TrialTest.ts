@@ -33,12 +33,13 @@ interface TrialTestState {
   getSubById: (id: number) => Promise<void>;
 }
 
-// const getToken = (): string | null => {
-//   if (typeof window !== 'undefined') {
-//     return localStorage.getItem('token');
-//   }
-//   return null;
-// };
+const getToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+};
+
 const useTrialTestStore = create<TrialTestState>((set) => ({
   data: [],
   loading: false,
