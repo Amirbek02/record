@@ -7,35 +7,35 @@ import { useEffect } from "react";
 import  Link  from "next/link";
 
 const TakeTest = () => {
-	const { test, getTests } = userInTests();
+	const { testt,  getSubById } = userInTests();
 	const params = useParams();
 	const slug = params?.slug;
-	const idParams = Array.isArray(slug) ? Number(slug[1]) : undefined;
+	const idParams = Array.isArray(slug) ? Number(slug[1]) : Number(slug);
 	console.log(idParams);
   const router = useRouter();
 
-
+console.log(testt,'TESTTTTTT')
 	useEffect(() => {
-		getTests();
-	}, [getTests]);
-	console.log(test);
+		getSubById(idParams);
+	}, [getSubById,idParams]);
+	
 
-	const testCategoryFilter = test.filter((test) => test.id === idParams);
-	const descr = testCategoryFilter.map((el) => el.description).join("");
+	// const testCategoryFilter = test.filter((test) => test.id === idParams);
+	// const descr = testCategoryFilter.map((el) => el.description).join("");
 
-	console.log(descr);
+	// console.log(descr);
 
-	const categoryName = testCategoryFilter.map(
-		(el) => el.test_category.test_category_name
-	);
-	const title = testCategoryFilter.map((el) => el.title);
+	// const categoryName = testCategoryFilter.map(
+	// 	(el) => el.test_category.test_category_name
+	// );
+	// const title = testCategoryFilter.map((el) => el.title);
 
 	return (
 		<div>
 			<div className="flex justify-center items-center flex-col px-[15px]  small:px-[35px] pb-[120px] pt-[40px] ">
 				<div className="flex justify-center items-center flex-col ">
 					<p className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] lg:hidden">
-						{categoryName}
+						{testt?.test_category?.test_category_name}
 					</p>
 					{/* <p className="font-montserrat text-[#4c4c4c] underline decoration-solid  text-[32px] font-[500] leading-[39px] tracking-[0.2px] hidden lg:block">
 						{title}
@@ -44,9 +44,9 @@ const TakeTest = () => {
 
 				<div className="pt-[24px] pb-[60px]">
 					<h2 className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] pb-[24px] lg:hidden">
-						{title}
+						{testt?.title}
 					</h2>
-					<p>{descr}</p>
+					<p>{testt?.description}</p>
 					{/* <p className="font-montserrat text-[#4c4c4c] text-[28px] font-[600] leading-[80%] tracking-[0.2px] hidden lg:block">
 						Негизги тест
 					</p>
@@ -104,13 +104,13 @@ const TakeTest = () => {
 						containerStyles="hidden lg:block bg-[rgba(224,224,224,1)] h-[40px] small:h-[50px] w-[220px] lg:w-[185px]  small:rounded-[5px] lg:self-end mr-[16px] "
 						textStyles="font-[500] small:font-[700] text-[18px] small:text-[20px] lg:text-[24px] leading-[30px] font-poppins text-[rgba(76,76,76,1)]"
 					/>
-					{/* <Link href={`${router}/о`}> */}
+					<Link href={`/in/all-tests/${testt?.test_category?.id}/${testt?.subject_category?.id}/${testt?.id}`}>
           <CustomButton
 						title="Тестти баштоо"
 						containerStyles="h-[40px] small:h-[50px] w-[220px] lg:w-[218px] small:w-[360px] small:rounded-[5px] lg:self-end "
 						textStyles="font-[500] small:font-[700] text-[18px] small:text-[20px] lg:text-[24px] leading-[30px] font-poppins text-[rgb(255,255,255)]"
 					/>
-          {/* </Link> */}
+          </Link>
 				</div>
 			</div>
 		</div>

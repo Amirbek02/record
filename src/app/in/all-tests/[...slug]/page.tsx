@@ -4,6 +4,9 @@ import TakeTest from "@/components/user/TakeTest";
 import TestExample from "@/components/user/example/TestExample";
 import TestIII from "@/components/user/test-questuions/TestQuestions";
 import GoodResultTest from "@/components/user/UserIn/GoodResultTest";
+import Mathematika from "@/components/user/test-questuions/Mathematika";
+import Grammer from "@/components/user/test-questuions/Grammer";
+import Analogies from "@/components/user/test-questuions/Analogies"
 
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;
@@ -12,7 +15,7 @@ const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     1: <FurtherTestCarousel />,
     2: <TakeTest />,
     3: <TestExample/>,
-    4: <TestIII />,
+    4:[<Analogies/>,<Grammer/>,<Mathematika/>],
     5: <GoodResultTest/>,
 
     // Add more routes/components as needed

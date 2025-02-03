@@ -1,5 +1,8 @@
+'use client'
 import Link from "next/link";
 import React from "react";
+import userInTests from "@/store/userInTests";
+import { useParams } from "next/navigation";
 
 interface ExamplePageProps {
   testId: number;
@@ -32,7 +35,19 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
   backButtonText,
   startButtonText,
 }) => {
+  const { testt,  getSubById } = userInTests();
+const params = useParams();
+const slug = params?.slug;
+const idParams = Array.isArray(slug) ? Number(slug[1]) : Number(slug);
+console.log(idParams);
+
+
+console.log(testt,'TESTTTTTT')
+React.useEffect(() => {
+  getSubById(idParams);
+}, [getSubById,idParams]);
   return (
+	
     <div className="max-w-6xl mx-auto px-4 py-8">
       {comparisonDetails.points.map((point, index) => (
         <div key={index} className="text-center mb-3 sm:mb-8">
@@ -100,7 +115,7 @@ const ExamplePage: React.FC<ExamplePageProps> = ({
         <button className="border text-xs sm:text-xl font-semibold bg-[#E0E0E0] hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-[10px]">
           {backButtonText}
         </button>
-        <Link href={`/test/${testId}`}>
+        <Link href={`/in/all-tests/${testt?.test_category?.id}/${testt?.subject_category?.id}/${testt?.id}/4-${testt?.id}`}>
         <button className="border text-xs sm:text-xl font-semibold text-white bg-blue-800  hover:bg-sky-800 w-full md:w-[245px] py-2 rounded-[10px]">
           {startButtonText}
         </button>

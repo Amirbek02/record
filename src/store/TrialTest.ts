@@ -33,12 +33,12 @@ interface TrialTestState {
   getSubById: (id: number) => Promise<void>;
 }
 
-const getToken = (): string | null => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('token');
-  }
-  return null;
-};
+// const getToken = (): string | null => {
+//   if (typeof window !== 'undefined') {
+//     return localStorage.getItem('token');
+//   }
+//   return null;
+// };
 const useTrialTestStore = create<TrialTestState>((set) => ({
   data: [],
   loading: false,
@@ -46,12 +46,16 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   test: [],
   getSub: async () => {
     set({ loading: true, error: null });
-    try {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("Token not found. User might not be logged in.");
+        }
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -67,11 +71,12 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getSubById: async (id: number) => {
     set({ loading: true, error: null });
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/test/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -87,9 +92,10 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getTest: async () => {
     set({ loading: true, error: null });
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`, {
         headers: {
-          Authorization: `Bearer ${getToken()}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       set({ test: response.data, loading: false });
