@@ -47,16 +47,12 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   test: [],
   getSub: async () => {
     set({ loading: true, error: null });
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("Token not found. User might not be logged in.");
-        }
+    try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -72,15 +68,11 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getSubById: async (id: number) => {
     set({ loading: true, error: null });
     try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/test/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/test/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
         },
-      );
+      });
       set({ data: [response.data], loading: false });
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -93,10 +85,9 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   getTest: async () => {
     set({ loading: true, error: null });
     try {
-      const token = localStorage.getItem("token");
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ test: response.data, loading: false });

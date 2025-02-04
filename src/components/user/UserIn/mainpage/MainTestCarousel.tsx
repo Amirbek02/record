@@ -1,18 +1,16 @@
-import React from "react";
-import { mockTestsData } from "../furtherTests/mockData";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselDots,
-} from "@/components/UI/carousel";
+'use client';
+import React, { useEffect } from 'react';
+import { Carousel, CarouselContent, CarouselItem, CarouselDots } from '@/components/UI/carousel';
 import {
   TestCard,
   TestCardMedia,
   TestCardTitle,
   TestCardSubtitle,
   TestCardDescription,
-} from "@/components/UI/TestCard";
+} from '@/components/UI/TestCard';
+import useTestStore from '@/store/useTestStore';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
+import Link from 'next/link';
 
 interface TestProps {
   testTitle: string;
@@ -32,10 +30,8 @@ const CarouselCard = ({
   return (
     <TestCard withLink href={href} isCarouselCard className="w-full ">
       <TestCardMedia imgSrc={imgSrc} className="w-full lg:h-[211px]">
-        {" "}
-        <TestCardTitle className="lg:text-base lg:right-1">
-          {testTitle}
-        </TestCardTitle>
+        {' '}
+        <TestCardTitle className="lg:text-base lg:right-1">{testTitle}</TestCardTitle>
       </TestCardMedia>
       <TestCardSubtitle className="lg:text-sm leading-none ml-5">
         {testDescriptionTitle}
@@ -48,23 +44,30 @@ const CarouselCard = ({
 };
 
 const MainTestCarousel = () => {
+  useAxiosInterceptors();
+  const { allCategory, getTests } = useTestStore();
+
+  useEffect(() => {
+    getTests();
+  }, [getTests]);
   return (
     <div className="mt-10  md:ml-10 ml-4 lg:ml-4 flex flex-col  justify-center  md:p-2  md:items-center">
       <h1 className="text-xl font-semibold self-start">Негизги тест</h1>
       <Carousel
-        opts={{ loop: true, align: "center" }}
-        className=" relative  w-full max-w-[780px] md:max-w-[900px] lg:max-w-[1400px] "
-      >
+        opts={{ loop: true, align: 'center' }}
+        className=" relative  w-full max-w-[780px] md:max-w-[900px] lg:max-w-[1400px] ">
         <CarouselContent className="py-3">
-          {mockTestsData.map((item) => (
+          {allCategory.map((item) => (
             <CarouselItem key={item.id} className="max-w-[285px]  ">
-              <CarouselCard
-                imgSrc={item.imgSrc}
-                testTitle={item.testTitle}
-                testDescriptionTitle={item.testDescriptionTitle}
-                description={item.description}
-                href="href"
-              />
+              <Link href={`/in/all-tests/${item.subject_category.id}/${item.id}`}>
+                <CarouselCard
+                  imgSrc={item.background_image}
+                  testTitle={item.subject_category.subject_category_name}
+                  testDescriptionTitle={item.title}
+                  description={item.description}
+                  href="href"
+                />
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>
