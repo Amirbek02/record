@@ -134,7 +134,7 @@ const TakeTheTestForm = () => {
           </form>
         </Form>
         <Button variant="link" className=" mx-auto underline text-blue-600 text-base ">
-          <Link href="/sign-up">Каталуу</Link>
+          <Link href="/sign-up">Катталуу</Link>
         </Button>
       </div>
     </div>
