@@ -10,6 +10,7 @@ type Test = {
     created_date: string;
   };
   test_category: {
+    id: number;
     test_category_name: string;
   };
   first_test: boolean;
@@ -20,16 +21,18 @@ type Test = {
 
 type ISubject = {
   id: number;
-  subject_category_name: string;
+
+  test_category_name: string;
 };
 
 interface TrialTestState {
   data: ISubject[];
   test: Test[];
+  testt: Test | null;
   loading: boolean;
   error: string | null;
   getSub: () => Promise<void>;
-  getTest: () => Promise<void>;
+  getTests: () => Promise<void>;
   getSubById: (id: number) => Promise<void>;
 }
 
@@ -40,22 +43,20 @@ const getToken = (): string | null => {
   return null;
 };
 
-const useTrialTestStore = create<TrialTestState>((set) => ({
+const userInTests = create<TrialTestState>((set) => ({
   data: [],
   loading: false,
   error: null,
   test: [],
+  testt: null,
   getSub: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/subjectcategories/`,
-        {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/testcategories/`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
         },
-      );
+      });
       set({ data: response.data, loading: false });
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -65,15 +66,16 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
       }
     }
   },
-  getSubById: async (id: number) => {
+  getSubById: async (id) => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/test/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/${id}`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      set({ data: [response.data], loading: false });
+      const data = await response.json();
+      set({ testt: data, loading: false });
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         set({ error: error.message, loading: false });
@@ -82,7 +84,7 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
       }
     }
   },
-  getTest: async () => {
+  getTests: async () => {
     set({ loading: true, error: null });
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`, {
@@ -101,4 +103,4 @@ const useTrialTestStore = create<TrialTestState>((set) => ({
   },
 }));
 
-export default useTrialTestStore;
+export default userInTests;

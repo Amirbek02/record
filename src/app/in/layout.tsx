@@ -1,7 +1,7 @@
-import React from "react";
-import Footer from "@/components/user/footer/Footer";
-import HeaderSign from "@/components/user/header/HeaderSign";
-import HeaderSearch from "@/components/user/header/HeaderSearch";
+import React from 'react';
+import Footer from '@/components/user/footer/Footer';
+import HeaderSign from '@/components/user/header/HeaderSign';
+import HeaderSearch from '@/components/user/header/HeaderSearch';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,7 +9,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       {/* <main className="lg:flex md:flex gap-5"> */}
       <main className="lg:flex  gap-5">
         <HeaderSign />
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <HeaderSearch />
           {children}
         </div>

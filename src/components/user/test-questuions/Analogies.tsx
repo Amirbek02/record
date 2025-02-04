@@ -6,19 +6,19 @@
 // import { useTestContentStore } from "../../../store/TestApiStore";
 // import ResultTest from "../../user/ResultTest";
 
-// interface TestContent {
-//   id: number;
-//   question_image?: string;
-//   question_text?: string;
-//   true_answer: string;
-//   var_A_text?: string;
-//   var_B_text?: string;
-//   var_C_text?: string;
-//   var_D_text?: string;
-//   var_E_text?: string;
+// type Option = {
+//     key: string;
+//     text: string;
+//     true_answer: string;
+//     guestion_image?: string;
+//     question_text?: string;
+//     var_A_text?: string;
+//     var_B_text?: string;
+//     var_C_text?: string;
+//     var_D_text?: string;
 // }
 
-// const TestQuestions = ({ initialTime = 30 * 60 }) => {
+// const Analogies = ({ initialTime = 30 * 60 }) => {
 //   const [timeLeft, setTimeLeft] = useState(initialTime);
 //   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 //   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -26,7 +26,7 @@
 //   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
 //   const [testFinished, setTestFinished] = useState(false);
 //   const totalTime = initialTime;
-//   const { testContents, isLoading, error, fetchTestContents, } = useTestContentStore();
+//   const { testContents, isLoading, error, fetchTestContents } = useTestContentStore();
 //   const router = useRouter();
 
 //   useEffect(() => {
@@ -46,20 +46,16 @@
 //   if (error) return <p>Ката кетти: {error}</p>;
 //   if (!testContents || testContents.length === 0) return <p>Суроолор табылган жок</p>;
 
-//   const questions: TestContent[] = testContents
-//   .filter(test => test.test.id === 1)
-//   // .slice(0, 30);
+//   const questions: Option[] = testContents.filter(test => test?.test?.id === 3);
+//   const currentQuestion = questions[currentQuestionIndex];
 
-// const currentQuestion = questions[currentQuestionIndex];
-
-//   const getAvailableOptions = () => {
-//     const options: string[] = [];
-//     ["А", "Б", "В", "Г"].forEach(option => {
-//       if (option) {
-//         options.push(option);
-//       }
-//     });
-//     return options;
+//   const getAvailableOptions = (): Option[] => {
+//     return [
+//       { key: "А", text: currentQuestion.var_A_text || "" },
+//       { key: "Б", text: currentQuestion.var_B_text || "" },
+//       { key: "В", text: currentQuestion.var_C_text || "" },
+//       { key: "Г", text: currentQuestion.var_D_text || "" }
+//     ].filter(option => option.text);
 //   };
 
 //   const handleAnswerSelect = (option: string) => {
@@ -73,15 +69,16 @@
 
 //   const handleNext = () => {
 //     if (currentQuestionIndex < questions.length - 1) {
-//         setCurrentQuestionIndex((prev) => prev + 1);
+//       setCurrentQuestionIndex((prev) => prev + 1);
 //     } else {
-//         finishTest();
+//       finishTest();
 //     }
-// };
+//   };
 
-// const finishTest = () => {
+//   const finishTest = () => {
 //     let correctCount = 0;
 //     let incorrectCount = 0;
+//     console.log('answers', answers);
 
 //     questions.forEach((question, index) => {
 //       const selectedAnswer = answers[index]?.toLowerCase();
@@ -109,7 +106,7 @@
 //   if (testFinished) {
 //     return (
 //       <ResultTest
-//         emoji={correctAnswers > incorrectAnswers ? "/images/goodemogi.png" : "/images/smile.svg"}
+//         emoji={correctAnswers > incorrectAnswers ? "/images/emoji/emoji_1.png" : "/images/emoji/emoji_2.png"}
 //         correct_answers={correctAnswers}
 //         incorrect_answers={incorrectAnswers}
 //         total_questions={questions.length}
@@ -126,82 +123,53 @@
 //   const availableOptions = getAvailableOptions();
 
 //   return (
-//     <div className="max-w-6xl mx-auto px-4 py-8 h-screen">
+//     <div className="max-w-6xl mx-auto px-4 py-8">
 //       <div className="text-center mb-8">
-//         <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
-//           1-бөлүм. Математика
-//         </h1>
-//         <div className="flex lg:justify-end md:justify-end absolute right-2 justify-center m-3 top-10 right-0">
+//         <h1 className="font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">1-бөлүм. Окшоштуктар</h1>
+//         <div className="flex lg:justify-end md:justify-end absolute right-10 justify-center m-3 top-0 right-0">
 //           <Timer timeLeft={timeLeft} totalTime={totalTime} />
-//           {timeLeft <= 0 && (
-//             <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>
-//           )}
+//           {timeLeft <= 0 && <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>}
 //         </div>
 //       </div>
 
 //       <div className="relative flex flex-col items-center justify-center">
 //         <div className="w-full">
-//           <p className="text-start text-sm sm:text-base lg:text-lg mb-4">
-//             Суроо {currentQuestionIndex + 1}/{questions.length}
-//           </p>
-
-//           <div className="flex flex-col items-center mb-6">
+//           <p className="text-start text-sm sm:text-base lg:text-lg mb-4">Суроо {currentQuestionIndex + 1}/{questions.length}</p>
+//           <div className="flex flex-col mb-6">
 //             {currentQuestion.question_text ? (
-//               <p className="text-start text-sm sm:text-base lg:text-lg">
-//                 {currentQuestion.question_text ? stripHtml(currentQuestion.question_text) : ""}
-//               </p>
+//               <p className="text-start text-sm sm:text-base lg:text-lg">{currentQuestion.question_text ? stripHtml(currentQuestion.question_text) : ""}</p>
 //             ) : (
-//               currentQuestion.question_image && (
-//                 <Image
-//                   src={currentQuestion.question_image}
-//                   alt="Question Image"
-//                   width={740}
-//                   height={210}
-//                   className="mb-4"
-//                 />
-//             )
+//               currentQuestion.question_image   && (
+//                 <Image src={currentQuestion.question_image} alt="Question Image" width={740} height={210} className="mb-4" />
+//               )
 //             )}
 //           </div>
 
-//           <div className="flex flex-wrap gap-8 justify-center mt-4">
-//             {availableOptions.map((option) => (
-//               <label
-//                 key={`${currentQuestionIndex}-${option}`}
-//                 className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded"
-//               >
+//           <div className="flex flex-col gap-8 justify-center mt-4">
+//             {availableOptions.map(({ key, text }) => (
+//               <label key={`${currentQuestionIndex}-${key}`} className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded">
 //                 <input
 //                   type="radio"
 //                   name={`question-${currentQuestionIndex}`}
-//                   value={option}
-//                   checked={answers[currentQuestionIndex] === option}
-//                   onChange={() => handleAnswerSelect(option)}
+//                   value={key}
+//                   checked={answers[currentQuestionIndex] === key}
+//                   onChange={() => handleAnswerSelect(key)}
 //                   className="w-5 h-5"
 //                   disabled={testFinished || timeLeft <= 0}
 //                 />
-//                 <span className="font-medium">{option}</span>
+//                 <span className="font-medium">{key}. {text ? stripHtml(text) : ""}</span>
 //               </label>
 //             ))}
 //           </div>
 //         </div>
 //       </div>
 
-//       <div className="lg:flex gap-4 flex flex-col md:flex md:flex-row md:justify-end  justify-center mt-8">
-//         <button
-//           onClick={handlePrev}
-//           disabled={currentQuestionIndex === 0}
-//           className="border text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl"
-//         >
-//           Артка
-//         </button>
-//         <button
-//           onClick={handleNext}
-//           className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl"
-//         >
-//           {currentQuestionIndex === questions.length - 1 ? "Аяктоо" : "Алдыга"}
-//         </button>
+//       <div className="lg:flex gap-4 md:flex md:justify-end flex-none justify-center mt-8">
+//         <button onClick={handlePrev} disabled={currentQuestionIndex === 0} className="border text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl">Артка</button>
+//         <button onClick={handleNext} className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl">{currentQuestionIndex === questions.length - 1 ? "Аяктоо" : "Алдыга"}</button>
 //       </div>
 //     </div>
 //   );
 // };
 
-// export default TestQuestions;
+// export default Analogies;

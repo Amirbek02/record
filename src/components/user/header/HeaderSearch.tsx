@@ -8,14 +8,14 @@ import { Modal } from "../../UI/modal";
 import { usePathname } from "next/navigation";
 
 const HeaderSearch = () => {
-  const pathname = usePathname();
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const pathname = usePathname();
+	const [isSidebarOpen, setSidebarOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-  const sidebarRef = useRef<HTMLDivElement | null>(null);
+	const toggleSidebar = () => {
+		setSidebarOpen(!isSidebarOpen);
+	};
+	const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,7 +27,6 @@ const HeaderSearch = () => {
         setSidebarOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -35,9 +34,13 @@ const HeaderSearch = () => {
   return (
     <div>
       <div className="flex justify-between py-[20px] items-center max-w-[1440px] w-[90%] mx-[auto]">
-        <div className="flex flex-wrap items-center justify-between  lg:hidden ">
+        <div
+          className="flex flex-wrap items-center justify-between  lg:hidden "
+          ref={sidebarRef}
+          onClick={toggleSidebar}
+        >
           <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
-            <button type="button" onClick={toggleSidebar}>
+            <button type="button">
               <svg
                 className="w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
