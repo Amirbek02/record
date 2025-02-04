@@ -9,6 +9,16 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        glow: "glow 2s ease-in-out infinite",
+      },
+      keyframes: {
+        glow: {
+          "0%": { boxShadow: "0 0 6px 1px rgba(33, 136, 56, 0.5)" },
+          "50%": { boxShadow: "0 0 15px 6px rgba(33, 136, 56, 0.6)" },
+          "100%": { boxShadow: "0 0 6px 1px rgba(33, 136, 56, 0.5)" },
+        },
+      },
       screens: {
         mm: "375px",
         small: "415px",
@@ -52,7 +62,6 @@ export default {
           "2xl": "6rem",
         },
       },
-      
     },
   },
   plugins: [require("tailwindcss-animate")],
