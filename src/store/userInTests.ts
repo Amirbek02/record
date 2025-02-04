@@ -1,7 +1,7 @@
 import axios from "axios";
 import { create } from "zustand";
 
-type Test = {
+export type Test = {
 	id: number;
 	subject_category: {
 		id: number;

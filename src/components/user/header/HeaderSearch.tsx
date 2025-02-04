@@ -96,10 +96,7 @@ const HeaderSearch = () => {
               href={item.path}
               key={index}
               className="flex gap-[16px] items-center"
-<<<<<<< HEAD
-=======
               onClick={toggleSidebar}
->>>>>>> 00f192672742c21977c0271435169960cfaeb114
             >
               <Image
                 src={item.icon}
