@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { TestCard, TestCardDescription, TestCardTitle } from '../UI/TestCard';
+import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 
 interface TestProps {
   testTitle: string;
@@ -17,6 +18,7 @@ const VideoCarouselCard = ({
   description,
   videoSrc,
 }: TestProps) => {
+  useAxiosInterceptors();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);

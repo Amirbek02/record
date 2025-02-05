@@ -20,7 +20,7 @@ interface TestStore {
   filteredTests: TestContent[];
   categories: Category[];
   allCategory: AllTest[];
-  testText: AllTest[];
+  testText: AllTest;
   subcategories: SubjectCategory[];
   isLoading: boolean;
   error: string | null;
@@ -42,7 +42,7 @@ const useTestStore = create<TestStore>((set) => ({
   filteredTests: [],
   allCategory: [],
   subcategories: [],
-  testText: [],
+  testText: {} as AllTest,
   isLoading: false,
   error: null,
 
@@ -102,7 +102,7 @@ const useTestStore = create<TestStore>((set) => ({
   getSubById: async (id: number) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.get<AllTest[]>(
+      const response = await axios.get<AllTest>(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/${id}`,
         {
           headers: {

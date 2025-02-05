@@ -21,12 +21,10 @@ const TitleTest: React.FC<Props> = ({ className }) => {
     getSubById(idParams);
   }, [getSubById, idParams]);
 
-  const currentTest = testText?.[0];
-
   return (
     <div className={className}>
       <div>
-        {currentTest.test_questions?.map((test) => (
+        {testText.test_questions?.map((test) => (
           <div key={test.id}>
             <div>{test?.question_text}</div>
             <Image

@@ -50,10 +50,6 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
 
   if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
   if (error) return <p>Ката кетти: {error}</p>;
-  if (!testText || testText.length === 0) return <p>Суроолор табылган жок</p>;
-
-  // Найдём тест с `id === 2`
-  // if (!selectedTest) return <p>Математика тести табылган жок</p>;
 
   const questions = testText?.test_questions || [];
 
