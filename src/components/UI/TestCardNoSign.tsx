@@ -10,9 +10,9 @@ import {
 interface TestProps {
 	testTitle: string;
 	testDescriptionTitle: string;
-	description: string;
+	description?: string;
 	imgSrc: string;
-	href: string;
+	href?: string;
 }
 
 const TestCardNoSign = ({
