@@ -8,7 +8,7 @@ import Mathematika from '@/components/user/test-questuions/Mathematika';
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;
   const routeComponents: Record<string, React.ReactNode> = {
-    1: <FurtherTestCarousel />,
+    1: <FurtherTestCarousel isLoggedIn />,
     2: <TakeTest />,
     3: <Mathematika />,
     5: <GoodResultTest />,

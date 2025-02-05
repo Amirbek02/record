@@ -7,13 +7,14 @@ import { useParams } from 'next/navigation';
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 import useTestStore from '@/store/useTestStore';
 
-const FurtherTestCarousel = () => {
+const FurtherTestCarousel = ({isLoggedIn}:{isLoggedIn?:boolean}) => {
   useAxiosInterceptors();
   const { allCategory, getTests } = useTestStore();
   const params = useParams();
   const slug = params?.slug;
   const idParams = Array.isArray(slug) ? Number(slug[0]) : undefined;
   console.log('params', params);
+  const parentRoute= isLoggedIn? "/in/all-tests":'/exam-test'
 
   useEffect(() => {
     getTests();
@@ -38,13 +39,13 @@ const FurtherTestCarousel = () => {
         <CarouselContent className="ml-4 py-2">
           {subjectCategoryTests.map((item) => (
             <CarouselItem key={item.id} className="max-w-[400px] flex justify-center pl-4">
-              <Link href={`/in/all-tests/${item.subject_category.id}/${item.id}`}>
+              <Link href={`${parentRoute}/${item.subject_category.id}/${item.id}`}>
                 <TestCarouselCard
                   imgSrc={item.background_image}
                   testTitle={item.subject_category.subject_category_name}
                   testDescriptionTitle={item.title}
                   description={item.description}
-                  href="#"
+                  href={`${parentRoute}/${item.subject_category.id}/${item.id}`}
                 />
               </Link>
             </CarouselItem>
