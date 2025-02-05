@@ -33,7 +33,6 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   const slug = params?.slug;
 
   const idParams = Array.isArray(slug) ? Number(slug[2]) : Number(slug);
-  const currentTest = testText?.[0];
 
   useEffect(() => {
     getSubById(idParams);
@@ -56,7 +55,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   // Найдём тест с `id === 2`
   // if (!selectedTest) return <p>Математика тести табылган жок</p>;
 
-  const questions = currentTest?.test_questions || [];
+  const questions = testText?.test_questions || [];
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -107,7 +106,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
     setIncorrectAnswers(incorrectCount);
     setTestFinished(true);
   };
-  if (!currentTest) {
+  if (!testText) {
     return <div>Ката бар</div>;
   }
   if (testFinished) {
@@ -140,7 +139,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
     <div className="px-4 py-8 max-w-[1000px]">
       <div className="w-full text-center mb-8">
         <h1 className="w-full font-medium text-lg sm:text-xl lg:text-2xl underline mt-2">
-          {currentTest?.title}
+          {testText?.title}
         </h1>
         <div className="flex lg:justify-end md:justify-end justify-center m-3 top-0 right-0">
           <Timer timeLeft={timeLeft} totalTime={totalTime} />

@@ -22,7 +22,11 @@ const TakeTest = () => {
     adf();
   }, [idParams, getSubById, fetchTests]);
 
-  const currentTest = testText?.[0];
+  const currentTest = testText;
+  console.log(testText?.[0]);
+  if (!currentTest) {
+    return <p>Загрузка...</p>; // Show loading if currentTest is not available
+  }
 
   return (
     <div>
