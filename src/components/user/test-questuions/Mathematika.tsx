@@ -6,6 +6,7 @@ import ResultTest from '../../user/ResultTest';
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 import useTestStore from '@/store/useTestStore';
 import { useParams } from 'next/navigation';
+import { number } from 'zod';
 
 interface TestQuestion {
   var_A_text: string;
@@ -28,6 +29,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   const [testFinished, setTestFinished] = useState(false);
   const totalTime = initialTime;
   const { testText, isLoading, error, getSubById } = useTestStore();
+  const [finalTimeSpent, setFinalTimeSpent] = useState<null|number>(null);
 
   const params = useParams();
   const slug = params?.slug;
@@ -47,6 +49,11 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
+  useEffect(() => {
+    if (testFinished && finalTimeSpent === null) {
+      setFinalTimeSpent(totalTime - timeLeft);
+    }
+  }, [testFinished, timeLeft,finalTimeSpent,totalTime]);
 
   if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
   if (error) return <p>Ката кетти: {error}</p>;
@@ -117,8 +124,8 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
         }
         incorrect_answers={incorrectAnswers}
         total_questions={questions.length}
-        time_spent={totalTime - timeLeft}
-        subjectName="Математика"
+        time_spent={finalTimeSpent !== null ? finalTimeSpent : totalTime - timeLeft}
+        subjectName={testText.title}
       />
     );
   }
