@@ -6,7 +6,6 @@ import ResultTest from '../../user/ResultTest';
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 import useTestStore from '@/store/useTestStore';
 import { useParams } from 'next/navigation';
-import { number } from 'zod';
 
 interface TestQuestion {
   var_A_text: string;
@@ -29,7 +28,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   const [testFinished, setTestFinished] = useState(false);
   const totalTime = initialTime;
   const { testText, isLoading, error, getSubById } = useTestStore();
-  const [finalTimeSpent, setFinalTimeSpent] = useState<null|number>(null);
+  const [finalTimeSpent, setFinalTimeSpent] = useState<null | number>(null);
 
   const params = useParams();
   const slug = params?.slug;
@@ -53,7 +52,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
     if (testFinished && finalTimeSpent === null) {
       setFinalTimeSpent(totalTime - timeLeft);
     }
-  }, [testFinished, timeLeft,finalTimeSpent,totalTime]);
+  }, [testFinished, timeLeft, finalTimeSpent, totalTime]);
 
   if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
   if (error) return <p>Ката кетти: {error}</p>;

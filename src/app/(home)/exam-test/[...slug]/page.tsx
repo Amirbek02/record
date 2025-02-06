@@ -1,20 +1,18 @@
 import React from 'react';
 // import TestList from '@/components/user/Alltestlist/TestList';
 import TakeTest1 from '@/components/user/TakeTest1';
-import ResultTest from '@/components/user/ResultTest';
 import WhatsAppAcceptingMessage from '@/components/user/WhatsAppAcceptingMessage';
 import FurtherTestCarousel from '@/components/user/UserIn/furtherTests/FurtherTestCarousel';
 import TestInstructionPage from '@/components/user/TestInstructionPage';
 import Mathematika from '@/components/user/test-questuions/Mathematika';
 
-
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;
   const routeComponents: Record<string, React.ReactNode> = {
-    1: <FurtherTestCarousel/>,
+    1: <FurtherTestCarousel />,
     2: <TakeTest1 />,
-    3:<TestInstructionPage/>,
-    4:<Mathematika/>,
+    3: <TestInstructionPage />,
+    4: <Mathematika />,
     // 5: (
     //   <ResultTest
     //     correct_answers={0}
