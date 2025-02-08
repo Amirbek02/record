@@ -5,11 +5,10 @@ import FurtherTestCarousel from '@/components/user/UserIn/furtherTests/FurtherTe
 import TestInstructionPage from '@/components/user/TestInstructionPage';
 import TestQuestions from '@/components/user/test-question/TestQuestion';
 
-
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;
   const routeComponents: Record<string, React.ReactNode> = {
-    1: <FurtherTestCarousel/>,
+    1: <FurtherTestCarousel />,
     2: <TakeTest1 />,
     3:<TestInstructionPage/>,
     4:<TestQuestions/>,
