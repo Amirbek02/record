@@ -19,4 +19,4 @@ const TakeTest1 = () => {
   )
 }
 
-export default TakeTest1
+export default TakeTest1 
