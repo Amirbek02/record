@@ -269,6 +269,7 @@ const CarouselPrevious = React.forwardRef<
         width={24}
         height={16}
       />
+      
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -303,6 +304,7 @@ const CarouselNext = React.forwardRef<
         width={24}
         height={16}
       />
+     
       <span className="sr-only">Next slide</span>
     </Button>
   );

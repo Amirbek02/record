@@ -1,12 +1,11 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import Timer from '@/components/UI/timer';
-import Image from 'next/image';
-import ResultTest from '../../user/ResultTest';
-import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
-import useTestStore from '@/store/useTestStore';
-import { useParams } from 'next/navigation';
-import { number } from 'zod';
+"use client";
+import React, { useState, useEffect } from "react";
+import Timer from "@/components/UI/timer";
+import Image from "next/image";
+import ResultTest from "../ResultTest";
+import useAxiosInterceptors from "@/lib/setupAxiosInterceptors";
+import useTestStore from "@/store/useTestStore";
+import { useParams } from "next/navigation";
 
 interface TestQuestion {
   var_A_text: string;
@@ -29,7 +28,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   const [testFinished, setTestFinished] = useState(false);
   const totalTime = initialTime;
   const { testText, isLoading, error, getSubById } = useTestStore();
-  const [finalTimeSpent, setFinalTimeSpent] = useState<null|number>(null);
+  const [finalTimeSpent, setFinalTimeSpent] = useState<null | number>(null);
 
   const params = useParams();
   const slug = params?.slug;
@@ -53,14 +52,11 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
     if (testFinished && finalTimeSpent === null) {
       setFinalTimeSpent(totalTime - timeLeft);
     }
-  }, [testFinished, timeLeft,finalTimeSpent,totalTime]);
-
-  if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
-  if (error) return <p>Ката кетти: {error}</p>;
+  }, [testFinished, timeLeft, finalTimeSpent, totalTime]);
 
   const questions = testText?.test_questions || [];
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex] || null;
 
   const handleAnswerSelect = (option: string) => {
     if (timeLeft > 0) {
@@ -91,10 +87,10 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
 
     questions.forEach((question, index) => {
       const selectedAnswer = answers[index]?.toLowerCase();
-      console.log('selectedAnswer', selectedAnswer);
+      console.log("selectedAnswer", selectedAnswer);
 
       const correctAnswer = question.true_answer.toLowerCase();
-      console.log('correctAnswer', correctAnswer);
+      console.log("correctAnswer", correctAnswer);
 
       if (selectedAnswer) {
         if (selectedAnswer === correctAnswer) {
@@ -115,29 +111,39 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
   if (testFinished) {
     return (
       <ResultTest
-        emoji={correctAnswers > incorrectAnswers ? '/images/goodemog.png' : '/images/smile1.png'}
+        emoji={
+          correctAnswers > incorrectAnswers
+            ? "/images/goodemog.png"
+            : "/images/smile1.png"
+        }
         correct_answers={correctAnswers}
         resultText={
           correctAnswers > incorrectAnswers
-            ? 'Тестти аткаруунун жыйынтыгы боюнча сиз  видео сабактты кайталап көрүп чыгыңыз! '
-            : 'Сизди куттуктайбыз! Тестти аткаруунун жыйынтыгы боюнча сиз 2-бөлүмгө өттүңүз! '
+            ? "Тестти аткаруунун жыйынтыгы боюнча сиз  видео сабактты кайталап көрүп чыгыңыз! "
+            : "Сизди куттуктайбыз! Тестти аткаруунун жыйынтыгы боюнча сиз 2-бөлүмгө өттүңүз! "
         }
         incorrect_answers={incorrectAnswers}
         total_questions={questions.length}
-        time_spent={finalTimeSpent !== null ? finalTimeSpent : totalTime - timeLeft}
-        subjectName={testText.title}
+        time_spent={
+          finalTimeSpent !== null ? finalTimeSpent : totalTime - timeLeft
+        }
+        subjectName={testText?.title}
       />
     );
   }
 
-  const answerMap: { [key in 'а' | 'б' | 'в' | 'г' | 'д']: keyof TestQuestion } = {
-    а: 'var_A_text',
-    б: 'var_B_text',
-    в: 'var_C_text',
-    г: 'var_D_text',
-    д: 'var_E_text',
+  const answerMap: {
+    [key in "а" | "б" | "в" | "г" | "д"]: keyof TestQuestion;
+  } = {
+    а: "var_A_text",
+    б: "var_B_text",
+    в: "var_C_text",
+    г: "var_D_text",
+    д: "var_E_text",
   };
 
+  if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
+  if (error) return <p>Ката кетти: {error}</p>;
   return (
     <div className="px-4 py-8 max-w-[1000px]">
       <div className="w-full text-center mb-8">
@@ -146,7 +152,9 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
         </h1>
         <div className="flex lg:justify-end md:justify-end justify-center m-3 top-0 right-0">
           <Timer timeLeft={timeLeft} totalTime={totalTime} />
-          {timeLeft <= 0 && <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>}
+          {timeLeft <= 0 && (
+            <p className="mt-4 text-lg text-red-500 font-bold">Убакыт бутту!</p>
+          )}
         </div>
       </div>
 
@@ -166,7 +174,7 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
               ) : (
                 currentQuestion?.question_image && (
                   <Image
-                    src={currentQuestion?.question_image}
+                    src={currentQuestion?.question_image || ""}
                     alt="Question Image"
                     width={740}
                     height={210}
@@ -177,27 +185,32 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
             </div>
 
             <div className="flex flex-col justify-center mt-4">
-              {['а', 'б', 'в', 'г', 'д'].map((option) => {
-                const optionText = currentQuestion[answerMap[option as keyof typeof answerMap]];
-                return (
-                  optionText && (
-                    <label
-                      key={`${currentQuestionIndex}-${option}`}
-                      className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded">
-                      <input
-                        type="radio"
-                        name={`question-${currentQuestionIndex}`}
-                        value={option}
-                        checked={answers[currentQuestionIndex] === option}
-                        onChange={() => handleAnswerSelect(option)}
-                        className="w-5 h-5"
-                        disabled={testFinished || timeLeft <= 0}
-                      />
-                      <span className="font-medium">{optionText}</span>
-                    </label>
-                  )
-                );
-              })}
+              {currentQuestion &&
+                ["а", "б", "в", "г", "д"]?.map((option) => {
+                  const optionText =
+                    currentQuestion[
+                      answerMap?.[option as keyof typeof answerMap]
+                    ];
+                  return (
+                    optionText && (
+                      <label
+                        key={`${currentQuestionIndex}-${option}`}
+                        className="flex items-center cursor-pointer gap-2 hover:bg-gray-100 p-2 rounded"
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${currentQuestionIndex}`}
+                          value={option}
+                          checked={answers[currentQuestionIndex] === option}
+                          onChange={() => handleAnswerSelect(option)}
+                          className="w-5 h-5"
+                          disabled={testFinished || timeLeft <= 0}
+                        />
+                        <span className="font-medium">{optionText}</span>
+                      </label>
+                    )
+                  );
+                })}
             </div>
           </div>
         </div>
@@ -207,13 +220,15 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
         <button
           onClick={handlePrev}
           disabled={currentQuestionIndex === 0}
-          className="border mb-3 text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl">
+          className="border mb-3 text-xl font-semibold bg-gray-200 hover:bg-gray-300 w-full md:w-[185px] py-2 rounded-xl"
+        >
           Артка
         </button>
         <button
           onClick={handleNext}
-          className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl">
-          {currentQuestionIndex === questions.length - 1 ? 'Аяктоо' : 'Алдыга'}
+          className="border text-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 w-full md:w-[185px] py-2 rounded-xl"
+        >
+          {currentQuestionIndex === questions.length - 1 ? "Аяктоо" : "Алдыга"}
         </button>
       </div>
     </div>

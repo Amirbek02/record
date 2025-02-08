@@ -44,7 +44,7 @@ const TakeTest = () => {
               />
             </Link>
             <Link
-              href={`/in/all-tests/${testText?.subject_category?.id}/${idParams}/${testText?.id}`}>
+              href={`/in/all-tests/${testText?.subject_category?.id}/${testText?.id}/${testText?.id}`}>
               <CustomButton
                 title="Тестти баштоо"
                 containerStyles="h-[40px] small:h-[50px] w-[220px] lg:w-[218px] small:w-[360px] small:rounded-[5px] lg:self-end"

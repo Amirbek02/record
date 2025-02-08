@@ -30,7 +30,7 @@ export type Test = {
   title: string;
 };
 
-type TestQuestion = {
+export type TestQuestion = {
   id: number;
   test: number;
   question_text: string;
@@ -63,4 +63,25 @@ export type AllTest = {
   last_update_date: string;
   created_date: string;
   test_questions: TestQuestion[];
+};
+
+export type Instruction = {
+  test:Test;
+  instruction_title: string;
+  instruction_image: string;
+  id:number
+};
+
+export type TReading = {
+  id: number;
+  question_number: number;
+  title: string;
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+  test: number;
 };

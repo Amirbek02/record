@@ -14,13 +14,13 @@ const TakeTest = ({
     <div>
       <div className="flex justify-center items-center flex-col px-[15px]  small:px-[35px] pb-[120px] pt-[40px] ">
         <div className="flex justify-center items-center flex-col ">
-          <p className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] lg:hidden">
-            {takeTestData?.test_category?.test_category_name}
+          <p className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] ">
+            {takeTestData?.subject_category?.subject_category_name}
           </p>
         </div>
 
         <div className="pt-[24px] pb-[60px]">
-          <h2 className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] pb-[24px] lg:hidden">
+          <h2 className="font-montserrat text-[#4c4c4c] text-[20px] font-[500] leading-[80%] tracking-[0.2px] pb-[24px]">
             {takeTestData?.title}
           </h2>
           <p>{takeTestData?.description}</p>

@@ -1,21 +1,21 @@
 'use client'
 import React from "react";
 import TestInstructions from "../UI/TestInstructions";
-import useTestStore from "@/store/useTestStore";
+import useInstructionStore from "@/store/useInstructionStore";
 import { useParams } from "next/navigation";
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
 const TestInstructionPage = () => {
   useAxiosInterceptors();
-  const { testText, getSubById } = useTestStore();
+  const { instructionData, getInstructions } = useInstructionStore();
   const params = useParams();
   const slug = params?.slug;
   const idParams = Array.isArray(slug) ? Number(slug[1]) : Number(slug);
   React.useEffect(() => {
-    getSubById(idParams);
-  }, [getSubById, idParams]);
+    getInstructions(idParams);
+  }, [getInstructions, idParams]);
   return (
     <div>
-      <TestInstructions testData={testText} />
+      <TestInstructions testData={instructionData} />
     </div>
   );
 };

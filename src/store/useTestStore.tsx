@@ -30,12 +30,12 @@ interface TestStore {
   getSubById: (id: number) => Promise<void>;
   getTests: () => Promise<void>;
 }
-const getToken = (): string | null => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('token');
-  }
-  return null;
-};
+// const getToken = (): string | null => {
+//   if (typeof window !== 'undefined') {
+//     return localStorage.getItem('token');
+//   }
+//   return null;
+// };
 const useTestStore = create<TestStore>((set) => ({
   testContents: [],
   categories: [],
@@ -52,7 +52,7 @@ const useTestStore = create<TestStore>((set) => ({
         'https://api.recordonline.kg/api/v1/subjectcategories/',
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            // Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -70,7 +70,7 @@ const useTestStore = create<TestStore>((set) => ({
         'https://api.recordonline.kg/api/v1/TestContent/',
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            // Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -86,7 +86,7 @@ const useTestStore = create<TestStore>((set) => ({
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            // Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -106,7 +106,7 @@ const useTestStore = create<TestStore>((set) => ({
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            // Authorization: `Bearer ${getToken()}`,
           },
         },
       );
@@ -125,7 +125,7 @@ const useTestStore = create<TestStore>((set) => ({
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/testcategories/`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}`,
+            // Authorization: `Bearer ${getToken()}`,
           },
         },
       );
