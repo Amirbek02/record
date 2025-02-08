@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/components/user/test-question/Mathematika.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import Timer from "@/components/UI/timer";
@@ -7,17 +6,6 @@ import ResultTest from "../ResultTest";
 import useAxiosInterceptors from "@/lib/setupAxiosInterceptors";
 import useTestStore from "@/store/useTestStore";
 import { useParams } from "next/navigation";
-=======
-'use client';
-import React, { useState, useEffect } from 'react';
-import Timer from '@/components/UI/timer';
-import Image from 'next/image';
-import ResultTest from '../../user/ResultTest';
-import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
-import useTestStore from '@/store/useTestStore';
-import { useParams } from 'next/navigation';
->>>>>>> e666c5a31f965005513086a333e44ade8e62af5a:src/components/user/test-questuions/Mathematika.tsx
-
 interface TestQuestion {
   var_A_text: string;
   var_B_text: string;
@@ -64,12 +52,6 @@ const Mathematika = ({ initialTime = 30 * 60 }) => {
       setFinalTimeSpent(totalTime - timeLeft);
     }
   }, [testFinished, timeLeft, finalTimeSpent, totalTime]);
-<<<<<<< HEAD:src/components/user/test-question/Mathematika.tsx
-=======
-
-  if (isLoading) return <p>Суроолор жүктөлүүдө...</p>;
-  if (error) return <p>Ката кетти: {error}</p>;
->>>>>>> e666c5a31f965005513086a333e44ade8e62af5a:src/components/user/test-questuions/Mathematika.tsx
 
   const questions = testText?.test_questions || [];
 
