@@ -30,24 +30,27 @@ export type Test = {
   title: string;
 };
 
-export type TestQuestion = {
+export interface BaseQuestion {
   id: number;
-  test: number;
   question_text: string;
-  question_image: string | null;
-  var_A_image: string | null;
-  var_B_image: string | null;
-  var_C_image: string | null;
-  var_D_image: string | null;
-  var_E_image: string | null;
   var_A_text: string;
   var_B_text: string;
   var_C_text: string;
   var_D_text: string;
   var_E_text: string;
-  additional_questions: string;
   true_answer: string;
   question_number: number;
+}
+
+export type TestQuestion = BaseQuestion & {
+  test: number;
+  question_image?: string | null;
+  var_A_image: string | null;
+  var_B_image: string | null;
+  var_C_image: string | null;
+  var_D_image: string | null;
+  var_E_image: string | null;
+  additional_questions: string;
   last_update_date: string;
   created_date: string;
 };
@@ -85,3 +88,15 @@ export type TReading = {
   text7: string;
   test: number;
 };
+
+export interface OkupTushunuu {
+  id: number;
+  name: string;
+  description: string;
+  created_at: string; // ISO date string
+}
+
+export interface QuestionReadingData extends BaseQuestion {
+  okup_tushunuu: OkupTushunuu;
+  question: number;
+}

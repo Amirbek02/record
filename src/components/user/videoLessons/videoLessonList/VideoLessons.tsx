@@ -66,8 +66,8 @@ const VideoCardLesson = ({
 
 const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
   const { fetchUserData, userDataState } = userDataStore();
-  console.log(userDataState?.[0].paid,'userDataState')
-  const paid=userDataState?.[0].paid
+  console.log(userDataState?.[0].paid, "userDataState");
+  const paid = userDataState?.[0].paid;
   React.useEffect(() => {
     fetchUserData();
   }, [fetchUserData]);
@@ -120,7 +120,11 @@ const VideoLessons = ({ videosData }: { videosData: VideoData[] | null }) => {
                       testTitle={video.subject_category.subject_category_name}
                       testDescriptionTitle={video.subject_name}
                       description={video.description}
-                      disabled={paid ? (video.is_paid && paid === "Не оплачено") : video.is_paid}
+                      disabled={
+                        paid
+                          ? video.is_paid && paid === "Не оплачено"
+                          : video.is_paid
+                      }
                     />
                   </CarouselItem>
                 ))}

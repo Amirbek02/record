@@ -3,7 +3,7 @@ import TakeTest1 from '@/components/user/TakeTest1';
 import WhatsAppAcceptingMessage from '@/components/user/WhatsAppAcceptingMessage';
 import FurtherTestCarousel from '@/components/user/UserIn/furtherTests/FurtherTestCarousel';
 import TestInstructionPage from '@/components/user/TestInstructionPage';
-import TestQuestions from '@/components/user/test-question/TestQuestion';
+import TestQuestions from '@/components/user/test-question/TestQuestions';
 
 const TestsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const tests = (await params).slug.length;

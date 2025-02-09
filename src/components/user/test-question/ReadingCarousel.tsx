@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import useReadingStore from "@/store/useReadingStore";
+import useReadingStore from "@/store/useReadingUnderstanding/useReadingStore";
 import Image from "next/image";
 import {
   Carousel,
@@ -19,8 +19,8 @@ const ReadingCarousel = () => {
   }, [getReadingTexts]);
 
   return (
-    <Carousel className="w-full max-w-[1000px] h-full">
-      <CarouselContent>
+    <Carousel className=" md:max-w-[550px] max-w-[360px]  lg:max-w-[450px] mx-auto  md:ml-[5%] xl:max-w-[700px] h-auto xl:ml-[5%] mb-2">
+      <CarouselContent className="md:max-w-[660px]">
         {readingData?.map((question) => {
           // Collect all non-null texts from text1 - text7
           const texts = [
@@ -34,11 +34,20 @@ const ReadingCarousel = () => {
           ].filter(Boolean);
 
           return texts.map((text, textIndex) => (
-            <CarouselItem key={`${question.id}-${textIndex}`} className=" max-w-[500px]">
+            <CarouselItem
+              key={`${question.id}-${textIndex}`}
+              className=" max-w-[300px] lg:max-w-[340px] flex justify-center"
+            >
               <div className="p-4 border border-gray-300 rounded-lg shadow-md text-center">
-                <h3 className="text-lg font-bold mb-2">{question.title}</h3>
-                {/* <p className="text-gray-700">{text}</p> */}
-                <Image src={text} alt='окуу жана тушунуунун тексти' width={100} height={400} className="h-auto" />
+                <h3 className="text-base font-semibold mb-2">
+                  {question.title}
+                </h3>
+                <Image
+                  src={text}
+                  alt="окуу жана тушунуунун тексти"
+                  width={300}
+                  height={400}
+                />
               </div>
             </CarouselItem>
           ));

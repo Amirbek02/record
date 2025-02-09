@@ -25,7 +25,7 @@ const TestInstructions = ({
           alt="instructions"
         />
         <div className="flex justify-end">
-          <Button className="text-2xl font-bold lg:w-[184px] lg:h-[36px] px-10">
+          <Button  className="text-2xl font-bold lg:w-[184px] lg:h-[36px] px-10">
             {" "}
             <Link
               href={`${rootPath}/${testData?.test.subject_category?.id}/${testData?.id}/${testData?.id}/${testData?.id}`}
