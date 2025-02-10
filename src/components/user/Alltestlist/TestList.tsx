@@ -84,7 +84,7 @@ const TestListIn = ({
                 testTitle={subCategory.subject_category_name}
                 testDescriptionTitle={''}
                 imgSrc={'/images/test.png'}
-                href='/exam-test/${subCategory.id}'
+                href={`/exam-test/${subCategory.id}`}
               />
             </Link>
           ))}

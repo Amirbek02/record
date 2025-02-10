@@ -4,6 +4,7 @@ import { MdEmail } from 'react-icons/md';
 import { IoMdPlay } from 'react-icons/io';
 import TakeTheTestForm from '../TakeTheTestForm';
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
+import Link from 'next/link';
 
 const MainSection = () => {
   useAxiosInterceptors();
@@ -32,12 +33,14 @@ const MainSection = () => {
               className="py-[12px] md:px-[47px] px-[67px] rounded-[80px] bg-blue-600 text-[#FFF] text-[16px] font-semibold mt-[8px]">
               Тест тапшыруу
             </button>
+              <Link href='/#videoLessons'>
             <div className="mt-[29px] md:mt-[5px] flex gap-[10px] items-center justify-center">
               <button className="w-[28px] md:w-[46px] md:h-[46px] h-[28px] rounded-full border-[0.35px] border-[black] flex items-center justify-center">
                 <IoMdPlay className="w-[12px] h-[12px] md:w-[20px] md:h-[20px] text-[#00732E] md:text-blue-600 ml-[3px]" />
               </button>
-              <h1 className="text-[#252641] text-[16px] ">Видео сабак</h1>
+              <h1 className="text-[#252641] text-[16px] cursor-pointer ">Видео сабак</h1>
             </div>
+              </Link>
           </div>
         </div>
 

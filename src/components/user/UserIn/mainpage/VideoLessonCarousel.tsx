@@ -3,6 +3,8 @@ import React from "react";
 import Link from "next/link";
 import useVideosStore from "@/store/videoStore/VideosStore";
 import userDataStore from "@/store/userDataStore";
+import parse from 'html-react-parser';
+import DOMPurify from 'dompurify';
 import {
   Carousel,
   CarouselContent,
@@ -34,6 +36,8 @@ const CarouselCardVideo = ({
   disabled = false,
   href, // Default to false
 }: TestProps) => {
+  const sanitizedHTML = DOMPurify.sanitize(description);
+  const content = parse(sanitizedHTML);
   return (
     <Link
       href={disabled ? "/in/payment" : `/in/video-lessons/${href}`}
@@ -54,7 +58,7 @@ const CarouselCardVideo = ({
           {testDescriptionTitle}
         </TestCardSubtitle>
         <TestCardDescription className="max-w-[356px] lg:text-xs ml-5">
-          {description}
+          {content}
         </TestCardDescription>
         {disabled && (
           <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
@@ -112,7 +116,7 @@ const VideoLessonCarousel = () => {
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem
-              key={item.subject_category.id}
+              key={item.id}
               className=" max-w-[285px] py-3 flex justify-center "
             >
               <CarouselCardVideo

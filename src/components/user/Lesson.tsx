@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import useVideoStore from '@/store/useVideoStore';
 import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
+import parse from 'html-react-parser';
+import DOMPurify from 'dompurify';
 
 const VideoLessons = () => {
   useAxiosInterceptors();
@@ -21,6 +23,8 @@ const VideoLessons = () => {
   }
 
   const freeVideos = videos.filter((video) => video.is_paid === false);
+  const sanitizedHTML = DOMPurify.sanitize(freeVideos[0]?.description);
+    const content = parse(sanitizedHTML);
 
   const extractVideoId = (videoUrl: string) => {
     try {
@@ -73,7 +77,7 @@ const VideoLessons = () => {
               {freeVideos[0].subject_name || 'Название урока'}
             </h3>
             <p className="text-gray-500 w-full lg:w-[470px] text-sm md:text-base">
-              {freeVideos[0].description || 'Описание отсутствует'}
+              {content || 'Описание отсутствует'}
             </p>
             <Link href="#" className="text-[#696984] underline font-semibold">
               Толук оку

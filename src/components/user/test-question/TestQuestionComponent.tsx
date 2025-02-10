@@ -6,6 +6,7 @@ import useAxiosInterceptors from "@/lib/setupAxiosInterceptors";
 import ReadingCarousel from "./ReadingCarousel";
 import { AllTest, QuestionReadingData, BaseQuestion } from "@/types/categories";
 import { Button } from "@/components/UI/button";
+import parse from "html-react-parser";
 const TestQuestionComponent = ({
   testsData,
   readingTestData,
@@ -41,7 +42,8 @@ const TestQuestionComponent = ({
   const questions = readingTest
     ? readingTestData || []
     : testsData?.test_questions || [];
-  const currentQuestion = questions[currentQuestionIndex] || null;
+  const sortedQuestions = [...questions].sort((a, b) => a.question_number - b.question_number);
+  const currentQuestion = sortedQuestions[currentQuestionIndex] || null;
 
   const handleAnswerSelect = (option: string) => {
     if (timeLeft > 0) {
@@ -140,11 +142,11 @@ const TestQuestionComponent = ({
           Суроо {currentQuestionIndex + 1}/{questions.length}
         </p>
         <div className="flex items-center flex-col">
-          <div className="flex flex-col items-center mb-3 max-w-[1000px] mx-auto">
+          <div className="flex flex-col items-center mb-3 max-w-[800px] mx-auto">
             {currentQuestion?.question_text ? (
               <p className="text-start text-sm sm:text-base lg:text-lg">
                 {`${currentQuestionIndex + 1}. `}
-                {currentQuestion?.question_text}
+                {parse(currentQuestion?.question_text)}
               </p>
             ) : (
               currentQuestion &&
@@ -155,7 +157,7 @@ const TestQuestionComponent = ({
                   alt="Question Image"
                   width={500}
                   height={400}
-                  style={{ width: "100%", height: "auto" }}
+                  style={{ width: "auto", height: "auto" }}
                   priority
                 />
               )
@@ -188,7 +190,11 @@ const TestQuestionComponent = ({
                         className="w-4 h-4"
                         disabled={testFinished || timeLeft === 0}
                       />
-                      <span className="font-medium">{optionText}</span>
+                      <span className="font-medium">
+                        {typeof optionText === "string"
+                          ? parse(optionText)
+                          : optionText}
+                      </span>
                     </label>
                   )
                 );
