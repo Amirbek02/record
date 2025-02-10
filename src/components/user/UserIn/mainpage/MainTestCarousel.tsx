@@ -17,7 +17,6 @@ import useTestStore from "@/store/useTestStore";
 import useAxiosInterceptors from "@/lib/setupAxiosInterceptors";
 import Link from "next/link";
 import parse from "html-react-parser";
-import DOMPurify from "dompurify";
 
 interface TestProps {
   testTitle: string;
@@ -34,8 +33,6 @@ const CarouselCard = ({
   imgSrc,
   href,
 }: TestProps) => {
-  const sanitizedHTML = DOMPurify.sanitize(description);
-  const content = parse(sanitizedHTML);
   return (
     <TestCard withLink href={href} isCarouselCard className="w-full ">
       <TestCardMedia imgSrc={imgSrc} className="w-full lg:h-[211px]">
@@ -48,7 +45,7 @@ const CarouselCard = ({
         {testDescriptionTitle}
       </TestCardSubtitle>
       <TestCardDescription className="max-w-[356px]  lg:text-xs ml-5">
-        {content}
+        {parse(description)}
       </TestCardDescription>
     </TestCard>
   );
