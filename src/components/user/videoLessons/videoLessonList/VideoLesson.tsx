@@ -3,8 +3,8 @@ import { VideoData } from "@/store/videoStore/VideosStore";
 import NextPrevButtons from "@/components/UI/nextPrevButtons";
 
 const VideoLesson = ({ video }: { video: VideoData | null }) => {
-  const extractVideoId = (videoUrl?:string) => {
-    if (!videoUrl) return null; 
+  const extractVideoId = (videoUrl?: string) => {
+    if (!videoUrl) return null;
     try {
       const url = new URL(videoUrl);
       return new URLSearchParams(url.search).get("v");
@@ -38,7 +38,7 @@ const VideoLesson = ({ video }: { video: VideoData | null }) => {
           {video?.subject_name}
         </h2>
         <div className="flex gap-[10px] mt-[100px] md:mt-[70px] justify-end">
-        <NextPrevButtons/>
+          <NextPrevButtons />
         </div>
       </div>
     </div>

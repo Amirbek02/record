@@ -36,12 +36,12 @@ interface TrialTestState {
   getSubById: (id: number) => Promise<void>;
 }
 
-const getToken = (): string | null => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('token');
-  }
-  return null;
-};
+// const getToken = (): string | null => {
+//   if (typeof window !== 'undefined') {
+//     return localStorage.getItem('token');
+//   }
+//   return null;
+// };
 
 const userInTests = create<TrialTestState>((set) => ({
   data: [],
@@ -54,7 +54,7 @@ const userInTests = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/testcategories/`, {
         headers: {
-          Authorization: `Bearer ${getToken()}`,
+          // Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ data: response.data, loading: false });
@@ -71,7 +71,7 @@ const userInTests = create<TrialTestState>((set) => ({
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/${id}`, {
         headers: {
-          Authorization: `Bearer ${getToken()}`,
+          // Authorization: `Bearer ${getToken()}`,
         },
       });
       const data = await response.json();
@@ -89,7 +89,7 @@ const userInTests = create<TrialTestState>((set) => ({
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tests/`, {
         headers: {
-          Authorization: `Bearer ${getToken()}`,
+          // Authorization: `Bearer ${getToken()}`,
         },
       });
       set({ test: response.data, loading: false });

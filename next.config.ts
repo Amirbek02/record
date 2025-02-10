@@ -1,15 +1,13 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-	/* config options here */
+  images: {
+    domains: ['api.recordonline.kg'],
+  },
 };
 
 export default nextConfig;
-// next.config.js
-module.exports = {
-	images: {
-	  domains: ['api.recordonline.kg'],
-	},
-  };
+
   
 

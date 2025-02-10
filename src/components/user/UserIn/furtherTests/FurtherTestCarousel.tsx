@@ -27,8 +27,8 @@ const FurtherTestCarousel = ({isLoggedIn}:{isLoggedIn?:boolean}) => {
     : 'Тест категориясы жок';
 
   return (
-    <div className="flex flex-col pb-10 pl-4 gap-8 items-end mt-3 max-w-[1440px]">
-      <h1 className="text-2xl font-bold text-red self-start ml-11 -mb-4">ЖРТ га даярдоо</h1>
+    <div className={`flex flex-col pb-10 pl-4 gap-8 mt-3 max-w-[1440px] mx-auto`}>
+      {isLoggedIn && <h1 className="text-2xl font-bold text-red self-start ml-11 -mb-4">ЖРТ га даярдоо</h1>}
       <h1 className="font-semibold text-[22px] self-start ml-11 -mb-2">{testCategoryName}</h1>
 
       {/* <FurtherTestMobile testData={mockTestsData} /> */}

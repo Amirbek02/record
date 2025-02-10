@@ -1,8 +1,9 @@
-'use client';
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import useVideoStore from '@/store/useVideoStore';
-import useAxiosInterceptors from '@/lib/setupAxiosInterceptors';
+"use client";
+import React, { useEffect } from "react";
+import Link from "next/link";
+import useVideoStore from "@/store/useVideoStore";
+import useAxiosInterceptors from "@/lib/setupAxiosInterceptors";
+import parse from "html-react-parser";
 
 const VideoLessons = () => {
   useAxiosInterceptors();
@@ -21,13 +22,14 @@ const VideoLessons = () => {
   }
 
   const freeVideos = videos.filter((video) => video.is_paid === false);
+  // const content = parse(freeVideos[0]?.description);
 
   const extractVideoId = (videoUrl: string) => {
     try {
       const url = new URL(videoUrl);
-      return new URLSearchParams(url.search).get('v');
+      return new URLSearchParams(url.search).get("v");
     } catch (e) {
-      console.error('Ошибка при обработке URL видео:', e);
+      console.error("Ошибка при обработке URL видео:", e);
       return null;
     }
   };
@@ -52,11 +54,14 @@ const VideoLessons = () => {
                 extractVideoId(freeVideos[0].video_url) ? (
                   <iframe
                     className="absolute top-0 left-0 w-full h-full rounded-xl border"
-                    src={`https://www.youtube.com/embed/${extractVideoId(freeVideos[0].video_url)}`}
-                    title={freeVideos[0].subject_name || 'Видео'}
+                    src={`https://www.youtube.com/embed/${extractVideoId(
+                      freeVideos[0].video_url
+                    )}`}
+                    title={freeVideos[0].subject_name || "Видео"}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen></iframe>
+                    allowFullScreen
+                  ></iframe>
                 ) : (
                   <div>Некорректный URL видео</div>
                 )
@@ -65,15 +70,15 @@ const VideoLessons = () => {
               )}
 
               <span className="absolute m-2 bottom-0 right-0 w-[154px] text-center cursor-pointer bg-[#4C4C4C] hover:bg-[#2E3095] text-white px-4 py-1 rounded-full z-10">
-                {freeVideos[0].subject_category_name || 'Категория'}
+                {freeVideos[0].subject_category_name || "Категория"}
               </span>
             </div>
 
             <h3 className="text-lg w-full lg:w-[450px] text-[#252641] md:text-xl font-semibold">
-              {freeVideos[0].subject_name || 'Название урока'}
+              {freeVideos[0].subject_name || "Название урока"}
             </h3>
             <p className="text-gray-500 w-full lg:w-[470px] text-sm md:text-base">
-              {freeVideos[0].description || 'Описание отсутствует'}
+              {parse(freeVideos[0]?.description) || "Описание отсутствует"}
             </p>
             <Link href="#" className="text-[#696984] underline font-semibold">
               Толук оку

@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import useVideosStore from "@/store/videoStore/VideosStore";
 import userDataStore from "@/store/userDataStore";
+import parse from 'html-react-parser';
 import {
   Carousel,
   CarouselContent,
@@ -54,7 +55,7 @@ const CarouselCardVideo = ({
           {testDescriptionTitle}
         </TestCardSubtitle>
         <TestCardDescription className="max-w-[356px] lg:text-xs ml-5">
-          {description}
+          {parse(description)}
         </TestCardDescription>
         {disabled && (
           <div className="z-30 transform -translate-x-1/2 -translate-y-1/2 absolute top-[50%] left-[50%]  flex items-center justify-center bg-green bg-opacity-50 text-white text-bold text-sm p-3 rounded-sm">
@@ -73,14 +74,14 @@ const CarouselCardVideo = ({
 
 const VideoLessonCarousel = () => {
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/video/`;
-  const { fetch, allVideos, error,isLoading } = useVideosStore();
-  const{fetchUserData,userDataState}=userDataStore()
-   const paid=userDataState?.[0].paid
+  const { fetch, allVideos, error, isLoading } = useVideosStore();
+  const { fetchUserData, userDataState } = userDataStore();
+  const paid = userDataState?.[0].paid;
 
   React.useEffect(() => {
-    fetch(url, "videos")
+    fetch(url, "videos");
     fetchUserData();
-  }, [fetch, url,fetchUserData]);
+  }, [fetch, url, fetchUserData]);
   console.log(allVideos);
   const paidVideos = (allVideos?.filter((video) => video.is_paid) || []).slice(
     0,
@@ -112,7 +113,7 @@ const VideoLessonCarousel = () => {
         <CarouselContent>
           {combinedVideos?.map((item) => (
             <CarouselItem
-              key={item.subject_category.id}
+              key={item.id}
               className=" max-w-[285px] py-3 flex justify-center "
             >
               <CarouselCardVideo
@@ -120,7 +121,9 @@ const VideoLessonCarousel = () => {
                 testTitle={item.subject_category.subject_category_name}
                 testDescriptionTitle={item.subject_name}
                 description={item.description}
-                disabled={paid ? (item.is_paid && paid === "Не оплачено") : item.is_paid}
+                disabled={
+                  paid ? item.is_paid && paid === "Не оплачено" : item.is_paid
+                }
                 href={`${item.video_category.id}/${item.id}`}
               />
             </CarouselItem>

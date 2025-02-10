@@ -1,7 +1,7 @@
-import React from 'react';
-import TestCarouselCard from '@/components/UI/TestCarouselCard';
-import Link from 'next/link';
-import { Category, SubjectCategory } from '@/types/categories';
+import React from "react";
+import TestCarouselCard from "@/components/UI/TestCarouselCard";
+import Link from "next/link";
+import { Category, SubjectCategory } from "@/types/categories";
 
 const TestListIn = ({
   categories = [],
@@ -18,7 +18,8 @@ const TestListIn = ({
         {categories.map((category) => (
           <p
             key={category.id}
-            className="text-xl lg:text-start md:text-center font-bold text-[#4C4C4C] lg:text-[32px] mb-4">
+            className="text-xl lg:text-start md:text-center font-bold text-[#4C4C4C] lg:text-[32px] mb-4"
+          >
             {category.test_category_name}
           </p>
         ))}
@@ -28,10 +29,10 @@ const TestListIn = ({
             <Link key={subCategory.id} href={`/in/all-tests/${subCategory.id}`}>
               <TestCarouselCard
                 testTitle={subCategory.subject_category_name}
-                testDescriptionTitle={''}
-                description={''}
-                imgSrc={'/images/test.png'}
-                href="#"
+                testDescriptionTitle={""}
+                description={""}
+                imgSrc={"/images/test.png"}
+                href={"/in/all-tests/${subCategory.id}"}
               />
             </Link>
           ))}
